@@ -11,6 +11,7 @@ export class GlobalService {
   private serverURL = 'http://10.16.208.154:8080/api/v11/';
   private index: number = 0;
   private result: any;
+  private footer: any;
 
   constructor (private http: Http) {};
 
@@ -25,6 +26,19 @@ export class GlobalService {
     console.debug('getConsntainers(): Получент '+ this.index +'раз' )
     return this.result;
   }
+  getFooter(): any {
+    if (!this.footer){
+      console.debug('getConsntainers(): Запрос двнных')
+      this.footer = this.http.get(this.serverURL + 'containers_by_type/footer/?format=json')
+                      .map(this.extractData)
+                      .catch(this.handleError);
+    }
+    return this.footer;
+  }
+
+
+
+
 
   private extractData(res: Response) {
     return res.json();
