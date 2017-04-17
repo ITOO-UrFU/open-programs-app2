@@ -5,8 +5,20 @@ const routes: Routes = [
   {
     path: '',
     children: []
+  },
+  {
+    path: ':id',
+    //component: name_component,
+    children: [
+      {
+        path: ':id',
+        //component: name_component,
+      }
+    ]
   }
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
