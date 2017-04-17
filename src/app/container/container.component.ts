@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -36,6 +36,11 @@ export class ContainerComponent implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.errorMessage = "";
+    this.subscription.unsubscribe()
   }
 
 }

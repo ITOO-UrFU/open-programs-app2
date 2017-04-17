@@ -1,7 +1,7 @@
 <ng-template ngFor let-container [ngForOf]="containers" let-i="index" [ngForTrackBy]="trackByFn">
   <div *ngIf="container.type=='menu'">
     {{container.title}}
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>  <!--Не должен храниться в условии если при переходе на страницу его не будет-->
   </div>
   <div *ngIf="container.type=='footer'">
     <footer footer>
@@ -10,3 +10,4 @@
   </div>
 </ng-template>
 
+<a [routerLink]="['/', 'fddfgd']"> gtht[jl</a>
