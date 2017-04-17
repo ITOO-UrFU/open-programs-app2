@@ -16,7 +16,7 @@ export class AppComponent implements OnInit  {
   ngOnInit(){
     this.globalService.getConsntainers()
                       .subscribe(
-                        containers => this.containers = containers,
+                        containers => {this.containers = containers;console.debug(this.containers)},
                         error => console.log(error));
 
   }
