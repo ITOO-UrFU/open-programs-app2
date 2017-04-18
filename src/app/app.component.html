@@ -1,8 +1,12 @@
+
+<div *ngIf="menu">
+  <ng-template ngFor let-container [ngForOf]="menu[0]?.containers" let-i="index" [ngForTrackBy]="trackByFn">
+    <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
+  </ng-template>
+  <router-outlet></router-outlet> 
+</div>
+
 <ng-template ngFor let-container [ngForOf]="containers" let-i="index" [ngForTrackBy]="trackByFn">
-  <div *ngIf="container.type=='menu'">
-    {{container.title}}
-  <router-outlet></router-outlet>  <!--Не должен храниться в условии если при переходе на страницу его не будет-->
-  </div>
   <div *ngIf="container.type=='footer'">
     <footer footer>
       <p>Телефон: {{ container.components[0].json.tel }}</p>
@@ -10,4 +14,3 @@
   </div>
 </ng-template>
 
-<a [routerLink]="['/', 'fddfgd']"> gtht[jl</a>

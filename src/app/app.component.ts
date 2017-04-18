@@ -9,14 +9,14 @@ import { GlobalService } from './global.service';
 })
 
 export class AppComponent implements OnInit  {
-  containers: any = []; // TODO: Написать класс который будет описывать элемент массива
+  menu: any = []; // TODO: Написать класс который будет описывать элемент массива
 
   constructor(private globalService: GlobalService){}
 
   ngOnInit(){
-    this.globalService.getConsntainers()
+    this.globalService.getByType('menu')
                       .subscribe(
-                        containers => {this.containers = containers;console.debug(this.containers)},
+                        menu => {this.menu = menu; console.log(this.menu) },
                         error => console.log(error));
 
   }

@@ -1,3 +1,12 @@
-<p>
-  {{title}}
-</p>
+
+<ng-template [ngIf]="contants">
+  <ng-template ngFor let-contant [ngForOf]="contants">
+    <h1>{{ contant.title }}</h1>
+    <ng-template ngFor let-component [ngForOf]="contant.components">
+      <div [ngSwitch]="component.type">
+        <div *ngSwitchCase="'article'" [innerHTML]="component.content"></div>
+        <div *ngSwitchCase="'openprograms'">json</div>
+      </div>
+    </ng-template>
+  </ng-template>
+</ng-template>

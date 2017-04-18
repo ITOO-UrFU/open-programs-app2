@@ -28,15 +28,23 @@ export class GlobalService {
   }
   getFooter(): any {
     if (!this.footer){
-      console.debug('getConsntainers(): Запрос двнных')
       this.footer = this.http.get(this.serverURL + 'containers_by_type/footer/?format=json')
                       .map(this.extractData)
                       .catch(this.handleError);
     }
     return this.footer;
   }
+  getBySlug(slug:string):any {
+    return this.http.get(this.serverURL + 'container_by_slug/'+ slug +'/?format=json')
+                      .map(this.extractData)
+                      .catch(this.handleError);
+  }
 
-
+  getByType(type:string):any {
+    return this.http.get(this.serverURL + 'containers_by_type/' + type +'/?format=json')
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
 
 
 
