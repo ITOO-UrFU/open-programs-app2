@@ -12,33 +12,34 @@ import { GlobalService } from '../global.service';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss']
 })
+
 export class ContainerComponent implements OnInit {
-  public errorMessage: string;
+
   private subscription: Subscription;
-  
+
+  public errorMessage: string;
   public title: any;
-  public contants: any;
+  public contents: any;
 
 
-  constructor (
-              private router: Router,
-              private activateRoute: ActivatedRoute,
-              private titleService: Title,
-              private globalService: GlobalService
-
+  constructor ( private router: Router,
+                private activateRoute: ActivatedRoute,
+                private titleService: Title,
+                private globalService: GlobalService
               ) { 
-                  this.subscription = activateRoute.params.subscribe(
+                    this.subscription = activateRoute.params.subscribe(
                       params => {
                         this.setTitle(params['id']);
                         this.getContentBySlug(params['id'])
                       },
                       error => this.errorMessage = "Неверный адрес!"
-                  );
-
-                router.events.subscribe((val) => {
-                      this.errorMessage = "";
-                });
-              }
+                    );
+                    router.events.subscribe(
+                      (val) => {
+                        this.errorMessage = "";
+                      }
+                    );
+                  }
 
   public setTitle( newTitle: string) {
     this.title = newTitle;
@@ -48,20 +49,17 @@ export class ContainerComponent implements OnInit {
   public getContentBySlug(slug:string){
     this.globalService.getBySlug(slug)
                     .subscribe(
-                      contants => {this.contants = contants; console.debug(this.contants) },
+                      contents => {
+                        this.contents = contents; console.debug(this.contents) 
+                      },
                       error => console.log(error)
                     )
-                    
-
   }
 
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.errorMessage = "";
     this.subscription.unsubscribe()
   }
-
 }
