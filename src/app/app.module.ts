@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { GlobalService } from './global.service';
 import { ContainerComponent } from './container/container.component';
 import { FooterComponent } from './footer/footer.component';
+import { ElementOpenProgramComponent } from './element-open-program/element-open-program.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContainerComponent,
-    FooterComponent
+    FooterComponent,
+    ElementOpenProgramComponent
   ],
   imports: [
     BrowserModule,

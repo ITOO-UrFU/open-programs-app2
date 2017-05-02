@@ -29,6 +29,7 @@ export class ContainerComponent implements OnInit {
               ) { 
                     this.subscription = activateRoute.params.subscribe(
                       params => {
+                        console.log(params['id'])
                         this.setTitle(params['id']);
                         this.getContentBySlug(params['id'])
                       },

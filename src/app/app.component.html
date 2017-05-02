@@ -1,6 +1,6 @@
 
 <div *ngIf="menu">
-  <ng-template ngFor let-container [ngForOf]="menu[0]?.containers" let-i="index" [ngForTrackBy]="trackByFn">
+  <ng-template ngFor let-container [ngForOf]="menu" let-i="index" [ngForTrackBy]="trackByFn">
     <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
   </ng-template>
   <router-outlet></router-outlet> 

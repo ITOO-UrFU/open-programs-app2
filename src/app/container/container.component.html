@@ -5,7 +5,7 @@
     <ng-template ngFor let-component [ngForOf]="contant.components">
       <div [ngSwitch]="component.type">
         <div *ngSwitchCase="'article'" [innerHTML]="component.content"></div>
-        <div *ngSwitchCase="'openprograms'">json</div>
+        <div *ngSwitchCase="'openprograms'" element-open-program></div>
       </div>
     </ng-template>
   </ng-template>

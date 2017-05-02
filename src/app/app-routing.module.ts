@@ -9,6 +9,15 @@ const routes: Routes = [
     children: []
   },
   {
+    path: 'programs',
+    children: [
+      {
+        path: ':id',
+        component: ContainerComponent,
+      }
+    ]
+  },
+  {
     path: ':id',
     component: ContainerComponent,
     children: [

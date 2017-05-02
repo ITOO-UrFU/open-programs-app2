@@ -46,6 +46,13 @@ export class GlobalService {
                     .catch(this.handleError);
   }
 
+  getElementsOpenPrograms(type:string):any{
+   
+      return this.http.get(this.serverURL + type +'/?format=json')
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
 
 
   private extractData(res: Response) {
