@@ -9,13 +9,15 @@ import { GlobalService } from './global.service';
 import { ContainerComponent } from './container/container.component';
 import { FooterComponent } from './footer/footer.component';
 import { ElementOpenProgramComponent } from './element-open-program/element-open-program.component';
+import { ProgramConstructorLiteComponent } from './program-constructor-lite/program-constructor-lite.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContainerComponent,
     FooterComponent,
-    ElementOpenProgramComponent
+    ElementOpenProgramComponent,
+    ProgramConstructorLiteComponent
   ],
   imports: [
     BrowserModule,

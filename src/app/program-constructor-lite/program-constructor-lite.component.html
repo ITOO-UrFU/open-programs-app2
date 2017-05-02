@@ -1,0 +1,24 @@
+<table>
+  <td><p>Модуль программы</p></td>
+  <td><p>Группа выбора</p></td>
+  <ng-template ngFor let-target [ngForOf]="targets">
+      <td>{{target.title}}</td>
+  </ng-template>
+  <td><p>Компетенции</p></td>
+  <ng-template ngFor let-module [ngForOf]="modules">
+    <tr>
+      <td><p>{{module.title}}</p></td>
+      <td><p>{{module.choice_group_title}}</p></td>
+      <ng-template ngFor let-target [ngForOf]="targets" let-i="index">
+      <td>
+        <select  (change)="callType($event.target.value)">
+          <option [selected]="module.targets_positions[i] == 0" [value] = "[module.id,target.id,0]">Не входит</option>
+          <option [selected]="module.targets_positions[i] == 1" [value] = "[module.id,target.id,1]">По умолчанию</option>
+          <option [selected]="module.targets_positions[i] == 2" [value] = "[module.id,target.id,2]">По выбору</option>
+        </select>
+       </td>
+      </ng-template>
+      <td><p>{{module.get_competence_display}}</p></td>
+    </tr> 
+  </ng-template>
+</table>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Headers, RequestOptions, Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -47,14 +47,26 @@ export class GlobalService {
   }
 
   getElementsOpenPrograms(type:string):any{
-   
       return this.http.get(this.serverURL + type +'/?format=json')
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
 
+  postTargetModule(value):any {
+    console.log("ok!")
+    console.log(value)
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      console.log(this.serverURL + 'change_target_module/')
+      return this.http.post(this.serverURL + 'change_target_module/', value, options)
+                    .map(this.extractDataPost)
+                    .catch(this.handleError);
+  }
 
+  private extractDataPost(res: Response) {
+    return res;
+  }
   private extractData(res: Response) {
     return res.json();
   }
