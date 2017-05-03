@@ -62,7 +62,7 @@
       </ng-template>
       <td>
         <select competence (change)="postCompetence($event.target.value)">
-            <option [value] ="[module.id, 'null']">None</option>
+            <option [value] ="[module.id, null]">None</option>
           <ng-template ngFor let-choice [ngForOf]="choiceCompetences" let-i="index">
             <option [selected]="module.competence==choice.id" [value] = "[module.id,choice.id]">{{ choice.title }}</option>
           </ng-template>
