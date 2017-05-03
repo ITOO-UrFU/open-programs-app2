@@ -1,10 +1,14 @@
+<div constructor>
 <table>
-  <td><p>Модуль программы</p></td>
-  <td><p>Группа выбора</p></td>
-  <ng-template ngFor let-target [ngForOf]="targets">
-      <td>{{target.title}}</td>
-  </ng-template>
-  <td><p>Компетенции</p></td>
+  <thead>
+    <td><p>Модуль программы</p></td>
+    <td><p>Группа выбора</p></td>
+    <ng-template ngFor let-target [ngForOf]="targets">
+        <td>{{target.title}}</td>
+    </ng-template>
+    <td><p>Компетенции</p></td>
+  </thead>
+  <tbody>
   <ng-template ngFor let-module [ngForOf]="modules">
     <tr>
       <td><p>{{module.title}}</p></td>
@@ -21,4 +25,6 @@
       <td><p>{{module.get_competence_display}}</p></td>
     </tr> 
   </ng-template>
+  </tbody>
 </table>
+</div>
