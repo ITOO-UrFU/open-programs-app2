@@ -20,11 +20,13 @@ export class ProgramConstructorLiteComponent implements OnInit {
   public modules: any;
   public targets: any;
   public selectValue: any;
+  public choiceGroups: any;
+  public currentChoiceGroups: any = 'all';
+  public choiceCompetences: any;
 
 /// 
 
   callType(value){
-    console.log(value)
     let object = {};
     value = value.split(',');
     object["module_id"]=value[0];
@@ -38,6 +40,45 @@ export class ProgramConstructorLiteComponent implements OnInit {
                       error => console.log(error)
                     )
   }
+  postChoiceGroups(value){
+
+    let object = {};
+    value = value.split(',');
+    object["module_id"]=value[0];
+    object["choice_group_id"]=value[1];
+  
+    this.globalService.postChoiceGroup(JSON.stringify(object))
+                      .subscribe(
+                      status => {
+                         console.log(status) 
+                      },
+                      error => console.log(error)
+                    )
+  }
+    sortChoiceGroups(value){
+    this.currentChoiceGroups = value
+  }
+    sort(value){
+      if (this.currentChoiceGroups=='all') return false
+      else if (this.currentChoiceGroups==value) return false
+      return true;
+    }
+      postCompetence(value){
+
+    let object = {};
+    value = value.split(',');
+    object["module_id"]=value[0];
+    object["competence_id"]=value[1];
+  
+    this.globalService.postChoiceCompetence(JSON.stringify(object))
+                      .subscribe(
+                      status => {
+                         console.log(status) 
+                      },
+                      error => console.log(error)
+                    )
+  }
+
 ////
 
   constructor ( private router: Router,
@@ -49,7 +90,9 @@ export class ProgramConstructorLiteComponent implements OnInit {
                       params => {
                         this.setTitle(params['id']);
                         this.getProgramModules(params['id']);
-                        this.getProgramTargets(params['id'])
+                        this.getProgramTargets(params['id']);
+                        this.getProgramChoiceGroups(params['id']);
+                        this.getProgramCompetences(params['id'])
                       },
                       error => this.errorMessage = "Неверный адрес!"
                     );
@@ -69,7 +112,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.getElementsOpenPrograms('get_program_modules/'+slug)
                     .subscribe(
                       modules => {
-                        this.modules = modules; console.log(this.modules) 
+                        this.modules = modules; 
                       },
                       error => console.log(error)
                     )
@@ -78,7 +121,26 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.getElementsOpenPrograms('get_targets_by_program/'+slug)
                     .subscribe(
                       targets => {
-                        this.targets = targets; console.log(this.targets) 
+                        this.targets = targets; 
+                      },
+                      error => console.log(error)
+                    )
+  }
+
+    public getProgramChoiceGroups(slug:string){
+    this.globalService.getElementsOpenPrograms('get_choice_groups_by_program/'+slug)
+                    .subscribe(
+                      choiceGroups => {
+                        this.choiceGroups = choiceGroups;
+                      },
+                      error => console.log(error)
+                    )
+  }
+    public getProgramCompetences(slug:string){
+    this.globalService.getElementsOpenPrograms('get_competences_by_program/'+slug)
+                    .subscribe(
+                      choiceCompetences => {
+                        this.choiceCompetences = choiceCompetences; console.log(choiceCompetences) 
                       },
                       error => console.log(error)
                     )

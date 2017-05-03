@@ -20,6 +20,10 @@ div[element-open-program]{
     table{
         thead{
             background: #efefef;
+            td select{
+                width: 1.4em;
+                margin-left: 20px
+            }
         }
         tbody{
 
@@ -28,6 +32,10 @@ div[element-open-program]{
         td{
             padding: 6px;
             border:1px solid #efefef;
+            & select{
+                width: 200px;
+            }
+
         }
     }
                 

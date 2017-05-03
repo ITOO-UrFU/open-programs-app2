@@ -64,6 +64,26 @@ export class GlobalService {
                     .catch(this.handleError);
   }
 
+postChoiceGroup(value):any {
+    console.log("ok!")
+    console.log(value)
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.serverURL + 'change_choice_group/', value, options)
+                    .map(this.extractDataPost)
+                    .catch(this.handleError);
+}
+
+postChoiceCompetence(value):any {
+    console.log("ok!")
+    console.log(value)
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.serverURL + 'change_competence/', value, options)
+                    .map(this.extractDataPost)
+                    .catch(this.handleError);
+}
+
   private extractDataPost(res: Response) {
     return res;
   }

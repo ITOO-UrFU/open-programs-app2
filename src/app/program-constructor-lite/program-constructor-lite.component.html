@@ -2,7 +2,15 @@
 <table>
   <thead>
     <td><p>Модуль программы</p></td>
-    <td><p>Группа выбора</p></td>
+    <td><p>Группа выбора 
+        <select  (change)="sortChoiceGroups($event.target.value)">
+            <option [value] = "'all'">Все группы выбора</option>
+          <ng-template ngFor let-choice [ngForOf]="choiceGroups" let-i="index">
+            <option [value] = "choice.id">{{ choice.title }}</option>
+        </ng-template>
+        </select>
+    </p>
+         </td>
     <ng-template ngFor let-target [ngForOf]="targets">
         <td>{{target.title}}</td>
     </ng-template>
@@ -10,9 +18,15 @@
   </thead>
   <tbody>
   <ng-template ngFor let-module [ngForOf]="modules">
-    <tr>
+    <tr [hidden] = "sort(module.choice_group)">
       <td><p>{{module.title}}</p></td>
-      <td><p>{{module.choice_group_title}}</p></td>
+      <td>
+        <select  (change)="postChoiceGroups($event.target.value)">
+          <ng-template ngFor let-choice [ngForOf]="choiceGroups" let-i="index">
+            <option [selected]="choice.get_program_modules.indexOf(module.id)!=-1" [value] = "[module.id,choice.id]">{{ choice.title }}</option>
+          </ng-template>
+        </select>
+        </td>
       <ng-template ngFor let-target [ngForOf]="targets" let-i="index">
       <td>
         
@@ -46,7 +60,14 @@
         
        </td>
       </ng-template>
-      <td><p>{{module.get_competence_display}}</p></td>
+      <td>
+        <select competence (change)="postCompetence($event.target.value)">
+            <option [value] ="[module.id, 'null']">None</option>
+          <ng-template ngFor let-choice [ngForOf]="choiceCompetences" let-i="index">
+            <option [selected]="module.competence==choice.id" [value] = "[module.id,choice.id]">{{ choice.title }}</option>
+          </ng-template>
+        </select>
+        </td>
     </tr> 
   </ng-template>
   </tbody>
