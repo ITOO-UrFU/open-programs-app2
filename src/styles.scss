@@ -33,6 +33,7 @@ div[element-open-program]{
                 
     input[type=radio]{
         &+label{
+            cursor: pointer;
             opacity: 0.1;
         }
         &:checked+label{
