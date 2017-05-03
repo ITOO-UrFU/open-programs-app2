@@ -31,5 +31,13 @@ div[element-open-program]{
         }
     }
                 
-
+    input[type=radio]{
+        &+label{
+            opacity: 0.1;
+        }
+        &:checked+label{
+            opacity: 1;
+        }
+    }
+    
  }

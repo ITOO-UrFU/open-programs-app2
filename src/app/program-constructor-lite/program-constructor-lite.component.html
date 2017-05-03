@@ -15,11 +15,35 @@
       <td><p>{{module.choice_group_title}}</p></td>
       <ng-template ngFor let-target [ngForOf]="targets" let-i="index">
       <td>
-        <select  (change)="callType($event.target.value)">
-          <option [selected]="module.targets_positions[i] == 0" [value] = "[module.id,target.id,0]">Не входит</option>
-          <option [selected]="module.targets_positions[i] == 1" [value] = "[module.id,target.id,1]">По умолчанию</option>
-          <option [selected]="module.targets_positions[i] == 2" [value] = "[module.id,target.id,2]">По выбору</option>
-        </select>
+        
+          <input [name]="module.id+target.id" [id]="module.id+target.id+0" type="radio" [checked]="module.targets_positions[i] == 0" [value] = "[module.id,target.id,0]" [hidden]="true" (change)="callType($event.target.value)">
+          <label [for]="module.id+target.id+0" >
+            <svg width=20 viewBox="0 0 20 20"> 
+              <g>
+                <path d="M10,19a9,9,0,1,1,9-9A9,9,0,0,1,10,19Z" fill="#22b573"/>
+                <path d="M10,2a8,8,0,1,1-8,8,8,8,0,0,1,8-8m0-2A10,10,0,1,0,20,10,10,10,0,0,0,10,0Z"/>
+              </g>
+            </svg>
+          </label>
+          <input [name]="module.id+target.id" [id]="module.id+target.id+1" type="radio" [checked]="module.targets_positions[i] == 1" [value] = "[module.id,target.id,1]" [hidden]="true" (change)="callType($event.target.value)">
+          <label [for]="module.id+target.id+1">
+            <svg width=20 viewBox="0 0 20 20"> 
+              <g>
+                <path d="M10,19a9,9,0,1,1,9-9A9,9,0,0,1,10,19Z" fill="#e6e6e6"/>
+                <path d="M10,2a8,8,0,1,1-8,8,8,8,0,0,1,8-8m0-2A10,10,0,1,0,20,10,10,10,0,0,0,10,0Z"/>
+              </g>
+            </svg>
+          </label>
+          <input [name]="module.id+target.id" [id]="module.id+target.id+2" type="radio" [checked]="module.targets_positions[i] == 2" [value] = "[module.id,target.id,2]" [hidden]="true" (change)="callType($event.target.value)">
+          <label [for]="module.id+target.id+2">
+            <svg width=20 viewBox="0 0 20 20"> 
+              <g>
+                <path d="M10,19a9,9,0,1,1,9-9A9,9,0,0,1,10,19Z" fill="#C1272D"/>
+                <path d="M10,2a8,8,0,1,1-8,8,8,8,0,0,1,8-8m0-2A10,10,0,1,0,20,10,10,10,0,0,0,10,0Z"/>
+              </g>
+            </svg>
+          </label>
+        
        </td>
       </ng-template>
       <td><p>{{module.get_competence_display}}</p></td>
