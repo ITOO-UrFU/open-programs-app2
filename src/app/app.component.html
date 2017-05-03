@@ -6,11 +6,5 @@
   <router-outlet></router-outlet> 
 </div>
 
-<ng-template ngFor let-container [ngForOf]="containers" let-i="index" >
-  <div *ngIf="container.type=='footer'">
-    <footer footer>
-      <p>Телефон: {{ container.components[0].json.tel }}</p>
-    </footer>
-  </div>
-</ng-template>
+
 
