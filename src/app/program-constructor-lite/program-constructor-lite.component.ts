@@ -17,6 +17,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
 
   public errorMessage: string;
   public title: any;
+  public program: any;
   public modules: any;
   public moduleTitles = {};
   public targets: any;
@@ -90,6 +91,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
                     this.subscription = activateRoute.params.subscribe(
                       params => {
                         this.setTitle(params['id']);
+                        this.getProgram(params['id']);
                         this.getProgramModules(params['id']);
                         this.getProgramTargets(params['id']);
                         this.getProgramChoiceGroups(params['id']);
@@ -107,6 +109,16 @@ export class ProgramConstructorLiteComponent implements OnInit {
   public setTitle( newTitle: string) {
     this.title = newTitle;
     this.titleService.setTitle( newTitle );
+  }
+    public getProgram(slug:string){
+    this.globalService.getElementsOpenPrograms('programs/'+slug)
+                    .subscribe(
+                      program => {
+                        this.program = program; 
+                        console.log(program)
+                      },
+                      error => console.log(error)
+                    )
   }
 
   public getProgramModules(slug:string){
