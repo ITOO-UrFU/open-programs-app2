@@ -24,6 +24,7 @@
       <td [attr.duble]="moduleTitles[module.title]"><p>{{module.title}}</p></td>
       <td>
         <select  (change)="postChoiceGroups($event.target.value)">
+          <option [value] ="[module.id, null]">None</option>
           <ng-template ngFor let-choice [ngForOf]="choiceGroups" let-i="index">
             <option [selected]="choice.get_program_modules.indexOf(module.id)!=-1" [value] = "[module.id,choice.id]">{{ choice.title }}</option>
           </ng-template>
