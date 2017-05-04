@@ -42,7 +42,7 @@ div[element-open-program]{
     input[type=radio]{
         &+label{
             cursor: pointer;
-            opacity: 0.1;
+            opacity: 0.2;
         }
         &:checked+label{
             opacity: 1;
