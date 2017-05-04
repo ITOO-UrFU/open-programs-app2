@@ -1,12 +1,10 @@
-<ng-template ngFor let-container [ngForOf]="containers" let-i="index" [ngForTrackBy]="trackByFn">
-  <div *ngIf="container.type=='menu'">
-    {{container.title}}
-    <router-outlet></router-outlet>
-  </div>
-  <div *ngIf="container.type=='footer'">
-    <footer>
-      <p>Телефон: {{ container.components[0].json.tel }}</p>
-    </footer>
-  </div>
-</ng-template>
+
+<div *ngIf="menu">
+  <ng-template ngFor let-container [ngForOf]="menu" let-i="index">
+    <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
+  </ng-template>
+  <router-outlet></router-outlet> 
+</div>
+
+
 

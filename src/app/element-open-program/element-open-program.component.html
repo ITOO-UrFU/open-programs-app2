@@ -1,0 +1,10 @@
+<ul>
+<ng-template ngFor let-program [ngForOf]="programs">
+  <li>
+  <p>{{program.title}}</p>
+  <p>{{program.training_direction}}</p>
+  <p>{{program.id}}</p>
+  <a href="" [routerLink]="['/programs', program.id]">Настроить цели</a>
+  </li>
+</ng-template>
+</ul>

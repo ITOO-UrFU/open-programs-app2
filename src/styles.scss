@@ -1,1 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+body[app-root]{
+    font-family: sans-serif;
+}
+div[element-open-program]{
+    ul {
+        padding: 1px;
+        margin: 1px;
+        li{
+            list-style-type:none;
+            padding: 10px;
+            margin: 1px;
+            &:hover{
+                background: #efefef;
+            }
+        }
+    }
+ }
+ div[constructor]{
+    table{
+        thead{
+            
+            background: #efefef;
+            tr {
+                td {
+                    select{
+                        width: 1.4em;
+                        margin-left: 20px
+                    }
+                }
+            }
+        }
+        tbody{
+
+        }
+
+        td{
+            padding: 6px;
+            border:1px solid #efefef;
+            & select{
+                width: 200px;
+            }
+        &[duble=true]{
+            background: #e6e6e6;
+        }
+
+        }
+    }
+                
+    input[type=radio]{
+        &+label{
+            cursor: pointer;
+            opacity: 0.2;
+        }
+        &:checked+label{
+            opacity: 1;
+        }
+    }
+    
+ }
