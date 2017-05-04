@@ -19,10 +19,15 @@ div[element-open-program]{
  div[constructor]{
     table{
         thead{
+            
             background: #efefef;
-            td select{
-                width: 1.4em;
-                margin-left: 20px
+            tr {
+                td {
+                    select{
+                        width: 1.4em;
+                        margin-left: 20px
+                    }
+                }
             }
         }
         tbody{
@@ -35,6 +40,9 @@ div[element-open-program]{
             & select{
                 width: 200px;
             }
+        &[duble=true]{
+            background: #e6e6e6;
+        }
 
         }
     }

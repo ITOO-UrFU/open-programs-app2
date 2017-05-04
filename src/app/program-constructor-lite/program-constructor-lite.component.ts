@@ -18,6 +18,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
   public errorMessage: string;
   public title: any;
   public modules: any;
+  public moduleTitles = {};
   public targets: any;
   public selectValue: any;
   public choiceGroups: any;
@@ -112,7 +113,12 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.getElementsOpenPrograms('get_program_modules/'+slug)
                     .subscribe(
                       modules => {
-                        this.modules = modules; 
+                        this.modules = modules;
+                        for (let module of modules){
+                          if (this.moduleTitles[module.title]===false) this.moduleTitles[module.title] = true
+                          else this.moduleTitles[module.title] = false
+                        }
+                        console.log(this.moduleTitles);
                       },
                       error => console.log(error)
                     )

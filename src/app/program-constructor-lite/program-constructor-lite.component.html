@@ -1,6 +1,7 @@
 <div constructor>
 <table>
   <thead>
+    <tr>
     <td><p>Модуль программы</p></td>
     <td><p>Группа выбора 
         <select  (change)="sortChoiceGroups($event.target.value)">
@@ -12,14 +13,15 @@
     </p>
          </td>
     <ng-template ngFor let-target [ngForOf]="targets">
-        <td>{{target.title}}</td>
+        <td >{{target.title}}</td>
     </ng-template>
     <td><p>Компетенции</p></td>
+    </tr>
   </thead>
   <tbody>
   <ng-template ngFor let-module [ngForOf]="modules">
     <tr [hidden] = "sort(module.choice_group)">
-      <td><p>{{module.title}}</p></td>
+      <td [attr.duble]="moduleTitles[module.title]"><p>{{module.title}}</p></td>
       <td>
         <select  (change)="postChoiceGroups($event.target.value)">
           <ng-template ngFor let-choice [ngForOf]="choiceGroups" let-i="index">
