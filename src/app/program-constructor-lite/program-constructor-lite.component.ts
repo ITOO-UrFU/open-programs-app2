@@ -58,11 +58,13 @@ export class ProgramConstructorLiteComponent implements OnInit {
                     )
   }
     sortChoiceGroups(value){
-    this.currentChoiceGroups = value
+      if (value == "null") this.currentChoiceGroups = null
+      else this.currentChoiceGroups = value
   }
     sort(value){
       if (this.currentChoiceGroups=='all') return false
       else if (this.currentChoiceGroups==value) return false
+      else if (this.currentChoiceGroups) return false
       return true;
     }
       postCompetence(value){

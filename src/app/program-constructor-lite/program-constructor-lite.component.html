@@ -9,6 +9,7 @@
     <td><p>Группа выбора 
         <select  (change)="sortChoiceGroups($event.target.value)">
             <option [value] = "'all'">Все группы выбора</option>
+            <option [value] = "'null'">None</option>
           <ng-template ngFor let-choice [ngForOf]="choiceGroups" let-i="index">
             <option [value] = "choice.id">{{ choice.title }}</option>
         </ng-template>
