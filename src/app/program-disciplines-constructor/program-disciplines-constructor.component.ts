@@ -16,6 +16,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   private subscription: Subscription;
 
   public errorMessage: string;
+  public disciplines: any;
 
     constructor ( private router: Router,
                 private activateRoute: ActivatedRoute,
@@ -24,7 +25,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
               ) { 
                     this.subscription = activateRoute.params.subscribe(
                       params => {
-                        console.log(params['id']);
+                        this.getDisciplines(params['id']);
                       },
                       error => this.errorMessage = "Неверный адрес!"
                     );
@@ -34,6 +35,17 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       }
                     );
                   }
+
+    public getDisciplines(slug:string){
+    this.globalService.getElementsOpenPrograms('get_program_disciplines/'+slug)
+                    .subscribe(
+                      disciplines => {
+                        this.disciplines = disciplines; 
+                        console.log(disciplines)
+                      },
+                      error => console.log(error)
+                    )
+  }
 
   ngOnInit() {
   }
