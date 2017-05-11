@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ContainerComponent } from './container/container.component';
-import { ProgramConstructorLiteComponent } from './program-constructor-lite/program-constructor-lite.component'
+import { ProgramConstructorLiteComponent } from './program-constructor-lite/program-constructor-lite.component';
+import { ProgramDisciplinesConstructorComponent } from './program-disciplines-constructor/program-disciplines-constructor.component'
 
 const routes: Routes = [
   {
@@ -15,6 +16,15 @@ const routes: Routes = [
       {
         path: ':id',
         component: ProgramConstructorLiteComponent,
+      }
+    ]
+  },
+  {
+    path:'discipline',
+    children: [
+      {
+        path: ':id',
+        component: ProgramDisciplinesConstructorComponent,
       }
     ]
   },

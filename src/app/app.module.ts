@@ -10,6 +10,7 @@ import { ContainerComponent } from './container/container.component';
 import { FooterComponent } from './footer/footer.component';
 import { ElementOpenProgramComponent } from './element-open-program/element-open-program.component';
 import { ProgramConstructorLiteComponent } from './program-constructor-lite/program-constructor-lite.component';
+import { ProgramDisciplinesConstructorComponent } from './program-disciplines-constructor/program-disciplines-constructor.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProgramConstructorLiteComponent } from './program-constructor-lite/prog
     ContainerComponent,
     FooterComponent,
     ElementOpenProgramComponent,
-    ProgramConstructorLiteComponent
+    ProgramConstructorLiteComponent,
+    ProgramDisciplinesConstructorComponent
   ],
   imports: [
     BrowserModule,
