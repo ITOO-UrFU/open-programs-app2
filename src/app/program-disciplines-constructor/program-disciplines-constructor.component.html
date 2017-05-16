@@ -16,9 +16,40 @@
     <ng-template ngFor let-discipline [ngForOf]="disciplines">
     <tr> 
     <td><p>{{discipline.title}}<br /><em>{{discipline.module}}</em></p></td>
-    <td><p>{{discipline.terms['3,5 года']}}</p></td>
-    <td><p>{{discipline.terms['4 года']}}</p></td>
-    <td><p>{{discipline.terms['5 года']}}</p></td>
+    <td><select (change)="callType({program_id:program.id,discipline_id:discipline.id,term_title:'3,5 года',semester:$event.target.value})">
+          <option [disabled]="true" [selected]="discipline.terms['3,5 года']==null">Семестр</option>
+          <option [selected]="discipline.terms['3,5 года']==1" [value] = "1">1 семестр</option>
+          <option [selected]="discipline.terms['3,5 года']==2" [value] = "2">2 семестр</option>
+          <option [selected]="discipline.terms['3,5 года']==3" [value] = "3">3 семестр</option>
+          <option [selected]="discipline.terms['3,5 года']==4" [value] = "4">4 семестр</option>
+          <option [selected]="discipline.terms['3,5 года']==5" [value] = "5">5 семестр</option>
+          <option [selected]="discipline.terms['3,5 года']==6" [value] = "6">6 семестр</option>
+          <option [selected]="discipline.terms['3,5 года']==7" [value] = "7">7 семестр</option>
+</select></td>
+    <td><select (change)="callType({program_id:program.id,discipline_id:discipline.id,term_title:'4 года',semester:$event.target.value})">
+          <option [disabled]="true" [selected]="discipline.terms['4 года']==null">Семестр</option>
+          <option [selected]="discipline.terms['4 года']==1" [value] = "1">1 семестр</option>
+          <option [selected]="discipline.terms['4 года']==2" [value] = "2">2 семестр</option>
+          <option [selected]="discipline.terms['4 года']==3" [value] = "3">3 семестр</option>
+          <option [selected]="discipline.terms['4 года']==4" [value] = "4">4 семестр</option>
+          <option [selected]="discipline.terms['4 года']==5" [value] = "5">5 семестр</option>
+          <option [selected]="discipline.terms['4 года']==6" [value] = "6">6 семестр</option>
+          <option [selected]="discipline.terms['4 года']==7" [value] = "7">7 семестр</option>
+          <option [selected]="discipline.terms['4 года']==8" [value] = "8">8 семестр</option>
+</select></td>
+    <td><select (change)="callType({program_id:program.id,discipline_id:discipline.id,term_title:'5 года',semester:$event.target.value})">
+          <option [disabled]="true" [selected]="discipline.terms['5 года']==null">Семестр</option>
+          <option [selected]="discipline.terms['5 года']==1" [value] = "1">1 семестр</option>
+          <option [selected]="discipline.terms['5 года']==2" [value] = "2">2 семестр</option>
+          <option [selected]="discipline.terms['5 года']==3" [value] = "3">3 семестр</option>
+          <option [selected]="discipline.terms['5 года']==4" [value] = "4">4 семестр</option>
+          <option [selected]="discipline.terms['5 года']==5" [value] = "5">5 семестр</option>
+          <option [selected]="discipline.terms['5 года']==6" [value] = "6">6 семестр</option>
+          <option [selected]="discipline.terms['5 года']==7" [value] = "7">7 семестр</option>
+          <option [selected]="discipline.terms['5 года']==8" [value] = "8">8 семестр</option>
+          <option [selected]="discipline.terms['5 года']==9" [value] = "9">9 семестр</option>
+          <option [selected]="discipline.terms['5 года']==10" [value] = "10">10 семестр</option>
+</select></td>
     <td><tr><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td></tr>
     <tr><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td></tr>
     <tr><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td></tr></td>
@@ -27,3 +58,8 @@
   </tbody>
 </table>
 </div>
+
+
+
+
+

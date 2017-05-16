@@ -53,6 +53,17 @@ export class GlobalService {
   }
 
 
+  postMassege(api, value):any {
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      console.log("postMassege")
+      console.log(value)
+      console.log(this.serverURL + api)
+      return this.http.post(this.serverURL + api, value, options)
+                    .map(this.extractDataPost)
+                    .catch(this.handleError);
+  }
+
   postTargetModule(value):any {
     console.log("ok!")
     console.log(value)
