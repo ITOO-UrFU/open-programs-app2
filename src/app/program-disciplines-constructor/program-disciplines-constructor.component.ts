@@ -18,6 +18,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   public errorMessage: string;
   public disciplines: any;
   public program: any;
+  public variants: any;
 
 
   callType(value){
@@ -40,6 +41,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       params => {
                         this.getDisciplines(params['id']);
                         this.getProgram(params['id']);
+                        this.getDisciplinesVariants(params['id']);
                       },
                       error => this.errorMessage = "Неверный адрес!"
                     );
@@ -50,22 +52,33 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                     );
                   }
 
-    public getDisciplines(slug:string){
-    this.globalService.getElementsOpenPrograms('get_program_disciplines/'+slug)
-                    .subscribe(
-                      disciplines => {
-                        this.disciplines = disciplines; 
-                        console.log(disciplines)
-                      },
-                      error => console.log(error)
-                    )
-  }
+
   public getProgram(slug:string){
     this.globalService.getElementsOpenPrograms('programs/'+slug)
                     .subscribe(
                       program => {
                         this.program = program; 
-                        console.log(program)
+                        console.log('Програма', program)
+                      },
+                      error => console.log(error)
+                    )
+  }
+  public getDisciplines(slug:string){
+    this.globalService.getElementsOpenPrograms('get_program_disciplines/'+slug)
+                    .subscribe(
+                      disciplines => {
+                        this.disciplines = disciplines; 
+                        console.log('Список дисциплин', disciplines)
+                      },
+                      error => console.log(error)
+                    )
+  }
+  public getDisciplinesVariants(slug:string){
+    this.globalService.getElementsOpenPrograms('get_program_variants/'+slug)
+                    .subscribe(
+                      variants => {
+                        this.variants = variants; 
+                        console.log('Список вариантов реализации дисциплин', variants)
                       },
                       error => console.log(error)
                     )

@@ -17,7 +17,7 @@
     <tr> 
     <td><p>{{discipline.title}}<br /><em>{{discipline.module}}</em></p></td>
     <td><select (change)="callType({program_id:program.id,discipline_id:discipline.id,term_title:'3,5 года',semester:$event.target.value})">
-          <option [disabled]="true" [selected]="discipline.terms['3,5 года']==null">Семестр</option>
+          <option [disabled]="true" [selected]="discipline.terms['3,5 года']==0">Семестр</option>
           <option [selected]="discipline.terms['3,5 года']==1" [value] = "1">1 семестр</option>
           <option [selected]="discipline.terms['3,5 года']==2" [value] = "2">2 семестр</option>
           <option [selected]="discipline.terms['3,5 года']==3" [value] = "3">3 семестр</option>
@@ -27,7 +27,7 @@
           <option [selected]="discipline.terms['3,5 года']==7" [value] = "7">7 семестр</option>
 </select></td>
     <td><select (change)="callType({program_id:program.id,discipline_id:discipline.id,term_title:'4 года',semester:$event.target.value})">
-          <option [disabled]="true" [selected]="discipline.terms['4 года']==null">Семестр</option>
+          <option [disabled]="true" [selected]="discipline.terms['4 года']==0">Семестр</option>
           <option [selected]="discipline.terms['4 года']==1" [value] = "1">1 семестр</option>
           <option [selected]="discipline.terms['4 года']==2" [value] = "2">2 семестр</option>
           <option [selected]="discipline.terms['4 года']==3" [value] = "3">3 семестр</option>
@@ -38,7 +38,7 @@
           <option [selected]="discipline.terms['4 года']==8" [value] = "8">8 семестр</option>
 </select></td>
     <td><select (change)="callType({program_id:program.id,discipline_id:discipline.id,term_title:'5 лет',semester:$event.target.value})">
-          <option [disabled]="true" [selected]="discipline.terms['5 лет']==null">Семестр</option>
+          <option [disabled]="true" [selected]="discipline.terms['5 лет']==0">Семестр</option>
           <option [selected]="discipline.terms['5 лет']==1" [value] = "1">1 семестр</option>
           <option [selected]="discipline.terms['5 лет']==2" [value] = "2">2 семестр</option>
           <option [selected]="discipline.terms['5 лет']==3" [value] = "3">3 семестр</option>
@@ -50,9 +50,29 @@
           <option [selected]="discipline.terms['5 лет']==9" [value] = "9">9 семестр</option>
           <option [selected]="discipline.terms['5 лет']==10" [value] = "10">10 семестр</option>
 </select></td>
-    <td><tr><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td></tr>
-    <tr><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td></tr>
-    <tr><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td><td><p>---</p></td></tr></td>
+  
+    <td>
+      <ng-template ngFor let-variant [ngForOf]="variants[discipline?.id]">
+      <tr *ngIf="variant.course">
+        <td>Курс</td>
+        <td>{{ variant.course.title }}</td>
+        <td>{{ variant.technology.title }}</td>
+        <td>{{ variant.diagram }}</td>
+      </tr>
+      <tr *ngIf="variant.parity">
+        <td >По четности</td>
+        <td>{{ variant.parity }} семестр</td>
+        <td>{{ variant.technology.title }}</td>
+        <td>{{ variant.diagram }}</td>
+      </tr>
+      <tr *ngIf="variant.semester">
+        <td >Семестр</td>
+        <td>{{ variant.semester.term }} -  {{ variant.semester.training_semester }} семестр</td>
+        <td>{{ variant.technology.title }}</td>
+        <td>{{ variant.diagram }}</td>
+      </tr>
+      </ng-template>
+    </td>
     </tr>
     </ng-template>
   </tbody>
