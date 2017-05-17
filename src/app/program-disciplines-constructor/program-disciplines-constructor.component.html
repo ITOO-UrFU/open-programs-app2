@@ -2,7 +2,6 @@
   <h1>{{program?.title}}</h1>
   <h3>{{program?.training_direction}}</h3>
   <h3>{{program?.get_level_display}}</h3>
-  <p (click)="getDisciplinesVariants(program_id);">клик</p>
 <table>
   <thead>
     <tr>
@@ -82,7 +81,7 @@
         </ng-template>
         <ng-template [ngIf]="variant.semester">
         <td >Семестр</td>
-        <td>{{ variant.semester.term }} -  {{ variant.semester.training_semester }} семестр
+        <td>
           <select (change)="changeVariant({variant_id:variant.id,semester:$event.target.value})">
             <option  [value]="'3,5 года'" [selected]="variant?.semester.term=='3,5 года'">3,5 года</option>
             <option  [value]="'4 года'" [selected]="variant?.semester.term=='4 года'">4 года</option>
