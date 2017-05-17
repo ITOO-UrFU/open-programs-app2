@@ -8,10 +8,18 @@ div[element-open-program]{
         margin: 1px;
         li{
             list-style-type:none;
-            padding: 10px;
+            padding: 1em;
             margin: 1px;
             &:hover{
-                background: #efefef;
+                background: rgba(74,150,173, 0.1);
+                font-weight: 600;
+            }
+            a {
+                background-color: #4A96AD;
+                padding: 5px;
+                border-radius: 2px;
+                color: white;
+                text-decoration: none;
             }
         }
     }
@@ -58,3 +66,20 @@ div[element-open-program]{
     }
     
  }
+
+// GOWENCODE
+
+    // #7D1935
+    // #4A96AD
+    // #F5F3EE
+    // #FFFFFF
+
+ body {
+    background-color: #F5F3EE;
+    color:#4D4A42;
+}
+#header {
+    color: white;
+    background-color: #7D1935;
+    padding: 1em;
+}

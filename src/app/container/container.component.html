@@ -1,7 +1,9 @@
 
 <ng-template [ngIf]="contents">
   <ng-template ngFor let-contant [ngForOf]="contents">
-    <h1>{{ contant.title }}</h1>
+    <div id="header">
+      <h1>{{ contant.title }}</h1>
+    </div>
     <ng-template ngFor let-component [ngForOf]="contant.components">
       
       <div [ngSwitch]="component.type">
