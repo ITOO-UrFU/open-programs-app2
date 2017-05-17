@@ -83,9 +83,9 @@
         <td class="variant-title"><p>Семестр</p></td>
         <td>
           <select (change)="changeVariant({variant_id:variant.id,semester:$event.target.value})">
-            <option  [value]="'3,5 года'" [selected]="variant?.semester.term=='3,5 года'">3,5 года</option>
-            <option  [value]="'4 года'" [selected]="variant?.semester.term=='4 года'">4 года</option>
-            <option  [value]="'5 лет'" [selected]="variant?.semester.term=='5 лет'">5 лет</option>
+            <option *ngIf="discipline.terms['3,5 года']"  [value]="'3,5 года'" [selected]="variant?.semester.term=='3,5 года'">3,5 года</option>
+            <option *ngIf="discipline.terms['4 года']"  [value]="'4 года'" [selected]="variant?.semester.term=='4 года'">4 года</option>
+            <option *ngIf="discipline.terms['5 лет']"  [value]="'5 лет'" [selected]="variant?.semester.term=='5 лет'">5 лет</option>
           </select>
         </td>
         </ng-template>
