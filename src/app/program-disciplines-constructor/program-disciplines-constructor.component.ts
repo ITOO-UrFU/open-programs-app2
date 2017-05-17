@@ -15,9 +15,11 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   
   private subscription: Subscription;
 
+  public program_id: any;
   public errorMessage: string;
   public disciplines: any;
   public program: any;
+  public courses: any = [];
   public variants: any;
 
 
@@ -39,9 +41,11 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
               ) { 
                     this.subscription = activateRoute.params.subscribe(
                       params => {
+                        this.program_id = params['id']
                         this.getDisciplines(params['id']);
                         this.getProgram(params['id']);
                         this.getDisciplinesVariants(params['id']);
+                        this.getCourses();
                       },
                       error => this.errorMessage = "Неверный адрес!"
                     );
@@ -59,6 +63,16 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       program => {
                         this.program = program; 
                         console.log('Програма', program)
+                      },
+                      error => console.log(error)
+                    )
+  }
+    public getCourses(){
+    this.globalService.getElementsOpenPrograms('courses')
+                    .subscribe(
+                      courses => {
+                        this.courses = courses; 
+                        console.log('Курсы', courses)
                       },
                       error => console.log(error)
                     )
@@ -82,6 +96,17 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       },
                       error => console.log(error)
                     )
+  }
+  public addVariant(value){
+    console.log(value);
+       this.globalService.postMassege('create_variant/', JSON.stringify(value))
+                      .subscribe(
+                      status => {
+                        this.getDisciplinesVariants(this.program_id)
+                       console.log(status) 
+                      },
+                      error => console.log(error)
+                      )
   }
 
   ngOnInit() {

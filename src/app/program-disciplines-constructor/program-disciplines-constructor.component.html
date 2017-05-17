@@ -2,6 +2,7 @@
   <h1>{{program?.title}}</h1>
   <h3>{{program?.training_direction}}</h3>
   <h3>{{program?.get_level_display}}</h3>
+  <p (click)="getDisciplinesVariants(program_id);">клик</p>
 <table>
   <thead>
     <tr>
@@ -52,23 +53,33 @@
 </select></td>
   
     <td>
+      <p>Добавить:<br />
+      <a (click)="addVariant({program_id:program.id,discipline_id:discipline.id,course_id:52})">Курс</a>
+      <a (click)="addVariant({program_id:program.id,discipline_id:discipline.id,parity_id:3})">По четности</a>
+      <a (click)="addVariant({program_id:program.id,discipline_id:discipline.id,term_title:'4 года'})">Семестр</a><p>
       <ng-template ngFor let-variant [ngForOf]="variants[discipline?.id]">
       <tr *ngIf="variant.course">
         <td>Курс</td>
-        <td>{{ variant.course.title }}</td>
-        <td>{{ variant.technology.title }}</td>
+        <td>
+          <select (change)="changeCourse({variant_id:variant.id,course:course.id})">
+            
+    <ng-template ngFor let-course [ngForOf]="courses">
+          <option [selected]="course.title==variant.course.title">{{course.title}}</option>
+    </ng-template>
+</select></td>
+        <td>{{ variant.technology?.title }}</td>
         <td>{{ variant.diagram }}</td>
       </tr>
       <tr *ngIf="variant.parity">
         <td >По четности</td>
         <td>{{ variant.parity }} семестр</td>
-        <td>{{ variant.technology.title }}</td>
+        <td>{{ variant.technology?.title }}</td>
         <td>{{ variant.diagram }}</td>
       </tr>
       <tr *ngIf="variant.semester">
         <td >Семестр</td>
         <td>{{ variant.semester.term }} -  {{ variant.semester.training_semester }} семестр</td>
-        <td>{{ variant.technology.title }}</td>
+        <td>{{ variant.technology?.title }}</td>
         <td>{{ variant.diagram }}</td>
       </tr>
       </ng-template>
