@@ -33,6 +33,16 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       error => console.log(error)
                       )
   }
+  changeCourse(value){
+    console.log(value);
+    this.globalService.postMassege('change_variant/', JSON.stringify(value))
+                      .subscribe(
+                      status => {
+                         console.log(status) 
+                      },
+                      error => console.log(error)
+                      )
+  }
 
     constructor ( private router: Router,
                 private activateRoute: ActivatedRoute,

@@ -61,12 +61,12 @@
       <tr *ngIf="variant.course">
         <td>Курс</td>
         <td>
-          <select (change)="changeCourse({variant_id:variant.id,course:course.id})">
-            
-    <ng-template ngFor let-course [ngForOf]="courses">
-          <option [selected]="course.title==variant.course.title">{{course.title}}</option>
-    </ng-template>
-</select></td>
+          <select (change)="changeCourse({variant_id:variant.id,course:$event.target.value})">
+            <ng-template ngFor let-course [ngForOf]="courses">
+                  <option [selected]="course.title==variant.course.title" [value]="course.id">{{course.title}}</option>
+            </ng-template>
+        </select>
+        </td>
         <td>{{ variant.technology?.title }}</td>
         <td>{{ variant.diagram }}</td>
       </tr>
