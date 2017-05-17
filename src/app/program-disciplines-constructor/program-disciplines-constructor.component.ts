@@ -142,6 +142,17 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       error => console.log(error)
                       )
   }
+    public removeVariant(value){
+    console.log(value);
+       this.globalService.postMassege('delete_variant/', JSON.stringify(value))
+                      .subscribe(
+                      status => {
+                        this.getDisciplinesVariants(this.program_id)
+                       console.log(status) 
+                      },
+                      error => console.log(error)
+                      )
+  }
 
   ngOnInit() {
   }
