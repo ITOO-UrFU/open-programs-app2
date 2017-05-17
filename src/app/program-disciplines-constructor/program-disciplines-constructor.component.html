@@ -61,26 +61,75 @@
       <tr *ngIf="variant.course">
         <td>Курс</td>
         <td>
-          <select (change)="changeCourse({variant_id:variant.id,course:$event.target.value})">
+          <select (change)="changeVariant({variant_id:variant.id,course_id:$event.target.value})">
+            <option  [disabled]="true" >Выбирите</option>
             <ng-template ngFor let-course [ngForOf]="courses">
                   <option [selected]="course.title==variant.course.title" [value]="course.id">{{course.title}}</option>
             </ng-template>
         </select>
         </td>
-        <td>{{ variant.technology?.title }}</td>
-        <td>{{ variant.diagram }}</td>
+        <td>
+          <select (change)="changeVariant({variant_id:variant.id,technology_id:$event.target.value})">
+              <option  [disabled]="true" >Выбирите</option>
+              <ng-template ngFor let-technology  [ngForOf]="technologies">
+                    <option [selected]="technology.id==variant.technology?.id" [value]="technology.id">{{technology.title}}</option>
+              </ng-template>
+          </select>
+        </td>
+        <td>          
+          <select (change)="changeVariant({variant_id:variant.id,diagram_id:$event.target.value})">
+            <option  [disabled]="true" >Выбирите</option>
+            <ng-template ngFor let-diagram [ngForOf]="diagrams">
+                  <option [selected]="diagram.id==variant.diagram?.id" [value]="diagram.id">{{diagram.title}}</option>
+            </ng-template>
+        </select>
+        </td>
       </tr>
       <tr *ngIf="variant.parity">
         <td >По четности</td>
-        <td>{{ variant.parity }} семестр</td>
-        <td>{{ variant.technology?.title }}</td>
-        <td>{{ variant.diagram }}</td>
+        <td>
+          <select (change)="changeVariant({variant_id:variant.id,parity:$event.target.value})">
+            <option  [value]="1" [selected]="variant?.parity==1">Осенний семестр</option>
+            <option  [value]="2" [selected]="variant?.parity==2">Весенний семестр</option>
+            <option  [value]="3" [selected]="variant?.parity==3">Любой семестр</option>
+          </select>
+        </td>
+        <td>
+          <select (change)="changeVariant({variant_id:variant.id,technology_id:$event.target.value})">
+              <option  [disabled]="true" >Выбирите</option>
+              <ng-template ngFor let-technology  [ngForOf]="technologies">
+                    <option [selected]="technology.id==variant.technology?.id" [value]="technology.id">{{technology.title}}</option>
+              </ng-template>
+          </select>
+        </td>
+        <td>          
+          <select (change)="changeVariant({variant_id:variant.id,diagram_id:$event.target.value})">
+            <option  [disabled]="true" >Выбирите</option>
+            <ng-template ngFor let-diagram [ngForOf]="diagrams">
+                  <option [selected]="diagram.id==variant.diagram?.id" [value]="diagram.id">{{diagram.title}}</option>
+            </ng-template>
+        </select>
+        </td>
       </tr>
       <tr *ngIf="variant.semester">
         <td >Семестр</td>
         <td>{{ variant.semester.term }} -  {{ variant.semester.training_semester }} семестр</td>
-        <td>{{ variant.technology?.title }}</td>
-        <td>{{ variant.diagram }}</td>
+                <td>
+          <select (change)="changeVariant({variant_id:variant.id,technology_id:$event.target.value})">
+              <option  [disabled]="true" >Выбирите</option>
+              <ng-template ngFor let-technology  [ngForOf]="technologies">
+                    <option [selected]="technology.id==variant.technology?.id" [value]="technology.id">{{technology.title}}</option>
+              </ng-template>
+          </select>
+        </td>
+        <td>          
+          <select (change)="changeVariant({variant_id:variant.id,diagram_id:$event.target.value})">
+            <option  [disabled]="true" >Выбирите</option>
+            <ng-template ngFor let-diagram [ngForOf]="diagrams">
+                  <option [selected]="diagram.id==variant.diagram?.id" [value]="diagram.id">{{diagram.title}}</option>
+            </ng-template>
+        </select>
+        </td>
       </tr>
       </ng-template>
     </td>
@@ -89,8 +138,6 @@
   </tbody>
 </table>
 </div>
-
-
 
 
 

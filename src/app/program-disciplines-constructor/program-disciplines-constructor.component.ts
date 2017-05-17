@@ -21,7 +21,8 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   public program: any;
   public courses: any = [];
   public variants: any;
-
+  public diagrams: any;
+  public technologies: any;
 
   callType(value){
     console.log(value);
@@ -33,7 +34,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       error => console.log(error)
                       )
   }
-  changeCourse(value){
+  changeVariant(value){
     console.log(value);
     this.globalService.postMassege('change_variant/', JSON.stringify(value))
                       .subscribe(
@@ -56,6 +57,8 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                         this.getProgram(params['id']);
                         this.getDisciplinesVariants(params['id']);
                         this.getCourses();
+                        this.getDiagrams();
+                        this.getTechnologies()
                       },
                       error => this.errorMessage = "Неверный адрес!"
                     );
@@ -87,6 +90,27 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       error => console.log(error)
                     )
   }
+  public getDiagrams(){
+    this.globalService.getElementsOpenPrograms('diagrams')
+                    .subscribe(
+                      diagrams => {
+                        this.diagrams = diagrams; 
+                        console.log('Диаграммы', diagrams)
+                      },
+                      error => console.log(error)
+                    )
+  }
+    public getTechnologies(){
+    this.globalService.getElementsOpenPrograms('technologies')
+                    .subscribe(
+                      technologies => {
+                        this.technologies = technologies; 
+                        console.log('Технологии', technologies)
+                      },
+                      error => console.log(error)
+                    )
+  }
+  
   public getDisciplines(slug:string){
     this.globalService.getElementsOpenPrograms('get_program_disciplines/'+slug)
                     .subscribe(
