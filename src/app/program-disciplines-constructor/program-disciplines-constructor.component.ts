@@ -53,9 +53,9 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                     this.subscription = activateRoute.params.subscribe(
                       params => {
                         this.program_id = params['id']
-                        this.getDisciplines(params['id']);
-                        this.getProgram(params['id']);
-                        this.getDisciplinesVariants(params['id']);
+                        this.getDisciplinesVariants(this.program_id);
+                        this.getDisciplines(this.program_id);
+                        this.getProgram(this.program_id);
                         this.getCourses();
                         this.getDiagrams();
                         this.getTechnologies()
