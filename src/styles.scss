@@ -28,7 +28,9 @@ div[element-open-program]{
     table{
         thead{
             
-            background: #efefef;
+            background:#4A96AD;
+            color: white;
+            font-weight: 600;
             tr {
                 td {
                     select{
@@ -39,12 +41,23 @@ div[element-open-program]{
             }
         }
         tbody{
+            tr{
+                vertical-align: text-top;
+            }
+            td{
+                text-align: inherit;
+
+                p{
+                    padding-left: 6px;
+                }
+            }
 
         }
 
         td{
-            padding: 6px;
-            border:1px solid #efefef;
+            padding: 3px;
+            border:1px solid rgba(74,150,173, 0.1);
+            text-align: center;
             & select{
                 width: 200px;
             }
@@ -75,7 +88,8 @@ div[element-open-program]{
     // #FFFFFF
 
  body {
-    background-color: #F5F3EE;
+    background: url(assets/bg.png) repeat #F5F3EE;
+    // background-color: #F5F3EE;
     color:#4D4A42;
 }
 #header {
@@ -83,3 +97,31 @@ div[element-open-program]{
     background-color: #7D1935;
     padding: 1em;
 }
+#actions {
+    text-align: initial;
+    a {
+                background-color: #4A96AD;
+                padding: 3px;
+                border-radius: 2px;
+                color: white;
+                text-decoration: none;
+                cursor: pointer;
+                font-size:80%;
+            }
+}
+
+#subscription {
+    font-size:80%;
+}
+#discipline-title {
+    font-weight: 600;
+}
+
+.variant-title {
+    font-size:80%;
+    color:white;
+}
+.variant {
+    background-color: rgba(74,150,173, 0.2)
+}
+.variants-table{}

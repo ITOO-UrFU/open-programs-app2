@@ -57,23 +57,23 @@ export class ProgramConstructorLiteComponent implements OnInit {
                       error => console.log(error)
                     )
   }
-    sortChoiceGroups(value){
-      if (value == "null") this.currentChoiceGroups = null
-      else this.currentChoiceGroups = value
+    sortChoiceGroups(value) {
+      if (value === 'null') this.currentChoiceGroups = null
+      else { this.currentChoiceGroups = value; }
   }
     sort(value){
-      if (this.currentChoiceGroups=='all') return false
+      if (this.currentChoiceGroups === 'all') return false
       else if (this.currentChoiceGroups==value) return false
       else if (this.currentChoiceGroups) return false
       return true;
     }
-      postCompetence(value){
+      postCompetence(value) {
 
     let object = {};
     value = value.split(',');
-    object["module_id"]=value[0];
-    object["competence_id"]=value[1];
-  
+    object['module_id'] = value[0];
+    object['competence_id'] = value[1];
+
     this.globalService.postChoiceCompetence(JSON.stringify(object))
                       .subscribe(
                       status => {
