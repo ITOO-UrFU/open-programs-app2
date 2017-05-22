@@ -1,0 +1,16 @@
+<canvas baseChart width="800" height="100"
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="{
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    animation : false,
+                    legend: {
+                        display: false,
+                        labels: {
+                            display: false
+                        }
+                    }
+                    }">
+                </canvas>

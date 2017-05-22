@@ -1,10 +1,60 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy, Pipe, PipeTransform, Input} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs/Subscription';
 
 import { GlobalService } from '../global.service';
+
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
+
+@Pipe({name: 'keys'})
+export class KeysPipe implements PipeTransform {
+  transform(value, args: string[]): any {
+    let keys = [];
+    for (let key in value) {
+      keys.push(key);
+    }
+    return keys;
+  }
+}
+
+@Component({
+  selector: 'diagram',
+  templateUrl: './diagram.html'
+})
+
+export class DiagramComponent implements OnInit {
+  @Input() program: any;
+  @Input() target: any;
+
+  responsive: true;
+  maintainAspectRatio: false;
+
+  public pieChartType = 'pie';
+  public pieChartLabels: string[] = [];
+  public pieChartData: number[] = [300, 500, 100];
+
+ public get_titles(): string[] {
+    const keys = []
+    for (let i = 0; i < this.program.get_competences_diagram[this.target].length; i++) {
+      keys.push(this.program.get_competences_diagram[this.target][i][0]);
+    }
+    return keys;
+ }
+
+  public get_numbers(): number[] {
+    const labors = []
+    for (let i = 0; i < this.get_titles().length; i++ ) {
+      labors.push(this.program.get_competences_diagram[this.target][i][2]);
+    }
+    return labors;
+ }
+  ngOnInit() {
+    this.pieChartLabels = this.get_titles();
+    this.pieChartData = this.get_numbers();
+  }
+}
 
 @Component({
   selector: 'app-program-constructor-lite',

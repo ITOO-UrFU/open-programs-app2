@@ -4,6 +4,15 @@
   <h3>{{program?.training_direction}}</h3>
   <h3>{{program?.get_level_display}}</h3>
 </div>
+
+<table *ngIf="program" id="competences_diagram">
+  <tr *ngFor="let diagram of program?.get_competences_diagram | keys">
+    <td>{{diagram}}</td>
+    <td>
+    <diagram [program]="program" [target]="diagram"></diagram></td>
+  </tr>
+</table>
+
 <table>
   <thead>
     <tr>

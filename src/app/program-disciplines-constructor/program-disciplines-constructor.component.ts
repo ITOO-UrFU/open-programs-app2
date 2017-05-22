@@ -125,7 +125,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
     this.globalService.getElementsOpenPrograms('get_program_variants/'+slug)
                     .subscribe(
                       variants => {
-                        this.variants = variants; 
+                        this.variants = variants;
                         console.log('Список вариантов реализации дисциплин', variants)
                       },
                       error => console.log(error)

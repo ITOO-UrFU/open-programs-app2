@@ -9,8 +9,9 @@ import { GlobalService } from './global.service';
 import { ContainerComponent } from './container/container.component';
 import { FooterComponent } from './footer/footer.component';
 import { ElementOpenProgramComponent } from './element-open-program/element-open-program.component';
-import { ProgramConstructorLiteComponent } from './program-constructor-lite/program-constructor-lite.component';
+import { ProgramConstructorLiteComponent, KeysPipe, DiagramComponent } from './program-constructor-lite/program-constructor-lite.component';
 import { ProgramDisciplinesConstructorComponent } from './program-disciplines-constructor/program-disciplines-constructor.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,16 @@ import { ProgramDisciplinesConstructorComponent } from './program-disciplines-co
     FooterComponent,
     ElementOpenProgramComponent,
     ProgramConstructorLiteComponent,
-    ProgramDisciplinesConstructorComponent
+    DiagramComponent,
+    ProgramDisciplinesConstructorComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ChartsModule,
   ],
   providers: [GlobalService],
   bootstrap: [AppComponent]
