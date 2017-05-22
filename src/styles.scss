@@ -80,6 +80,17 @@ div[element-open-program]{
     
  }
 
+figure{
+    display: inline-block;
+    width: 300px;
+    margin: 20px;
+    vertical-align: top;
+    figcaption{
+        text-align: center;
+    }
+}
+
+
 // GOWENCODE
 
     // #7D1935
