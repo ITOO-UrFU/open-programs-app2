@@ -53,7 +53,7 @@
 </select></td>
   
 
-    <td class="variants-table">
+    <td *ngIf="variants" class="variants-table">
       
       <ng-template ngFor let-variant [ngForOf]="variants[discipline?.id]">
       <tr class="variant">
