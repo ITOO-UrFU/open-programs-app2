@@ -16,7 +16,7 @@
   <tbody>
     <ng-template ngFor let-discipline [ngForOf]="disciplines">
     <tr> 
-    <td><p><span id="discipline-title">{{discipline.title}}</span><br /><span id="subscription">{{discipline.module}}</span></p></td>
+    <td><p><span id="discipline-title">{{discipline?.title}}</span><br /><span id="subscription">{{discipline?.module}}</span></p></td>
     <td><select (change)="callType({program_id:program.id,discipline_id:discipline.id,term_title:'3,5 года',semester:$event.target.value})">
           <option [disabled]="true" [selected]="discipline.terms['3,5 года']==0">Семестр</option>
           <option [selected]="discipline.terms['3,5 года']==1" [value] = "1">1 семестр</option>
@@ -55,7 +55,7 @@
 
     <td class="variants-table">
       
-      <ng-template ngFor let-variant [ngForOf]="variants[discipline?.id] | async">
+      <ng-template ngFor let-variant [ngForOf]="variants[discipline?.id]">
       <tr class="variant">
 
         <ng-template [ngIf]="variant.course">
@@ -70,7 +70,7 @@
         </td>
         </ng-template>
         <ng-template [ngIf]="variant.parity">
-        <td class="variant-title"><p>По четности</p></td>
+        <td class="variant-title"><p>По&nbsp;четности</p></td>
         <td>
           <select (change)="changeVariant({variant_id:variant.id,parity:$event.target.value})">
             <option  [value]="1" [selected]="variant?.parity==1">Осенний семестр</option>
