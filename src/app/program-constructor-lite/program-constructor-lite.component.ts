@@ -87,7 +87,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.postTargetModule(JSON.stringify(object))
                       .subscribe(
                       status => {
-                         console.log(status) 
+                         console.log("status", status) 
                       },
                       error => console.log(error)
                     )
@@ -102,7 +102,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.postChoiceGroup(JSON.stringify(object))
                       .subscribe(
                       status => {
-                         console.log(status) 
+                         console.log("status", status) 
                       },
                       error => console.log(error)
                     )
@@ -127,7 +127,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.postChoiceCompetence(JSON.stringify(object))
                       .subscribe(
                       status => {
-                         console.log(status) 
+                         console.log("status", status) 
                       },
                       error => console.log(error)
                     )
@@ -162,12 +162,12 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.title = newTitle;
     this.titleService.setTitle( newTitle );
   }
-    public getProgram(slug:string){
+  public getProgram(slug:string){
     this.globalService.getElementsOpenPrograms('programs/'+slug)
                     .subscribe(
                       program => {
                         this.program = program; 
-                        console.log(program)
+                        console.log("program", program)
                       },
                       error => console.log(error)
                     )
@@ -178,11 +178,12 @@ export class ProgramConstructorLiteComponent implements OnInit {
                     .subscribe(
                       modules => {
                         this.modules = modules;
+                        console.log("modules", modules);
                         for (let module of modules){
                           if (this.moduleTitles[module.title]===false) this.moduleTitles[module.title] = true
                           else this.moduleTitles[module.title] = false
                         }
-                        console.log(this.moduleTitles);
+                        console.log("moduleTitles", this.moduleTitles);
                       },
                       error => console.log(error)
                     )
@@ -191,7 +192,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.getElementsOpenPrograms('get_targets_by_program/'+slug)
                     .subscribe(
                       targets => {
-                        this.targets = targets; 
+                        this.targets = targets; console.log("targets",targets)
                       },
                       error => console.log(error)
                     )
@@ -201,7 +202,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.getElementsOpenPrograms('get_choice_groups_by_program/'+slug)
                     .subscribe(
                       choiceGroups => {
-                        this.choiceGroups = choiceGroups;
+                        this.choiceGroups = choiceGroups;console.log("choiceGroups",choiceGroups)
                       },
                       error => console.log(error)
                     )
@@ -210,7 +211,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.getElementsOpenPrograms('get_competences_by_program/'+slug)
                     .subscribe(
                       choiceCompetences => {
-                        this.choiceCompetences = choiceCompetences; console.log(choiceCompetences) 
+                        this.choiceCompetences = choiceCompetences; console.log("choiceCompetences", choiceCompetences) 
                       },
                       error => console.log(error)
                     )
