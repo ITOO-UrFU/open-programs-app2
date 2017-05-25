@@ -8,6 +8,9 @@ import { GlobalService } from '../global.service';
 
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
+// Classes
+import { Program } from '../program'
+
 @Pipe({name: 'keys'})
 export class KeysPipe implements PipeTransform {
   transform(value, args: string[]): any {
@@ -68,6 +71,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
   public errorMessage: string;
   public title: any;
   public program: any;
+  public programList: Program[];
   public modules: any;
   public moduleTitles = {};
   public targets: any;
@@ -168,6 +172,14 @@ export class ProgramConstructorLiteComponent implements OnInit {
                       program => {
                         this.program = program; 
                         console.log("program", program)
+                      },
+                      error => console.log(error)
+                    );
+    this.globalService.getProgramsList()
+                    .subscribe(
+                      (programs:Program[]) => {
+                        this.programList = programs;
+                        console.log("programList", programs)
                       },
                       error => console.log(error)
                     )

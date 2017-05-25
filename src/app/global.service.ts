@@ -1,6 +1,11 @@
+// Angular
 import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Http, Response } from '@angular/http';
 
+// Classes
+import { Program } from './program'
+
+// Observable
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -43,6 +48,12 @@ export class GlobalService {
   getByType(type:string):any {
     return this.http.get(this.serverURL + 'containers_by_type/' + type +'/?format=json')
                     .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  getProgramsList():any {
+      return this.http.get(this.serverURL + 'programs/?format=json')
+                    .map((res: Response) => {return res.json() as Program[]})
                     .catch(this.handleError);
   }
 
