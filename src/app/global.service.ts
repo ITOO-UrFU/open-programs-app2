@@ -12,8 +12,9 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class GlobalService {
-  private serverURL = 'http://212.193.94.145:8080/api/v11/';
-  //private serverURL = 'http://10.16.208.154:8080/api/v11/';
+  private consoleStatus: boolean = true;
+  // private serverURL = 'http://212.193.94.145:8080/api/v11/';
+  private serverURL = 'http://10.16.208.154:8080/api/v11/';
   private index: number = 0;
   private result: any;
   private footer: any;
@@ -22,7 +23,9 @@ export class GlobalService {
 
   getConsntainers(): any {
     if (!this.result){
-      console.debug('getConsntainers(): Запрос двнных')
+      if (this.consoleStatus) {
+        console.info('getConsntainers(): Запрос двнных')
+      }
       this.result = this.http.get(this.serverURL + 'containers/?format=json')
                       .map(this.extractData)
                       .catch(this.handleError);
@@ -51,14 +54,11 @@ export class GlobalService {
                     .catch(this.handleError);
   }
 
-  getProgramsList():any {
-      return this.http.get(this.serverURL + 'programs/?format=json')
-                    .map((res: Response) => {return res.json() as Program[]})
-                    .catch(this.handleError);
-  }
-
-  getElementsOpenPrograms(type:string):any {
-      return this.http.get(this.serverURL + type +'/?format=json')
+  getElements(type:string):any {
+    if (this.consoleStatus) {
+      console.log("[URL API]: ", this.serverURL + type);
+    }
+    return this.http.get(this.serverURL + type +'/?format=json')
                     .map(this.extractData)
                     .catch(this.handleError);
   }
@@ -66,50 +66,19 @@ export class GlobalService {
 
 // Здесь начинаются POST запросы к серверу для отправки от клиентна
 
-  postMassege(api, value):any {
+  public postResponse(api, value):any {
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      console.log('POST to ' + api + ':', this.serverURL + api);
-      console.log('value:', value)
+      if (this.consoleStatus) {
+        console.log('POST to ' + api + ':', this.serverURL + api);
+        console.log('value:', value)
+      } 
       return this.http.post(this.serverURL + api, value, options)
-                    .map(this.extractDataPost)
+                    .map(res => res.json())
                     .catch(this.handleError);
   }
 
-  postTargetModule(value):any {
-    console.log("ok!")
-    console.log(value)
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      console.log(this.serverURL + 'change_target_module/')
-      return this.http.post(this.serverURL + 'change_target_module/', value, options)
-                    .map(this.extractDataPost)
-                    .catch(this.handleError);
-  }
-
-postChoiceGroup(value):any {
-    console.log("ok!")
-    console.log(value)
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.serverURL + 'change_choice_group/', value, options)
-                    .map(this.extractDataPost)
-                    .catch(this.handleError);
-}
-
-postChoiceCompetence(value):any {
-    console.log("ok!")
-    console.log(value)
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.serverURL + 'change_competence/', value, options)
-                    .map(this.extractDataPost)
-                    .catch(this.handleError);
-}
-
-  private extractDataPost(res: Response) {
-    return res;
-  }
+  
   private extractData(res: Response) {
     return res.json();
   }

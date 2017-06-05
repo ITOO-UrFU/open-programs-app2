@@ -26,7 +26,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
 
   callType(value){
     console.log(value);
-    this.globalService.postMassege('change_discipline_semester/', JSON.stringify(value))
+    this.globalService.postResponse('change_discipline_semester/', JSON.stringify(value))
                       .subscribe(
                       status => {
                          console.log(status) 
@@ -36,7 +36,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
   changeVariant(value){
     console.log(value);
-    this.globalService.postMassege('change_variant/', JSON.stringify(value))
+    this.globalService.postResponse('change_variant/', JSON.stringify(value))
                       .subscribe(
                       status => {
                          console.log(status) 
@@ -71,7 +71,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
 
 
   public getProgram(slug:string){
-    this.globalService.getElementsOpenPrograms('programs/'+slug)
+    this.globalService.getElements('programs/'+slug)
                     .subscribe(
                       program => {
                         this.program = program; 
@@ -81,7 +81,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                     )
   }
     public getCourses(){
-    this.globalService.getElementsOpenPrograms('courses')
+    this.globalService.getElements('courses')
                     .subscribe(
                       courses => {
                         this.courses = courses; 
@@ -91,7 +91,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                     )
   }
   public getDiagrams(){
-    this.globalService.getElementsOpenPrograms('diagrams')
+    this.globalService.getElements('diagrams')
                     .subscribe(
                       diagrams => {
                         this.diagrams = diagrams; 
@@ -101,7 +101,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                     )
   }
     public getTechnologies(){
-    this.globalService.getElementsOpenPrograms('technologies')
+    this.globalService.getElements('technologies')
                     .subscribe(
                       technologies => {
                         this.technologies = technologies; 
@@ -112,7 +112,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
   
   public getDisciplines(slug:string){
-    this.globalService.getElementsOpenPrograms('get_program_disciplines/'+slug)
+    this.globalService.getElements('get_program_disciplines/'+slug)
                     .subscribe(
                       disciplines => {
                         this.disciplines = disciplines; 
@@ -122,7 +122,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                     )
   }
   public getDisciplinesVariants(slug:string){
-    this.globalService.getElementsOpenPrograms('get_program_variants/'+slug)
+    this.globalService.getElements('get_program_variants/'+slug)
                     .subscribe(
                       variants => {
                         this.variants = variants;
@@ -133,7 +133,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
   public addVariant(value){
     console.log(value);
-       this.globalService.postMassege('create_variant/', JSON.stringify(value))
+       this.globalService.postResponse('create_variant/', JSON.stringify(value))
                       .subscribe(
                       status => {
                         this.getDisciplinesVariants(this.program_id)
@@ -144,7 +144,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
     public removeVariant(value){
     console.log(value);
-       this.globalService.postMassege('delete_variant/', JSON.stringify(value))
+       this.globalService.postResponse('delete_variant/', JSON.stringify(value))
                       .subscribe(
                       status => {
                         this.getDisciplinesVariants(this.program_id)
