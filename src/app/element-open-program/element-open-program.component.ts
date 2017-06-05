@@ -15,7 +15,7 @@ export class ElementOpenProgramComponent implements OnInit {
   constructor(private globalService: GlobalService) { }
 
   ngOnInit() {
-        this.globalService.getElementsOpenPrograms('programs')
+        this.globalService.getElements('programs')
                     .subscribe(
                       programs => {
                         this.programs = programs; console.log(this.programs) 
