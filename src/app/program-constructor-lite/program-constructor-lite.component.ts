@@ -88,7 +88,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
     object["module_id"]=value[0];
     object["target_id"]=value[1];
     object["status"]=value[2];
-    this.globalService.postResponse('change_target_module/', JSON.stringify(object))
+    this.globalService.postResponse('change_target_module', JSON.stringify(object))
                       .subscribe(
                       status => {
                          console.log("status", status) 

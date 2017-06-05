@@ -26,7 +26,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
 
   callType(value){
     console.log(value);
-    this.globalService.postResponse('change_discipline_semester/', JSON.stringify(value))
+    this.globalService.postResponse('change_discipline_semester', JSON.stringify(value))
                       .subscribe(
                       status => {
                          console.log(status) 
@@ -36,7 +36,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
   changeVariant(value){
     console.log(value);
-    this.globalService.postResponse('change_variant/', JSON.stringify(value))
+    this.globalService.postResponse('change_variant', JSON.stringify(value))
                       .subscribe(
                       status => {
                          console.log(status) 
@@ -133,7 +133,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
   public addVariant(value){
     console.log(value);
-       this.globalService.postResponse('create_variant/', JSON.stringify(value))
+       this.globalService.postResponse('create_variant', JSON.stringify(value))
                       .subscribe(
                       status => {
                         this.getDisciplinesVariants(this.program_id)
@@ -144,7 +144,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
     public removeVariant(value){
     console.log(value);
-       this.globalService.postResponse('delete_variant/', JSON.stringify(value))
+       this.globalService.postResponse('delete_variant', JSON.stringify(value))
                       .subscribe(
                       status => {
                         this.getDisciplinesVariants(this.program_id)

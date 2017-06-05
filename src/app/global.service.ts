@@ -12,7 +12,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class GlobalService {
-  private consoleStatus: boolean = true;
+  public consoleStatus: boolean = false; // вынести настройки в отдельный файл
+
   // private serverURL = 'http://212.193.94.145:8080/api/v11/';
   private serverURL = 'http://10.16.208.154:8080/api/v11/';
   private index: number = 0;
@@ -24,14 +25,14 @@ export class GlobalService {
   getConsntainers(): any {
     if (!this.result){
       if (this.consoleStatus) {
-        console.info('getConsntainers(): Запрос двнных')
+        console.log('getConsntainers(): Запрос двнных')
       }
       this.result = this.http.get(this.serverURL + 'containers/?format=json')
-                      .map(this.extractData)
-                      .catch(this.handleError);
+                             .map(this.extractData)
+                             .catch(this.handleError);
     }
     this.index++;
-    console.debug('getConsntainers(): Получент '+ this.index +'раз' )
+    console.log('getConsntainers(): Получент '+ this.index +'раз' )
     return this.result;
   }
   getFooter(): any {
@@ -47,12 +48,14 @@ export class GlobalService {
                       .map(this.extractData)
                       .catch(this.handleError);
   }
-
   getByType(type:string):any {
     return this.http.get(this.serverURL + 'containers_by_type/' + type +'/?format=json')
                     .map(this.extractData)
                     .catch(this.handleError);
   }
+
+
+// Получение элементов Открытой образовательной программы
 
   getElements(type:string):any {
     if (this.consoleStatus) {
@@ -73,7 +76,7 @@ export class GlobalService {
         console.log('POST to ' + api + ':', this.serverURL + api);
         console.log('value:', value)
       } 
-      return this.http.post(this.serverURL + api, value, options)
+      return this.http.post(this.serverURL + api + '/', value, options)
                     .map(res => res.json())
                     .catch(this.handleError);
   }
@@ -92,7 +95,7 @@ export class GlobalService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
+    console.log(errMsg);
     return Observable.throw(errMsg);
   }
 }
