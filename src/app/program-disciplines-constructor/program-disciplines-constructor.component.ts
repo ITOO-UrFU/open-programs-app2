@@ -71,7 +71,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
 
 
   public getProgram(slug:string){
-    this.globalService.getElements('programs/'+slug)
+    this.globalService.getElementsBySlug('programs', slug)
                     .subscribe(
                       program => {
                         this.program = program; 
@@ -112,7 +112,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
   
   public getDisciplines(slug:string){
-    this.globalService.getElements('get_program_disciplines/'+slug)
+    this.globalService.getElementsBySlug('get_program_disciplines', slug)
                     .subscribe(
                       disciplines => {
                         this.disciplines = disciplines; 
@@ -122,7 +122,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                     )
   }
   public getDisciplinesVariants(slug:string){
-    this.globalService.getElements('get_program_variants/'+slug)
+    this.globalService.getElementsBySlug('get_program_variants', slug)
                     .subscribe(
                       variants => {
                         this.variants = variants;

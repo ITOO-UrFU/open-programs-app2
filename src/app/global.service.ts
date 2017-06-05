@@ -55,6 +55,10 @@ export class GlobalService {
   }
 
 
+  private extractData(res: Response) {
+    return res.json();
+  }
+
 // Получение элементов Открытой образовательной программы
 
   getElements(type:string):any {
@@ -62,7 +66,16 @@ export class GlobalService {
       console.log("[URL API]: ", this.serverURL + type);
     }
     return this.http.get(this.serverURL + type +'/?format=json')
-                    .map(this.extractData)
+                    .map(res => res.json())
+                    .catch(this.handleError);
+  }
+
+  getElementsBySlug(type:string, slug:string):any {
+    if (this.consoleStatus) {
+      console.log("[URL API]: ", this.serverURL + type + '/' + slug);
+    }
+    return this.http.get(this.serverURL + type + '/' + slug + '/?format=json')
+                    .map(res => res.json())
                     .catch(this.handleError);
   }
 
@@ -82,9 +95,7 @@ export class GlobalService {
   }
 
   
-  private extractData(res: Response) {
-    return res.json();
-  }
+
   //TODO: Разобраться что делает функция обработки ошибок
   private handleError (error: Response | any) {
     let errMsg: string;
