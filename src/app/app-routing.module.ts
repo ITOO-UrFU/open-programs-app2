@@ -28,8 +28,12 @@ const routes: Routes = [
       }
     ]
   },
+   {
+    path: 'constructor',
+    children: []
+  },
   {
-    path: ':id',
+    path: 'open_programs',
     component: ContainerComponent,
     children: [
       {
@@ -37,13 +41,41 @@ const routes: Routes = [
         component: ContainerComponent,
       }
     ]
+  },
+  {
+    path: 'menu',
+    component: ContainerComponent,
+    children: [
+      {
+        path: ':id',
+        component: ContainerComponent,
+      }
+    ]
+  },
+  {
+    path: 'programlist',
+    redirectTo: 'constructor/programlist'
   }
+  // {
+  //   path: ':id',
+  //   component: ContainerComponent,
+  //   children: [
+  //     {
+  //       path: ':id',
+  //       component: ContainerComponent,
+  //     }
+  //   ]
+  // }
 ];
 
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class AppRoutingModule { }

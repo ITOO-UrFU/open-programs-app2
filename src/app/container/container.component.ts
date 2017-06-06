@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs/Subscription';
 
+
 import { GlobalService } from '../global.service';
 
 
@@ -27,11 +28,12 @@ export class ContainerComponent implements OnInit {
                 private titleService: Title,
                 private globalService: GlobalService
               ) { 
-                    this.subscription = activateRoute.params.subscribe(
+                 
+                    this.subscription = activateRoute.url.subscribe(
                       params => {
-                        console.log(params['id'])
-                        this.setTitle(params['id']);
-                        this.getContentBySlug(params['id'])
+                        console.log('param_id', params[0].path)
+                        this.setTitle(params[0].path);
+                        this.getContentBySlug(params[0].path)
                       },
                       error => this.errorMessage = "Неверный адрес!"
                     );
@@ -51,7 +53,7 @@ export class ContainerComponent implements OnInit {
     this.globalService.getBySlug(slug)
                     .subscribe(
                       contents => {
-                        this.contents = contents; console.debug(this.contents) 
+                        this.contents = contents; console.log(this.contents) 
                       },
                       error => console.log(error)
                     )
