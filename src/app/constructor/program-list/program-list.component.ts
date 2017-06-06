@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { ConstructorService } from '../constructor.service'
+import { ConstructorService } from '../constructor.service';
 
 
 @Component({
-  selector: '.program-list',
+  selector: 'app-program-list',
   templateUrl: './program-list.component.html',
   styleUrls: ['./program-list.component.scss']
 })
@@ -18,8 +18,8 @@ export class ProgramListComponent implements OnInit {
 
   constructor(private router: Router, private service: ConstructorService) { }
 
-  onSelect(id:string){
-    this.router.navigate(['/constructor','program', id]);
+  onSelect(id: string ) {
+    this.router.navigate(['/constructor', 'program', id]);
   }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class ProgramListComponent implements OnInit {
                   error => {
                     console.log(error)
                   }
-                )
+                );
   }
 }
 

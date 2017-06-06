@@ -4,7 +4,6 @@ import { Title } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs/Subscription';
 
-
 import { GlobalService } from '../global.service';
 
 
@@ -27,8 +26,7 @@ export class ContainerComponent implements OnInit {
                 private activateRoute: ActivatedRoute,
                 private titleService: Title,
                 private globalService: GlobalService
-              ) { 
-                 
+              ) {
                     this.subscription = activateRoute.url.subscribe(
                       params => {
                         console.log('param_id', params[0].path)
