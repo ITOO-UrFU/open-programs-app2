@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ConstructorRoutingModule } from './constructor-routing.module';
 import { ProgramListComponent } from './program-list/program-list.component';
-import { ConstructorService } from './constructor.service'
+import { ConstructorService } from './constructor.service';
+import { ProgramComponent } from './program/program.component'
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { ConstructorService } from './constructor.service'
     ConstructorRoutingModule
   ],
   providers: [ConstructorService],
-  declarations: [ProgramListComponent]
+  declarations: [ProgramListComponent, ProgramComponent]
 })
 export class ConstructorModule { }

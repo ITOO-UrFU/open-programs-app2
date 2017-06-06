@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // components
 
 import { ProgramListComponent } from './program-list/program-list.component';
+import { ProgramComponent } from './program/program.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
         children: [
           {
             path: ':id',
-            component: Program,
+            component: ProgramComponent,
           }
         ]
       }
