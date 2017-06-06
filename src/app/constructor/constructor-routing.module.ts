@@ -12,6 +12,15 @@ const routes: Routes = [
       {
         path: 'programlist',
         component: ProgramListComponent,
+      },
+      {
+        path: 'program',
+        children: [
+          {
+            path: ':id',
+            component: Program,
+          }
+        ]
       }
     ]
   },

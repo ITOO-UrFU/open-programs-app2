@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -14,7 +16,11 @@ export class ProgramListComponent implements OnInit {
 
   public programList: Array<any>;
 
-  constructor(private service: ConstructorService) { }
+  constructor(private router: Router, private service: ConstructorService) { }
+
+  onSelect(id:string){
+    this.router.navigate(['/constructor','program', id]);
+  }
 
   ngOnInit() {
     this.service.getElements('programs')
@@ -27,7 +33,6 @@ export class ProgramListComponent implements OnInit {
                   }
                 )
   }
-
 }
 
 

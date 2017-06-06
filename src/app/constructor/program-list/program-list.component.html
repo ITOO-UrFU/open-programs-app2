@@ -1,7 +1,7 @@
 <ul>
 <ng-template ngFor let-program [ngForOf]="programList">
   <li>
-    <h3>{{program.title}}</h3>
+    <h3 (click)="onSelect(program.id)">{{program.title}}</h3>
   </li>
 </ng-template>
 </ul>
