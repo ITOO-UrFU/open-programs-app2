@@ -201,7 +201,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
                     )
   }
     public getProgramTargets(slug:string){
-    this.globalService.getElementsBySlug('get_targets_by_program',slug)
+    this.globalService.getElementsBySlug('get_program_targets',slug)
                     .subscribe(
                       targets => {
                         this.targets = targets; console.log("targets",targets)
@@ -211,7 +211,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
   }
 
     public getProgramChoiceGroups(slug:string){
-    this.globalService.getElementsBySlug('get_choice_groups_by_program', slug)
+    this.globalService.getElementsBySlug('get_choice_groups_program', slug)
                     .subscribe(
                       choiceGroups => {
                         this.choiceGroups = choiceGroups;console.log("choiceGroups",choiceGroups)
@@ -220,7 +220,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
                     )
   }
     public getProgramCompetences(slug:string){
-    this.globalService.getElementsBySlug('get_competences_by_program', slug)
+    this.globalService.getElementsBySlug('get_program_competences', slug)
                     .subscribe(
                       choiceCompetences => {
                         this.choiceCompetences = choiceCompetences; console.log("choiceCompetences", choiceCompetences) 

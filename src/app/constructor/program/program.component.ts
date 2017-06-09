@@ -15,6 +15,7 @@ import { ConstructorService } from '../constructor.service';
 export class ProgramComponent implements OnInit {
   private program;
   private targets;
+  private modules;
 
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
@@ -27,12 +28,19 @@ export class ProgramComponent implements OnInit {
     .subscribe((program) => {
       this.program = program;
       this.titleService.setTitle(this.program.title);
-      this.service.getElementsBySlug('get_targets_by_program', this.program.id)
+      this.service.getElementsBySlug('get_program_targets', this.program.id)
                   .subscribe(
                     targets => {
                       this.targets = targets;
                     }
                   )
+      this.service.getElementsBySlug('get_program_modules', this.program.id)
+                  .subscribe(
+                    modules => {
+                      this.modules = modules;console.log(this.program, this.targets, this.modules)
+                    }
+                  )
+      
     });
 }
 

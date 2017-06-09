@@ -5,7 +5,7 @@ export class Program {
     get_level_display: string;          // "бакалавриат"
     get_competences_diagram: any;       // {Тест 1: [], Тест 2: [], Тест 3: [], Тест 4: [], Тест 5: []}
     get_choice_groups: string[];        // []
-    chief: any;                         // {user: {id: 1, username: "root", email: "mastergowen@gmail.com"}, first_name: "", last_name: "", second_name: "", sex: "U", …}
+    chief: any;                         // class User or Preson {user: {id: 1, username: "root", email: "mastergowen@gmail.com"}, first_name: "", last_name: "", second_name: "", sex: "U", …}
     competences: any[];
     jopa:string = 'жопа';
 
