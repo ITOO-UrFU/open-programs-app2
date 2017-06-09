@@ -15,7 +15,10 @@ import { ConstructorService } from '../constructor.service';
 export class ProgramComponent implements OnInit {
   private program;
   private targets;
+  private targetsObject = {};
   private modules;
+  private choiceGroups;
+  private choiceGroupsObject = {};
 
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
@@ -32,12 +35,21 @@ export class ProgramComponent implements OnInit {
                   .subscribe(
                     targets => {
                       this.targets = targets;
+                      this.targets.map(element => this.targetsObject[element.id] = element);
                     }
                   )
       this.service.getElementsBySlug('get_program_modules', this.program.id)
                   .subscribe(
                     modules => {
-                      this.modules = modules;console.log(this.program, this.targets, this.modules)
+                      this.modules = modules;
+                    }
+                  )
+      this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
+                  .subscribe(
+                    choiceGroups => {
+                      this.choiceGroups = choiceGroups;
+                      this.choiceGroups.map(element => this.choiceGroupsObject[element.id] = element);
+                      console.log(this.choiceGroupsObject)
                     }
                   )
       
