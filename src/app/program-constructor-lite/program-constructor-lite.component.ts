@@ -211,7 +211,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
   }
 
     public getProgramChoiceGroups(slug:string){
-    this.globalService.getElementsBySlug('get_choice_groups_program', slug)
+    this.globalService.getElementsBySlug('get_program_choice_groups', slug)
                     .subscribe(
                       choiceGroups => {
                         this.choiceGroups = choiceGroups;console.log("choiceGroups",choiceGroups)
