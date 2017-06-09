@@ -14,17 +14,26 @@
 </ng-template>
 </ul>
 <h2>Модули (modules)</h2>
-<ul>
-	<ng-template ngFor let-choiceGroup [ngForOf]="choiceGroups">
-		<li [ngSwitch]="choiceGroup?.id"> 
+<ng-template ngFor let-target [ngForOf]="targets">
+	<h2>{{ target?.title }}</h2>
+	<ul>
+	<ng-template ngFor let-choiceGroup [ngForOf]="target?.choice_groups">
+		<h3>{{ choiceGroupsObject[choiceGroup]?.title }}</h3>
+		<ng-template ngFor let-module [ngForOf]="choiceGroupsObject[choiceGroup]?.get_program_modules">
+			<li>{{ modulesObject[module].title }}</li>
+
+
+		</ng-template>
+		<!--<li [ngSwitch]="target?.choice_group"> 
 			<h3>{{choiceGroup?.title}}</h3>
 			<ng-template ngFor let-module [ngForOf]="modules">
 				<ng-template [ngIf]="module?.targets_positions[0]!=0">
 					<li *ngSwitchCase="module?.choice_group">{{ module?.title }}<br />
-																{{ module?.targets_positions[2] }}
+															 {{ module?.targets_positions[2] }}
 					</li>
 				</ng-template>
 			</ng-template>
-		</li>
+		</li>-->
 	</ng-template>
 </ul>
+</ng-template>
