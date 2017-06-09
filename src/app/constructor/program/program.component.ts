@@ -41,7 +41,7 @@ export class ProgramComponent implements OnInit {
       this.service.getElementsBySlug('get_program_modules', this.program.id)
                   .subscribe(
                     modules => {
-                      this.modules = modules;
+                      this.modules = modules;console.log(this.modules)
                     }
                   )
       this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
@@ -49,7 +49,6 @@ export class ProgramComponent implements OnInit {
                     choiceGroups => {
                       this.choiceGroups = choiceGroups;
                       this.choiceGroups.map(element => this.choiceGroupsObject[element.id] = element);
-                      console.log(this.choiceGroupsObject)
                     }
                   )
       

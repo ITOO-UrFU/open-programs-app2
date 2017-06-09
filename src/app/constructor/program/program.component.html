@@ -1,8 +1,8 @@
 <h1>
 {{ program?.title }}
 </h1>
-<ul>
 <h2>Цели (targets)</h2>
+<ul>
 <ng-template ngFor let-target [ngForOf]="targets">
 	<li>{{ target?.title }}</li>
 </ng-template>
@@ -16,8 +16,11 @@
 <h2>Модули (modules)</h2>
 <ul>
 <ng-template ngFor let-module [ngForOf]="modules">
-	<li>{{ module?.title }}<br />
-		{{ choiceGroupsObject[module?.choice_group]?.title }}
+	<li *ngIf="module?.targets_positions[1]!=0">{{ module?.title }}<br />
+		{{ choiceGroupsObject[module?.choice_group]?.title }}<br />
+		{{ module?.targets_positions[1] }}
+		
+
 	</li>
 </ng-template>
 </ul>
