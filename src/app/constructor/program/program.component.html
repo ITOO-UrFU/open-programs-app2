@@ -21,19 +21,7 @@
 		<h3>{{ choiceGroupsObject[choiceGroup]?.title }}</h3>
 		<ng-template ngFor let-module [ngForOf]="choiceGroupsObject[choiceGroup]?.get_program_modules">
 			<li>{{ modulesObject[module].title }}</li>
-
-
 		</ng-template>
-		<!--<li [ngSwitch]="target?.choice_group"> 
-			<h3>{{choiceGroup?.title}}</h3>
-			<ng-template ngFor let-module [ngForOf]="modules">
-				<ng-template [ngIf]="module?.targets_positions[0]!=0">
-					<li *ngSwitchCase="module?.choice_group">{{ module?.title }}<br />
-															 {{ module?.targets_positions[2] }}
-					</li>
-				</ng-template>
-			</ng-template>
-		</li>-->
 	</ng-template>
 </ul>
 </ng-template>
