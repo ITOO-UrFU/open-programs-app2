@@ -15,10 +15,10 @@
 </ul>
 <h2>Модули (modules)</h2>
 <ng-template ngFor let-target [ngForOf]="targets">
-	<h2>{{ target?.title }}</h2>
+	<h2>Цели: {{ target?.title }}</h2>
 	<ul>
 	<ng-template ngFor let-choiceGroup [ngForOf]="target?.choice_groups">
-		<h3>{{ choiceGroupsObject[choiceGroup]?.title }}</h3>
+		<h3>Группа: {{ choiceGroupsObject[choiceGroup]?.title }}</h3>
 		<ng-template ngFor let-module [ngForOf]="choiceGroupsObject[choiceGroup]?.get_program_modules">
 			<li>{{ modulesObject[module].title }}</li>
 		</ng-template>

@@ -27,36 +27,33 @@ export class ProgramComponent implements OnInit {
                private service: ConstructorService ) { }
 
   ngOnInit() {
-  this.activateRoute.params
-    .switchMap((params: Params) => this.service.getElementsBySlug('programs', params['id']))
-    .subscribe((program) => {
-      this.program = program;
-      this.titleService.setTitle(this.program.title);
-      this.service.getElementsBySlug('get_program_targets', this.program.id)
-                  .subscribe(
-                    targets => {
-                      this.targets = targets;
-                      this.targets.map(element => this.targetsObject[element.id] = element);
-                    }
-                  )
-      this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
-                  .subscribe(
-                    choiceGroups => {
-                      this.choiceGroups = choiceGroups;
-                      this.choiceGroups.map(element => this.choiceGroupsObject[element.id] = element);
-                      console.log(choiceGroups)
-                    }
-                  )
-      this.service.getElementsBySlug('get_program_modules', this.program.id)
-                  .subscribe(
-                    modules => {
-                      this.modules = modules;
-                      this.modules.map(element => this.modulesObject[element.id] = element);
-                    }
-                  )
-
-      
-    });
-}
-
+    this.activateRoute.params
+      .switchMap((params: Params) => this.service.getElementsBySlug('programs', params['id']))
+      .subscribe((program) => {
+        this.program = program;
+        this.titleService.setTitle(this.program.title);
+        this.service.getElementsBySlug('get_program_targets', this.program.id)
+                    .subscribe(
+                      targets => {
+                        this.targets = targets;
+                        this.targets.map(element => this.targetsObject[element.id] = element);
+                      }
+                    )
+        this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
+                    .subscribe(
+                      choiceGroups => {
+                        this.choiceGroups = choiceGroups;
+                        this.choiceGroups.map(element => this.choiceGroupsObject[element.id] = element);
+                        console.log(choiceGroups)
+                      }
+                    )
+        this.service.getElementsBySlug('get_program_modules', this.program.id)
+                    .subscribe(
+                      modules => {
+                        this.modules = modules;
+                        this.modules.map(element => this.modulesObject[element.id] = element);
+                      }
+                    )  
+      });
+  }
 }
