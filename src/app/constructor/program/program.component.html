@@ -14,10 +14,10 @@
 </ng-template>
 </ul>
 <h2>Модули (modules)</h2>
-<ng-template ngFor let-target [ngForOf]="targets">
-	<h2>Цели: {{ target?.title }}</h2>
+<ng-template ngFor let-target [ngForOf]="targets" let-i="index">
+	<h2>Цели {{ i+1 }}: {{ target?.title }}</h2>
 	<ul>
-	<ng-template ngFor let-choiceGroup [ngForOf]="target?.choice_groups">
+	<ng-template ngFor let-choiceGroup [ngForOf]="target?.choice_groups" >
 		<h3>Группа: {{ choiceGroupsObject[choiceGroup]?.title }}</h3>
 		<ng-template ngFor let-module [ngForOf]="choiceGroupsObject[choiceGroup]?.get_program_modules">
 			<li>{{ modulesObject[module].title }}</li>
