@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 
 // Variables
 
-export let program: any[] = [{test:"ok"}];
+export let program: any[] = [{test:"Тестовые данные"}];
 
 
 @Injectable()

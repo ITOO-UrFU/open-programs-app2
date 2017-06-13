@@ -31,8 +31,9 @@ export class ProgramComponent implements OnInit {
                private data: DataService ) { }
 
   ngOnInit() {
-    this.test = this.data.getProgram()
-    console.log(this.test)
+    this.test = this.data.getProgram();
+    console.log(this.test);
+    // Скорость получения данных выше чем отправка. Нужно использовать rxjs
 
     this.activateRoute.params
       .switchMap((params: Params) => this.service.getElementsBySlug('programs', params['id']))
