@@ -20,7 +20,7 @@
 	<ng-template ngFor let-choiceGroup [ngForOf]="target?.choice_groups" >
 		<h3>Группа: {{ choiceGroupsObject[choiceGroup]?.title }}</h3>
 		<ng-template ngFor let-module [ngForOf]="choiceGroupsObject[choiceGroup]?.get_program_modules">
-			<li>{{ modulesObject[module].title }}</li>
+			<li>{{ modulesObject[module].title }} </li>
 		</ng-template>
 	</ng-template>
 </ul>
