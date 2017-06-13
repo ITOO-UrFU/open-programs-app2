@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 
 import { ConstructorService } from '../constructor.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-program',
@@ -21,12 +22,18 @@ export class ProgramComponent implements OnInit {
   private choiceGroups;
   private choiceGroupsObject = {};
 
+  private test;
+
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
                private titleService: Title,
-               private service: ConstructorService ) { }
+               private service: ConstructorService,
+               private data: DataService ) { }
 
   ngOnInit() {
+    this.test = this.data.getProgram()
+    console.log(this.test)
+
     this.activateRoute.params
       .switchMap((params: Params) => this.service.getElementsBySlug('programs', params['id']))
       .subscribe((program) => {
@@ -50,7 +57,7 @@ export class ProgramComponent implements OnInit {
         this.service.getElementsBySlug('get_program_modules', this.program.id)
                     .subscribe(
                       modules => {
-                        this.modules = modules;
+                        this.modules = modules; console.log(this.modules);
                         this.modules.map(element => this.modulesObject[element.id] = element);
                       }
                     )  
