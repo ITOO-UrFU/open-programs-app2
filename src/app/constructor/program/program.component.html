@@ -1,10 +1,19 @@
 <h1>
 {{ program?.title }}
+<div *ngIf="path">
+<small>{{ path.title }}</small>
+</div>
 </h1>
 <h2>Цели (targets)</h2>
 <ul>
 <ng-template ngFor let-target [ngForOf]="targets">
-	<li>{{ target?.title }}</li>
+	<li (click)="change(target.id)">{{ target?.title }}</li>
+</ng-template>
+</ul>
+<h2>Компетенции (targets)</h2>
+<ul>
+<ng-template ngFor let-competence [ngForOf]="competences">
+	<li>{{ competence?.title }}</li>
 </ng-template>
 </ul>
 <h2>Группы выбора (choiceGroups)</h2>
@@ -14,14 +23,17 @@
 </ng-template>
 </ul>
 <h2>Модули (modules)</h2>
-<ng-template ngFor let-target [ngForOf]="targets" let-i="index">
-	<h2>Цели {{ i+1 }}: {{ target?.title }}</h2>
+<div *ngIf="path">
+	<h2> {{ targetsObject[path.title]?.title }}</h2>
 	<ul>
-	<ng-template ngFor let-choiceGroup [ngForOf]="target?.choice_groups" >
+	<ng-template ngFor let-choiceGroup [ngForOf]="targetsObject[path.title]?.choice_groups" >
 		<h3>Группа: {{ choiceGroupsObject[choiceGroup]?.title }}</h3>
 		<ng-template ngFor let-module [ngForOf]="choiceGroupsObject[choiceGroup]?.get_program_modules">
-			<li>{{ modulesObject[module].title }} </li>
+			<li>{{ modulesObject[module]?.title }} </li>
+			<ng-template ngFor let-discipline [ngForOf]="modulesObject[module]?.disciplines" >
+			<p> - <em discipline [discipline]="discipline"></em></p>
+			</ng-template>
 		</ng-template>
 	</ng-template>
-</ul>
-</ng-template>
+	</ul>
+</div>
