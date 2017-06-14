@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { ConstructorService } from '../constructor.service';
 import { DataService } from '../data.service';
+// import { DisciplineComponent } from '../discipline/discipline.component'
 
 @Component({
   selector: 'app-program',
@@ -15,12 +16,15 @@ import { DataService } from '../data.service';
 })
 export class ProgramComponent implements OnInit {
   private program;
+  private path={};
   private targets;
   private targetsObject = {};
   private modules;
   private modulesObject = {};
   private choiceGroups;
   private choiceGroupsObject = {};
+  private competences;
+  private competencesObject = {};
 
   private test;
 
@@ -29,6 +33,12 @@ export class ProgramComponent implements OnInit {
                private titleService: Title,
                private service: ConstructorService,
                private data: DataService ) { }
+  
+  change(value){
+    this.path['title'] = this.targetsObject[value].id;
+    this.path['index'] = this.targetsObject[value].index;
+    console.log(this.path)
+  }
 
   ngOnInit() {
     this.test = this.data.getProgram();
@@ -44,24 +54,35 @@ export class ProgramComponent implements OnInit {
                     .subscribe(
                       targets => {
                         this.targets = targets;
-                        this.targets.map(element => this.targetsObject[element.id] = element);
+                        this.targets.map((element, index) => { this.targetsObject[element.id] = element;
+                                                                      this.targetsObject[element.id].index = index;  });
+
                       }
                     )
+        this.service.getElementsBySlug('get_program_competences', this.program.id)
+                    .subscribe(
+                      competences => {
+                        this.competences = competences; 
+                        this.competences.map(element => this.competencesObject[element.id] = element );
+                      }
+                    )  
         this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
                     .subscribe(
                       choiceGroups => {
                         this.choiceGroups = choiceGroups;
                         this.choiceGroups.map(element => this.choiceGroupsObject[element.id] = element);
-                        console.log(choiceGroups)
+                        
                       }
                     )
         this.service.getElementsBySlug('get_program_modules', this.program.id)
                     .subscribe(
                       modules => {
                         this.modules = modules; console.log(this.modules);
-                        this.modules.map(element => this.modulesObject[element.id] = element);
+                        this.modules.map(element => { this.modulesObject[element.id] = element;
+                                                      this.modulesObject[element.id].status=false }
+                                        );
                       }
-                    )  
+                    )
       });
   }
 }
