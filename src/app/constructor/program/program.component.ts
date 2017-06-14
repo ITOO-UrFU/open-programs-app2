@@ -36,6 +36,7 @@ export class ProgramComponent implements OnInit {
   
   change(value){
     this.path['title'] = this.targetsObject[value].id;
+    this.path['index'] = this.targetsObject[value].index;
     console.log(this.path)
   }
 
@@ -53,8 +54,9 @@ export class ProgramComponent implements OnInit {
                     .subscribe(
                       targets => {
                         this.targets = targets;
-                        this.targets.map(element => this.targetsObject[element.id] = element);
-                        
+                        this.targets.map((element, index) => { this.targetsObject[element.id] = element;
+                                                                      this.targetsObject[element.id].index = index;  });
+
                       }
                     )
         this.service.getElementsBySlug('get_program_competences', this.program.id)

@@ -29,7 +29,9 @@
 	<ng-template ngFor let-choiceGroup [ngForOf]="targetsObject[path.title]?.choice_groups" >
 		<h3>Группа: {{ choiceGroupsObject[choiceGroup]?.title }}</h3>
 		<ng-template ngFor let-module [ngForOf]="choiceGroupsObject[choiceGroup]?.get_program_modules">
-			<li>{{ modulesObject[module]?.title }} </li>
+			<li><span *ngIf="modulesObject[module]?.targets_positions[path.index] == 1">[x]</span>
+			<span *ngIf="modulesObject[module]?.targets_positions[path.index] == 2">[ ]</span>
+			{{ path.index }} {{ modulesObject[module]?.title }} </li>
 			<ng-template ngFor let-discipline [ngForOf]="modulesObject[module]?.disciplines" >
 			<p> - <em discipline [discipline]="discipline"></em></p>
 			</ng-template>
