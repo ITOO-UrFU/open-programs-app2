@@ -9,6 +9,8 @@ import { ConstructorService } from '../constructor.service';
 import { DataService } from '../data.service';
 // import { DisciplineComponent } from '../discipline/discipline.component'
 
+import { Trajectory } from '../trajectory'
+
 @Component({
   selector: 'app-program',
   templateUrl: './program.component.html',
@@ -25,6 +27,7 @@ export class ProgramComponent implements OnInit {
   private choiceGroupsObject = {};
   private competences;
   private competencesObject = {};
+  private trajectory:Trajectory;
 
   private test;
 
@@ -37,12 +40,14 @@ export class ProgramComponent implements OnInit {
   change(value){
     this.path['title'] = this.targetsObject[value].id;
     this.path['index'] = this.targetsObject[value].index;
-    console.log(this.path)
+    this.trajectory = new Trajectory('test',this.program, this.modules)
+    console.log(this.trajectory)
+    console.log(this.test);
   }
 
   ngOnInit() {
     this.test = this.data.getProgram();
-    console.log(this.test);
+    
     // Скорость получения данных выше чем отправка. Нужно использовать rxjs
 
     this.activateRoute.params
