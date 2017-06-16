@@ -9,6 +9,7 @@ import { ConstructorService } from '../constructor.service';
 import { DataService } from '../data.service';
 // import { DisciplineComponent } from '../discipline/discipline.component'
 
+import { Program } from '../program'
 import { Trajectory } from '../trajectory'
 
 @Component({
@@ -17,7 +18,7 @@ import { Trajectory } from '../trajectory'
   styleUrls: ['./program.component.scss']
 })
 export class ProgramComponent implements OnInit {
-  private program;
+  private program: Program;
   private path={};
   private targets;
   private targetsObject = {};
@@ -40,9 +41,7 @@ export class ProgramComponent implements OnInit {
   change(value){
     this.path['title'] = this.targetsObject[value].id;
     this.path['index'] = this.targetsObject[value].index;
-    this.trajectory = new Trajectory('test',this.program, this.modules)
-    console.log(this.trajectory)
-    console.log(this.test);
+
   }
 
   ngOnInit() {
@@ -52,8 +51,17 @@ export class ProgramComponent implements OnInit {
 
     this.activateRoute.params
       .switchMap((params: Params) => this.service.getElementsBySlug('programs', params['id']))
-      .subscribe((program) => {
-        this.program = program;
+      .subscribe((program:any) => {
+        this.program = new Program( program.id,
+                                    program.title,
+                                    program.training_direction,
+                                    program.get_level_display,
+                                    //program.get_competences_diagram,
+                                    program.get_choice_groups,
+                                    program.chief,
+                                    program.competences );
+        this.trajectory = new Trajectory('test',this.program)
+        console.log(this.program)
         this.titleService.setTitle(this.program.title);
         this.service.getElementsBySlug('get_program_targets', this.program.id)
                     .subscribe(
@@ -67,7 +75,7 @@ export class ProgramComponent implements OnInit {
         this.service.getElementsBySlug('get_program_competences', this.program.id)
                     .subscribe(
                       competences => {
-                        this.competences = competences; 
+                        this.competences = competences;
                         this.competences.map(element => this.competencesObject[element.id] = element );
                       }
                     )  
@@ -82,10 +90,12 @@ export class ProgramComponent implements OnInit {
         this.service.getElementsBySlug('get_program_modules', this.program.id)
                     .subscribe(
                       modules => {
-                        this.modules = modules; console.log(this.modules);
+                        this.modules = modules;
                         this.modules.map(element => { this.modulesObject[element.id] = element;
-                                                      this.modulesObject[element.id].status=false }
-                                        );
+                                                      this.modulesObject[element.id].status=false
+                                                      
+                                                   });
+                        this.trajectory.modules(modules);
                       }
                     )
       });
