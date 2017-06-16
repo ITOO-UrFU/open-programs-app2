@@ -18,17 +18,17 @@ import { Trajectory } from '../trajectory'
   styleUrls: ['./program.component.scss']
 })
 export class ProgramComponent implements OnInit {
-  private program: Program;
-  private path={};
-  private targets;
+  public program: Program;
+  public path={};
+  public targets;
   private targetsObject = {};
-  private modules;
+  public modules;
   private modulesObject = {};
-  private choiceGroups;
+  public choiceGroups;
   private choiceGroupsObject = {};
-  private competences;
+  public competences;
   private competencesObject = {};
-  private trajectory:Trajectory;
+  public trajectory:Trajectory;
 
   private test;
 
