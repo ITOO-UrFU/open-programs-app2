@@ -31,10 +31,12 @@
 		<ng-template ngFor let-module [ngForOf]="choiceGroupsObject[choiceGroup]?.get_program_modules">
 			<li><span *ngIf="modulesObject[module]?.targets_positions[path.index] == 1">[x]</span>
 			<span *ngIf="modulesObject[module]?.targets_positions[path.index] == 2">[ ]</span>
-			{{ path.index }} {{ modulesObject[module]?.title }} </li>
+			{{ modulesObject[module]?.title }} 
+			<ul>
 			<ng-template ngFor let-discipline [ngForOf]="modulesObject[module]?.disciplines" >
-			<p> - <em discipline [discipline]="discipline"></em></p>
+			 <li> <em discipline [discipline]="discipline"></em></li>
 			</ng-template>
+			</ul></li>
 		</ng-template>
 	</ng-template>
 	</ul>
