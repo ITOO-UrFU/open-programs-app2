@@ -20,7 +20,7 @@ export class ProgramListComponent implements OnInit {
 
   constructor(private router: Router, private service: ConstructorService) { }
 
-  onSelect(id: string ) {
+  public onSelect(id: string ) {
     this.router.navigate(['/constructor', 'program', id]);
   }
 
