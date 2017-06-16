@@ -9,8 +9,8 @@ import { ConstructorService } from '../constructor.service';
 import { DataService } from '../data.service';
 // import { DisciplineComponent } from '../discipline/discipline.component'
 
-import { Program } from '../program'
-import { Trajectory } from '../trajectory'
+import { Program } from '../program';
+import { Trajectory } from '../trajectory';
 
 @Component({
   selector: 'app-program',
@@ -51,7 +51,7 @@ export class ProgramComponent implements OnInit {
 
     this.activateRoute.params
       .switchMap((params: Params) => this.service.getElementsBySlug('programs', params['id']))
-      .subscribe((program:any) => {
+      .subscribe((program: any) => {
         this.program = new Program( program.id,
                                     program.title,
                                     program.training_direction,

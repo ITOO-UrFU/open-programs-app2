@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { ConstructorService } from '../constructor.service';
 
+import { Program } from '../program';
+
 
 @Component({
   selector: 'app-program-list',
@@ -14,7 +16,7 @@ import { ConstructorService } from '../constructor.service';
 })
 export class ProgramListComponent implements OnInit {
 
-  public programList: Array<any>;
+  public programList: Program[];
 
   constructor(private router: Router, private service: ConstructorService) { }
 
@@ -25,8 +27,18 @@ export class ProgramListComponent implements OnInit {
   ngOnInit() {
     this.service.getElements('programs')
                 .subscribe(
-                  data => {
-                    this.programList = data;
+                  (data) => {
+                    console.log(data);
+                    this.programList = data.map((program: any) => new Program( program.id,
+                                                                                program.title,
+                                                                                program.training_direction,
+                                                                                program.get_level_display,
+                                                                                program.get_competences_diagram,
+                                                                                program.get_choice_groups,
+                                                                                program.chief,
+                                                                                program.competences )
+                                                                  );
+                    console.log(this.programList);
                   },
                   error => {
                     console.log(error)
