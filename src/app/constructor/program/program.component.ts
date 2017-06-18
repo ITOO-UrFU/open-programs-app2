@@ -37,7 +37,7 @@ export class ProgramComponent implements OnInit {
                private titleService: Title,
                private service: ConstructorService,
                private data: DataService ) { }
-  
+
   change(value){
     this.path['title'] = this.targetsObject[value].id;
     this.path['index'] = this.targetsObject[value].index;
@@ -46,7 +46,7 @@ export class ProgramComponent implements OnInit {
 
   ngOnInit() {
     this.test = this.data.getProgram();
-    
+
     // Скорость получения данных выше чем отправка. Нужно использовать rxjs
 
     this.activateRoute.params
@@ -56,48 +56,47 @@ export class ProgramComponent implements OnInit {
                                     program.title,
                                     program.training_direction,
                                     program.get_level_display,
-                                    //program.get_competences_diagram,
+                                    program.get_competences_diagram,
                                     program.get_choice_groups,
                                     program.chief,
                                     program.competences );
-        this.trajectory = new Trajectory('test',this.program)
-        console.log(this.program)
+        this.trajectory = new Trajectory('test', this.program)
+        console.log(this.trajectory)
         this.titleService.setTitle(this.program.title);
         this.service.getElementsBySlug('get_program_targets', this.program.id)
                     .subscribe(
                       targets => {
                         this.targets = targets;
                         this.targets.map((element, index) => { this.targetsObject[element.id] = element;
-                                                                      this.targetsObject[element.id].index = index;  });
+                                                               this.targetsObject[element.id].index = index;
+                                                              });
 
                       }
-                    )
+                    );
         this.service.getElementsBySlug('get_program_competences', this.program.id)
                     .subscribe(
                       competences => {
                         this.competences = competences;
                         this.competences.map(element => this.competencesObject[element.id] = element );
                       }
-                    )  
+                    );
         this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
                     .subscribe(
                       choiceGroups => {
                         this.choiceGroups = choiceGroups;
                         this.choiceGroups.map(element => this.choiceGroupsObject[element.id] = element);
-                        
                       }
-                    )
+                    );
         this.service.getElementsBySlug('get_program_modules', this.program.id)
                     .subscribe(
                       modules => {
                         this.modules = modules;
                         this.modules.map(element => { this.modulesObject[element.id] = element;
-                                                      this.modulesObject[element.id].status=false
-                                                      
+                                                      this.modulesObject[element.id].status = false;
                                                    });
                         this.trajectory.modules(modules);
                       }
-                    )
+                    );
       });
   }
 }

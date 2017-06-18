@@ -22,7 +22,7 @@ export class ConstructorService {
 
   // Получение элементов Открытой образовательной программы
 
-  getElements(type:string):any {
+  public getElements(type:string):any {
     if (this.consoleStatus) {
       console.log("[URL API]: ", this.serverURL + type);
     }
@@ -31,11 +31,19 @@ export class ConstructorService {
                     .catch(this.handleError);
   }
 
-  getElementsBySlug(type:string, slug:string):any {
+  public getElementsBySlug(type:string, slug:string):any {
     if (this.consoleStatus) {
       console.log("[URL API]: ", this.serverURL + type + '/' + slug);
     }
     return this.http.get(this.serverURL + type + '/' + slug + '/?format=json')
+                    .map(res => res.json())
+                    .catch(this.handleError);
+  }
+
+  public postResponse(api, value): any {
+      const headers = new Headers({ 'Content-Type': 'application/json' });
+      const options = new RequestOptions({ headers: headers });
+      return this.http.post(this.serverURL + api + '/', value, options)
                     .map(res => res.json())
                     .catch(this.handleError);
   }

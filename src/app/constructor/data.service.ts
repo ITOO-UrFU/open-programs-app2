@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 
 // Variables
 
-export let program: any[] = [{test:"Тестовые данные"}];
+export let program: any[] = [{test: 'Тестовые данные'}];
 
 
 @Injectable()
@@ -18,10 +18,10 @@ export class DataService {
 
   getProgram():any{
     return program;
-  } 
+  };
   setProgram(value): any{
     program = value;
-  } 
+  };
 
   constructor() { }
 
