@@ -54,7 +54,7 @@ export class ProgramListComponent implements OnInit {
     this.service.getElements('programs')
                 .subscribe(
                   (data) => {
-                    this.programList = data.map((program: any) => { 
+                    this.programList = data.map((program: any) => {
                                                                     this.getTr(program);
                                                                     return new Program( program.id,
                                                                                 program.title,
@@ -64,8 +64,6 @@ export class ProgramListComponent implements OnInit {
                                                                                 program.get_choice_groups,
                                                                                 program.chief,
                                                                                 program.competences );
-                                                                    
-
                     });
                     console.log(this.programList);
                   },
