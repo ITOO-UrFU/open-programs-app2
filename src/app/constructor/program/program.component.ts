@@ -50,7 +50,9 @@ export class ProgramComponent implements OnInit {
     // Скорость получения данных выше чем отправка. Нужно использовать rxjs
 
     this.activateRoute.params
-      .switchMap((params: Params) => this.service.getElementsBySlug('programs', params['id']))
+      .switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
+      .subscribe((trajectory: any) => {
+      this.service.getElementsBySlug('programs', trajectory.program)
       .subscribe((program: any) => {
         this.program = new Program( program.id,
                                     program.title,
@@ -97,6 +99,6 @@ export class ProgramComponent implements OnInit {
                         this.trajectory.modules(modules);
                       }
                     );
-      });
+      });})
   }
 }

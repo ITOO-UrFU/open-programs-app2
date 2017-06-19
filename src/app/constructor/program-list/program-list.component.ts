@@ -17,6 +17,7 @@ import { Program } from '../program';
 export class ProgramListComponent implements OnInit {
 
   public programList: Program[];
+  public trajectories = {};
 
   constructor(private router: Router, private service: ConstructorService) { }
 
@@ -26,6 +27,7 @@ export class ProgramListComponent implements OnInit {
                       .subscribe(
                       newTrajectory => {
                          trajectory  = newTrajectory;
+                         console.log(trajectory)
                          this.router.navigate(['/constructor', 'program', trajectory.id]);
                       },
                       error => {
@@ -35,20 +37,36 @@ export class ProgramListComponent implements OnInit {
     // this.router.navigate(['/constructor', 'program', trajectory_id]);
   }
 
+  public getTr(program: any){
+  this.service.getElementsBySlug('get_program_trajectory', program.id)
+              .subscribe(
+                (trajectories: any) => {
+                  console.log(trajectories);
+                  this.trajectories[program.id] = trajectories;
+                },
+                error => {
+                  console.log(error);
+                }
+              );
+}
+
   ngOnInit() {
     this.service.getElements('programs')
                 .subscribe(
                   (data) => {
-                    console.log(data);
-                    this.programList = data.map((program: any) => new Program( program.id,
+                    this.programList = data.map((program: any) => { 
+                                                                    this.getTr(program);
+                                                                    return new Program( program.id,
                                                                                 program.title,
                                                                                 program.training_direction,
                                                                                 program.get_level_display,
                                                                                 program.get_competences_diagram,
                                                                                 program.get_choice_groups,
                                                                                 program.chief,
-                                                                                program.competences )
-                                                                  );
+                                                                                program.competences );
+                                                                    
+
+                    });
                     console.log(this.programList);
                   },
                   error => {
@@ -57,8 +75,6 @@ export class ProgramListComponent implements OnInit {
                 );
   }
 }
-
-
 
 
 
