@@ -21,15 +21,15 @@ export class ProgramListComponent implements OnInit {
   constructor(private router: Router, private service: ConstructorService) { }
 
   public onSelect(id: string ) {
-    let trajectory_id: string = 'w2w2w2w2w';
+    let trajectory: any;
     this.service.postResponse('new_trajectory', JSON.stringify({program_id: id, data:{}}))
                       .subscribe(
-                      status => {
-                         console.log("status", status);
+                      newTrajectory => {
+                         trajectory  = newTrajectory;
+                         this.router.navigate(['/constructor', 'program', trajectory.id]);
                       },
                       error => {
                         console.log(error);
-                        trajectory_id = 'q1q1q1q1q1q1q1';
                       }
                     )
     // this.router.navigate(['/constructor', 'program', trajectory_id]);
