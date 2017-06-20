@@ -23,11 +23,11 @@ export class ProgramListComponent implements OnInit {
 
   public onSelect(id: string ) {
     let trajectory: any;
-    this.service.postResponse('new_trajectory', JSON.stringify({program_id: id, data:{}}))
-                      .subscribe(
+    this.service.postResponse('new_trajectory', JSON.stringify({program_id: id, data: {}}))
+                .subscribe(
                       newTrajectory => {
                          trajectory  = newTrajectory;
-                         console.log(trajectory)
+                         console.log(trajectory);
                          this.router.navigate(['/constructor', 'program', trajectory.id]);
                       },
                       error => {
@@ -35,6 +35,9 @@ export class ProgramListComponent implements OnInit {
                       }
                     )
     // this.router.navigate(['/constructor', 'program', trajectory_id]);
+  }
+  public editTrajectory(id: string){
+    this.router.navigate(['/constructor', 'program', id])
   }
 
   public getTr(program: any){
@@ -68,7 +71,7 @@ export class ProgramListComponent implements OnInit {
                     console.log(this.programList);
                   },
                   error => {
-                    console.log(error)
+                    console.log(error);
                   }
                 );
   }

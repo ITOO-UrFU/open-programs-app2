@@ -13,14 +13,14 @@
 		</ng-template>
 	</ul>
 </div>
-	<div id="competences">
+	<!--<div id="competences">
 		<h2>Компетенции (targets)</h2>
 		<ul>
 			<ng-template ngFor let-competence [ngForOf]="competences">
 				<li>{{ competence?.title }}</li>
 			</ng-template>
 		</ul>
-</div>
+</div>-->
 <h2>Группы выбора (choiceGroups)</h2>
 <ul>
 <ng-template ngFor let-choiceGroup [ngForOf]="choiceGroups">
@@ -45,4 +45,9 @@
 		</ng-template>
 	</ng-template>
 	</ul>
+</div>
+
+<div *ngIf = "trajectory" >
+	{{ trajectory?.id }} - {{ trajectory?.program.id }}
+{{ trajectory?._target?.groups_id}}
 </div>

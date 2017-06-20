@@ -21,13 +21,13 @@ export class ProgramComponent implements OnInit {
   public program: Program;
   public path= {};
   public targets;
-  private targetsObject = {};
+  public targetsObject = {};
   public modules;
-  private modulesObject = {};
+  public modulesObject = {};
   public choiceGroups;
-  private choiceGroupsObject = {};
+  public choiceGroupsObject = {};
   public competences;
-  private competencesObject = {};
+  public competencesObject = {};
   public trajectory: Trajectory;
 
   private test;
@@ -38,29 +38,30 @@ export class ProgramComponent implements OnInit {
                private service: ConstructorService,
                private data: DataService ) { }
 
-  change(value){
+  change(value) {
     this.path['title'] = this.targetsObject[value].id;
     this.path['index'] = this.targetsObject[value].index;
 
   }
-  public functionName() {
+  public getChoiceGroups() {
     this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
             .subscribe(
               choiceGroups => {
-                console.log('choiceGroups', choiceGroups)
                 this.choiceGroups = choiceGroups;
+                this.trajectory.groups(choiceGroups);
                 this.choiceGroups.map(element => {
                   this.choiceGroupsObject[element.id] = element;
                   this.choiceGroupsObject[element.id].get_program_modules_status = element.get_program_modules.map(
                     module_id => {
                       return this.modulesObject[module_id].targets_positions.map(value => {
-                        if(value == 1) return 'selected'
-                        else if (value == 2) return 'available'
-                        else return 'disabled'
+                        if (value === 1) { return 'selected' }
+                        else if (value === 2) { return 'available' }
+                        else { return 'disabled' }
                       });
                     });
                 });
-                console.log(this.choiceGroupsObject)
+                console.log(this.choiceGroupsObject);
+                console.log('this.trajectory', this.trajectory);
               }
             );
   }
@@ -75,8 +76,9 @@ export class ProgramComponent implements OnInit {
     this.activateRoute.params
       .switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
       .subscribe((trajectory: any) => {
-      this.trajectory = new Trajectory(trajectory.id, trajectory.program)
-      this.service.getElementsBySlug('programs', trajectory.program)
+        
+      this.trajectory = new Trajectory( trajectory.id, trajectory.program );
+      this.service.getElementsBySlug( 'programs', trajectory.program )
       .subscribe((program: any) => {
         this.program = new Program( program.id,
                                     program.title,
@@ -92,10 +94,12 @@ export class ProgramComponent implements OnInit {
         this.service.getElementsBySlug('get_program_targets', this.program.id)
                     .subscribe(
                       targets => {
+
                         this.targets = targets;
                         this.targets.map((element, index) => { this.targetsObject[element.id] = element;
                                                                this.targetsObject[element.id].index = index;
                                                               });
+                        this.trajectory.target(targets[0].id, targets[0].choice_groups);
 
                       }
                     );
@@ -116,7 +120,7 @@ export class ProgramComponent implements OnInit {
                                                       this.modulesObject[element.id].status = false;
                                                    });
                         this.trajectory.modules(modules);
-                        this.functionName();
+                        this.getChoiceGroups();
                       }
                     );
       });})
