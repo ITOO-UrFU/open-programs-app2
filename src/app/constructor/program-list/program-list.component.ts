@@ -19,61 +19,64 @@ export class ProgramListComponent implements OnInit {
   public programList: Program[];
   public trajectories = {};
 
-  constructor(private router: Router, private service: ConstructorService) { }
+  constructor( private router: Router, private service: ConstructorService ) { }
 
-  public onSelect(id: string ) {
-    let trajectory: any;
-    this.service.postResponse('new_trajectory', JSON.stringify({program_id: id, data: {}}))
+  // Функции работы с траекториями
+  // Создание траектории
+  public createTrajectory(program_id: string ) {
+    this.service.postResponse('new_trajectory', JSON.stringify({program_id: program_id, data: {}}))
                 .subscribe(
-                      newTrajectory => {
-                         trajectory  = newTrajectory;
-                         console.log(trajectory);
+                      (trajectory: any) => {
                          this.router.navigate(['/constructor', 'program', trajectory.id]);
                       },
                       error => {
                         console.log(error);
-                      }
-                    )
-    // this.router.navigate(['/constructor', 'program', trajectory_id]);
+                      });
   }
-  public editTrajectory(id: string){
-    this.router.navigate(['/constructor', 'program', id])
+  // Переход на редактирование созданной траектории
+  public editTrajectory(trajectory_id: string) {
+    this.router.navigate(['/constructor', 'program', trajectory_id]);
   }
 
-  public getTr(program: any){
-  this.service.getElementsBySlug('get_program_trajectory', program.id)
-              .subscribe(
-                (trajectories: any) => {
-                  console.log(trajectories);
-                  this.trajectories[program.id] = trajectories;
-                },
-                error => {
-                  console.log(error);
-                }
-              );
-}
-
-  ngOnInit() {
+  // Функция получения созданных траекторий по крнкретной программе
+  public getTrajectories(program: any) {
+    this.service.getElementsBySlug('get_program_trajectory', program.id)
+                .subscribe(
+                  (trajectories: any) => {
+                    this.trajectories[program.id] = trajectories;
+                  },
+                  (error) => {
+                    console.log(error);
+                  });
+  }
+  // Получение списка программ
+  public getPrograms() {
     this.service.getElements('programs')
                 .subscribe(
-                  (data) => {
-                    this.programList = data.map((program: any) => {
-                                                                    this.getTr(program);
-                                                                    return new Program( program.id,
-                                                                                program.title,
-                                                                                program.training_direction,
-                                                                                program.get_level_display,
-                                                                                program.get_competences_diagram,
-                                                                                program.get_choice_groups,
-                                                                                program.chief,
-                                                                                program.competences );
-                    });
-                    console.log(this.programList);
+                  (data: any) => {
+                    this.programList = data.map(
+                      (program: any) => {
+                        this.getTrajectories(program);
+                        console.log(program)
+                        return new Program( program.id,
+                                    program.title,
+                                    program.training_direction,
+                                    program.get_level_display,
+                                    program.get_competences_diagram,
+                                    program.get_choice_groups,
+                                    program.chief,
+                                    program.competences );
+                      }
+                    );
                   },
-                  error => {
+                  (error) => {
                     console.log(error);
                   }
                 );
+  }
+
+  ngOnInit() {
+    this.getPrograms();
   }
 }
 

@@ -1,11 +1,19 @@
 <ul>
 <ng-template ngFor let-program [ngForOf]="programList">
-  <li>
-    <h3>{{ program.title }}</h3>
-    <button (click)="onSelect(program.id)">Построить траекторию</button>
-    <ng-template ngFor let-trajectory [ngForOf]="trajectories[program.id]">
-      <p (click)="editTrajectory(trajectory.id)">{{ trajectory.id }}</p>
-    </ng-template>
+  <li><hr>
+    <h3>{{ program.title }} <button (click)="createTrajectory(program.id)">Создать</button>
+    </h3>
+    <p>{{ program.id }}</p>
+    <div>
+      <ng-template ngFor let-element [ngForOf]="program.get_competences_diagra">
+        {{ element }}
+      </ng-template>
+    </div>
+    <p>Созданные траектории:
+      <ng-template ngFor let-trajectory [ngForOf]="trajectories[program.id]">
+        <button (click)="editTrajectory(trajectory.id)">{{ trajectory.id }}</button>
+      </ng-template>
+    </p>
   </li>
 </ng-template>
 </ul>
