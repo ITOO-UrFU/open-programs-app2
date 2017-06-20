@@ -16,10 +16,9 @@ import { Trajectory } from '../trajectory';
   selector: 'app-program',
   templateUrl: './program.component.html',
   styleUrls: ['./program.component.scss']
-})
+}) 
 export class ProgramComponent implements OnInit {
   public program: Program;
-  public path= {};
   public targets;
   public targetsObject = {};
   public modules;
@@ -38,11 +37,7 @@ export class ProgramComponent implements OnInit {
                private service: ConstructorService,
                private data: DataService ) { }
 
-  change(value) {
-    this.path['title'] = this.targetsObject[value].id;
-    this.path['index'] = this.targetsObject[value].index;
 
-  }
   public getChoiceGroups() {
     this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
             .subscribe(
