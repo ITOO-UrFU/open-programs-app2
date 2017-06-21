@@ -85,6 +85,7 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (targets) => {
                     this.program.getTargets(targets);
+                    this.trajectory.getTarget(targets[0].id, targets.choice_groups)
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
                 );
@@ -107,6 +108,7 @@ export class ProgramComponent implements OnInit {
                                   this.trajectory = new Trajectory( trajectory.id,
                                                                     trajectory.program );
                                   this.getProgram(trajectory.program);
+                                  console.log(this.trajectory);
                                 }
                               );
   }

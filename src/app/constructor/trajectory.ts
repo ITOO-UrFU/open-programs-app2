@@ -1,23 +1,36 @@
 export class Trajectory {
     public id: string;
     public program: Program;
-    public _target: Target;
-    public _groups: Group[];
-    public _modules: Module[];
+    public target: Target;
+    public groups: Group[];
+    public modules: Module[];
 
+    constructor ( id: string,
+                  program: any ) {
+      this.id = id;
+      this.program = new Program( program );
+    }
 
-    constructor(id: string, program: any) {
-        this.id = id;
-        this.program = new Program( program );
+    getModules ( modules: any ) {
+      this.modules = modules.map (
+        (module: any) => {
+          return new Module( module.id,
+                             module.title );
+        }
+      );
     }
-    modules( modules: any ) {
-        this._modules = modules.map( module => new Module( module.id, module.title ) );
+    getGroups ( groups: any ) {
+      this.groups = groups.map (
+        (group: any) => {
+          return new Group( group.id,
+                            group.title,
+                            group.get_program_modules );
+        }
+      );
     }
-    groups( groups: any ) {
-        this._groups = groups.map( group => new Group( group.id, group.title, group.get_program_modules ) );
-    }
-    target( target: string, groups_id: string[] ) {
-        this._target = new Target( target, groups_id);
+    getTarget ( target: string, groups_id: string[] ) {
+        this.target = new Target( target,
+                                  groups_id );
     }
 }
 
@@ -31,7 +44,8 @@ export class Group {
     id: string;
     title: string;
     modules_id: string[];
-    constructor( id: string, title: string, modules_id: string[] ){
+    constructor( id: string,
+                 title: string, modules_id: string[] ){
         this.id = id;
         this.title = title;
         this.modules_id = modules_id;
