@@ -78,8 +78,7 @@ export class Program {
           this.targets_by_id[target.id] = _target;
           return _target;
         }
-      )
-      console.log('targets', this.targets_by_id);
+      );
     }
     getCompetences(competences) {
       this.competences = competences.map(
@@ -90,8 +89,7 @@ export class Program {
           this.competences_by_id[competence.id] = _competence;
           return _competence
         }
-      )
-      console.log('competences', competences);
+      );
     }
 }
 

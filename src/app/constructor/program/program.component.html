@@ -1,44 +1,44 @@
 <h1>
 {{ program?.title }}
-<div *ngIf="path">
-<!--<small>{{ path.title }}</small>-->
-</div>
+	<div *ngIf="path">
+	<small>{{ path.title }}</small>
+	</div>
 </h1>
 
 <div id="targets">
 	<h2>Цели (targets)</h2>
 	<ul class="target_choices">
-		<ng-template ngFor let-target [ngForOf]="targets">
+		<ng-template ngFor let-target [ngForOf]="program?.targets">
 			<li class="target_choice" (click)="change(target.id)">{{ target?.title }}</li>
 		</ng-template>
 	</ul>
 </div>
-	<!--<div id="competences">
+	<div id="competences">
 		<h2>Компетенции (targets)</h2>
 		<ul>
-			<ng-template ngFor let-competence [ngForOf]="competences">
+			<ng-template ngFor let-competence [ngForOf]="program?.competences">
 				<li>{{ competence?.title }}</li>
 			</ng-template>
 		</ul>
-</div>-->
+</div>
 <h2>Группы выбора (choiceGroups)</h2>
 <ul>
-<ng-template ngFor let-choiceGroup [ngForOf]="choiceGroups">
+<ng-template ngFor let-choiceGroup [ngForOf]="program?.choice_groups">
 	<li>{{ choiceGroup?.title }}</li>
 </ng-template>
 </ul>
 <h2>Модули (modules)</h2>
-<div *ngIf="path">
-	<h2> {{ targetsObject[path.title]?.title }}</h2>
+<div *ngIf="program?.targets">
+	<h2> {{ program?.targets_by_id['c27891a6-2a25-4de3-8edb-9a04a98d6f94']?.title }}</h2>
 	<ul>
-	<ng-template ngFor let-choiceGroup [ngForOf]="targetsObject[path.title]?.choice_groups" >
-		<h3>Группа: {{ choiceGroupsObject[choiceGroup]?.title }}</h3>
-		<ng-template ngFor let-module [ngForOf]="choiceGroupsObject[choiceGroup]?.get_program_modules">
-			<li class="module_title"><span class="is_selected" *ngIf="modulesObject[module]?.targets_positions[path.index] == 1">[x]</span>
-			<span *ngIf="modulesObject[module]?.targets_positions[path.index] == 2">[ ]</span>
-				{{ modulesObject[module]?.title }} - <span class="labor_display">{{ modulesObject[module]?.get_labor }} з.е.</span></li>
+	<ng-template ngFor let-choiceGroup [ngForOf]="program?.targets_by_id['c27891a6-2a25-4de3-8edb-9a04a98d6f94']?.choice_groups" >
+		<h3>Группа: {{ program?.choice_group_by_id[choiceGroup]?.title }}</h3>
+		<ng-template ngFor let-module [ngForOf]="program?.choice_group_by_id[choiceGroup]?.get_program_modules">
+			<li class="module_title"><span class="is_selected" *ngIf="program?.modules_by_id[module]?.targets_positions_indexed['c27891a6-2a25-4de3-8edb-9a04a98d6f94'] == 1">[x]</span>
+			<span *ngIf="program?.modules_by_id[module]?.targets_positions_indexed['c27891a6-2a25-4de3-8edb-9a04a98d6f94'] == 2">[ ]</span>
+				{{ program?.modules_by_id[module]?.title }} - <span class="labor_display">{{ program?.modules_by_id[module]?.get_labor }} з.е.</span></li>
 				<div class="disciplines">
-					<ng-template ngFor let-discipline [ngForOf]="modulesObject[module]?.disciplines" >
+					<ng-template ngFor let-discipline [ngForOf]="program?.modules_by_id[module]?.disciplines" >
 						<p> - <em discipline [discipline]="discipline"></em><span class="labor_display">{{discipline.labor}} з.е.</span></p>
 					</ng-template>
 				</div>

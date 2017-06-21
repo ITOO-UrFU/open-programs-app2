@@ -16,7 +16,8 @@ import { Trajectory } from '../trajectory';
   selector: 'app-program',
   templateUrl: './program.component.html',
   styleUrls: ['./program.component.scss']
-}) 
+})
+
 export class ProgramComponent implements OnInit {
   public program: Program;
   public targets;
@@ -29,13 +30,11 @@ export class ProgramComponent implements OnInit {
   public competencesObject = {};
   public trajectory: Trajectory;
 
-
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
                private titleService: Title,
                private service: ConstructorService,
                private data: DataService ) { }
-
 
   public getProgram(program_id: string) {
     this.service.getElementsBySlug( 'programs', program_id )
@@ -48,16 +47,19 @@ export class ProgramComponent implements OnInit {
                                                 program.get_competences_diagram,
                                                 program.get_choice_groups,
                                                 program.chief,
-                                                program.competences);
+                                                program.competences );
+
+                    this.titleService.setTitle(this.program.title);
+
                     this.getModules(program_id);
                     this.getChoiceGroups(program_id);
                     this.getTargets(program_id);
                     this.getCompetences(program_id);
-                    
                   },
                   (error) => { console.log('Ошибка получения программы. API: /programs', error); }
                 );
   }
+
   public getModules(program_id: string) {
     this.service.getElementsBySlug('get_program_modules', program_id)
                 .subscribe(
@@ -67,6 +69,7 @@ export class ProgramComponent implements OnInit {
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
                 );
   }
+
   public getChoiceGroups(program_id) {
     this.service.getElementsBySlug('get_program_choice_groups', program_id)
                 .subscribe(
@@ -76,6 +79,7 @@ export class ProgramComponent implements OnInit {
                   (error) => { console.error('Ошибка получения групп выбора. API: /get_program_choice_groups', error); }
                 );
   }
+
   public getTargets(program_id) {
     this.service.getElementsBySlug('get_program_targets', program_id)
                 .subscribe(
@@ -85,6 +89,7 @@ export class ProgramComponent implements OnInit {
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
                 );
   }
+
   public getCompetences(program_id) {
     this.service.getElementsBySlug('get_program_competences', program_id)
                 .subscribe(
@@ -95,42 +100,14 @@ export class ProgramComponent implements OnInit {
                 );
   }
 
-
-
   ngOnInit() {
-
-    // Скорость получения данных выше чем отправка. Нужно использовать rxjs
-
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
                                 (trajectory: any) => {
-                                  this.trajectory = new Trajectory( trajectory.id, trajectory.program );
+                                  this.trajectory = new Trajectory( trajectory.id,
+                                                                    trajectory.program );
                                   this.getProgram(trajectory.program);
-
-                                  
-
-
-
-
-
-
-
-      this.service.getElementsBySlug( 'programs', trajectory.program )
-      .subscribe((program: any) => {
-        this.program = new Program( program.id,
-                                    program.title,
-                                    program.training_direction,
-                                    program.get_level_display,
-                                    program.get_competences_diagram,
-                                    program.get_choice_groups,
-                                    program.chief,
-                                    program.competences );
-
-        console.log(this.trajectory, this.program);
-        this.titleService.setTitle(this.program.title);
-
-
-
-      });})
+                                }
+                              );
   }
 }
