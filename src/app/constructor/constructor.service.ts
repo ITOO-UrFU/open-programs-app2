@@ -44,8 +44,8 @@ export class ConstructorService {
       const headers = new Headers({ 'Content-Type': 'application/json' });
       const options = new RequestOptions({ headers: headers });
       return this.http.post(this.serverURL + api + '/', value, options)
-                    .map(res => res.json())
-                    .catch(this.handleError);
+                    .map( res => res.json() )
+                    .catch( this.handleError );
   }
 
   //TODO: Разобраться что делает функция обработки ошибок

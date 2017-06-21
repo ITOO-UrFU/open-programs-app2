@@ -87,7 +87,7 @@ export class Program {
                                               competence.title,
                                               competence.number );
           this.competences_by_id[competence.id] = _competence;
-          return _competence
+          return _competence;
         }
       );
     }
