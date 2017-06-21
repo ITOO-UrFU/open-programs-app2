@@ -29,13 +29,46 @@ export class ProgramComponent implements OnInit {
   public competencesObject = {};
   public trajectory: Trajectory;
 
-  private test;
 
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
                private titleService: Title,
                private service: ConstructorService,
                private data: DataService ) { }
+
+
+  public getProgram(program_id: string) {
+    this.service.getElementsBySlug( 'programs', program_id )
+                .subscribe(
+                  (program: any) => {
+                    this.program = new Program( program.id,
+                                                program.title,
+                                                program.training_direction,
+                                                program.get_level_display,
+                                                program.get_competences_diagram,
+                                                program.get_choice_groups,
+                                                program.chief,
+                                                program.competences);
+                    this.getModules(program_id);
+                  },
+                  (error) => { console.log('Ошибка получения программы. API: /programs', error); }
+                );
+  }
+  public getModules(program_id: string) {
+    this.service.getElementsBySlug('get_program_modules', program_id)
+                .subscribe(
+                      (modules: any) => {
+                        console.log('modules', modules)
+                         this.program.getModules(modules);
+                        // this.modules.map(element => { this.modulesObject[element.id] = element;
+                        //                               this.modulesObject[element.id].status = false;
+                        //                            });
+                        
+                        // this.getChoiceGroups();
+                        console.log(this.program)
+                      }
+                    );
+  }
 
 
   public getChoiceGroups() {
@@ -61,18 +94,39 @@ export class ProgramComponent implements OnInit {
             );
   }
 
+  public getTargets() {
+    this.service.getElementsBySlug('get_program_targets', this.program.id)
+                .subscribe(
+                  (targets) => {
+                    this.targets = targets;
+                    this.targets.map((element, index) => { this.targetsObject[element.id] = element;
+                                                            this.targetsObject[element.id].index = index;
+                                                          });
+
+                  },
+                  (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
+                );
+  }
+
 
 
   ngOnInit() {
-    this.test = this.data.getProgram();
 
     // Скорость получения данных выше чем отправка. Нужно использовать rxjs
 
-    this.activateRoute.params
-      .switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
-      .subscribe((trajectory: any) => {
-        
-      this.trajectory = new Trajectory( trajectory.id, trajectory.program );
+    this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
+                             .subscribe(
+                                (trajectory: any) => {
+                                  this.trajectory = new Trajectory( trajectory.id, trajectory.program );
+                                  this.getProgram(trajectory.program);
+                                  
+
+
+
+
+
+
+
       this.service.getElementsBySlug( 'programs', trajectory.program )
       .subscribe((program: any) => {
         this.program = new Program( program.id,
@@ -86,18 +140,7 @@ export class ProgramComponent implements OnInit {
 
         console.log(this.trajectory, this.program);
         this.titleService.setTitle(this.program.title);
-        this.service.getElementsBySlug('get_program_targets', this.program.id)
-                    .subscribe(
-                      targets => {
 
-                        this.targets = targets;
-                        this.targets.map((element, index) => { this.targetsObject[element.id] = element;
-                                                               this.targetsObject[element.id].index = index;
-                                                              });
-                        this.trajectory.target(targets[0].id, targets[0].choice_groups);
-
-                      }
-                    );
         this.service.getElementsBySlug('get_program_competences', this.program.id)
                     .subscribe(
                       competences => {
@@ -106,18 +149,7 @@ export class ProgramComponent implements OnInit {
                         this.competences.map(element => this.competencesObject[element.id] = element );
                       }
                     );
-        this.service.getElementsBySlug('get_program_modules', this.program.id)
-                    .subscribe(
-                      modules => {
-                        console.log(modules)
-                        this.modules = modules;
-                        this.modules.map(element => { this.modulesObject[element.id] = element;
-                                                      this.modulesObject[element.id].status = false;
-                                                   });
-                        this.trajectory.modules(modules);
-                        this.getChoiceGroups();
-                      }
-                    );
+
       });})
   }
 }
