@@ -8,7 +8,9 @@ export class Program {
     chief: any;
     competences: any[];
     modules: Module[];
-    moduleById = {};
+    modules_by_id = {};
+    choice_groups: ChoicGroup[];
+    choice_group_by_id = {};
 
     constructor( id: string,
                 title: string,
@@ -40,8 +42,23 @@ export class Program {
                               module.semester,
                               module.targets_positions,
                               module.targets_positions_indexed );
-          this.moduleById[module.id] = _module;
+          this.modules_by_id[module.id] = _module;
           return _module;
+        }
+      );
+    };
+    getChoicGroup(choice_groups){
+      this.choice_groups = choice_groups.map(
+        (choice_group: any) => {
+          const _choice_group = new ChoicGroup( choice_group.id,
+                                                choice_group.title,
+                                                choice_group.program,
+                                                choice_group.labor,
+                                                choice_group.get_choice_group_type_display,
+                                                choice_group.get_program_modules,
+                                                choice_group.number );
+          this.choice_group_by_id[choice_group.id] = _choice_group;
+          return _choice_group;
         }
       );
     };
@@ -69,19 +86,52 @@ class Module {
                   semester: number,
                   targets_positions: number[],
                   targets_positions_indexed: any ) {
-    this.id = id;
-    this.title = title;
-    this.choice_group = choice_group;
-    this.competence = competence;
-    this.disciplines = disciplines;
-    this.get_labor = get_labor;
-    this.priority = priority;
-    this.semester = semester;
-    this.targets_positions = targets_positions;
-    this.targets_positions_indexed = targets_positions_indexed;
+      this.id = id;
+      this.title = title;
+      this.choice_group = choice_group;
+      this.competence = competence;
+      this.disciplines = disciplines;
+      this.get_labor = get_labor;
+      this.priority = priority;
+      this.semester = semester;
+      this.targets_positions = targets_positions;
+      this.targets_positions_indexed = targets_positions_indexed;
     };
 }
 
+class ChoicGroup {
+    id: string;
+    title: string;
+    program: string;
+    labor: number;
+    get_choice_group_type_display: string;
+    get_program_modules: string[];
+    number: number;
+
+    constructor( id: string,
+                 title: string,
+                 program: string,
+                 labor: number,
+                 get_choice_group_type_display: string,
+                 get_program_modules: string[],
+                 number: number ) {
+      this.id = id;
+      this.title = title;
+      this.program = program;
+      this.labor = labor;
+      this.get_choice_group_type_display = get_choice_group_type_display;
+      this.get_program_modules = get_program_modules;
+      this.number = number;
+    };
+
+
+
+
+
+
+
+
+}
 
 
 

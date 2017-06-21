@@ -50,6 +50,7 @@ export class ProgramComponent implements OnInit {
                                                 program.chief,
                                                 program.competences);
                     this.getModules(program_id);
+                    this.getChoiceGroups(program_id);
                   },
                   (error) => { console.log('Ошибка получения программы. API: /programs', error); }
                 );
@@ -57,21 +58,23 @@ export class ProgramComponent implements OnInit {
   public getModules(program_id: string) {
     this.service.getElementsBySlug('get_program_modules', program_id)
                 .subscribe(
-                      (modules: any) => {
-                        console.log('modules', modules)
-                         this.program.getModules(modules);
-                        // this.modules.map(element => { this.modulesObject[element.id] = element;
-                        //                               this.modulesObject[element.id].status = false;
-                        //                            });
-                        
-                        // this.getChoiceGroups();
-                        console.log(this.program)
-                      }
-                    );
+                  (modules: any) => {
+                    this.program.getModules(modules);
+                  },
+                  (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
+                );
+  }
+  public getChoiceGroups(program_id) {
+    this.service.getElementsBySlug('get_program_choice_groups', program_id)
+                .subscribe(
+                  (choiceGroups) => {
+                    this.program.getChoicGroup(choiceGroups);
+                  },
+                  (error) => { console.error('Ошибка получения групп выбора. API: /get_program_choice_groups', error); }
+                );
   }
 
-
-  public getChoiceGroups() {
+  public _getChoiceGroups(program_id) {
     this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
             .subscribe(
               choiceGroups => {
