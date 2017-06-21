@@ -14,8 +14,8 @@ import 'rxjs/add/operator/map';
 export class GlobalService {
   public consoleStatus: boolean = false; // вынести настройки в отдельный файл
 
-  // private serverURL = 'http://212.193.94.145:8080/api/v11/';
-  private serverURL = 'http://10.16.208.154:8080/api/v11/';
+  private serverURL = 'http://212.193.94.145:8080/api/v11/';
+  // private serverURL = 'http://10.16.208.154:8080/api/v11/';
   private index: number = 0;
   private result: any;
   private footer: any;

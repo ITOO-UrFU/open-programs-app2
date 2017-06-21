@@ -15,8 +15,8 @@ export class ConstructorService {
 
   public consoleStatus: boolean = false; // вынести настройки в отдельный файл
 
-   // private serverURL = 'http://212.193.94.145:8080/api/v11/';
-   private serverURL = 'http://10.16.208.154:8080/api/v11/';
+   private serverURL = 'http://212.193.94.145:8080/api/v11/';
+  //  private serverURL = 'http://10.16.208.154:8080/api/v11/';
 
   constructor(private http: Http) { }
 
@@ -31,7 +31,7 @@ export class ConstructorService {
                     .catch(this.handleError);
   }
 
-  public getElementsBySlug(type:string, slug:string):any {
+  public getElementsBySlug(type:string, slug: string): any {
     if (this.consoleStatus) {
       console.log("[URL API]: ", this.serverURL + type + '/' + slug);
     }
