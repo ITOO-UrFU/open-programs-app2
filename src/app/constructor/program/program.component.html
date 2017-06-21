@@ -10,7 +10,7 @@
 		<h2>Цели (targets)</h2>
 		<ul class="target_choices">
 			<ng-template ngFor let-target [ngForOf]="program?.targets">
-				<li class="target_choice">{{ target?.title }}</li>
+				<li class="target_choice" (click)="selectTarget(target?.id)">{{ target?.title }}</li>
 			</ng-template>
 		</ul>
 	</div>

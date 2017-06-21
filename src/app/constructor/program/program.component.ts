@@ -100,7 +100,9 @@ export class ProgramComponent implements OnInit {
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
   }
-
+  public selectTarget(id){
+    this.trajectory.target.id = id
+  }
   ngOnInit() {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
