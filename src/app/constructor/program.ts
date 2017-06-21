@@ -11,6 +11,11 @@ export class Program {
     modules_by_id = {};
     choice_groups: ChoicGroup[];
     choice_group_by_id = {};
+    targets: Target[];
+    targets_by_id = {};
+    competences_by_id = {};
+
+
 
     constructor( id: string,
                 title: string,
@@ -46,7 +51,7 @@ export class Program {
           return _module;
         }
       );
-    };
+    }
     getChoicGroup(choice_groups){
       this.choice_groups = choice_groups.map(
         (choice_group: any) => {
@@ -61,7 +66,33 @@ export class Program {
           return _choice_group;
         }
       );
-    };
+    }
+    getTargets(targets) {
+      this.targets = targets.map(
+        (target) => {
+          const _target = new Target( target.id,
+                                      target.title,
+                                      target.program,
+                                      target.choice_groups,
+                                      target.number );
+          this.targets_by_id[target.id] = _target;
+          return _target;
+        }
+      )
+      console.log('targets', this.targets_by_id);
+    }
+    getCompetences(competences) {
+      this.competences = competences.map(
+        (competence) => {
+          const _competence = new Competence( competence.id,
+                                              competence.title,
+                                              competence.number );
+          this.competences_by_id[competence.id] = _competence;
+          return _competence
+        }
+      )
+      console.log('competences', competences);
+    }
 }
 
 class Module {
@@ -123,17 +154,39 @@ class ChoicGroup {
       this.get_program_modules = get_program_modules;
       this.number = number;
     };
-
-
-
-
-
-
-
-
 }
 
+class Target {
+    id: string;
+    title: string;
+    program: string;
+    choice_groups: string[];
+    number: number;
 
+    constructor( id: string,
+                 title: string,
+                 program: string,
+                 choice_groups: string[],
+                 number: number ) {
+      this.id = id;
+      this.title = title;
+      this.program = program;
+      this.choice_groups = choice_groups;
+      this.number = number;
+    };
+}
 
+class Competence {
+    id: string;
+    title: string;
+    number: number;
 
+    constructor( id: string,
+                 title: string,
+                 number: number ) {
+      this.id = id;
+      this.title = title;
+      this.number = number;
+    };
+}
 

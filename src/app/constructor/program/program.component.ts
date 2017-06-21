@@ -51,6 +51,9 @@ export class ProgramComponent implements OnInit {
                                                 program.competences);
                     this.getModules(program_id);
                     this.getChoiceGroups(program_id);
+                    this.getTargets(program_id);
+                    this.getCompetences(program_id);
+                    
                   },
                   (error) => { console.log('Ошибка получения программы. API: /programs', error); }
                 );
@@ -73,41 +76,22 @@ export class ProgramComponent implements OnInit {
                   (error) => { console.error('Ошибка получения групп выбора. API: /get_program_choice_groups', error); }
                 );
   }
-
-  public _getChoiceGroups(program_id) {
-    this.service.getElementsBySlug('get_program_choice_groups', this.program.id)
-            .subscribe(
-              choiceGroups => {
-                this.choiceGroups = choiceGroups;
-                this.trajectory.groups(choiceGroups);
-                this.choiceGroups.map(element => {
-                  this.choiceGroupsObject[element.id] = element;
-                  this.choiceGroupsObject[element.id].get_program_modules_status = element.get_program_modules.map(
-                    module_id => {
-                      return this.modulesObject[module_id].targets_positions.map(value => {
-                        if (value === 1) { return 'selected' }
-                        else if (value === 2) { return 'available' }
-                        else { return 'disabled' }
-                      });
-                    });
-                });
-                console.log(this.choiceGroupsObject);
-                console.log('this.trajectory', this.trajectory);
-              }
-            );
-  }
-
-  public getTargets() {
-    this.service.getElementsBySlug('get_program_targets', this.program.id)
+  public getTargets(program_id) {
+    this.service.getElementsBySlug('get_program_targets', program_id)
                 .subscribe(
                   (targets) => {
-                    this.targets = targets;
-                    this.targets.map((element, index) => { this.targetsObject[element.id] = element;
-                                                            this.targetsObject[element.id].index = index;
-                                                          });
-
+                    this.program.getTargets(targets);
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
+                );
+  }
+  public getCompetences(program_id) {
+    this.service.getElementsBySlug('get_program_competences', program_id)
+                .subscribe(
+                  (competences) => {
+                    this.program.getCompetences(competences);console.log('program', this.program);
+                  },
+                  (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
   }
 
@@ -122,6 +106,7 @@ export class ProgramComponent implements OnInit {
                                 (trajectory: any) => {
                                   this.trajectory = new Trajectory( trajectory.id, trajectory.program );
                                   this.getProgram(trajectory.program);
+
                                   
 
 
@@ -144,14 +129,7 @@ export class ProgramComponent implements OnInit {
         console.log(this.trajectory, this.program);
         this.titleService.setTitle(this.program.title);
 
-        this.service.getElementsBySlug('get_program_competences', this.program.id)
-                    .subscribe(
-                      competences => {
-                        console.log(competences);
-                        this.competences = competences;
-                        this.competences.map(element => this.competencesObject[element.id] = element );
-                      }
-                    );
+
 
       });})
   }
