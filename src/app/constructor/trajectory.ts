@@ -28,9 +28,8 @@ export class Trajectory {
         }
       );
     }
-    getTarget ( target: string, groups_id: string[] ) {
-        this.target = new Target( target,
-                                  groups_id );
+    getTarget ( target: string ) {
+        this.target = new Target( target );
     }
 }
 
@@ -63,10 +62,8 @@ export class Module {
 
 export class Target {
     id: string;
-    groups_id: string[];
 
-    constructor( id: string, groups_id: string[] ) {
+    constructor( id: string ) {
         this.id = id;
-        this.groups_id = groups_id;
     }
 }

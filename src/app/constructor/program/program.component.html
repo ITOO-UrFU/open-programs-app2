@@ -1,4 +1,4 @@
-<div *ngIf="trajectory?.target">
+<div *ngIf="trajectory?.target || program?.modules">
 	<h1>
 	{{ program?.title }}
 		<div *ngIf="path">
@@ -33,7 +33,7 @@
 		<h2> {{ program?.targets_by_id[trajectory.target.id]?.title }}</h2>
 		<ul>
 		<ng-template ngFor let-choiceGroup [ngForOf]="program?.targets_by_id[trajectory.target.id]?.choice_groups" >
-			<h3>Группа: {{ program?.choice_group_by_id[choiceGroup]?.title }}</h3>
+			<h3>Группа: {{ program?.choice_group_by_id[choiceGroup]?.title }} ___ из {{ program?.choice_group_by_id[choiceGroup]?.labor }} з.e</h3>
 			<ng-template ngFor let-module [ngForOf]="program?.choice_group_by_id[choiceGroup]?.get_program_modules">
 				<li class="module_title"><span class="is_selected" *ngIf="program?.modules_by_id[module]?.targets_positions_indexed[trajectory.target.id] == 1">[x]</span>
 				<span *ngIf="program?.modules_by_id[module]?.targets_positions_indexed[trajectory.target.id] == 2">[ ]</span>

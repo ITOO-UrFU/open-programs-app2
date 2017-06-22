@@ -20,15 +20,8 @@ import { Trajectory } from '../trajectory';
 
 export class ProgramComponent implements OnInit {
   public program: Program;
-  public targets;
-  public targetsObject = {};
-  public modules;
-  public modulesObject = {};
-  public choiceGroups;
-  public choiceGroupsObject = {};
-  public competences;
-  public competencesObject = {};
   public trajectory: Trajectory;
+  public selected = {};
 
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
@@ -85,7 +78,6 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (targets) => {
                     this.program.getTargets(targets);
-                    this.trajectory.getTarget(targets[0].id, targets.choice_groups)
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
                 );
@@ -115,10 +107,11 @@ export class ProgramComponent implements OnInit {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
                                 (trajectory: any) => {
+                                  console.log(trajectory.data.target);
                                   this.trajectory = new Trajectory( trajectory.id,
                                                                     trajectory.program );
                                   this.getProgram(trajectory.program);
-                                  console.log(this.trajectory);
+                                  this.trajectory.getTarget(trajectory.data.target);
                                 }
                               );
   }
