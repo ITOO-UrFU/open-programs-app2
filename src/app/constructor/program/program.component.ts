@@ -93,8 +93,8 @@ export class ProgramComponent implements OnInit {
                 );
   }
   public selectTarget(id) {
-    this.trajectory.target.id = id;
-    this.service.postResponse('save_trajectory', JSON.stringify({id: this.trajectory.id, program_id: this.trajectory.program.id, data: {target: id}}))
+    this.trajectory.getTarget(id);
+    this.service.postResponse('save_trajectory', JSON.stringify({id: this.trajectory.id, program_id: this.trajectory.program_id, data: {target: id}}))
                 .subscribe(
                       (trajectory) => {
                          console.log(trajectory);
