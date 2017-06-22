@@ -10,7 +10,7 @@ export class Program {
     modules: Module[];
     modules_by_id = {};
     choice_groups: ChoicGroup[];
-    choice_group_by_id = {};
+    choice_groups_by_id = {};
     targets: Target[];
     targets_by_id = {};
     competences_by_id = {};
@@ -62,7 +62,7 @@ export class Program {
                                                 choice_group.get_choice_group_type_display,
                                                 choice_group.get_program_modules,
                                                 choice_group.number );
-          this.choice_group_by_id[choice_group.id] = _choice_group;
+          this.choice_groups_by_id[choice_group.id] = _choice_group;
           return _choice_group;
         }
       );
