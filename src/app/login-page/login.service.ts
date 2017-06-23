@@ -18,6 +18,7 @@ export class LoginService {
             if (user && user.token) {
                 localStorage.setItem('currentUser', JSON.stringify(user));
               }
+            console.log('Вы авторизованы!');
             });
     }
 

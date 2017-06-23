@@ -17,9 +17,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { ConstructorModule } from './constructor/constructor.module';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 // custom services
 import { LoginService } from './login-page/login.service';
+import { RegisterService } from './register-page/register.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { LoginService } from './login-page/login.service';
     DiagramComponent,
     ProgramDisciplinesConstructorComponent,
     KeysPipe,
-    LoginPageComponent
+    LoginPageComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { LoginService } from './login-page/login.service';
   ],
   providers: [
     GlobalService,
-    LoginService
+    LoginService,
+    RegisterService,
   ],
   bootstrap: [AppComponent]
 })

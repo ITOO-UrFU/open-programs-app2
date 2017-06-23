@@ -21,7 +21,7 @@ export class LoginPageComponent implements OnInit {
             .subscribe(
                 data => {
                     // window.location.reload();
-                    console.log(data);
+                    // console.log(data);
                 },
                 error => {
                     console.error('Ошибка при входе. Проверьте правильность введенных данных.');

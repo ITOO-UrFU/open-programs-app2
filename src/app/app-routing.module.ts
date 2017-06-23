@@ -6,6 +6,7 @@ import { ProgramConstructorLiteComponent } from './program-constructor-lite/prog
 import { ProgramDisciplinesConstructorComponent } from './program-disciplines-constructor/program-disciplines-constructor.component';
 
 import { LoginPageComponent } from './login-page/login-page.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 const routes: Routes = [
   {
@@ -61,7 +62,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent,
-  }
+  },
+  {
+    path: 'register',
+    component: RegisterPageComponent,
+  },
   // {
   //   path: ':id',
   //   component: ContainerComponent,
