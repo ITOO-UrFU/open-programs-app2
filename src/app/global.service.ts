@@ -80,7 +80,7 @@ export class GlobalService {
   }
 
 
-// Здесь начинаются POST запросы к серверу для отправки от клиентна
+// Здесь начинаются POST запросы к серверу для отправки от клиента
 
   public postResponse(api, value):any {
       let headers = new Headers({ 'Content-Type': 'application/json' });

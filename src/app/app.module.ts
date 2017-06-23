@@ -15,7 +15,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 // custom module
 
-import { ConstructorModule } from './constructor/constructor.module'
+import { ConstructorModule } from './constructor/constructor.module';
+import { LoginPageComponent } from './login-page/login-page.component';
+
+// custom services
+import { LoginService } from './login-page/login.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import { ConstructorModule } from './constructor/constructor.module'
     ProgramConstructorLiteComponent,
     DiagramComponent,
     ProgramDisciplinesConstructorComponent,
-    KeysPipe
+    KeysPipe,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,10 @@ import { ConstructorModule } from './constructor/constructor.module'
     ChartsModule,
     ConstructorModule,
   ],
-  providers: [GlobalService],
+  providers: [
+    GlobalService,
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ContainerComponent } from './container/container.component';
 import { ProgramConstructorLiteComponent } from './program-constructor-lite/program-constructor-lite.component';
-import { ProgramDisciplinesConstructorComponent } from './program-disciplines-constructor/program-disciplines-constructor.component'
+import { ProgramDisciplinesConstructorComponent } from './program-disciplines-constructor/program-disciplines-constructor.component';
+
+import { LoginPageComponent } from './login-page/login-page.component';
 
 const routes: Routes = [
   {
@@ -20,7 +22,7 @@ const routes: Routes = [
     ]
   },
   {
-    path:'discipline',
+    path: 'discipline',
     children: [
       {
         path: ':id',
@@ -55,6 +57,10 @@ const routes: Routes = [
   {
     path: 'programlist',
     redirectTo: 'constructor/programlist'
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent,
   }
   // {
   //   path: ':id',
