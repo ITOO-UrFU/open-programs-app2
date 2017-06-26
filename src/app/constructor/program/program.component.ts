@@ -26,10 +26,8 @@ export class ProgramComponent implements OnInit {
   // Временные переменные
   public selected: string;
   public build = false;
-  public modules = {
-    default: [],
-    variative: []
-  };
+  public modules = {};
+
 
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
@@ -108,25 +106,21 @@ export class ProgramComponent implements OnInit {
   }
   public selectTarget(id) {
     this.selected = id;
-      this.modules.default = this.program.modules.filter(
+    for (const group of this.program.choice_groups ){
+      this.modules[group.id] = {};
+      this.modules[group.id].default = group.get_program_modules.filter(
         (module: any) => {
-           return module.targets_positions_indexed[this.selected] === 1;
-        }
-      ).map(
-        (module: any) => {
-           return module.id;
+          return this.program.modules_by_id[module].targets_positions_indexed[this.selected] === 1;
         }
       );
-      this.modules.variative = this.program.modules.filter(
+      this.modules[group.id].variative = group.get_program_modules.filter(
         (module: any) => {
-           return module.targets_positions_indexed[this.selected] === 2;
-        }
-      ).map(
-        (module: any) => {
-           return module.id;
+          return this.program.modules_by_id[module].targets_positions_indexed[this.selected] === 2;
         }
       );
-
+      this.modules[group.id].status = ((this.modules[group.id].variative.length === 0) ? false : true );
+    }
+    console.log(this.modules);
 
 
     this.trajectory.getTarget(id);
@@ -142,45 +136,41 @@ export class ProgramComponent implements OnInit {
                         console.log(error);
                       });
   }
-  public buildTrajectory(){
+  public buildTrajectory() {
     if ( this.program.complete_load().indexOf(false) === -1) {
-      this.modules.default = this.program.modules.filter(
-        (module: any) => {
-           return module.targets_positions_indexed[this.selected] === 1;
-        }
-      ).map(
-        (module: any) => {
-           return module.id;
-        }
-      );
-      this.modules.variative = this.program.modules.filter(
-        (module: any) => {
-           return module.targets_positions_indexed[this.selected] === 2;
-        }
-      ).map(
-        (module: any) => {
-           return module.id;
-        }
-      );
-      console.log(this.modules.default, this.program.modules)
+
+      for (const group of this.program.choice_groups ){
+        this.modules[group.id] = {};
+        this.modules[group.id].default = group.get_program_modules.filter(
+          (module: any) => {
+            return this.program.modules_by_id[module].targets_positions_indexed[this.selected] === 1;
+          }
+        );
+        this.modules[group.id].variative = group.get_program_modules.filter(
+          (module: any) => {
+            return this.program.modules_by_id[module].targets_positions_indexed[this.selected] === 2;
+          }
+        );
+        this.modules[group.id].status = ((this.modules[group.id].variative.length === 0) ? false : true );
+      }
       this.build = true;
-      console.log('build')
+      console.log('build');
     } else {
-      console.log('nea!')
+      console.log('nea!');
     }
 
   }
-  public tuggle(id: string, type: string){
-    console.log(this.modules.default.length, this.modules.variative.length)
-    if (type === 'default') {
-      this.modules.default.splice(this.modules.default.indexOf(id), 1);
-      this.modules.variative.push(id);
+  public toggle(id: string, group: string, type: string) {
+    if (this.modules[group].status) {
+      if (type === 'default') {
+        this.modules[group].default.splice(this.modules[group].default.indexOf(id), 1);
+        this.modules[group].variative.push(id);
+      }
+      if (type === 'variative') {
+        this.modules[group].variative.splice(this.modules[group].variative.indexOf(id), 1);
+        this.modules[group].default.push(id);
+      }
     }
-    if (type === 'variative') {
-      this.modules.variative.splice(this.modules.variative.indexOf(id), 1);
-      this.modules.default.push(id);
-    }
-     console.log(this.modules.default.length, this.modules.variative.length)
   }
 
   ngOnInit() {

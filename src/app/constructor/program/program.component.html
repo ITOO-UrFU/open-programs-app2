@@ -25,12 +25,12 @@
 			
 				<ul class="left">
 					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<li *ngIf = "modules.default.indexOf(module)!=-1" (click)="tuggle(module, 'default')">{{ program.modules_by_id[module].title  }}</li>
+					<li *ngIf = "modules[choiceGroup].default.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'default')">{{ program.modules_by_id[module].title  }}</li>
 					</ng-template>
 				</ul>
 				<ul class="right">
 					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<li *ngIf = "modules.variative.indexOf(module)!=-1" (click)="tuggle(module, 'variative')">{{ program.modules_by_id[module].title }}</li>
+					<li *ngIf = "modules[choiceGroup].variative.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'variative')">{{ program.modules_by_id[module].title }}</li>
 					</ng-template>
 				</ul>
 				
