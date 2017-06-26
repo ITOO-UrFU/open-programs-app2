@@ -23,9 +23,10 @@ export class ProgramComponent implements OnInit {
   public program: Program;
   public trajectory: Trajectory;
   public create: boolean;
-  // Временные переменные 
+  // Временные переменные
   public selected: string;
   public build = false;
+  public selected_modules;
 
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
@@ -61,6 +62,9 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (targets: any) => {
                     this.program.getTargets(targets);
+//
+                    this.selected = targets[0].id;
+//
                     this.buildTrajectory();
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
@@ -101,6 +105,18 @@ export class ProgramComponent implements OnInit {
   }
   public selectTarget(id) {
     this.selected = id;
+          this.selected_modules = this.program.modules.filter(
+        (module: any) => {
+           return module.targets_positions_indexed[this.selected] === 1;
+        }
+      ).map(
+        (module: any) => {
+           return module.id;
+        }
+      );
+
+
+
     this.trajectory.getTarget(id);
     this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
                                                                   program_id:  this.trajectory.program_id,
@@ -116,6 +132,16 @@ export class ProgramComponent implements OnInit {
   }
   public buildTrajectory(){
     if ( this.program.complete_load().indexOf(false) === -1) {
+      this.selected_modules = this.program.modules.filter(
+        (module: any) => {
+           return module.targets_positions_indexed[this.selected] === 1;
+        }
+      ).map(
+        (module: any) => {
+           return module.id;
+        }
+      );
+      console.log(this.selected_modules, this.program.modules)
       this.build = true;
       console.log('build')
     } else {
