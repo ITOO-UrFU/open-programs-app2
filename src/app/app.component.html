@@ -3,6 +3,8 @@
   <ng-template ngFor let-container [ngForOf]="menu" let-i="index">
     <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
   </ng-template>
+
+  <a href="" [routerLink]="['/', loggedMenu.slug]">{{ loggedMenu.title }}</a>
   <router-outlet></router-outlet> 
 </div>
 

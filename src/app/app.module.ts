@@ -23,6 +23,11 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { LoginService } from './login-page/login.service';
 import { RegisterService } from './register-page/register.service';
 
+//app config
+import { APP_CONFIG, AppConfig } from './app.config';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AuthGuard } from './auth.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +39,8 @@ import { RegisterService } from './register-page/register.service';
     ProgramDisciplinesConstructorComponent,
     KeysPipe,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +54,8 @@ import { RegisterService } from './register-page/register.service';
     GlobalService,
     LoginService,
     RegisterService,
+    { provide: APP_CONFIG, useValue: AppConfig },
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

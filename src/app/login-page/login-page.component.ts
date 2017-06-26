@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -10,6 +11,7 @@ export class LoginPageComponent implements OnInit {
   loginModel: any = {};
   constructor(
     private loginService: LoginService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -20,8 +22,7 @@ export class LoginPageComponent implements OnInit {
         this.loginService.login(this.loginModel.email, this.loginModel.password)
             .subscribe(
                 data => {
-                    // window.location.reload();
-                    // console.log(data);
+                    this.router.navigate(['admin']);
                 },
                 error => {
                     console.error('Ошибка при входе. Проверьте правильность введенных данных.');
