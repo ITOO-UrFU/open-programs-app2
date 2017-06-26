@@ -25,12 +25,12 @@
 			
 				<div class="left">
 					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<p *ngIf = "selected_modules.indexOf(module)!=-1">{{ program.modules_by_id[module].title  }}</p>
+					<p *ngIf = "modules.default.indexOf(module)!=-1">{{ program.modules_by_id[module].title  }}</p>
 					</ng-template>
 				</div>
 				<div class="right">
 					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<p *ngIf = "program.modules_by_id[module].targets_positions_indexed[selected]==2">{{ program.modules_by_id[module].title }}</p>
+					<p *ngIf = "modules.variative.indexOf(module)!=-1">{{ program.modules_by_id[module].title }}</p>
 					</ng-template>
 				</div>
 				

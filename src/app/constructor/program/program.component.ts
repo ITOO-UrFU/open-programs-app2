@@ -26,7 +26,10 @@ export class ProgramComponent implements OnInit {
   // Временные переменные
   public selected: string;
   public build = false;
-  public selected_modules;
+  public modules = {
+    default: [],
+    variative: []
+  };
 
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
@@ -105,9 +108,18 @@ export class ProgramComponent implements OnInit {
   }
   public selectTarget(id) {
     this.selected = id;
-          this.selected_modules = this.program.modules.filter(
+      this.modules.default = this.program.modules.filter(
         (module: any) => {
            return module.targets_positions_indexed[this.selected] === 1;
+        }
+      ).map(
+        (module: any) => {
+           return module.id;
+        }
+      );
+      this.modules.variative = this.program.modules.filter(
+        (module: any) => {
+           return module.targets_positions_indexed[this.selected] === 2;
         }
       ).map(
         (module: any) => {
@@ -132,7 +144,7 @@ export class ProgramComponent implements OnInit {
   }
   public buildTrajectory(){
     if ( this.program.complete_load().indexOf(false) === -1) {
-      this.selected_modules = this.program.modules.filter(
+      this.modules.default = this.program.modules.filter(
         (module: any) => {
            return module.targets_positions_indexed[this.selected] === 1;
         }
@@ -141,7 +153,16 @@ export class ProgramComponent implements OnInit {
            return module.id;
         }
       );
-      console.log(this.selected_modules, this.program.modules)
+      this.modules.variative = this.program.modules.filter(
+        (module: any) => {
+           return module.targets_positions_indexed[this.selected] === 2;
+        }
+      ).map(
+        (module: any) => {
+           return module.id;
+        }
+      );
+      console.log(this.modules.default, this.program.modules)
       this.build = true;
       console.log('build')
     } else {
