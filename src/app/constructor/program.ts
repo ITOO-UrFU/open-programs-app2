@@ -20,7 +20,9 @@ export class Program {
       choice_groups: false,
       targets: false,
     };
-    complete_load = [ this.complete.competences, this.complete.modules, this.complete.choice_groups, this.complete.targets ];
+    complete_load():boolean[] {
+      return [ this.complete.competences, this.complete.modules, this.complete.choice_groups, this.complete.targets ]
+    };
 
 
 

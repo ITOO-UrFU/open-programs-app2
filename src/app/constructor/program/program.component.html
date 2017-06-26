@@ -1,35 +1,27 @@
-<div *ngIf="trajectory?.target_id">
+<div class="header">
 	<h1>
 	{{ program?.title }}
-		<div *ngIf="path">
-		<small>{{ path.title }}</small>
-		</div>
 	</h1>
-
-	<div id="targets">
-		<h2>Цели (targets)</h2>
+</div>
+	<div *ngIf="program?.targets" id="targets">
 		<ul class="target_choices">
 			<ng-template ngFor let-target [ngForOf]="program?.targets">
-				<li class="target_choice" (click)="selectTarget(target?.id)">{{ target?.title }}</li>
+				<li (click)="selectTarget(target?.id)">{{ target?.title }}</li>
 			</ng-template>
 		</ul>
 	</div>
-		<div id="competences">
-			<h2>Компетенции (targets)</h2>
-			<ul>
-				<ng-template ngFor let-competence [ngForOf]="program?.competences">
-					<li>{{ competence?.title }}</li>
-				</ng-template>
-			</ul>
+	<div id="competences">
+		<ul>
+			<ng-template ngFor let-competence [ngForOf]="program?.competences">
+				<li>{{ competence?.title }} <em>Значение</em> %</li>
+			</ng-template>
+		</ul>
 	</div>
-	<h2>Группы выбора (choiceGroups)</h2>
-	<ul>
-	<ng-template ngFor let-choiceGroup [ngForOf]="program?.choice_groups">
-		<li>{{ choiceGroup?.title }}</li>
-	</ng-template>
-	</ul>
-	<h2>Модули (modules)</h2>
-	<div *ngIf="program?.targets">
+	<div class="build">
+		<div class="left">rr</div>
+		<div class="right">erter</div>
+	</div>
+	<!--<div *ngIf="program?.targets">
 		<h2> {{ program?.targets_by_id[trajectory.target_id]?.title }}</h2>
 		<ul>
 		<ng-template ngFor let-choiceGroup [ngForOf]="program?.targets_by_id[trajectory?.target_id]?.choice_groups" >
@@ -46,5 +38,5 @@
 			</ng-template>
 		</ng-template>
 		</ul>
-	</div>
-</div>
+	</div>-->
+

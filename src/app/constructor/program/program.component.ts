@@ -43,12 +43,12 @@ export class ProgramComponent implements OnInit {
                                                 program.get_choice_groups,
                                                 program.chief,
                                                 program.competences );
-
                     this.titleService.setTitle(this.program.title);
                     this.getTargets(program_id);
                     this.getCompetences(program_id);
                     this.getChoiceGroups(program_id);
                     this.getModules(program_id);
+                    this.buildTrajectory();
                   },
                   (error) => { console.log('Ошибка получения программы. API: /programs', error); }
                 );
@@ -58,6 +58,7 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (targets: any) => {
                     this.program.getTargets(targets);
+                    this.buildTrajectory();
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
                 );
@@ -68,6 +69,7 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (choiceGroups: any) => {
                     this.program.getChoicGroup(choiceGroups);
+                    this.buildTrajectory();
                   },
                   (error) => { console.error('Ошибка получения групп выбора. API: /get_program_choice_groups', error); }
                 );
@@ -78,6 +80,7 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (modules: any) => {
                     this.program.getModules(modules);
+                    this.buildTrajectory();
                   },
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
                 );
@@ -88,6 +91,7 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (competences: any) => {
                     this.program.getCompetences(competences);
+                    this.buildTrajectory();
                   },
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
@@ -106,6 +110,15 @@ export class ProgramComponent implements OnInit {
                         console.log(error);
                       });
   }
+  public buildTrajectory(){
+    if ( this.program.complete_load().indexOf(false) === -1) {
+      console.log('build')
+    } else {
+      console.log('nea!')
+    }
+
+  }
+
   ngOnInit() {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
