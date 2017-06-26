@@ -17,10 +17,25 @@
 			</ng-template>
 		</ul>
 	</div>
-	<div *ngIf="build" class="build">
-		<div class="left"></div>
-
-		<div class="right"></div>
+	<div *ngIf="build">
+		<h2> {{ program.targets_by_id[selected]?.title }}</h2>
+		<ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups" >
+		<div class="build">
+			<h3>{{ program.choice_groups_by_id[choiceGroup].title }}</h3>
+			
+				<div class="left">
+					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
+					<p *ngIf = "program.modules_by_id[module].targets_positions_indexed[selected]==1">{{ program.modules_by_id[module].title  }}</p>
+					</ng-template>
+				</div>
+				<div class="right">
+					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
+					<p *ngIf = "program.modules_by_id[module].targets_positions_indexed[selected]==2">{{ program.modules_by_id[module].title }}</p>
+					</ng-template>
+				</div>
+				
+		</div>
+		</ng-template>
 	</div>
 	<!--<div *ngIf="program?.targets">
 		<h2> {{ program?.targets_by_id[trajectory.target_id]?.title }}</h2>

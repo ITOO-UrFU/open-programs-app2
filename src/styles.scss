@@ -214,16 +214,16 @@ diagram {
 }
 .build{
     width: 100%;
-    div{ display: inline-block; }
+    div{ 
+        display: inline-block;
+        vertical-align: top;
+    }
     .left{
-        height: 100px;
         width: 45%;
         border: 1px solid green;
     }
     .right{
-        height: 100px;
         width: 45%;
-        
         border: 1px solid red;
     }
 }
