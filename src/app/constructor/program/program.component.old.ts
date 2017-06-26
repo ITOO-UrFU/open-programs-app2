@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
 import { ConstructorService } from '../constructor.service';
@@ -30,7 +29,6 @@ export class ProgramComponent implements OnInit {
                private service: ConstructorService,
                private data: DataService ) { }
 
-
   public getProgram( program_id: string ) {
     this.service.getElementsBySlug( 'programs', program_id )
                 .subscribe(
@@ -47,8 +45,6 @@ export class ProgramComponent implements OnInit {
                     this.titleService.setTitle(this.program.title);
                     this.getTargets(program_id);
                     this.getCompetences(program_id);
-                    this.getChoiceGroups(program_id);
-                    this.getModules(program_id);
                   },
                   (error) => { console.log('Ошибка получения программы. API: /programs', error); }
                 );
@@ -56,8 +52,13 @@ export class ProgramComponent implements OnInit {
   public getTargets( program_id: string ) {
     this.service.getElementsBySlug('get_program_targets', program_id)
                 .subscribe(
-                  (targets: any) => {
+                  (targets) => {
                     this.program.getTargets(targets);
+                    if (this.create) {
+                      this.trajectory.getTarget(this.program.targets[0].id);
+                      this.trajectory.getChoiceGroups(this.program.targets[0].choice_groups);
+                    }
+                    this.getChoiceGroups(program_id);
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
                 );
@@ -66,8 +67,18 @@ export class ProgramComponent implements OnInit {
   public getChoiceGroups( program_id: string ) {
     this.service.getElementsBySlug('get_program_choice_groups', program_id)
                 .subscribe(
-                  (choiceGroups: any) => {
+                  (choiceGroups) => {
                     this.program.getChoicGroup(choiceGroups);
+                    if (this.create) {
+                      let modulesList: any[];
+                      modulesList = this.trajectory.choice_groups.map(
+                        (choice_group_id) => {
+                          return this.program.choice_groups_by_id[choice_group_id].get_program_modules;
+                        }
+                      );
+                      this.trajectory.getModules(modulesList);
+                    }
+                    this.getModules(program_id);
                   },
                   (error) => { console.error('Ошибка получения групп выбора. API: /get_program_choice_groups', error); }
                 );
@@ -78,6 +89,20 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (modules: any) => {
                     this.program.getModules(modules);
+                    if (this.create) {
+                      let object = this.trajectory.modules_by_id_group;
+
+                      for (let key in object) {
+                        if (object.hasOwnProperty(key)) {
+                        object[key] = object[key].map( 
+                          (module_id) => {
+                            const _object = {};
+                            _object[module_id] = this.program.modules_by_id[module_id].targets_positions_indexed[this.trajectory.target_id];
+                            return _object;
+                          }
+                        );
+                      }};
+                    }
                   },
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
                 );
@@ -110,9 +135,14 @@ export class ProgramComponent implements OnInit {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
                                 (trajectory: any) => {
+
                                   this.trajectory = new Trajectory( trajectory.id, trajectory.program );
                                   this.trajectory.getTarget(trajectory.data.target_id);
+                                  console.log('Trajectory', this.trajectory);
                                   this.getProgram(trajectory.program);
+
+                                  if (trajectory.data) { this.create = false; }
+                                  else { this.create = true; }
                                 }
                               );
   }
