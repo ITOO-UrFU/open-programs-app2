@@ -23,16 +23,16 @@
 		<div class="build">
 			<h3>{{ program.choice_groups_by_id[choiceGroup].title }}</h3>
 			
-				<div class="left">
+				<ul class="left">
 					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<p *ngIf = "modules.default.indexOf(module)!=-1">{{ program.modules_by_id[module].title  }}</p>
+					<li *ngIf = "modules.default.indexOf(module)!=-1" (click)="tuggle(module, 'default')">{{ program.modules_by_id[module].title  }}</li>
 					</ng-template>
-				</div>
-				<div class="right">
+				</ul>
+				<ul class="right">
 					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<p *ngIf = "modules.variative.indexOf(module)!=-1">{{ program.modules_by_id[module].title }}</p>
+					<li *ngIf = "modules.variative.indexOf(module)!=-1" (click)="tuggle(module, 'variative')">{{ program.modules_by_id[module].title }}</li>
 					</ng-template>
-				</div>
+				</ul>
 				
 		</div>
 		</ng-template>

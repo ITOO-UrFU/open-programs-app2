@@ -170,6 +170,18 @@ export class ProgramComponent implements OnInit {
     }
 
   }
+  public tuggle(id: string, type: string){
+    console.log(this.modules.default.length, this.modules.variative.length)
+    if (type === 'default') {
+      this.modules.default.splice(this.modules.default.indexOf(id), 1);
+      this.modules.variative.push(id);
+    }
+    if (type === 'variative') {
+      this.modules.variative.splice(this.modules.variative.indexOf(id), 1);
+      this.modules.default.push(id);
+    }
+     console.log(this.modules.default.length, this.modules.variative.length)
+  }
 
   ngOnInit() {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
