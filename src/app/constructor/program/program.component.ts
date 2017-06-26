@@ -23,6 +23,9 @@ export class ProgramComponent implements OnInit {
   public program: Program;
   public trajectory: Trajectory;
   public create: boolean;
+  // Временные переменные 
+  public selected: string;
+  public build = false;
 
   constructor( private router: Router,
                private activateRoute: ActivatedRoute,
@@ -97,6 +100,7 @@ export class ProgramComponent implements OnInit {
                 );
   }
   public selectTarget(id) {
+    this.selected = id;
     this.trajectory.getTarget(id);
     this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
                                                                   program_id:  this.trajectory.program_id,
@@ -112,6 +116,7 @@ export class ProgramComponent implements OnInit {
   }
   public buildTrajectory(){
     if ( this.program.complete_load().indexOf(false) === -1) {
+      this.build = true;
       console.log('build')
     } else {
       console.log('nea!')

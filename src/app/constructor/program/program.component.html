@@ -6,7 +6,7 @@
 	<div *ngIf="program?.targets" id="targets">
 		<ul class="target_choices">
 			<ng-template ngFor let-target [ngForOf]="program?.targets">
-				<li (click)="selectTarget(target?.id)">{{ target?.title }}</li>
+				<li (click)="selectTarget(target?.id)" [class.selected]="selected == target?.id">{{ target?.title }}</li>
 			</ng-template>
 		</ul>
 	</div>
@@ -17,9 +17,10 @@
 			</ng-template>
 		</ul>
 	</div>
-	<div class="build">
-		<div class="left">rr</div>
-		<div class="right">erter</div>
+	<div *ngIf="build" class="build">
+		<div class="left"></div>
+
+		<div class="right"></div>
 	</div>
 	<!--<div *ngIf="program?.targets">
 		<h2> {{ program?.targets_by_id[trajectory.target_id]?.title }}</h2>

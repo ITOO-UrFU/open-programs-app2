@@ -172,6 +172,10 @@ diagram {
         text-align: center;
         float: left;
         width: 200px;
+        &.selected{
+            background-color: #656565;
+            color: white;
+        }
         &:hover{
             background-color: #565656;
             color: white;
