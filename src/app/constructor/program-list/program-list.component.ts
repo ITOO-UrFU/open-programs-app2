@@ -57,7 +57,6 @@ export class ProgramListComponent implements OnInit {
                     this.programList = data.map(
                       (program: any) => {
                         this.getTrajectories(program);
-                        console.log(program)
                         return new Program( program.id,
                                     program.title,
                                     program.training_direction,

@@ -161,16 +161,25 @@ diagram {
     padding: 0;
     overflow: hidden;
 
-    li.target_choice{
-        min-height: 3em;
+    li{
+        margin: 0 4px;
+        height: 5em;
+        padding: 18px 10px;
         display: inline;
-        padding: 5px;
-        background-color: #565656;
-        color: white;
+        background-color: #a6a6a6;
+        color: #222222; 
         cursor: pointer;
         text-align: center;
         float: left;
-        margin: 1em;
+        width: 200px;
+        &.selected{
+            background-color: #656565;
+            color: white;
+        }
+        &:hover{
+            background-color: #565656;
+            color: white;
+        }
     } 
 }
 
@@ -202,4 +211,23 @@ diagram {
     color: white;
     font-weight: 700;
     border-radius: 7px;
+}
+.build{
+    width: 100%;
+    ul{ 
+        display: inline-block;
+        vertical-align: top;
+    }
+    .left{
+        width: 45%;
+        border: 1px solid green;
+    }
+    .right{
+        width: 45%;
+        border: 1px solid red;
+    }
+}
+
+.alert{
+    color: red;
 }

@@ -40,6 +40,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+
     canActivate: [AuthGuard],
     component: ContainerComponent,
     children: [

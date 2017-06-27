@@ -7,13 +7,22 @@ export class Program {
     get_choice_groups: string[];
     chief: any;
     competences: any[];
+    competences_by_id = {};
     modules: Module[];
     modules_by_id = {};
     choice_groups: ChoicGroup[];
-    choice_group_by_id = {};
+    choice_groups_by_id = {};
     targets: Target[];
     targets_by_id = {};
-    competences_by_id = {};
+    complete = {
+      competences: false,
+      modules: false,
+      choice_groups: false,
+      targets: false,
+    };
+    complete_load():boolean[] {
+      return [ this.complete.competences, this.complete.modules, this.complete.choice_groups, this.complete.targets ]
+    };
 
 
 
@@ -48,6 +57,7 @@ export class Program {
                               module.targets_positions,
                               module.targets_positions_indexed );
           this.modules_by_id[module.id] = _module;
+          this.complete.modules = true;
           return _module;
         }
       );
@@ -62,7 +72,8 @@ export class Program {
                                                 choice_group.get_choice_group_type_display,
                                                 choice_group.get_program_modules,
                                                 choice_group.number );
-          this.choice_group_by_id[choice_group.id] = _choice_group;
+          this.choice_groups_by_id[choice_group.id] = _choice_group;
+          this.complete.choice_groups = true;
           return _choice_group;
         }
       );
@@ -76,6 +87,7 @@ export class Program {
                                       target.choice_groups,
                                       target.number );
           this.targets_by_id[target.id] = _target;
+          this.complete.targets = true;
           return _target;
         }
       );
@@ -87,6 +99,7 @@ export class Program {
                                               competence.title,
                                               competence.number );
           this.competences_by_id[competence.id] = _competence;
+          this.complete.competences = true;
           return _competence;
         }
       );
