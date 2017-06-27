@@ -21,16 +21,35 @@
 		<h2> {{ program.targets_by_id[selected]?.title }}</h2>
 		<ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups" >
 		<div class="build">
-			<h3>{{ program.choice_groups_by_id[choiceGroup].title }}</h3>
+			<h3>{{ program.choice_groups_by_id[choiceGroup].title }} {{ program.choice_groups_by_id[choiceGroup].labor }} з.е. выбрано: {{modules[choiceGroup].labor_selected}}</h3>
 			
 				<ul class="left">
 					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<li *ngIf = "modules[choiceGroup].default.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'default')">{{ program.modules_by_id[module].title  }}</li>
+					<li *ngIf = "modules[choiceGroup].default.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'default')">
+						<hr>
+						{{ program.modules_by_id[module].title  }} {{ program.modules_by_id[module].get_labor }} з.е.
+						<ol>
+						<ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines" >
+							<li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
+						</ng-template>
+						</ol>
+						<hr>
+					</li>
+			
 					</ng-template>
 				</ul>
 				<ul class="right">
 					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<li *ngIf = "modules[choiceGroup].variative.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'variative')">{{ program.modules_by_id[module].title }}</li>
+					<li *ngIf = "modules[choiceGroup].variative.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'variative')">
+						<hr>
+						{{ program.modules_by_id[module].title }} {{ program.modules_by_id[module].get_labor }} з.е.
+						<ol>
+						<ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines" >
+							<li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
+						</ng-template>
+						</ol>
+						<hr>
+					</li>
 					</ng-template>
 				</ul>
 				

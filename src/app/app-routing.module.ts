@@ -33,7 +33,7 @@ const routes: Routes = [
     children: []
   },
   {
-    path: 'open_programs',
+    path: 'admin',
     component: ContainerComponent,
     children: [
       {

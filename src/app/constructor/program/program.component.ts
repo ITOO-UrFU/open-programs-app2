@@ -119,6 +119,16 @@ export class ProgramComponent implements OnInit {
         }
       );
       this.modules[group.id].status = ((this.modules[group.id].variative.length === 0) ? false : true );
+      this.modules[group.id].labor = group.labor;
+      this.modules[group.id].labor_selected = this.modules[group.id].default.map(
+        (id: string) => {
+            return this.program.modules_by_id[id].get_labor || 0;
+        }
+      ).reduce (
+        (a: number, b: number) => {
+            return  a + b;
+        }, 0
+      );
     }
     console.log(this.modules);
 
@@ -152,6 +162,16 @@ export class ProgramComponent implements OnInit {
           }
         );
         this.modules[group.id].status = ((this.modules[group.id].variative.length === 0) ? false : true );
+        this.modules[group.id].labor = group.labor;
+        this.modules[group.id].labor_selected = this.modules[group.id].default.map(
+          (id: string) => {
+             return this.program.modules_by_id[id].get_labor || 0;
+          }
+        ).reduce (
+          (a: number, b: number) => {
+              return  a + b;
+          }, 0
+        );
       }
       this.build = true;
       console.log('build');
@@ -170,7 +190,17 @@ export class ProgramComponent implements OnInit {
         this.modules[group].variative.splice(this.modules[group].variative.indexOf(id), 1);
         this.modules[group].default.push(id);
       }
+      this.modules[group].labor_selected = this.modules[group].default.map(
+        (id: string) => {
+            return this.program.modules_by_id[id].get_labor || 0;
+        }
+      ).reduce (
+        (a: number, b: number) => {
+            return  a + b;
+        }, 0
+      );
     }
+     console.log(this.modules);
   }
 
   ngOnInit() {
