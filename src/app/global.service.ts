@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Http, Response } from '@angular/http';
 
 // Classes
-import { Program } from './program'
+import { Program } from './program';
 
 // Observable
 import { Observable } from 'rxjs/Observable';
@@ -80,7 +80,7 @@ export class GlobalService {
   }
 
 
-// Здесь начинаются POST запросы к серверу для отправки от клиентна
+// Здесь начинаются POST запросы к серверу для отправки от клиента
 
   public postResponse(api, value):any {
       let headers = new Headers({ 'Content-Type': 'application/json' });

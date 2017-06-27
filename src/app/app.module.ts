@@ -13,6 +13,21 @@ import { ProgramConstructorLiteComponent, KeysPipe, DiagramComponent } from './p
 import { ProgramDisciplinesConstructorComponent } from './program-disciplines-constructor/program-disciplines-constructor.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
+// custom module
+
+import { ConstructorModule } from './constructor/constructor.module';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
+
+// custom services
+import { LoginService } from './login-page/login.service';
+import { RegisterService } from './register-page/register.service';
+
+//app config
+import { APP_CONFIG, AppConfig } from './app.config';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AuthGuard } from './auth.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +37,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ProgramConstructorLiteComponent,
     DiagramComponent,
     ProgramDisciplinesConstructorComponent,
-    KeysPipe
+    KeysPipe,
+    LoginPageComponent,
+    RegisterPageComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
@@ -30,8 +48,15 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     HttpModule,
     AppRoutingModule,
     ChartsModule,
+    ConstructorModule,
   ],
-  providers: [GlobalService],
+  providers: [
+    GlobalService,
+    LoginService,
+    RegisterService,
+    { provide: APP_CONFIG, useValue: AppConfig },
+    AuthGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
