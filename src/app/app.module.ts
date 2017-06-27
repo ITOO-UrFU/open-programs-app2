@@ -13,6 +13,10 @@ import { ProgramConstructorLiteComponent, KeysPipe, DiagramComponent } from './p
 import { ProgramDisciplinesConstructorComponent } from './program-disciplines-constructor/program-disciplines-constructor.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
+// custom module
+
+import { ConstructorModule } from './constructor/constructor.module'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +34,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     HttpModule,
     AppRoutingModule,
     ChartsModule,
+    ConstructorModule,
   ],
   providers: [GlobalService],
   bootstrap: [AppComponent]

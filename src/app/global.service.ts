@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Http, Response } from '@angular/http';
 
 // Classes
-import { Program } from './program'
+import { Program } from './program';
 
 // Observable
 import { Observable } from 'rxjs/Observable';
