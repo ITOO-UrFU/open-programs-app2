@@ -15,7 +15,18 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 // custom module
 
-import { ConstructorModule } from './constructor/constructor.module'
+import { ConstructorModule } from './constructor/constructor.module';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
+
+// custom services
+import { LoginService } from './login-page/login.service';
+import { RegisterService } from './register-page/register.service';
+
+//app config
+import { APP_CONFIG, AppConfig } from './app.config';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -26,7 +37,10 @@ import { ConstructorModule } from './constructor/constructor.module'
     ProgramConstructorLiteComponent,
     DiagramComponent,
     ProgramDisciplinesConstructorComponent,
-    KeysPipe
+    KeysPipe,
+    LoginPageComponent,
+    RegisterPageComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +50,13 @@ import { ConstructorModule } from './constructor/constructor.module'
     ChartsModule,
     ConstructorModule,
   ],
-  providers: [GlobalService],
+  providers: [
+    GlobalService,
+    LoginService,
+    RegisterService,
+    { provide: APP_CONFIG, useValue: AppConfig },
+    AuthGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

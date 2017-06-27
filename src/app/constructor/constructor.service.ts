@@ -61,6 +61,5 @@ export class ConstructorService {
     console.log(errMsg);
     return Observable.throw(errMsg);
   }
-  
 
 }
