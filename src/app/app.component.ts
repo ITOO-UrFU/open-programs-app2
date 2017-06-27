@@ -20,14 +20,14 @@ export class AppComponent implements OnInit  {
   ){}
 
   ngOnInit(){
-    if(this.loginService.getCurrentUser()){
-      this.loggedMenu.title = 'Выход';
-      this.loggedMenu.slug = 'logout';
-    }
-    else{
+    // if(this.loginService.getCurrentUser()){
+    //   this.loggedMenu.title = 'Выход';
+    //   this.loggedMenu.slug = 'logout';
+    // }
+    // else{
       this.loggedMenu.title = 'Вход';
       this.loggedMenu.slug = 'login';
-    }
+    // }
     console.log('this.loggedMenu', this.loggedMenu);
     this.globalService.getByType('menu')
                       .subscribe(

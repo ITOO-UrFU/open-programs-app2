@@ -38,6 +38,21 @@ export class LoginService {
       return JSON.parse(localStorage.getItem('currentUser')); // || JSON.parse('{person: null}');
     }
 
+    refreshToken(){
+        let currentToken = '';
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.token) {
+            currentToken = currentUser.token;
+        }
+        return this.http.post(this.config.apiEndpoint + 'api-token-refresh/',
+                              { token: currentToken},
+                              this.jwt())
+            .map((response: Response) => {
+              const user = response.json();
+              console.log('Токен обновлен!');
+            });
+    }
+
     private jwt() {
         const headers = new Headers({ 'Content-Type': 'application/json'});
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));

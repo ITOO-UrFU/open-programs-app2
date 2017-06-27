@@ -28,4 +28,13 @@ export class LoginPageComponent implements OnInit {
                     console.error('Ошибка при входе. Проверьте правильность введенных данных.');
                 });
     }
+    refreshToken(){
+      this.loginService.refreshToken().subscribe(
+                data => {
+                    console.log('Новый токен пришел.', data);
+                },
+                error => {
+                    console.error('Ошибка при обновлении. Проверьте правильность введенных данных.');
+                });
+    }
 }
