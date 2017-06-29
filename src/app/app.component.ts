@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GlobalService } from './global.service';
-import { LoginService } from './login-page/login.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: '[app-root]',
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit  {
 
   constructor(
     private globalService: GlobalService,
-    private loginService: LoginService
+    private authService: AuthService
   ){}
 
   ngOnInit(){

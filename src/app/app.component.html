@@ -4,9 +4,6 @@
     <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
   </ng-template>
 
-  <a href="" [routerLink]="['/', loggedMenu.slug]">{{ loggedMenu.title }}</a>
+  <a href="" (click)="LoginLogout()">{{ loggedMenu.title }}</a>
   <router-outlet></router-outlet> 
 </div>
-
-
-

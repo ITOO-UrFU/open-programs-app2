@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from './login.service';
+import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
   loginModel: any = {};
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
     private router: Router,
   ) { }
 
@@ -19,7 +19,7 @@ export class LoginPageComponent implements OnInit {
 
     login() {
 
-        this.loginService.login(this.loginModel.email, this.loginModel.password)
+        this.authService.login(this.loginModel.email, this.loginModel.password)
             .subscribe(
                 data => {
                     this.router.navigate(['admin']);
@@ -29,9 +29,9 @@ export class LoginPageComponent implements OnInit {
                 });
     }
     refreshToken(){
-      this.loginService.refreshToken().subscribe(
+      this.authService.refreshToken().subscribe(
                 data => {
-                    console.log('Новый токен пришел.', data);
+                 //   console.log('Новый токен пришел.', data);
                 },
                 error => {
                     console.error('Ошибка при обновлении. Проверьте правильность введенных данных.');
