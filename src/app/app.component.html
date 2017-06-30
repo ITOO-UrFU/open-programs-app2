@@ -4,13 +4,6 @@
     <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
   </ng-template>
 
-
-    <ng-template [ngIf]="isLogged" [ngIfElse]='elseBlock'>
-       <a [routerLink]="['/', 'logout']">Выход</a>
-    </ng-template>
-    <ng-template #elseBlock>
-       <a [routerLink]="['/', 'login']">Вход</a>
-    </ng-template>
-
+  <a href="" (click)="LoginLogout()">{{ loggedMenu.title }}</a>
   <router-outlet></router-outlet> 
 </div>

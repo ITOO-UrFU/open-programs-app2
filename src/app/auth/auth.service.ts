@@ -24,12 +24,10 @@ export class AuthService {
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }
             console.log('Вы авторизованы!', user);
-            location.reload();
             });
     }
 
     logout() {
-        location.reload();
         localStorage.removeItem('currentUser');
         this.router.navigate(['login']);
     }

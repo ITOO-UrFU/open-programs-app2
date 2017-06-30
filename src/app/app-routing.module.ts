@@ -69,11 +69,6 @@ const routes: Routes = [
     component: LoginPageComponent,
   },
   {
-    path: 'logout',
-    component: LoginPageComponent,
-  },
-
-  {
     path: 'register',
     component: RegisterPageComponent,
   }
