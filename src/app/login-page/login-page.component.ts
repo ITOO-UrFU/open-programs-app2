@@ -20,19 +20,19 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   ) {
     this.subscription = activateRoute.url.subscribe(
       params => {
-        if(params[0].path === 'logout'){
+        if (params[0].path === 'logout') {
           authService.logout();
         }
-        if(params[0].path === 'login' && authService.getCurrentUser()){
+        if (params[0].path === 'login' && authService.getCurrentUser()) {
           this.router.navigate(['admin']);
         }
       },
-      error => this.errorMessage = "Неверный адрес!"
+      error => this.errorMessage = 'Неверный адрес!'
     );
   }
 
   ngOnDestroy() {
-    this.errorMessage = "";
+    this.errorMessage = '';
     this.subscription.unsubscribe();
   }
 

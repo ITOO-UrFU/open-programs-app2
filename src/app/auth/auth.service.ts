@@ -62,7 +62,7 @@ export class AuthService {
             });
     }
 
-    private jwt() {
+    jwt() {
         const headers = new Headers({ 'Content-Type': 'application/json'});
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
