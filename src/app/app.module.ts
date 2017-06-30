@@ -13,11 +13,11 @@ import { ProgramConstructorLiteComponent, KeysPipe, DiagramComponent } from './p
 import { ProgramDisciplinesConstructorComponent } from './program-disciplines-constructor/program-disciplines-constructor.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
-import { AuthModule } from './auth/auth.module';
-
 // custom module
-
+import { AuthModule } from './auth/auth.module';
 import { ConstructorModule } from './constructor/constructor.module';
+import { ProfileModule } from './profile/profile.module';
+ 
 import { RegisterPageComponent } from './register-page/register-page.component';
 
 // custom services
@@ -46,6 +46,7 @@ import { AuthGuard } from './auth.guard';
     ChartsModule,
     ConstructorModule,
     AuthModule,
+    ProfileModule,
   ],
   providers: [
     GlobalService,
