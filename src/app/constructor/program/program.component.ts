@@ -28,7 +28,10 @@ export class ProgramComponent implements OnInit {
   public build = false;
   public modules: object;
   public competences: object;
-  public steps: number;
+  public steps = {
+    modules: false,
+    disciplines: false
+  };
 
 
   constructor( private router: Router,
@@ -36,6 +39,7 @@ export class ProgramComponent implements OnInit {
                private titleService: Title,
                private service: ConstructorService,
                private data: DataService ) { }
+
 
 
   public getProgram( program_id: string ) {
@@ -109,6 +113,16 @@ export class ProgramComponent implements OnInit {
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
   }
+  public step() {
+    if ( this.steps.modules && this.steps.disciplines ) { 
+      this.steps.modules = !this.steps.modules;
+    } else {
+      this.steps.modules = !this.steps.modules;
+      this.steps.disciplines = !this.steps.disciplines
+    }
+  }
+
+
   private collectModules(): any {
     let obj = {}
     let array = [];
@@ -235,7 +249,6 @@ export class ProgramComponent implements OnInit {
                                     this.selected = trajectory.data.selected;
                                     this.modules = trajectory.data.modules;
                                   }
-                                  
                                   this.getProgram(trajectory.program);
                                 }
                               );

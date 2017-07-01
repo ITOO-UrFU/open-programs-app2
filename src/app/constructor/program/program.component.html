@@ -2,7 +2,12 @@
 	<h1>
 	{{ program?.title }}
 	</h1>
+<div>
+	<a (click)="step()">Назад</a>
+	<a (click)="step()">Start</a>
+	<a (click)="step()">Вперед</a>
 </div>
+<div *ngIf="steps.modules">
 	<div *ngIf="program?.targets" id="targets">
 		<ul class="target_choices">
 			<ng-template ngFor let-target [ngForOf]="program?.targets">
@@ -74,4 +79,8 @@
 		</ng-template>
 		</ul>
 	</div>-->
+</div>
 
+<div *ngIf="steps.disciplines">
+	Дисциплины
+</div>
