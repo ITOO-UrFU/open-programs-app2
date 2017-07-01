@@ -59,6 +59,7 @@ export class ProgramComponent implements OnInit {
                     this.getCompetences(program_id);
                     this.getChoiceGroups(program_id);
                     this.getModules(program_id);
+                    this.getVariants(program_id);
                     this.buildTrajectory();
                   },
                   (error) => { console.log('Ошибка получения программы. API: /programs', error); }
@@ -69,12 +70,9 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (targets: any) => {
                     this.program.getTargets(targets);
-
-                    if(!this.selected){
-                      console.log("из цели")
-                      this.selected = targets[0].id
+                    if ( !this.selected) {
+                      this.selected = targets[0].id;
                     };
-                    
                     this.buildTrajectory();
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
@@ -113,13 +111,25 @@ export class ProgramComponent implements OnInit {
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
   }
+  public getVariants( program_id: string ) {
+    this.service.getElementsBySlug('get_program_variants', program_id)
+                .subscribe(
+                  (variants: any) => {
+                    this.program.getVariants(variants);
+                    this.buildTrajectory();
+                  },
+                  (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_variants', error); }
+                );
+  }
   public step() {
     if ( this.steps.modules && this.steps.disciplines ) { 
       this.steps.modules = !this.steps.modules;
     } else {
       this.steps.modules = !this.steps.modules;
-      this.steps.disciplines = !this.steps.disciplines
+      this.steps.disciplines = !this.steps.disciplines;
     }
+    this.saveTrajectory();
+    console.log(this.program.modules)
   }
 
 
@@ -177,10 +187,12 @@ export class ProgramComponent implements OnInit {
   private saveTrajectory() {
     const data = {
       selected: {},
-      modules: {}
+      modules: {},
+      steps: {}
     };
     data.selected = this.selected;
     data.modules = this.modules;
+    data.steps = this.steps;
     this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
                                                                   program_id:  this.trajectory.program_id,
                                                                   data: data })
@@ -204,7 +216,7 @@ export class ProgramComponent implements OnInit {
     this.saveTrajectory();
   }
   public buildTrajectory() {
-    if ( this.program.complete_load().indexOf(false) === -1) {
+    if ( this.program.complete_load() ) {
       this.competences = this.collectCompetences(this.collectModules().array);
       if (!this.modules) {
         this.modules = this.collectModules().modules;
@@ -248,6 +260,7 @@ export class ProgramComponent implements OnInit {
                                   if ( trajectory.data ) {
                                     this.selected = trajectory.data.selected;
                                     this.modules = trajectory.data.modules;
+                                    this.steps = trajectory.data.steps;
                                   }
                                   this.getProgram(trajectory.program);
                                 }

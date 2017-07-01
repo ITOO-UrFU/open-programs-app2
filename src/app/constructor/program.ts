@@ -19,9 +19,16 @@ export class Program {
       modules: false,
       choice_groups: false,
       targets: false,
+      variants: false
     };
-    complete_load():boolean[] {
-      return [ this.complete.competences, this.complete.modules, this.complete.choice_groups, this.complete.targets ]
+    complete_load(): boolean {
+      let array = [];
+      for (let value in this.complete) {
+         array.push(this.complete[value])
+         console.log(array)
+        }
+
+      return  array.every(e => e === true);
     };
 
 
@@ -103,6 +110,13 @@ export class Program {
           return _competence;
         }
       );
+    }
+    getVariants(variants) {
+      console.log('variants', variants);
+      const _variants = variants;
+
+      this.complete.variants = true;
+      return _variants;
     }
 }
 
