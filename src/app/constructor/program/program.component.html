@@ -10,6 +10,7 @@
 			</ng-template>
 		</ul>
 	</div>
+	<div *ngIf="build">
 	<div id="competences">
 		<ul>
 			<ng-template ngFor let-competence [ngForOf]="program?.competences">
@@ -17,7 +18,6 @@
 			</ng-template>
 		</ul>
 	</div>
-	<div *ngIf="build">
 		<h2> {{ program.targets_by_id[selected]?.title }}</h2>
 		<ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups" >
 		<div class="build">

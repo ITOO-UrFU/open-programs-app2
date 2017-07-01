@@ -26,8 +26,8 @@ export class ProgramComponent implements OnInit {
   // Временные переменные
   public selected: string;
   public build = false;
-  public modules = {};
-  public competences = {};
+  public modules: object;
+  public competences: object;
   public steps: number;
 
 
@@ -67,9 +67,10 @@ export class ProgramComponent implements OnInit {
                     this.program.getTargets(targets);
 
                     if(!this.selected){
+                      console.log("из цели")
                       this.selected = targets[0].id
                     };
-
+                    
                     this.buildTrajectory();
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
@@ -191,14 +192,12 @@ export class ProgramComponent implements OnInit {
   public buildTrajectory() {
     if ( this.program.complete_load().indexOf(false) === -1) {
       this.competences = this.collectCompetences(this.collectModules().array);
-      if (this.modules) {
+      if (!this.modules) {
         this.modules = this.collectModules().modules;
       }
       this.build = true;
       this.saveTrajectory();
       console.log('build')
-      console.log(this.competences);
-      console.log(this.modules);
     } else {
       console.log('nea!');
     }
@@ -236,6 +235,7 @@ export class ProgramComponent implements OnInit {
                                     this.selected = trajectory.data.selected;
                                     this.modules = trajectory.data.modules;
                                   }
+                                  
                                   this.getProgram(trajectory.program);
                                 }
                               );
