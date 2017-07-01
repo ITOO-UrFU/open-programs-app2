@@ -10,6 +10,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+import { AuthService } from '../auth/auth.service';
+
 @Injectable()
 export class ConstructorService {
 
@@ -18,7 +20,7 @@ export class ConstructorService {
    // private serverURL = 'http://212.193.94.145:8080/api/v11/';
    private serverURL = 'http://10.16.208.154:8080/api/v11/';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authService: AuthService) { }
 
   // Получение элементов Открытой образовательной программы
 
@@ -42,8 +44,8 @@ export class ConstructorService {
 
   public postResponse(api, value): any {
       const headers = new Headers({ 'Content-Type': 'application/json' });
-      const options = new RequestOptions({ headers: headers });
-      return this.http.post(this.serverURL + api + '/', value, options)
+     // const options = new RequestOptions({ headers: headers });
+      return this.http.post(this.serverURL + api + '/', value, this.authService.jwt())
                     .map( res => res.json() )
                     .catch( this.handleError );
   }

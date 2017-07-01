@@ -89,12 +89,19 @@ export class GlobalService {
         console.log('POST to ' + api + ':', this.serverURL + api);
         console.log('value:', value)
       } 
-      return this.http.post(this.serverURL + api + '/', value, options)
+      return this.http.post(this.serverURL + api + '/', value, this.jwt())
                     .map(res => res.json())
                     .catch(this.handleError);
   }
 
-  
+  private jwt() {
+        const headers = new Headers({ 'Content-Type': 'application/json'});
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.token) {
+            headers.append('Authorization', currentUser.token);
+        }
+        return new RequestOptions({ headers: headers });
+    }
 
   //TODO: Разобраться что делает функция обработки ошибок
   private handleError (error: Response | any) {

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { APP_CONFIG, IAppConfig } from '../app.config';
 
 @Injectable()
-export class LoginService {
+export class AuthService {
 
   constructor(
     private http: Http,
@@ -24,18 +24,27 @@ export class LoginService {
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }
             console.log('Вы авторизованы!', user);
+            location.reload();
             });
     }
 
     logout() {
+        location.reload();
         localStorage.removeItem('currentUser');
-        // window.location.reload();
         this.router.navigate(['login']);
+    }
+
+    register(user: any) {
+        return this.http.post(this.config.apiEndpoint + 'register/', user, this.jwt())
+                          .map((response: Response) => {
+                            // response.json()
+                            console.log('Вы зарегистрированы!');
+                          });
     }
 
     getCurrentUser(){
       console.log(JSON.parse(localStorage.getItem('currentUser')));
-      return JSON.parse(localStorage.getItem('currentUser')); // || JSON.parse('{person: null}');
+      return JSON.parse(localStorage.getItem('currentUser'));
     }
 
     refreshToken(){
@@ -53,7 +62,7 @@ export class LoginService {
             });
     }
 
-    private jwt() {
+    jwt() {
         const headers = new Headers({ 'Content-Type': 'application/json'});
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GlobalService } from './global.service';
-import { LoginService } from './login-page/login.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: '[app-root]',
@@ -16,18 +16,11 @@ export class AppComponent implements OnInit  {
 
   constructor(
     private globalService: GlobalService,
-    private loginService: LoginService
+    private authService: AuthService
   ){}
 
   ngOnInit(){
-    // if(this.loginService.getCurrentUser()){
-    //   this.loggedMenu.title = 'Выход';
-    //   this.loggedMenu.slug = 'logout';
-    // }
-    // else{
-      this.loggedMenu.title = 'Вход';
-      this.loggedMenu.slug = 'login';
-    // }
+    this.isLogged = this.authService.getCurrentUser();
     console.log('this.loggedMenu', this.loggedMenu);
     this.globalService.getByType('menu')
                       .subscribe(

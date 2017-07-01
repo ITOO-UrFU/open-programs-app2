@@ -4,9 +4,13 @@
     <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
   </ng-template>
 
-  <a href="" [routerLink]="['/', loggedMenu.slug]">{{ loggedMenu.title }}</a>
+
+    <ng-template [ngIf]="isLogged" [ngIfElse]='elseBlock'>
+       <a [routerLink]="['/', 'logout']">Выход</a>
+    </ng-template>
+    <ng-template #elseBlock>
+       <a [routerLink]="['/', 'login']">Вход</a>
+    </ng-template>
+
   <router-outlet></router-outlet> 
 </div>
-
-
-

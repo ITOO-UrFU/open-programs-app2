@@ -1,40 +1,63 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from './login.service';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
   loginModel: any = {};
-  constructor(
-    private loginService: LoginService,
-    private router: Router,
-  ) { }
+  private subscription: Subscription;
+  public errorMessage: string;
 
-  ngOnInit() {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activateRoute: ActivatedRoute,
+  ) {
+    this.subscription = activateRoute.url.subscribe(
+      params => {
+        if (params[0].path === 'logout') {
+          authService.logout();
+        }
+        if (params[0].path === 'login' && authService.getCurrentUser()) {
+          this.router.navigate(['admin']);
+        }
+      },
+      error => this.errorMessage = 'Неверный адрес!'
+    );
   }
 
-    login() {
+  ngOnDestroy() {
+    this.errorMessage = '';
+    this.subscription.unsubscribe();
+  }
 
-        this.loginService.login(this.loginModel.email, this.loginModel.password)
-            .subscribe(
-                data => {
-                    this.router.navigate(['admin']);
-                },
-                error => {
-                    console.error('Ошибка при входе. Проверьте правильность введенных данных.');
-                });
-    }
-    refreshToken(){
-      this.loginService.refreshToken().subscribe(
-                data => {
-                    console.log('Новый токен пришел.', data);
-                },
-                error => {
-                    console.error('Ошибка при обновлении. Проверьте правильность введенных данных.');
-                });
-    }
+  ngOnInit() {
+
+  }
+
+  login() {
+
+    this.authService.login(this.loginModel.email, this.loginModel.password)
+      .subscribe(
+      data => {
+        this.router.navigate(['admin']);
+      },
+      error => {
+        console.error('Ошибка при входе. Проверьте правильность введенных данных.');
+      });
+  }
+  refreshToken() {
+    this.authService.refreshToken().subscribe(
+      data => {
+        //   console.log('Новый токен пришел.', data);
+      },
+      error => {
+        console.error('Ошибка при обновлении. Проверьте правильность введенных данных.');
+      });
+  }
 }
