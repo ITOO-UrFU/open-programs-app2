@@ -136,6 +136,7 @@ export class ProgramComponent implements OnInit {
         }, 0
       );
     }
+    console.log({ modules: obj, array: array })
     return { modules: obj, array: array };
   }
   private collectCompetences(array: any[]): any {
@@ -190,15 +191,17 @@ export class ProgramComponent implements OnInit {
   public buildTrajectory() {
     if ( this.program.complete_load().indexOf(false) === -1) {
       this.competences = this.collectCompetences(this.collectModules().array);
-      if (!this.modules) { this.modules = this.collectModules().modules;}
+      if (this.modules) {
+        this.modules = this.collectModules().modules;
+      }
       this.build = true;
       this.saveTrajectory();
       console.log('build')
       console.log(this.competences);
+      console.log(this.modules);
     } else {
       console.log('nea!');
     }
-    ( this.build ) ? console.log('build') : console.log('nea!');
   }
 
   public toggle(id: string, group: string, type: string) {
@@ -229,8 +232,10 @@ export class ProgramComponent implements OnInit {
                              .subscribe(
                                 (trajectory: any) => {
                                   this.trajectory = new Trajectory( trajectory.id, trajectory.program );
-                                  this.selected = trajectory.data.selected;
-                                  this.modules = trajectory.data.modules;
+                                  if ( trajectory.data ) {
+                                    this.selected = trajectory.data.selected;
+                                    this.modules = trajectory.data.modules;
+                                  }
                                   this.getProgram(trajectory.program);
                                 }
                               );
