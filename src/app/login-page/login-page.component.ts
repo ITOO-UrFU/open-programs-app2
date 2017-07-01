@@ -31,6 +31,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     );
   }
 
+
   ngOnDestroy() {
     this.errorMessage = '';
     this.subscription.unsubscribe();
@@ -52,12 +53,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       });
   }
   refreshToken() {
-    this.authService.refreshToken().subscribe(
-      data => {
-        //   console.log('Новый токен пришел.', data);
-      },
-      error => {
-        console.error('Ошибка при обновлении. Проверьте правильность введенных данных.');
-      });
+    this.authService.refreshToken()
   }
 }
