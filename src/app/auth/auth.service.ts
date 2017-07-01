@@ -36,7 +36,7 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('currentUser');
-        this.router.navigate(['login']);
+        location.href = "/";
     }
 
     register(user: any) {
