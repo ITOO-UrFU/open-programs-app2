@@ -9,11 +9,10 @@ export class AuthService {
   constructor(
     private http: Http,
     private router: Router,
-    
+
     @Inject(APP_CONFIG) private config: IAppConfig,
 
-    )
-  { }
+    ) { }
 
     login(email_or_username: string, password: string) {
         return this.http.post(this.config.apiEndpoint + 'api-token-auth/',
@@ -25,13 +24,8 @@ export class AuthService {
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }
             console.log('Вы авторизованы!');
-            if (user.person.user.is_staff) {
-                location.href = "admin";
-            }
-            else {
-                location.href = "/";
-            }
-            });
+            if (user.person.user.is_staff) { location.href = 'admin'; } else { location.href = '/'; }
+        });
     }
 
     logout() {
