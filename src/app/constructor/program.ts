@@ -14,6 +14,7 @@ export class Program {
     choice_groups_by_id = {};
     targets: Target[];
     targets_by_id = {};
+    variants = {};
     complete = {
       competences: false,
       modules: false,
@@ -27,7 +28,6 @@ export class Program {
          array.push(this.complete[value])
          console.log(array)
         }
-
       return  array.every(e => e === true);
     };
 
@@ -114,9 +114,8 @@ export class Program {
     getVariants(variants) {
       console.log('variants', variants);
       const _variants = variants;
-
+      this.variants = _variants;
       this.complete.variants = true;
-      return _variants;
     }
 }
 

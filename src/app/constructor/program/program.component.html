@@ -85,23 +85,29 @@
 		<h2> Дисциплины </h2>
 		
 		<div *ngIf="build" class="build">
-		<ol>
+		<table width="100%" border="1">
 		<ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups" >
 		
 				
-					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
+				<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
 					<ng-template [ngIf] = "modules[choiceGroup].default.indexOf(module)!=-1">
 						<ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines" >
-							<li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
+						<tr>
+							<td>
+								<em discipline [discipline]="discipline"></em>
+							</td>
+							<td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+								<!--<ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]" >
+								<span *ngIf="variant.technology">{{ variant.technology.title }}</span> | 
+								</ng-template>-->
+						</tr>
 						</ng-template>
-
 					</ng-template>
-			
-					</ng-template>
+				</ng-template>
 		
 				
 		</ng-template>
-		</ol>
+		</table>
 
 		</div>
 	</div>
