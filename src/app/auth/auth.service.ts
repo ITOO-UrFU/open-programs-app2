@@ -24,8 +24,13 @@ export class AuthService {
             if (user && user.token) {
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }
-            console.log('Вы авторизованы!', user);
-            location.reload();
+            console.log('Вы авторизованы!');
+            if (user.person.user.is_staff) {
+                location.href = "admin";
+            }
+            else {
+                location.href = "/";
+            }
             });
     }
 
