@@ -129,7 +129,7 @@ export class ProgramComponent implements OnInit {
       this.steps.disciplines = !this.steps.disciplines;
     }
     this.saveTrajectory();
-    console.log(this.program.modules)
+    console.log(this.program.modules);
   }
 
 

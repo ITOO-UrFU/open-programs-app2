@@ -96,10 +96,27 @@
 							<td>
 								<em discipline [discipline]="discipline"></em>
 							</td>
-							<td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
-								<!--<ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]" >
-								<span *ngIf="variant.technology">{{ variant.technology.title }}</span> | 
-								</ng-template>-->
+							<ng-template ngFor let-semester [ngForOf]="[1,2,3,4,5,6,7,8]" >
+							<td>
+								<ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]" >
+									<ng-template [ngIf]="variant.course"><div>Онлайн-курс</div></ng-template>
+									<ng-template [ngIf]="variant.parity == 1 || variant.parity == 2 ">
+									<div [ngSwitch]="semester%variant.parity">
+											<div *ngSwitchCase="0"> Осень </div>
+											<div *ngSwitchCase="1"> Весна </div>
+									</div>
+									</ng-template>
+									<ng-template [ngIf]="variant.parity == 3 ">
+										<div> Когда хошь </div>
+									</ng-template>
+									<ng-template [ngIf]="variant.semester">
+										<div [ngSwitch]="variant.semester.training_semester - semester">
+											<div *ngSwitchCase="0">{{variant.semester.term}} </div>
+										</div>
+									</ng-template>
+								</ng-template>
+							</td>
+							</ng-template>
 						</tr>
 						</ng-template>
 					</ng-template>
