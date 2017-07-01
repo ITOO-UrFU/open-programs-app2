@@ -27,6 +27,8 @@ export class ProgramComponent implements OnInit {
   public selected: string;
   public build = false;
   public modules = {};
+  public competences = {};
+  public steps: number;
 
 
   constructor( private router: Router,
@@ -63,9 +65,11 @@ export class ProgramComponent implements OnInit {
                 .subscribe(
                   (targets: any) => {
                     this.program.getTargets(targets);
-//
-                    this.selected = targets[0].id;
-//
+
+                    if(!this.selected){
+                      this.selected = targets[0].id
+                    };
+
                     this.buildTrajectory();
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
@@ -104,52 +108,97 @@ export class ProgramComponent implements OnInit {
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
   }
-
-  public buildTrajectory() {
-    if ( this.program.complete_load().indexOf(false) === -1) {
-      for (const group of this.program.choice_groups ){
-        this.modules[group.id] = {};
-        this.modules[group.id].default = group.get_program_modules.filter(
-          (module: any) => {
-            return this.program.modules_by_id[module].targets_positions_indexed[this.selected] === 1;
+  private collectModules(): any {
+    let obj = {}
+    let array = [];
+    for (const group of this.program.choice_groups ){
+      obj[group.id] = {};
+      obj[group.id].default = group.get_program_modules.filter(
+        (module_id: any) => {
+          return this.program.modules_by_id[module_id].targets_positions_indexed[this.selected] === 1;
+        }
+      );
+      array = array.concat(obj[group.id].default);
+      obj[group.id].variative = group.get_program_modules.filter(
+        (module_id: any) => {
+          return this.program.modules_by_id[module_id].targets_positions_indexed[this.selected] === 2;
+        }
+      );
+      obj[group.id].status = ((obj[group.id].variative.length === 0) ? false : true );
+      obj[group.id].labor = group.labor;
+      obj[group.id].labor_selected = obj[group.id].default.map(
+        (modules_id: string) => {
+            return this.program.modules_by_id[modules_id].get_labor || 0;
+        }
+      ).reduce (
+        (a: number, b: number) => {
+            return  a + b;
+        }, 0
+      );
+    }
+    return { modules: obj, array: array };
+  }
+  private collectCompetences(array: any[]): any {
+    let obj = {};
+    for (const competence of this.program.competences ){
+        obj[competence.id] = array.filter(
+          (module_id: any) => {
+            return this.program.modules_by_id[module_id].competence === competence.id;
           }
-        );
-        this.modules[group.id].variative = group.get_program_modules.filter(
-          (module: any) => {
-            return this.program.modules_by_id[module].targets_positions_indexed[this.selected] === 2;
-          }
-        );
-        this.modules[group.id].status = ((this.modules[group.id].variative.length === 0) ? false : true );
-        this.modules[group.id].labor = group.labor;
-        this.modules[group.id].labor_selected = this.modules[group.id].default.map(
-          (id: string) => {
-             return this.program.modules_by_id[id].get_labor || 0;
+        ).map(
+          (module_id: any) => {
+            return this.program.modules_by_id[module_id].get_labor;
           }
         ).reduce (
           (a: number, b: number) => {
               return  a + b;
-          }, 0 );
+          }, 0
+        );
       }
-      this.build = true;
-    }
-    ( this.build ) ? console.log('build') : console.log('nea!');
+      return obj;
   }
 
-  public selectTarget(id) {
-    this.selected = id;
-    this.buildTrajectory();
-
-    this.trajectory.getTarget(id);
+  private saveTrajectory() {
+    const data = {
+      selected: {},
+      modules: {}
+    };
+    data.selected = this.selected;
+    data.modules = this.modules;
     this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
                                                                   program_id:  this.trajectory.program_id,
-                                                                  data: this.trajectory })
-                             ).subscribe(
+                                                                  data: data })
+                             )
+                .subscribe(
                       (trajectory) => {
                          console.log('ok');
                       },
                       error => {
                         console.log(error);
                       });
+  }
+
+
+
+  public selectTarget(id) {
+    this.selected = id;
+    this.modules = this.collectModules().modules;
+    this.competences = this.collectCompetences(this.collectModules().array);
+
+    this.saveTrajectory();
+  }
+  public buildTrajectory() {
+    if ( this.program.complete_load().indexOf(false) === -1) {
+      this.competences = this.collectCompetences(this.collectModules().array);
+      if (!this.modules) { this.modules = this.collectModules().modules;}
+      this.build = true;
+      this.saveTrajectory();
+      console.log('build')
+      console.log(this.competences);
+    } else {
+      console.log('nea!');
+    }
+    ( this.build ) ? console.log('build') : console.log('nea!');
   }
 
   public toggle(id: string, group: string, type: string) {
@@ -172,7 +221,7 @@ export class ProgramComponent implements OnInit {
         }, 0
       );
     }
-     console.log(this.modules);
+    this.saveTrajectory();
   }
 
   ngOnInit() {
@@ -180,7 +229,8 @@ export class ProgramComponent implements OnInit {
                              .subscribe(
                                 (trajectory: any) => {
                                   this.trajectory = new Trajectory( trajectory.id, trajectory.program );
-                                  this.trajectory.getTarget(trajectory.data.target_id);
+                                  this.selected = trajectory.data.selected;
+                                  this.modules = trajectory.data.modules;
                                   this.getProgram(trajectory.program);
                                 }
                               );

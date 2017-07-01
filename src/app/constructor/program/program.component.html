@@ -13,7 +13,7 @@
 	<div id="competences">
 		<ul>
 			<ng-template ngFor let-competence [ngForOf]="program?.competences">
-				<li>{{ competence?.title }} <em>Значение</em> %</li>
+				<li>{{ competence?.title }} <em>{{ competences[competence.id] }}</em> %</li>
 			</ng-template>
 		</ul>
 	</div>
