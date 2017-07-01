@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { GlobalService } from './global.service';
 import { AuthService } from './auth/auth.service';
+import { LoginPageComponent } from './login-page/login-page.component';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/bufferTime';
 
 @Component({
   selector: '[app-root]',
@@ -16,16 +22,25 @@ export class AppComponent implements OnInit  {
 
   constructor(
     private globalService: GlobalService,
-    private authService: AuthService
-  ){}
+    private authService: AuthService,
+  ) {}
 
-  ngOnInit(){
+  activity() {
+        console.log(document);
+        Observable.fromEvent(document, 'click').bufferTime(60000).subscribe((clickBuffer) => {
+            if (clickBuffer.length > 0) {
+                this.authService.refreshToken();
+              }
+        });
+    }
+
+  ngOnInit() {
     this.isLogged = this.authService.getCurrentUser();
     console.log('this.loggedMenu', this.loggedMenu);
     this.globalService.getByType('menu')
                       .subscribe(
                         menu => {this.menu = menu; console.log(this.menu)},
                         error => console.log(error));
+    this.activity();
   }
-
 }

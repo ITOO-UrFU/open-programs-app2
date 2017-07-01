@@ -9,6 +9,7 @@ export class AuthService {
   constructor(
     private http: Http,
     private router: Router,
+    
     @Inject(APP_CONFIG) private config: IAppConfig,
 
     )
@@ -47,19 +48,19 @@ export class AuthService {
       return JSON.parse(localStorage.getItem('currentUser'));
     }
 
-    refreshToken(){
-        let currentToken = '';
+    refreshToken() {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
-            currentToken = currentUser.token;
+            this.http.post(
+                            this.config.apiEndpoint + 'api-token-refresh/',
+                            { token: currentUser.token},
+                            this.jwt())
+                     .map(
+                         (response: Response) => {
+                            const user = response.json();
+                         })
+                     .subscribe();
         }
-        return this.http.post(this.config.apiEndpoint + 'api-token-refresh/',
-                              { token: currentToken},
-                              this.jwt())
-            .map((response: Response) => {
-              const user = response.json();
-              console.log('Токен обновлен!');
-            });
     }
 
     jwt() {
