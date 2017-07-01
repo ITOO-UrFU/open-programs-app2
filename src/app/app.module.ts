@@ -14,18 +14,16 @@ import { ProgramDisciplinesConstructorComponent } from './program-disciplines-co
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 // custom module
-
+import { AuthModule } from './auth/auth.module';
 import { ConstructorModule } from './constructor/constructor.module';
-import { LoginPageComponent } from './login-page/login-page.component';
+import { ProfileModule } from './profile/profile.module';
+ 
 import { RegisterPageComponent } from './register-page/register-page.component';
 
 // custom services
-import { LoginService } from './login-page/login.service';
-import { RegisterService } from './register-page/register.service';
 
 //app config
 import { APP_CONFIG, AppConfig } from './app.config';
-import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AuthGuard } from './auth.guard';
 
 @NgModule({
@@ -38,9 +36,7 @@ import { AuthGuard } from './auth.guard';
     DiagramComponent,
     ProgramDisciplinesConstructorComponent,
     KeysPipe,
-    LoginPageComponent,
     RegisterPageComponent,
-    AdminPageComponent
   ],
   imports: [
     BrowserModule,
@@ -49,11 +45,11 @@ import { AuthGuard } from './auth.guard';
     AppRoutingModule,
     ChartsModule,
     ConstructorModule,
+    AuthModule,
+    ProfileModule,
   ],
   providers: [
     GlobalService,
-    LoginService,
-    RegisterService,
     { provide: APP_CONFIG, useValue: AppConfig },
     AuthGuard,
   ],

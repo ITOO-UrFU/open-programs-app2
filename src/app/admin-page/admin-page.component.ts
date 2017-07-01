@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login-page/login.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -8,12 +7,12 @@ import { LoginService } from '../login-page/login.service';
 })
 export class AdminPageComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   logout(){
-    this.loginService.logout();
+
   }
 }

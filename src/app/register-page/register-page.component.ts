@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from './register.service';
-import { LoginService } from '../login-page/login.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-register-page',
@@ -10,8 +9,7 @@ import { LoginService } from '../login-page/login.service';
 export class RegisterPageComponent implements OnInit {
   registerModel: any = {};
   constructor(
-    private registerService: RegisterService,
-    private loginService: LoginService,
+    private authService: AuthService,
   ) { }
 
 
@@ -19,10 +17,10 @@ export class RegisterPageComponent implements OnInit {
   }
 
   register() {
-    this.registerService.create(this.registerModel)
+    this.authService.register(this.registerModel)
         .subscribe(
             data => {
-              this.loginService.login(this.registerModel.email, this.registerModel.password1).subscribe(data => {}, error => {});
+              this.authService.login(this.registerModel.email, this.registerModel.password1).subscribe(data => {}, error => {});
             },
             error => {
                 console.error("Ошибка при регистрации. Проверьте правильность введенных данных.");

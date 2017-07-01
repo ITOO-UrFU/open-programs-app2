@@ -104,51 +104,9 @@ export class ProgramComponent implements OnInit {
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
   }
-  public selectTarget(id) {
-    this.selected = id;
-    for (const group of this.program.choice_groups ){
-      this.modules[group.id] = {};
-      this.modules[group.id].default = group.get_program_modules.filter(
-        (module: any) => {
-          return this.program.modules_by_id[module].targets_positions_indexed[this.selected] === 1;
-        }
-      );
-      this.modules[group.id].variative = group.get_program_modules.filter(
-        (module: any) => {
-          return this.program.modules_by_id[module].targets_positions_indexed[this.selected] === 2;
-        }
-      );
-      this.modules[group.id].status = ((this.modules[group.id].variative.length === 0) ? false : true );
-      this.modules[group.id].labor = group.labor;
-      this.modules[group.id].labor_selected = this.modules[group.id].default.map(
-        (id: string) => {
-            return this.program.modules_by_id[id].get_labor || 0;
-        }
-      ).reduce (
-        (a: number, b: number) => {
-            return  a + b;
-        }, 0
-      );
-    }
-    console.log(this.modules);
 
-
-    this.trajectory.getTarget(id);
-    this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
-                                                                  program_id:  this.trajectory.program_id,
-                                                                  data: this.trajectory })
-                             )
-                .subscribe(
-                      (trajectory) => {
-                         console.log('ok');
-                      },
-                      error => {
-                        console.log(error);
-                      });
-  }
   public buildTrajectory() {
     if ( this.program.complete_load().indexOf(false) === -1) {
-
       for (const group of this.program.choice_groups ){
         this.modules[group.id] = {};
         this.modules[group.id].default = group.get_program_modules.filter(
@@ -170,16 +128,30 @@ export class ProgramComponent implements OnInit {
         ).reduce (
           (a: number, b: number) => {
               return  a + b;
-          }, 0
-        );
+          }, 0 );
       }
       this.build = true;
-      console.log('build');
-    } else {
-      console.log('nea!');
     }
-
+    ( this.build ) ? console.log('build') : console.log('nea!');
   }
+
+  public selectTarget(id) {
+    this.selected = id;
+    this.buildTrajectory();
+
+    this.trajectory.getTarget(id);
+    this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
+                                                                  program_id:  this.trajectory.program_id,
+                                                                  data: this.trajectory })
+                             ).subscribe(
+                      (trajectory) => {
+                         console.log('ok');
+                      },
+                      error => {
+                        console.log(error);
+                      });
+  }
+
   public toggle(id: string, group: string, type: string) {
     if (this.modules[group].status) {
       if (type === 'default') {
@@ -191,8 +163,8 @@ export class ProgramComponent implements OnInit {
         this.modules[group].default.push(id);
       }
       this.modules[group].labor_selected = this.modules[group].default.map(
-        (id: string) => {
-            return this.program.modules_by_id[id].get_labor || 0;
+        (module_id: string) => {
+            return this.program.modules_by_id[module_id].get_labor || 0;
         }
       ).reduce (
         (a: number, b: number) => {
