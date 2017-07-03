@@ -7,7 +7,6 @@ import { ProgramDisciplinesConstructorComponent } from './program-disciplines-co
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
 
 import { AuthGuard } from './auth.guard';
 
@@ -77,11 +76,7 @@ const routes: Routes = [
     path: 'register',
     component: RegisterPageComponent,
   }
-  // {
-  //   path: 'admin',
-  //   canActivate: [AuthGuard],
-  //   component: AdminPageComponent,
-  // }
+
   // {
   //   path: ':id',
   //   component: ContainerComponent,
