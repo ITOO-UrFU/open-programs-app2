@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { APP_CONFIG, IAppConfig } from '../app.config';
+// import { ProfileService } from '../profile/profile.service';
 
 @Injectable()
 export class AuthService {
@@ -9,6 +10,7 @@ export class AuthService {
   constructor(
     private http: Http,
     private router: Router,
+    // private profileService: ProfileService,
 
     @Inject(APP_CONFIG) private config: IAppConfig,
 
@@ -22,9 +24,11 @@ export class AuthService {
             const user = response.json();
             if (user && user.token) {
                 localStorage.setItem('currentUser', JSON.stringify(user));
+                console.log(user);
+              //  this.profileService.setPerson(user.person);
             }
             console.log('Вы авторизованы!');
-            if (user.person.user.is_staff) { location.href = 'admin'; } else { location.href = '/'; }
+          //  if (user.person.user.is_staff) { location.href = 'profile'; } else { location.href = '/'; }
         });
     }
 
