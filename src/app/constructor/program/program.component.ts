@@ -32,6 +32,10 @@ export class ProgramComponent implements OnInit {
     modules: false,
     disciplines: false
   };
+  eduLength = [1,2,3,4,5,6,7,8];
+  public funcLength(val) {
+    this.eduLength = val
+  }
 
 
   constructor( private router: Router,
@@ -122,7 +126,7 @@ export class ProgramComponent implements OnInit {
                 );
   }
   public step() {
-    if ( this.steps.modules && this.steps.disciplines ) { 
+    if ( !this.steps.modules && !this.steps.disciplines ) { 
       this.steps.modules = !this.steps.modules;
     } else {
       this.steps.modules = !this.steps.modules;

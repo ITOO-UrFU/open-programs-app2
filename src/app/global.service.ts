@@ -87,10 +87,22 @@ export class GlobalService {
       let options = new RequestOptions({ headers: headers });
       if (this.consoleStatus) {
         console.log('POST to ' + api + ':', this.serverURL + api);
-        console.log('value:', value)
-      } 
+        console.log('value:', value);
+      }
       return this.http.post(this.serverURL + api + '/', value, this.jwt())
                     .map(res => res.json())
+                    .catch(this.handleError);
+  }
+
+    public postResponseAdmin(api, value): any {
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      if (this.consoleStatus) {
+        console.log('POST to ' + api + ':', this.serverURL + api);
+        console.log('value:', value);
+      }
+      return this.http.post(this.serverURL + api + '/', value, this.jwt())
+                    .map(res => res)
                     .catch(this.handleError);
   }
 

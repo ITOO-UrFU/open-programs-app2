@@ -122,6 +122,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                     )
   }
   public getDisciplinesVariants(slug:string){
+    console.log("test");
     this.globalService.getElementsBySlug('get_program_variants', slug)
                     .subscribe(
                       variants => {
@@ -131,20 +132,21 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       error => console.log(error)
                     )
   }
-  public addVariant(value){
-    console.log(value);
-       this.globalService.postResponse('create_variant', JSON.stringify(value))
+  public addVariant(value) {
+    console.log('addVariant', value);
+       this.globalService.postResponseAdmin('create_variant', JSON.stringify(value))
                       .subscribe(
                       status => {
+                        console.log("test");
                         this.getDisciplinesVariants(this.program_id)
-                       console.log(status) 
+                       console.log(status)
                       },
                       error => console.log(error)
                       )
   }
     public removeVariant(value){
     console.log(value);
-       this.globalService.postResponse('delete_variant', JSON.stringify(value))
+       this.globalService.postResponseAdmin('delete_variant', JSON.stringify(value))
                       .subscribe(
                       status => {
                         this.getDisciplinesVariants(this.program_id)

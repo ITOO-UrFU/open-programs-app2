@@ -83,6 +83,9 @@
 
 <div *ngIf="steps.disciplines">
 		<h2> Дисциплины </h2>
+		<a (click)="funcLength([1,2,3,4,5,6,7])">3.5 года</a>
+		<a (click)="funcLength([1,2,3,4,5,6,7,8])">4 года</a>
+		<a (click)="funcLength([1,2,3,4,5,6,7,8,9,10])">5 лет</a>
 		
 		<div *ngIf="build" class="build">
 		<table width="100%" border="1">
@@ -96,7 +99,7 @@
 							<td>
 								<em discipline [discipline]="discipline"></em>
 							</td>
-							<ng-template ngFor let-semester [ngForOf]="[1,2,3,4,5,6,7,8]" >
+							<ng-template ngFor let-semester [ngForOf]="eduLength" >
 							<td>
 								<ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]" >
 									<ng-template [ngIf]="variant.course"><div>Онлайн-курс</div></ng-template>
