@@ -29,7 +29,15 @@ export class AppComponent implements OnInit  {
         console.log(document);
         Observable.fromEvent(document, 'click').bufferTime(60000).subscribe((clickBuffer) => {
             if (clickBuffer.length > 0) {
-                this.authService.refreshToken();
+              console.log("Пытаемся обновить токен");
+                this.authService.refreshToken().subscribe(
+                         (data) => {
+                          console.log("токен обновлен");
+                         },
+                         (err) => {
+                           console.error("токен не обновлен");
+                           this.authService.logout();
+                          });
               }
         });
     }

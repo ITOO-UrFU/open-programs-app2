@@ -17,6 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'programs',
+    canActivate: [AuthGuard],
     children: [
       {
         path: ':id',

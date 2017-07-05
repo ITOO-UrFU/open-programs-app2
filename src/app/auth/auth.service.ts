@@ -53,17 +53,19 @@ export class AuthService {
 
     refreshToken() {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            this.http.post(
+        // тут придумать
+        // if (currentUser && currentUser.token) {
+
+        // }
+        return this.http.post(
                             this.config.apiEndpoint + 'api-token-refresh/',
                             { token: currentUser.token},
                             this.jwt())
                      .map(
                          (response: Response) => {
                             const user = response.json();
-                         })
-                     .subscribe();
-        }
+                     });
+       
     }
 
     jwt() {
