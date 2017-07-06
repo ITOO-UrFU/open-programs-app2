@@ -34,8 +34,9 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('currentUser');
-        this.router.navigate(['login']);
         location.reload();
+        // this.router.navigate(['login']);
+        // 
     }
 
     register(user: any) {
@@ -46,13 +47,15 @@ export class AuthService {
                           });
     }
 
-    getCurrentUser(){
-      console.log(JSON.parse(localStorage.getItem('currentUser')));
+    getCurrentUser() {
       return JSON.parse(localStorage.getItem('currentUser'));
     }
 
     refreshToken() {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const currentUser = this.getCurrentUser();
+        if (currentUser == null) {
+            currentUser.token = null;
+        }
         // тут придумать
         // if (currentUser && currentUser.token) {
 

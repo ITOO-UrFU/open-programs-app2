@@ -156,5 +156,4 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
