@@ -27,7 +27,7 @@
 		<ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups" >
 		<div class="build">
 			<h3>{{ program.choice_groups_by_id[choiceGroup].title }} {{ program.choice_groups_by_id[choiceGroup].labor }} з.е. выбрано: <span [class.alert]="modules[choiceGroup].labor_selected > modules[choiceGroup].labor">{{modules[choiceGroup].labor_selected}} з.е.</span></h3>
-			
+
 				<ul class="left">
 					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
 					<li *ngIf = "modules[choiceGroup].default.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'default')">
@@ -40,7 +40,7 @@
 						</ol>
 						<hr>
 					</li>
-			
+
 					</ng-template>
 				</ul>
 				<ul class="right">
@@ -57,7 +57,7 @@
 					</li>
 					</ng-template>
 				</ul>
-				
+
 		</div>
 		</ng-template>
 	</div>
@@ -86,12 +86,12 @@
 		<a (click)="funcLength([1,2,3,4,5,6,7])">3.5 года</a>
 		<a (click)="funcLength([1,2,3,4,5,6,7,8])">4 года</a>
 		<a (click)="funcLength([1,2,3,4,5,6,7,8,9,10])">5 лет</a>
-		
+
 		<div *ngIf="build" class="build">
 		<table width="100%" border="1">
 		<ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups" >
-		
-				
+
+
 				<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
 					<ng-template [ngIf] = "modules[choiceGroup].default.indexOf(module)!=-1">
 						<ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines" >
@@ -124,8 +124,6 @@
 						</ng-template>
 					</ng-template>
 				</ng-template>
-		
-				
 		</ng-template>
 		</table>
 
