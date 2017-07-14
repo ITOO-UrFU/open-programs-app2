@@ -31,6 +31,7 @@ export class AuthService {
             if (user && user.token) {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 console.log(user);
+                this.activity();
               //  this.profileService.setPerson(user.person);
             }
             console.log('Вы авторизованы!');
@@ -85,7 +86,7 @@ export class AuthService {
 
   activity() {
     this.refreshAction();
-    Observable.fromEvent(document, 'click').bufferTime(1000).subscribe((clickBuffer) => {
+    Observable.fromEvent(document, 'click').bufferTime(60000).subscribe((clickBuffer) => {
       console.log(idleCount);
         if (clickBuffer.length > 0) {
           idleCount = 0;
@@ -93,7 +94,7 @@ export class AuthService {
         } else {
           idleCount++;
         }
-        if (idleCount > 20) {
+        if (idleCount > 59) {
           this.logout();
         }
 
