@@ -5,6 +5,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ProfileComponent } from './profile/profile.component';
+
+import { ProfileService } from './profile.service';
+
+import { ProfileRoutingModule } from './profile-routing.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -12,11 +18,13 @@ import { RouterModule, Routes } from '@angular/router';
     BrowserModule,
     HttpModule,
     RouterModule,
+    ProfileRoutingModule,
   ],
   providers: [
+
   ],
   declarations: [
-
+    ProfileComponent,
   ]
 })
 export class ProfileModule { }

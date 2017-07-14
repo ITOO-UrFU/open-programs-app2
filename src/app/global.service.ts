@@ -9,6 +9,7 @@ import { Program } from './program';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { AuthService } from './auth/auth.service';
 
 @Injectable()
 export class GlobalService {
@@ -20,7 +21,11 @@ export class GlobalService {
   private result: any;
   private footer: any;
 
-  constructor (private http: Http) {};
+  constructor (
+    private http: Http,
+    private authService: AuthService,
+    ) {};
+
 
   getConsntainers(): any {
     if (!this.result){
@@ -108,9 +113,11 @@ export class GlobalService {
 
   private jwt() {
         const headers = new Headers({ 'Content-Type': 'application/json'});
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            headers.append('Authorization', currentUser.token);
+        const currentUser = this.authService.getCurrentUser();
+        if (currentUser != null) {
+          if (currentUser.token) {
+              headers.append('Authorization', currentUser.token);
+          }
         }
         return new RequestOptions({ headers: headers });
     }

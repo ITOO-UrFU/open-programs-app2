@@ -24,7 +24,7 @@ export class ConstructorService {
 
   // Получение элементов Открытой образовательной программы
 
-  public getElements(type:string):any {
+  public getElements(type: string):any {
     if (this.consoleStatus) {
       console.log("[URL API]: ", this.serverURL + type);
     }
@@ -33,7 +33,7 @@ export class ConstructorService {
                     .catch(this.handleError);
   }
 
-  public getElementsBySlug(type:string, slug:string):any {
+  public getElementsBySlug(type: string, slug: string):any {
     if (this.consoleStatus) {
       console.log("[URL API]: ", this.serverURL + type + '/' + slug);
     }

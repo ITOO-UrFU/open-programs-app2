@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 
 import { GlobalService } from '../global.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-program-disciplines-constructor',
@@ -48,7 +49,8 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
     constructor ( private router: Router,
                 private activateRoute: ActivatedRoute,
                 private titleService: Title,
-                private globalService: GlobalService
+                private globalService: GlobalService,
+                private authService: AuthService,
               ) { 
                     this.subscription = activateRoute.params.subscribe(
                       params => {
@@ -157,6 +159,6 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.activity();
   }
-
 }

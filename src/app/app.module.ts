@@ -21,6 +21,7 @@ import { ProfileModule } from './profile/profile.module';
 import { RegisterPageComponent } from './register-page/register-page.component';
 
 // custom services
+import { ProfileService } from './profile/profile.service';
 
 //app config
 import { APP_CONFIG, AppConfig } from './app.config';
@@ -52,6 +53,7 @@ import { AuthGuard } from './auth.guard';
     GlobalService,
     { provide: APP_CONFIG, useValue: AppConfig },
     AuthGuard,
+    ProfileService,
   ],
   bootstrap: [AppComponent]
 })
