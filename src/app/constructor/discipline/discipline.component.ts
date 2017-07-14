@@ -13,12 +13,20 @@ import { DataService } from '../data.service';
 })
 export class DisciplineComponent implements OnInit {
   @Input() public discipline;
+  @Input() public variants;
+
 
 
   constructor( private service: ConstructorService ) { }
 
-  ngOnInit() {
+  public select = false;
 
+  public toSelect(){
+    this.select = !this.select
+  }
+
+  ngOnInit() {
+    console.log('discipline', this.discipline, this.variants);
   }
 
 }

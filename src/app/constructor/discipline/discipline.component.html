@@ -1,2 +1,7 @@
-{{ discipline?.title }}
-
+<span (click)="toSelect()">{{ discipline?.title }}</span>
+<ul *ngIf="select && variants.length">
+  <ng-template ngFor let-variant [ngForOf]="variants" >
+    <li>{{variant.diagram.title}} {{ variant.technology.presence  }}</li>
+  </ng-template>
+</ul>
+<span *ngIf="select && !variants.length"> Нет вариантов реадизации</span>

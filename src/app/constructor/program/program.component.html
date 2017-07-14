@@ -105,27 +105,32 @@
 						<ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines" >
 						<tr>
 							<td>
-								<em discipline [discipline]="discipline"></em>
+								<em discipline [discipline]="discipline" [variants] = "program.variants[discipline.id]"></em>
 							</td>
 							<ng-template ngFor let-semester [ngForOf]="eduLength" >
 							<td [style.background-color]="discipline.default_semester[term] == semester ? 'rgba(128, 0, 0, 0.21)' : 'rgba(0, 128, 0, 0.21)'">
 								<ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]" >
-                  <div *ngIf="variant.semester?.term && discipline.default_semester[term] == semester && (variant.technology.presence == presence || variant.technology.presence == 'online') && variant.technology.technology_type == technology_type && variant.semester.term == term" style="background: gray; color: #FFFFFF">{{ variant.technology.title }}<br /> {{ variant.diagram.title }}</div>
-									<!--<ng-template [ngIf]="variant.course"><div>Онлайн-курс</div></ng-template>-->
-									<!--<ng-template [ngIf]="variant.parity == 1 || variant.parity == 2 ">-->
-									<!--<div [ngSwitch]="semester%variant.parity">-->
-											<!--<div *ngSwitchCase="0"> Осень </div>-->
-											<!--<div *ngSwitchCase="1"> Весна </div>-->
-									<!--</div>-->
-									<!--</ng-template>-->
-									<!--<ng-template [ngIf]="variant.parity == 3 ">-->
-										<!--<div> Когда хошь </div>-->
-									<!--</ng-template>-->
-									<!--<ng-template [ngIf]="variant.semester">-->
-										<!--<div [ngSwitch]="variant.semester.training_semester - semester">-->
-											<!--<div *ngSwitchCase="0">{{variant.semester.term}} </div>-->
-										<!--</div>-->
-									<!--</ng-template>-->
+                  <div *ngIf=" variant.semester?.term && discipline.default_semester[term] == semester
+                          && (variant.technology.presence == presence || variant.technology.presence == 'online')
+                          && variant.technology.technology_type == technology_type
+                          && variant.semester.term == term" style="background: gray; color: #FFFFFF">{{ variant.technology.title }}<br /> {{ variant.diagram.title }}</div>
+									<ng-template [ngIf]="variant.course"><div>Онлайн-курс</div></ng-template>
+									<ng-template [ngIf]="variant.parity == 1 || variant.parity == 2 ">
+                  <div *ngIf="semester%2==variant.parity">
+									<div [ngSwitch]="semester%2">
+											<div *ngSwitchCase="1">{{ variant.parity }} Осень </div>
+											<div *ngSwitchCase="0">{{ variant.parity }} Весна </div>
+									</div>
+                  </div>
+									</ng-template>
+									<ng-template [ngIf]="variant.parity == 3 ">
+										<div> Когда хошь </div>
+									</ng-template>
+									<ng-template [ngIf]="variant.semester">
+										<div [ngSwitch]="variant.semester.training_semester - semester">
+											<div *ngSwitchCase="0">{{variant.semester.term}} </div>
+										</div>
+									</ng-template>
 								</ng-template>
 							</td>
 							</ng-template>
