@@ -82,48 +82,49 @@ export class ProgramConstructorLiteComponent implements OnInit {
 
 /// 
 
-  callType(value){
-    let object = {};
+  callType(value) {
+    const object = {};
     value = value.split(',');
-    object["module_id"]=value[0];
-    object["target_id"]=value[1];
-    object["status"]=value[2];
+    object['module_id'] = value[0];
+    object['target_id'] = value[1];
+    object['status'] = value[2];
     this.globalService.postResponseAdmin('change_target_module', JSON.stringify(object))
                       .subscribe(
                       status => {
-                         console.log("status", status) 
+                         console.log('status', status);
                       },
                       error => console.log(error)
-                    )
+                    );
   }
-  postChoiceGroups(value){
+  postChoiceGroups(value) {
 
-    let object = {};
+    const object = {};
     value = value.split(',');
-    object["module_id"]=value[0];
-    object["choice_group_id"]=value[1];
-  
-    this.globalService.postResponseAdmin('change_choice_group' ,JSON.stringify(object))
+    object['module_id'] = value[0];
+    object['choice_group_id'] = value[1];
+
+    this.globalService.postResponseAdmin('change_choice_group', JSON.stringify(object))
                       .subscribe(
                       status => {
-                         console.log("status", status) 
+                         console.log('status', status);
                       },
                       error => console.log(error)
-                    )
+                    );
   }
     sortChoiceGroups(value) {
-      if (value === 'null') this.currentChoiceGroups = null
-      else { this.currentChoiceGroups = value; }
+      if (value === 'null') { this.currentChoiceGroups = null;
+      } else {
+        this.currentChoiceGroups = value; }
   }
-    sort(value){
-      if (this.currentChoiceGroups === 'all') return false
-      else if (this.currentChoiceGroups==value) return false
-      else if (this.currentChoiceGroups) return false
+    sort(value) {
+      if (this.currentChoiceGroups === 'all') { return false;
+      } else if (this.currentChoiceGroups === value) { return false;
+      }
       return true;
     }
       postCompetence(value) {
 
-    let object = {};
+    const object = {};
     value = value.split(',');
     object['module_id'] = value[0];
     object['competence_id'] = value[1];
@@ -131,7 +132,7 @@ export class ProgramConstructorLiteComponent implements OnInit {
     this.globalService.postResponseAdmin('change_competence', JSON.stringify(object))
                       .subscribe(
                       status => {
-                         console.log("status", status) 
+                         console.log('status', status)
                       },
                       error => console.log(error)
                     )
