@@ -24,8 +24,8 @@ export class ProfileService {
     return this.http.post(this.config.apiEndpoint + 'get_user/', {}, this.authService.jwt())
       .map(response => {
         const profile = response.json();
-        console.log("profile: ", response);
-      })
+        // console.log("profile: ", profile);
+      });
   }
 
   public setPerson(value: any) {
