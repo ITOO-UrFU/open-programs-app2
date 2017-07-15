@@ -24,7 +24,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
           authService.logout();
         }
         if (params[0].path === 'login' && authService.getCurrentUser()) {
-          this.router.navigate(['admin']);
+          this.router.navigate(['profile']);
         }
       },
       error => this.errorMessage = 'Неверный адрес!'
@@ -46,13 +46,12 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.authService.login(this.loginModel.email, this.loginModel.password)
       .subscribe(
       data => {
+        // console.log("Вы точно авторизованы");
         this.router.navigate(['profile']);
       },
       error => {
         console.error('Ошибка при входе. Проверьте правильность введенных данных.');
       });
   }
-  refreshToken() {
-    this.authService.refreshToken();
-  }
+
 }

@@ -18,6 +18,7 @@ const routes: Routes = [
   {
     path: 'programs',
     canActivate: [AuthGuard],
+    data: { roles: ['manager'] },
     children: [
       {
         path: ':id',
@@ -40,8 +41,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-
     canActivate: [AuthGuard],
+    data: { roles: ['manager'] },
     component: ContainerComponent,
     children: [
       {

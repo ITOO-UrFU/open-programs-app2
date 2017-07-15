@@ -1,7 +1,22 @@
-<p>
- PROFILE
-</p>
 
-<p>
-  {{person}}
-</p>
+<div *ngIf="person">
+<h3>Ваш профиль: </h3>
+
+<p>Имя пользователя: {{person.user.username || emptyFieldText}}</p>
+<p>Фамилия: {{person.last_name || emptyFieldText}}</p>
+<p>Имя: {{person.first_name || emptyFieldText}}</p>
+<p>Отчество: {{person.second_name || emptyFieldText}}</p>
+<p>Пол: {{person.sex}}</p>
+<p>Электронная почта: {{person.user.email}}</p>
+
+<h3>Ваши траектории: </h3>
+
+<div *ngIf="userTrajectories">
+
+<div *ngFor="let trajectory of userTrajectories">
+    <div [routerLink]="['/constructor/program/' + trajectory.id]">{{trajectory.id}}</div>
+</div>
+
+</div>
+
+</div>
