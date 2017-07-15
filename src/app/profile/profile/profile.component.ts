@@ -15,10 +15,12 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfile().subscribe(
       data => {
         console.log(data);
+        this.person = data;
+        console.log(this.person);
       },
       error => {
         console.error('Ошибка при получении данных пользователя');
-      });;
+      });
   }
 
 }
