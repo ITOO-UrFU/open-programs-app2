@@ -13,7 +13,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./program-disciplines-constructor.component.scss']
 })
 export class ProgramDisciplinesConstructorComponent implements OnInit {
-  
+
   private subscription: Subscription;
 
   public program_id: any;
@@ -25,12 +25,14 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   public diagrams: any;
   public technologies: any;
 
-  callType(value){
+  callType(discipline_id, term_title, target_value){
+    let value = {program_id: this.program_id, discipline_id: discipline_id, term_title: term_title, semester: target_value};
     console.log(value);
-    this.globalService.postResponse('change_discipline_semester', JSON.stringify(value))
+    this.globalService.postResponseAdmin('change_discipline_semester', JSON.stringify(value))
                       .subscribe(
                       status => {
-                         console.log(status) 
+                         console.log("!", status);
+                         this.getDisciplineId(discipline_id)
                       },
                       error => console.log(error)
                       )
@@ -40,7 +42,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
     this.globalService.postResponse('change_variant', JSON.stringify(value))
                       .subscribe(
                       status => {
-                         console.log(status) 
+                         console.log(status)
                       },
                       error => console.log(error)
                       )
@@ -51,7 +53,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                 private titleService: Title,
                 private globalService: GlobalService,
                 private authService: AuthService,
-              ) { 
+              ) {
                     this.subscription = activateRoute.params.subscribe(
                       params => {
                         this.program_id = params['id']
@@ -117,12 +119,24 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
     this.globalService.getElementsBySlug('get_program_disciplines', slug)
                     .subscribe(
                       disciplines => {
-                        this.disciplines = disciplines; 
+                        this.disciplines = disciplines;
                         console.log('Список дисциплин', disciplines)
                       },
                       error => console.log(error)
                     )
   }
+
+  public getDisciplineId(slug: string){
+    this.globalService.getElementsBySlug('disciplines', slug)
+      .subscribe(
+        discipline => {
+          this.disciplines[slug] = discipline;
+          console.log('Дисциплина', discipline)
+        },
+        error => console.log(error)
+      )
+  }
+
   public getDisciplinesVariants(slug: string){
     console.log("test");
     this.globalService.getElementsBySlug('get_program_variants', slug)

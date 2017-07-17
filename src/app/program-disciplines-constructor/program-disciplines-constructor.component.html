@@ -29,7 +29,7 @@
                     <td>
                         <p><span id="discipline-title">{{discipline?.title}}</span><br /><span id="subscription">{{discipline?.module}} <strong>{{ discipline?.module_uni_number }}</strong></span></p>
                     </td>
-                    <td><select (change)="callType({program_id:program.id,discipline_id:discipline.id,term_title:'3,5 года',semester:$event.target.value})">
+                    <td [style.background-color]="discipline.terms['3,5 года'] ? 'rgba(0, 128, 0, 0.21)' : 'rgba(128, 0, 0, 0.21)'"><select (change)="callType(discipline.id, '3,5 года', $event.target.value)">
           <option [disabled]="true" [selected]="discipline.terms['3,5 года']==0">Семестр</option>
           <option [selected]="discipline.terms['3,5 года']==1" [value] = "1">1 семестр</option>
           <option [selected]="discipline.terms['3,5 года']==2" [value] = "2">2 семестр</option>
@@ -39,7 +39,7 @@
           <option [selected]="discipline.terms['3,5 года']==6" [value] = "6">6 семестр</option>
           <option [selected]="discipline.terms['3,5 года']==7" [value] = "7">7 семестр</option>
 </select></td>
-                    <td><select (change)="callType({program_id:program?.id,discipline_id:discipline?.id,term_title:'4 года',semester:$event.target.value})">
+                    <td [style.background-color]="discipline.terms['4 года'] ? 'rgba(0, 128, 0, 0.21)' : 'rgba(128, 0, 0, 0.21)'"><select (change)="callType(discipline.id, '4 года', $event.target.value)">
           <option [disabled]="true" [selected]="discipline.terms['4 года']==0">Семестр</option>
           <option [selected]="discipline.terms['4 года']==1" [value] = "1">1 семестр</option>
           <option [selected]="discipline.terms['4 года']==2" [value] = "2">2 семестр</option>
@@ -50,7 +50,7 @@
           <option [selected]="discipline.terms['4 года']==7" [value] = "7">7 семестр</option>
           <option [selected]="discipline.terms['4 года']==8" [value] = "8">8 семестр</option>
 </select></td>
-                    <td><select (change)="callType({program_id:program?.id,discipline_id:discipline?.id,term_title:'5 лет',semester:$event.target.value})">
+                    <td [style.background-color]="discipline.terms['5 лет'] ? 'rgba(0, 128, 0, 0.21)' : 'rgba(128, 0, 0, 0.21)'"><select (change)="callType(discipline.id, '5 лет', $event.target.value)">
           <option [disabled]="true" [selected]="discipline.terms['5 лет']==0">Семестр</option>
           <option [selected]="discipline.terms['5 лет']==1" [value] = "1">1 семестр</option>
           <option [selected]="discipline.terms['5 лет']==2" [value] = "2">2 семестр</option>
@@ -65,7 +65,7 @@
 </select></td>
 
     <td *ngIf="program?.id && discipline && courses && diagrams && technologies"  class="variants-table" app-variants [program_id]="program?.id" [discipline]="discipline" [courses]="courses" [diagrams]="diagrams" [technologies]="technologies">
-      
+
     </td>
 
     </tr>

@@ -41,7 +41,7 @@
               </ng-template>
           </select>
         </td>
-        <td>          
+        <td>
           <select (change)="changeVariant({variant_id:variant.id,diagram_id:$event.target.value})">
             <option  [disabled]="true" >Выберите</option>
             <ng-template ngFor let-diagram [ngForOf]="diagrams">
@@ -58,5 +58,5 @@
       <p id="actions">
       <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,course_id:52})">Курс</a>
       <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,parity_id:3})">По четности</a>
-      <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,term_title:'4 года'})">Семестр</a><p>
+      <a (click)="addVariantSemester()">Семестр</a><p>
 </ng-template>
