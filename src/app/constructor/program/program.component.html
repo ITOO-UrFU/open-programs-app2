@@ -1,67 +1,65 @@
 <div class="header">
-	<h1>
-	{{ program?.title }}
-	</h1>
-<div>
-	<a (click)="step()">Назад</a>
-	<a (click)="step()">Start</a>
-	<a (click)="step()">Вперед</a>
-</div>
-<div *ngIf="steps.modules">
-	<div *ngIf="program?.targets" id="targets">
-		<ul class="target_choices">
-			<ng-template ngFor let-target [ngForOf]="program?.targets">
-				<li (click)="selectTarget(target?.id)" [class.selected]="selected == target?.id">{{ target?.title }}</li>
-			</ng-template>
-		</ul>
-	</div>
-	<div *ngIf="build">
-	<div id="competences">
-		<ul>
-			<ng-template ngFor let-competence [ngForOf]="program?.competences">
-				<li>{{ competence?.title }} <em>{{ competences[competence.id] }}</em> %</li>
-			</ng-template>
-		</ul>
-	</div>
-		<h2> {{ program.targets_by_id[selected]?.title }}</h2>
-		<ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups" >
-		<div class="build">
-			<h3>{{ program.choice_groups_by_id[choiceGroup].title }} {{ program.choice_groups_by_id[choiceGroup].labor }} з.е. выбрано: <span [class.alert]="modules[choiceGroup].labor_selected > modules[choiceGroup].labor">{{modules[choiceGroup].labor_selected}} з.е.</span></h3>
+    <h1>
+        {{ program?.title }}
+    </h1>
+    <div>
+        <a (click)="step()">Назад</a>
+        <a (click)="step()">Start</a>
+        <a (click)="step()">Вперед</a>
+    </div>
+    <div *ngIf="steps.modules">
+        <div *ngIf="program?.targets" id="targets">
+            <ul class="target_choices">
+                <ng-template ngFor let-target [ngForOf]="program?.targets">
+                    <li (click)="selectTarget(target?.id)" [class.selected]="selected == target?.id">{{ target?.title }}</li>
+                </ng-template>
+            </ul>
+        </div>
+        <div *ngIf="build">
+            <div id="competences">
+                <ul>
+                    <ng-template ngFor let-competence [ngForOf]="program?.competences">
+                        <li>{{ competence?.title }} <em>{{ competences[competence.id] }}</em> %</li>
+                    </ng-template>
+                </ul>
+            </div>
+            <h2> {{ program.targets_by_id[selected]?.title }}</h2>
+            <ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups">
+                <div class="build">
+                    <h3>{{ program.choice_groups_by_id[choiceGroup].title }} {{ program.choice_groups_by_id[choiceGroup].labor }} з.е. выбрано: <span [class.alert]="modules[choiceGroup].labor_selected > modules[choiceGroup].labor">{{modules[choiceGroup].labor_selected}} з.е.</span></h3>
 
-				<ul class="left">
-					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<li *ngIf = "modules[choiceGroup].default.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'default')">
-						<hr>
-						{{ program.modules_by_id[module].title  }} {{ program.modules_by_id[module].get_labor }} з.е.
-						<ol>
-						<ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines" >
-							<li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
-						</ng-template>
-						</ol>
-						<hr>
-					</li>
+                    <ul class="left">
+                        <ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
+                            <li *ngIf="modules[choiceGroup].default.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'default')">
+                                <hr> {{ program.modules_by_id[module].title }} {{ program.modules_by_id[module].get_labor }} з.е.
+                                <ol>
+                                    <ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines">
+                                        <li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
+                                    </ng-template>
+                                </ol>
+                                <hr>
+                            </li>
 
-					</ng-template>
-				</ul>
-				<ul class="right">
-					<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<li *ngIf = "modules[choiceGroup].variative.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'variative')">
-						<hr>
-						{{ program.modules_by_id[module].title }} {{ program.modules_by_id[module].get_labor }} з.е.
-						<ol>
-						<ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines" >
-							<li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
-						</ng-template>
-						</ol>
-						<hr>
-					</li>
-					</ng-template>
-				</ul>
+                        </ng-template>
+                    </ul>
+                    <ul class="right">
+                        <ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
+                            <li *ngIf="modules[choiceGroup].variative.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'variative')">
+                                <hr> {{ program.modules_by_id[module].title }} {{ program.modules_by_id[module].get_labor }} з.е.
+                                <ol>
+                                    <ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines">
+                                        <li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
+                                    </ng-template>
+                                </ol>
+                                <hr>
+                            </li>
+                        </ng-template>
+                    </ul>
 
-		</div>
-		</ng-template>
-	</div>
-	<!--<div *ngIf="program?.targets">
+                </div>
+            </ng-template>
+        </div>
+        <!--<div *ngIf="program?.targets">
 		<h2> {{ program?.targets_by_id[trajectory.target_id]?.title }}</h2>
 		<ul>
 		<ng-template ngFor let-choiceGroup [ngForOf]="program?.targets_by_id[trajectory?.target_id]?.choice_groups" >
@@ -79,68 +77,70 @@
 		</ng-template>
 		</ul>
 	</div>-->
-</div>
+    </div>
 
-<div *ngIf="steps.disciplines">
-		<h2> Дисциплины  {{ term }} {{presence}} {{ technology_type }}</h2>
-		<a (click)="funcLength([1,2,3,4,5,6,7], '3,5 года')">3,5 года</a>
-		<a (click)="funcLength([1,2,3,4,5,6,7,8] , '4 года')">4 года</a>
-		<a (click)="funcLength([1,2,3,4,5,6,7,8,9,10], '5 лет')">5 лет</a>
-<hr />
-  <a (click)="setPresence('o')">Очно</a>
-  <a (click)="setPresence('z')">Заочно</a>
-  <hr />
-  <a (click)="setTechnologyType('t')">Традиционно</a>
-  <a (click)="setTechnologyType('d')">Удаленно</a>
-
-
-
-		<div *ngIf="build" class="build">
-		<table width="100%" border="1">
-		<ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups" >
+    <div *ngIf="steps.disciplines">
+        <h2> Дисциплины {{ term }} {{presence}} {{ technology_type }}</h2>
+        <a (click)="funcLength([1,2,3,4,5,6,7], '3,5 года')">3,5 года</a>
+        <a (click)="funcLength([1,2,3,4,5,6,7,8] , '4 года')">4 года</a>
+        <a (click)="funcLength([1,2,3,4,5,6,7,8,9,10], '5 лет')">5 лет</a>
+        <hr />
+        <a (click)="setPresence('o')">Очно</a>
+        <a (click)="setPresence('z')">Заочно</a>
+        <hr />
+        <a (click)="setTechnologyType('t')">Традиционно</a>
+        <a (click)="setTechnologyType('d')">Удаленно</a>
 
 
-				<ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
-					<ng-template [ngIf] = "modules[choiceGroup].default.indexOf(module)!=-1">
-						<ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines" >
-						<tr>
-							<td>
-								<em discipline [discipline]="discipline" [variants] = "program.variants[discipline.id]"></em>
-							</td>
-							<ng-template ngFor let-semester [ngForOf]="eduLength" >
-							<td [style.background-color]="discipline.default_semester[term] == semester ? 'rgba(128, 0, 0, 0.21)' : 'rgba(0, 128, 0, 0.21)'">
-								<ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]" >
-                  <div *ngIf=" variant.semester?.term && discipline.default_semester[term] == semester
+
+        <div *ngIf="build" class="build">
+            <table width="100%" border="1">
+                <ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups">
+
+
+                    <ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
+                        <ng-template [ngIf]="modules[choiceGroup].default.indexOf(module)!=-1">
+                            <ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines">
+                                <tr>
+                                    <td>
+                                        <em discipline [discipline]="discipline" [variants]="program.variants[discipline.id]"></em>
+                                    </td>
+                                    <ng-template ngFor let-semester [ngForOf]="eduLength">
+                                        <td [style.background-color]="discipline.default_semester[term] == semester ? 'rgba(128, 0, 0, 0.21)' : 'rgba(0, 128, 0, 0.21)'">
+                                            <ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]">
+                                                <div *ngIf=" variant.semester?.term && discipline.default_semester[term] == semester
                           && (variant.technology.presence == presence || variant.technology.presence == 'online')
                           && variant.technology.technology_type == technology_type
                           && variant.semester.term == term" style="background: gray; color: #FFFFFF">{{ variant.technology.title }}<br /> {{ variant.diagram.title }}</div>
-									<ng-template [ngIf]="variant.course"><div>Онлайн-курс</div></ng-template>
-									<ng-template [ngIf]="variant.parity == 1 || variant.parity == 2 ">
-                  <div *ngIf="semester%2==variant.parity">
-									<div [ngSwitch]="semester%2">
-											<div *ngSwitchCase="1">{{ variant.parity }} Осень </div>
-											<div *ngSwitchCase="0">{{ variant.parity }} Весна </div>
-									</div>
-                  </div>
-									</ng-template>
-									<ng-template [ngIf]="variant.parity == 3 ">
-										<div> Когда хошь </div>
-									</ng-template>
-									<ng-template [ngIf]="variant.semester">
-										<div [ngSwitch]="variant.semester.training_semester - semester">
-											<div *ngSwitchCase="0">{{variant.semester.term}} </div>
-										</div>
-									</ng-template>
-								</ng-template>
-							</td>
-							</ng-template>
-						</tr>
-						</ng-template>
-					</ng-template>
-				</ng-template>
-		</ng-template>
-		</table>
+                                                <ng-template [ngIf]="variant.course">
+                                                    <div>Онлайн-курс</div>
+                                                </ng-template>
+                                                <ng-template [ngIf]="variant.parity == 1 || variant.parity == 2 ">
+                                                    <div *ngIf="semester%2==variant.parity">
+                                                        <div [ngSwitch]="semester%2">
+                                                            <div *ngSwitchCase="1">{{ variant.parity }} Осень </div>
+                                                            <div *ngSwitchCase="0">{{ variant.parity }} Весна </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template [ngIf]="variant.parity == 3 ">
+                                                    <div> Когда хошь </div>
+                                                </ng-template>
+                                                <ng-template [ngIf]="variant.semester">
+                                                    <div [ngSwitch]="variant.semester.training_semester - semester">
+                                                        <div *ngSwitchCase="0">{{variant.semester.term}} </div>
+                                                    </div>
+                                                </ng-template>
+                                            </ng-template>
+                                        </td>
+                                    </ng-template>
+                                </tr>
+                            </ng-template>
+                        </ng-template>
+                    </ng-template>
+                </ng-template>
+            </table>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
