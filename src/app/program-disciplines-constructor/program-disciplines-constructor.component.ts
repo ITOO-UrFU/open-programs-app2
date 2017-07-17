@@ -128,14 +128,14 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
 
   public getDisciplineId(slug: string){
     console.log("getDisciplineId", slug)
-    this.globalService.getElementsBySlug('disciplines', slug)
+    this.globalService.getElementsBySlug('get_program_discipline/' + this.program_id, slug)
       .subscribe(
         discipline => {
           const iter = this.disciplines.findIndex((element) => {return element.id === slug;} )
           console.log('Дисциплина', this.disciplines[iter])
           console.log('Дисциплина замена', discipline);
 
-          /// this.disciplines[iter] = discipline;
+           this.disciplines[iter] = discipline;
         },
         error => console.log(error)
       )
