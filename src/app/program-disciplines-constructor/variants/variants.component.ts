@@ -7,7 +7,6 @@ import { GlobalService } from '../../global.service';
   styleUrls: ['./variants.component.scss']
 })
 export class VariantsComponent implements OnInit {
- public variants: any;
 
  @Input()  courses: any = [];
  @Input()  diagrams: any;
@@ -15,6 +14,7 @@ export class VariantsComponent implements OnInit {
 
  @Input() program_id: any;
  @Input() discipline: any;
+ @Input() variants: any;
 
   constructor(
     private globalService: GlobalService,
@@ -79,7 +79,7 @@ export class VariantsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getDisciplinesVariants(this.discipline.id);
+    // this.getDisciplinesVariants(this.discipline.id);
   }
 
 }

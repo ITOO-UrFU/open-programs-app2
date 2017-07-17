@@ -64,7 +64,7 @@
           <option [selected]="discipline.terms['5 лет']==10" [value] = "10">10 семестр</option>
 </select></td>
 
-    <td *ngIf="program?.id && discipline && courses && diagrams && technologies"  class="variants-table" app-variants [program_id]="program?.id" [discipline]="discipline" [courses]="courses" [diagrams]="diagrams" [technologies]="technologies">
+    <td *ngIf="program?.id && discipline && courses && diagrams && technologies"  class="variants-table" app-variants [program_id]="program?.id" [discipline]="discipline" [courses]="courses" [diagrams]="diagrams" [technologies]="technologies" [variants]="variants[discipline.id]">
 
     </td>
 
