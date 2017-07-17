@@ -53,70 +53,10 @@
 </select></td>
   
 
-    <td *ngIf="variants" class="variants-table">
+    <td *ngIf="program?.id && discipline && courses && diagrams && technologies"  class="variants-table" app-variants [program_id]="program?.id" [discipline]="discipline" [courses]="courses" [diagrams]="diagrams" [technologies]="technologies">
       
-      <ng-template ngFor let-variant [ngForOf]="variants[discipline?.id]">
-      <tr class="variant">
-
-        <ng-template [ngIf]="variant.course">
-        <td class="variant-title"><p>Курс</p></td>
-        <td>
-          <select (change)="changeVariant({variant_id:variant.id,course_id:$event.target.value})">
-            <option  [disabled]="true">Выберите</option>
-            <ng-template ngFor let-course [ngForOf]="courses">
-                  <option [selected]="course.title==variant.course.title" [value]="course.id">{{course.title}}</option>
-            </ng-template>
-        </select>
-        </td>
-        </ng-template>
-        <ng-template [ngIf]="variant.parity">
-        <td class="variant-title"><p>По&nbsp;четности</p></td>
-        <td>
-          <select (change)="changeVariant({variant_id:variant.id,parity:$event.target.value})">
-            <option  [value]="1" [selected]="variant?.parity==1">Осенний семестр</option>
-            <option  [value]="2" [selected]="variant?.parity==2">Весенний семестр</option>
-            <option  [value]="3" [selected]="variant?.parity==3">Любой семестр</option>
-          </select>
-        </td>
-        </ng-template>
-        <ng-template [ngIf]="variant.semester">
-        <td class="variant-title"><p>Семестр</p></td>
-        <td>
-          <select (change)="changeVariant({variant_id:variant.id,semester:$event.target.value})">
-            <option *ngIf="discipline.terms['3,5 года']"  [value]="'3,5 года'" [selected]="variant?.semester.term=='3,5 года'">3,5 года</option>
-            <option *ngIf="discipline.terms['4 года']"  [value]="'4 года'" [selected]="variant?.semester.term=='4 года'">4 года</option>
-            <option *ngIf="discipline.terms['5 лет']"  [value]="'5 лет'" [selected]="variant?.semester.term=='5 лет'">5 лет</option>
-          </select>
-        </td>
-        </ng-template>
-                <td>
-          <select (change)="changeVariant({variant_id:variant.id,technology_id:$event.target.value})">
-              <option  [disabled]="true" >Выберите</option>
-              <ng-template ngFor let-technology  [ngForOf]="technologies">
-                    <option [selected]="technology.id==variant.technology?.id" [value]="technology.id">{{technology.title}}</option>
-              </ng-template>
-          </select>
-        </td>
-        <td>          
-          <select (change)="changeVariant({variant_id:variant.id,diagram_id:$event.target.value})">
-            <option  [disabled]="true" >Выберите</option>
-            <ng-template ngFor let-diagram [ngForOf]="diagrams">
-                  <option [selected]="diagram.id==variant.diagram?.id" [value]="diagram.id">{{diagram.title}}</option>
-            </ng-template>
-        </select>
-        </td>
-        <td (click)="removeVariant({variant_id:variant.id})">
-          [x]
-        </td>
-      </tr>
-      </ng-template>
-
-      <p id="actions">
-      <a (click)="addVariant({program_id:program.id,discipline_id:discipline.id,course_id:52})">Курс</a>
-      <a (click)="addVariant({program_id:program.id,discipline_id:discipline.id,parity_id:3})">По четности</a>
-      <a (click)="addVariant({program_id:program.id,discipline_id:discipline.id,term_title:'4 года'})">Семестр</a><p>
-
     </td>
+
     </tr>
     </ng-template>
   </tbody>

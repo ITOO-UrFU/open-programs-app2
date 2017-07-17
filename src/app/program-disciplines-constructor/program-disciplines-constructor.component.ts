@@ -60,7 +60,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                         this.getProgram(this.program_id);
                         this.getCourses();
                         this.getDiagrams();
-                        this.getTechnologies()
+                        this.getTechnologies();
                       },
                       error => this.errorMessage = "Неверный адрес!"
                     );
@@ -76,8 +76,8 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
     this.globalService.getElementsBySlug('programs', slug)
                     .subscribe(
                       program => {
-                        this.program = program; 
-                        console.log('Програма', program)
+                        this.program = program;
+                        console.log('Програма', program);
                       },
                       error => console.log(error)
                     )
@@ -86,8 +86,8 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
     this.globalService.getElements('courses')
                     .subscribe(
                       courses => {
-                        this.courses = courses; 
-                        console.log('Курсы', courses)
+                        this.courses = courses;
+                        console.log('Курсы', courses);
                       },
                       error => console.log(error)
                     )
@@ -96,8 +96,8 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
     this.globalService.getElements('diagrams')
                     .subscribe(
                       diagrams => {
-                        this.diagrams = diagrams; 
-                        console.log('Диаграммы', diagrams)
+                        this.diagrams = diagrams;
+                        console.log('Диаграммы', diagrams);
                       },
                       error => console.log(error)
                     )
@@ -106,14 +106,14 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
     this.globalService.getElements('technologies')
                     .subscribe(
                       technologies => {
-                        this.technologies = technologies; 
-                        console.log('Технологии', technologies)
+                        this.technologies = technologies;
+                        console.log('Технологии', technologies);
                       },
                       error => console.log(error)
                     )
   }
-  
-  public getDisciplines(slug:string){
+
+  public getDisciplines(slug: string){
     this.globalService.getElementsBySlug('get_program_disciplines', slug)
                     .subscribe(
                       disciplines => {
@@ -123,41 +123,17 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       error => console.log(error)
                     )
   }
-  public getDisciplinesVariants(slug:string){
+  public getDisciplinesVariants(slug: string){
     console.log("test");
     this.globalService.getElementsBySlug('get_program_variants', slug)
                     .subscribe(
                       variants => {
                         this.variants = variants;
-                        console.log('Список вариантов реализации дисциплин', variants)
+                        console.log('Список вариантов реализации дисциплин', variants);
                       },
                       error => console.log(error)
-                    )
+                    );
   }
-  public addVariant(value) {
-    console.log('addVariant', value);
-       this.globalService.postResponseAdmin('create_variant', JSON.stringify(value))
-                      .subscribe(
-                      status => {
-                        console.log("test");
-                        this.getDisciplinesVariants(this.program_id)
-                       console.log(status)
-                      },
-                      error => console.log(error)
-                      )
-  }
-    public removeVariant(value){
-    console.log(value);
-       this.globalService.postResponseAdmin('delete_variant', JSON.stringify(value))
-                      .subscribe(
-                      status => {
-                        this.getDisciplinesVariants(this.program_id)
-                       console.log(status) 
-                      },
-                      error => console.log(error)
-                      )
-  }
-
   ngOnInit() {
     this.authService.activity();
   }
