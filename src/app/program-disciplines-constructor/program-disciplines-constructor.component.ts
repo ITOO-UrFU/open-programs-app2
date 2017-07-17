@@ -32,7 +32,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       .subscribe(
                       status => {
                          console.log("!", status);
-                         this.getDisciplineId(discipline_id)
+                         this.getDisciplineId(discipline_id);
                       },
                       error => console.log(error)
                       )
@@ -127,11 +127,15 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   }
 
   public getDisciplineId(slug: string){
+    console.log("getDisciplineId", slug)
     this.globalService.getElementsBySlug('disciplines', slug)
       .subscribe(
         discipline => {
-          this.disciplines[slug] = discipline;
-          console.log('Дисциплина', discipline)
+          const iter = this.disciplines.findIndex((element) => {return element.id === slug;} )
+          console.log('Дисциплина', this.disciplines[iter])
+          console.log('Дисциплина замена', discipline);
+
+          /// this.disciplines[iter] = discipline;
         },
         error => console.log(error)
       )
