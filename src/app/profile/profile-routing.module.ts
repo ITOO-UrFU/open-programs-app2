@@ -9,6 +9,7 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [AuthGuard],
     component: ProfileComponent,
+    data: {roles: ['admin', 'manager', 'user']}
   },
 ];
 

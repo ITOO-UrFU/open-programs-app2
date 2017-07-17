@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -10,6 +11,7 @@ export class RegisterPageComponent implements OnInit {
   registerModel: any = {};
   constructor(
     private authService: AuthService,
+    private router: Router,
   ) { }
 
 
@@ -20,7 +22,9 @@ export class RegisterPageComponent implements OnInit {
     this.authService.register(this.registerModel)
         .subscribe(
             data => {
-              this.authService.login(this.registerModel.email, this.registerModel.password1).subscribe(data => {}, error => {});
+              this.authService.login(this.registerModel.email, this.registerModel.password1).subscribe(data => {
+                this.router.navigate(['profile']);
+              }, error => {});
             },
             error => {
                 console.error("Ошибка при регистрации. Проверьте правильность введенных данных.");

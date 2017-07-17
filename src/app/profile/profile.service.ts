@@ -24,14 +24,29 @@ export class ProfileService {
     return this.http.post(this.config.apiEndpoint + 'get_user/', {}, this.authService.jwt())
       .map(response => {
         const profile = response.json();
-        // console.log("profile: ", profile);
+        return profile;
+      })
+      .catch((error: any) => {
+        console.error("Error retrieving profile!");
+        return Observable.throw(error);
+      });
+  }
+
+  public GetUserTrajectories(){
+    return this.http.get(this.config.apiEndpoint + 'get_trajectories/', this.authService.jwt())
+      .map(response => {
+        const trajectories = response.json();
+        return trajectories;
+      })
+      .catch((error: any) => {
+        console.error("Error retrieving trajectories!");
+        return Observable.throw(error);
       });
   }
 
   public setPerson(value: any) {
     person = value;
     alert(person.sex);
-    //this.authService.jwt()
   }
 
 }
