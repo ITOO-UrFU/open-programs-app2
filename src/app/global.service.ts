@@ -13,7 +13,7 @@ import { AuthService } from './auth/auth.service';
 
 @Injectable()
 export class GlobalService {
-  public consoleStatus: boolean = false; // вынести настройки в отдельный файл
+  public consoleStatus: boolean = true; // вынести настройки в отдельный файл
 
   // private serverURL = 'http://212.193.94.145:8080/api/v11/';
   private serverURL = 'http://10.16.208.154:8080/api/v11/';

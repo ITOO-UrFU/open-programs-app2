@@ -26,6 +26,8 @@ import { ProfileService } from './profile/profile.service';
 //app config
 import { APP_CONFIG, AppConfig } from './app.config';
 import { AuthGuard } from './auth.guard';
+import { VariantsComponent } from './program-disciplines-constructor/variants/variants.component';
+import { VariantComponent } from './program-disciplines-constructor/variant/variant.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { AuthGuard } from './auth.guard';
     ProgramDisciplinesConstructorComponent,
     KeysPipe,
     RegisterPageComponent,
+    VariantsComponent,
+    VariantComponent,
   ],
   imports: [
     BrowserModule,
