@@ -58,5 +58,5 @@
       <p id="actions">
       <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,course_id:52})">Курс</a>
       <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,parity_id:3})">По четности</a>
-      <a (click)="addVariantSemester()">Семестр</a><p>
+      <a (click)="addVariantSemester()" [style.background-color] ="disabledButton() ? 'red' : 'green'">Семестр</a><p>
 </ng-template>

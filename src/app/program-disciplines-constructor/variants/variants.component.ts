@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GlobalService } from '../../global.service';
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: '[app-variants]',
@@ -42,18 +43,39 @@ export class VariantsComponent implements OnInit {
                       );
   }
 
-  public addVariantSemester() {
-    const value = { program_id:this.program_id, discipline_id:this.discipline.id, term_title:'4 года'}
-    console.log('addVariant', value);
-    this.globalService.postResponseAdmin('create_variant', JSON.stringify(value))
-      .subscribe(
-        status => {
+  public disabledButton(): boolean {
 
-          this.getDisciplinesVariants(this.discipline.id);
-          console.log(status);
-        },
-        error => console.log(error)
-      );
+    if (this.discipline.terms['3,5 года'] === 0 || this.discipline.terms['4 года'] === 0 || this.discipline.terms['5 лет'] === 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public addVariantSemester() {
+    let value: string;
+    if (this.discipline.terms['3,5 года'] > 0) {
+      value = '3,5 года';
+    } else  if (this.discipline.terms['4 года'] > 0) {
+      value = '4 года';
+    } else  if (this.discipline.terms['5 лет'] > 0) {
+      value = '5 лет';
+    }
+    if (value) {
+      const value = {program_id: this.program_id, discipline_id: this.discipline.id, term_title: '4 года'}
+      console.log('addVariant', value);
+      this.globalService.postResponseAdmin('create_variant', JSON.stringify(value))
+        .subscribe(
+          status => {
+
+            this.getDisciplinesVariants(this.discipline.id);
+            console.log(status);
+          },
+          error => console.log(error)
+        );
+    } else {
+      console.log('не указан симестр')
+    }
   }
 
     public removeVariant(value){
