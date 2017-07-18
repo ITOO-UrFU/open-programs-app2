@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GlobalService } from '../../global.service';
 import {forEach} from "@angular/router/src/utils/collection";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: '[app-variants]',
@@ -61,7 +62,7 @@ export class VariantsComponent implements OnInit {
     } else  if (this.discipline.terms['5 лет'] > 0) {
       value = '5 лет';
     }
-    if (value) {
+    if (value !== undefined) {
       const value = {program_id: this.program_id, discipline_id: this.discipline.id, term_title: '4 года'}
       console.log('addVariant', value);
       this.globalService.postResponseAdmin('create_variant', JSON.stringify(value))
@@ -74,7 +75,7 @@ export class VariantsComponent implements OnInit {
           error => console.log(error)
         );
     } else {
-      console.log('не указан симестр')
+      console.log('не указан симестр');
     }
   }
 
