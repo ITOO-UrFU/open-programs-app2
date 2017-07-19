@@ -14,7 +14,7 @@
 <div *ngIf="userTrajectories">
 
 <div *ngFor="let trajectory of userTrajectories">
-    <div [routerLink]="['/constructor/program/' + trajectory.id]">{{trajectory.id}}</div>
+    <a [routerLink]="['/constructor/program/' + trajectory.id]">Траектория программы: {{trajectory.title}}</a>
 </div>
 
 </div>

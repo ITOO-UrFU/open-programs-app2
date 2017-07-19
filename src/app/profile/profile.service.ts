@@ -44,6 +44,19 @@ export class ProfileService {
       });
   }
 
+  public GetPrograms() {
+    return this.http.get(this.config.apiEndpoint + 'programs/', this.authService.jwt())
+      .map(response => {
+        const programs = response.json();
+        return programs;
+      })
+      .catch((error: any) => {
+        console.error("Error retrieving programs!");
+        return Observable.throw(error);
+      });
+  }
+
+
   public setPerson(value: any) {
     person = value;
     alert(person.sex);

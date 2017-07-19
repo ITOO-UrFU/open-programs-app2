@@ -10,6 +10,7 @@ export class ProfileComponent implements OnInit {
   public person: any;
   public emptyFieldText = 'Не заполнено';
   public userTrajectories: any;
+  public allPrograms: any;
 
   constructor(private profileService: ProfileService) { }
 
@@ -30,14 +31,40 @@ export class ProfileComponent implements OnInit {
       });
 
     this.profileService.GetUserTrajectories().subscribe(
-      data => {
-        this.userTrajectories = data;
-        console.log("GetUserTrajectories: ", this.userTrajectories);
+      trajectory => {
+        this.userTrajectories = trajectory;
+
+        this.profileService.GetPrograms().subscribe(
+          programs => {
+            this.allPrograms = programs;
+
+            for (let trajectory of this.userTrajectories){
+              for (let program of this.allPrograms){
+                if (program.id == trajectory.program){
+                  trajectory.title = program.title;
+                }
+              }
+            }
+
+            console.log(this.userTrajectories);
+
+          },
+          programs_error => {
+            console.error('Ошибка при получении программ');
+          }
+        );
+
+
+
       },
-      error => {
+      trajectory_error => {
         console.error('Ошибка при получении траекторий');
       }
     );
+
+
+
+    
 
 
   }
