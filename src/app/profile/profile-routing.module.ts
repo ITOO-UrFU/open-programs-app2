@@ -12,8 +12,13 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [AuthGuard],
     component: ProfileComponent,
-    data: {roles: ['admin', 'manager', 'user']},
+    data: { roles: ['admin', 'manager', 'user'] },
     children: [
+      {
+        path: '',
+        redirectTo: 'trajectories',
+        pathMatch: 'full'
+      },
       {
         path: 'edit',
         component: ProfileEditComponent,

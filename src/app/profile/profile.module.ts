@@ -14,6 +14,7 @@ import { UserTrajectoriesListComponent } from './user-trajectories-list/user-tra
 import { UserTrajectoryBlockComponent } from './user-trajectory-block/user-trajectory-block.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
+import { ChangePasswordComponent } from './profile-edit/change-password/change-password.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { ProfileInfoComponent } from './profile-info/profile-info.component';
     UserTrajectoryBlockComponent,
     ProfileEditComponent,
     ProfileInfoComponent,
+    ChangePasswordComponent,
   ]
 })
 export class ProfileModule { }

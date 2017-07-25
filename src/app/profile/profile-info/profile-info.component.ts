@@ -17,7 +17,7 @@ export class ProfileInfoComponent implements OnInit {
     this.profileService.getProfile().subscribe(
       data => {
         this.person = data;
-        console.log(this.person);
+        // console.log(this.person);
         const sexNames = {
           U: 'Не выбрано',
           M: 'Мужской',

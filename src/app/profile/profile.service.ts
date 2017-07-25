@@ -44,9 +44,14 @@ export class ProfileService {
           });
     }
 
+  public changePassword(model: any){
+        return this.http.post(this.config.apiEndpoint + 'change_password/', model, this.authService.jwt());
+  }
+
   public removeTrajectory(id: string){
         return this.http.post(this.config.apiEndpoint + 'delete_trajectory/', {id: id}, this.authService.jwt());
   }
+
   public copyTrajectory(id: string){
         return this.http.post(this.config.apiEndpoint + 'copy_trajectory/', {id: id}, this.authService.jwt());
   }

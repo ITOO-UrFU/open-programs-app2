@@ -18,6 +18,7 @@ export class ProfileEditComponent implements OnInit {
       data => {
         this.person = data;
         this.model = this.person;
+        console.log(this.person);
       },
       error => {
         console.error('Ошибка при получении данных пользователя');
