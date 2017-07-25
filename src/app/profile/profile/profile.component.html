@@ -1,22 +1,15 @@
 
-<div *ngIf="person">
-<h3>Ваш профиль: </h3>
+<!--<button (click)="toggleEditing()">Редактировать</button>-->
+<!--<div [ngSwitch]="isEditing">-->
 
-<p>Имя пользователя: {{person.user.username || emptyFieldText}}</p>
-<p>Фамилия: {{person.last_name || emptyFieldText}}</p>
-<p>Имя: {{person.first_name || emptyFieldText}}</p>
-<p>Отчество: {{person.second_name || emptyFieldText}}</p>
-<p>Пол: {{person.sex}}</p>
-<p>Электронная почта: {{person.user.email}}</p>
+<!--<div app-profile-info></div>-->
 
-<h3>Ваши траектории: </h3>
+<!--<div *ngSwitchCase="true" app-profile-edit></div>-->
 
-<div *ngIf="userTrajectories">
+<!--<div app-user-trajectories-list></div>-->
+<div>
+<a [routerLink]="['edit']">Редактрировать профиль</a>
+<a [routerLink]="['trajectories']">Смотреть траектории</a>
 
-<div *ngFor="let trajectory of userTrajectories">
-    <a [routerLink]="['/constructor/program/' + trajectory.id]">Траектория программы: {{trajectory.title}}</a>
-</div>
-
-</div>
-
+<router-outlet></router-outlet> 
 </div>

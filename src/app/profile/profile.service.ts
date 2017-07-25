@@ -32,6 +32,25 @@ export class ProfileService {
       });
   }
 
+  public updateProfile(user: any) {
+        return this.http.post(this.config.apiEndpoint + 'change_person/', user, this.authService.jwt())
+          .map(response => {
+            const profile = response.json();
+            return profile;
+          })
+          .catch((error: any) => {
+            console.error("Error updating profile!");
+            return Observable.throw(error);
+          });
+    }
+
+  public removeTrajectory(id: string){
+        return this.http.post(this.config.apiEndpoint + 'delete_trajectory/', {id: id}, this.authService.jwt());
+  }
+  public copyTrajectory(id: string){
+        return this.http.post(this.config.apiEndpoint + 'copy_trajectory/', {id: id}, this.authService.jwt());
+  }
+
   public GetUserTrajectories(){
     return this.http.get(this.config.apiEndpoint + 'get_trajectories/', this.authService.jwt())
       .map(response => {
