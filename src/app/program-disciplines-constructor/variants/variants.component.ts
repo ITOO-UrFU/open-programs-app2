@@ -13,7 +13,6 @@ export class VariantsComponent implements OnInit {
  @Input()  courses: any = [];
  @Input()  diagrams: any;
  @Input()  technologies: any;
-
  @Input() program_id: any;
  @Input() discipline: any;
  @Input() variants: any;
@@ -54,21 +53,21 @@ export class VariantsComponent implements OnInit {
   }
 
   public addVariantSemester() {
-    let value: string;
+    let terms: string;
     if (this.discipline.terms['3,5 года'] > 0) {
-      value = '3,5 года';
+      terms = '3,5 года';
     } else  if (this.discipline.terms['4 года'] > 0) {
-      value = '4 года';
+      terms = '4 года';
     } else  if (this.discipline.terms['5 лет'] > 0) {
-      value = '5 лет';
+      terms = '5 лет';
     }
-    if (value !== undefined) {
-      const value = {program_id: this.program_id, discipline_id: this.discipline.id, term_title: '4 года'}
+    console.log(terms)
+    if (terms !== undefined) {
+      const value = {program_id: this.program_id, discipline_id: this.discipline.id, term_title: terms}
       console.log('addVariant', value);
       this.globalService.postResponseAdmin('create_variant', JSON.stringify(value))
         .subscribe(
           status => {
-
             this.getDisciplinesVariants(this.discipline.id);
             console.log(status);
           },
