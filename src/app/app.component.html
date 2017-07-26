@@ -1,16 +1,16 @@
 
-<div *ngIf="menu">
+<div *ngIf="menu" class="menu">
   <ng-template ngFor let-container [ngForOf]="menu" let-i="index">
     <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
   </ng-template>
 
 
     <ng-template [ngIf]="isLogged" [ngIfElse]='elseBlock'>
-       <a [routerLink]="['/', 'logout']">Выход</a>
+       <app-menu-profile-block></app-menu-profile-block>
     </ng-template>
     <ng-template #elseBlock>
        <a [routerLink]="['/', 'login']">Вход</a>
     </ng-template>
-
-  <router-outlet></router-outlet>
 </div>
+
+<router-outlet></router-outlet>

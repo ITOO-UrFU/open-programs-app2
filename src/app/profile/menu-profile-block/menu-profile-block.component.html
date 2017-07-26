@@ -1,0 +1,4 @@
+<a *ngIf="person" [routerLink]="['/', 'profile']"> 
+ <img src="{{person.profile_photo}}" alt="Фото профиля" class="profile-photo">
+ <span>{{person.first_name || 'Безымянный'}} {{person.last_name || 'человек'}}</span>
+</a>

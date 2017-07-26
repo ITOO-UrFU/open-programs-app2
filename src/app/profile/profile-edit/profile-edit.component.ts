@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProfileService } from '../profile.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -11,7 +12,10 @@ export class ProfileEditComponent implements OnInit {
   public person: any = {};
   public model: any = {};
 
-  constructor(private profileService: ProfileService) { }
+  constructor(
+    private profileService: ProfileService,
+    private authService: AuthService,
+    ) { }
 
   ngOnInit() {
     this.profileService.getProfile().subscribe(
@@ -29,6 +33,7 @@ export class ProfileEditComponent implements OnInit {
       .subscribe(
       data => {
         console.log('Профиль успешно обновлен');
+        this.authService.logged.emit(true);
       },
       error => {
         console.error('Ошибка при обновлении профиля пользователя');
