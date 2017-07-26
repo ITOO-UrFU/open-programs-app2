@@ -9,6 +9,7 @@ import { Program } from './program';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
 import { AuthService } from './auth/auth.service';
 
 @Injectable()
@@ -34,7 +35,7 @@ export class GlobalService {
       }
       this.result = this.http.get(this.serverURL + 'containers/?format=json')
                              .map(this.extractData)
-                             .catch(this.handleError);
+                             .catch(this.handleError.bind(this));
     }
     this.index++;
     console.log('getConsntainers(): Получент '+ this.index +'раз' )
@@ -44,19 +45,19 @@ export class GlobalService {
     if (!this.footer){
       this.footer = this.http.get(this.serverURL + 'containers_by_type/footer/?format=json')
                       .map(this.extractData)
-                      .catch(this.handleError);
+                      .catch(this.handleError.bind(this));
     }
     return this.footer;
   }
   getBySlug(slug:string):any {
     return this.http.get(this.serverURL + 'container_by_slug/'+ slug +'/?format=json')
                       .map(this.extractData)
-                      .catch(this.handleError);
+                      .catch(this.handleError.bind(this));
   }
   getByType(type:string):any {
     return this.http.get(this.serverURL + 'containers_by_type/' + type +'/?format=json')
                     .map(this.extractData)
-                    .catch(this.handleError);
+                    .catch(this.handleError.bind(this));
   }
 
 
@@ -72,7 +73,7 @@ export class GlobalService {
     }
     return this.http.get(this.serverURL + type +'/?format=json')
                     .map(res => res.json())
-                    .catch(this.handleError);
+                    .catch(this.handleError.bind(this));
   }
 
   getElementsBySlug(type:string, slug:string):any {
@@ -81,7 +82,7 @@ export class GlobalService {
     }
     return this.http.get(this.serverURL + type + '/' + slug + '/?format=json')
                     .map(res => res.json())
-                    .catch(this.handleError);
+                    .catch(this.handleError.bind(this));
   }
 
 
@@ -96,7 +97,7 @@ export class GlobalService {
       }
       return this.http.post(this.serverURL + api + '/', value, this.jwt())
                     .map(res => res.json())
-                    .catch(this.handleError);
+                    .catch(this.handleError.bind(this));
   }
 
     public postResponseAdmin(api, value): any {
@@ -108,7 +109,7 @@ export class GlobalService {
       }
       return this.http.post(this.serverURL + api + '/', value, this.jwt())
                     .map(res => res)
-                    .catch(this.handleError);
+                    .catch(this.handleError.bind(this));
   }
 
   private jwt() {
@@ -132,7 +133,7 @@ export class GlobalService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.log(errMsg);
+    console.log('ERROR:', errMsg);
     return Observable.throw(errMsg);
   }
 }

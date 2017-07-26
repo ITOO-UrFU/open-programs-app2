@@ -25,27 +25,30 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   public diagrams: any;
   public technologies: any;
 
-  callType(discipline_id, term_title, target_value){
-    let value = {program_id: this.program_id, discipline_id: discipline_id, term_title: term_title, semester: target_value};
+  callType(discipline_id, term_title, target_value) {
+    const value = {program_id: this.program_id, discipline_id: discipline_id, term_title: term_title, semester: target_value};
     console.log(value);
     this.globalService.postResponseAdmin('change_discipline_semester', JSON.stringify(value))
                       .subscribe(
                       status => {
-                         console.log("!", status);
                          this.getDisciplineId(discipline_id);
                       },
-                      error => console.log(error)
-                      )
+                      error => {
+                        if (error.indexOf('401') !== -1) { this.authService.logout(); }
+                      }
+                      );
   }
-  changeVariant(value){
+  changeVariant(value) {
     console.log(value);
     this.globalService.postResponse('change_variant', JSON.stringify(value))
                       .subscribe(
                       status => {
-                         console.log(status)
+                         console.log(status);
                       },
-                      error => console.log(error)
-                      )
+                     error => {
+                        if (error.indexOf('401') !== -1) { this.authService.logout(); }
+                      }
+                      );
   }
 
     constructor ( private router: Router,
@@ -56,7 +59,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
               ) {
                     this.subscription = activateRoute.params.subscribe(
                       params => {
-                        this.program_id = params['id']
+                        this.program_id = params['id'];
                         this.getDisciplinesVariants(this.program_id);
                         this.getDisciplines(this.program_id);
                         this.getProgram(this.program_id);
@@ -64,17 +67,17 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                         this.getDiagrams();
                         this.getTechnologies();
                       },
-                      error => this.errorMessage = "Неверный адрес!"
+                      error => this.errorMessage = 'Неверный адрес!'
                     );
                     router.events.subscribe(
                       (val) => {
-                        this.errorMessage = "";
+                        this.errorMessage = '';
                       }
                     );
                   }
 
 
-  public getProgram(slug:string){
+  public getProgram(slug: string) {
     this.globalService.getElementsBySlug('programs', slug)
                     .subscribe(
                       program => {
@@ -82,9 +85,9 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                         console.log('Програма', program);
                       },
                       error => console.log(error)
-                    )
+                    );
   }
-    public getCourses(){
+    public getCourses() {
     this.globalService.getElements('courses')
                     .subscribe(
                       courses => {
@@ -92,9 +95,9 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                         console.log('Курсы', courses);
                       },
                       error => console.log(error)
-                    )
+                    );
   }
-  public getDiagrams(){
+  public getDiagrams() {
     this.globalService.getElements('diagrams')
                     .subscribe(
                       diagrams => {
@@ -102,9 +105,9 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                         console.log('Диаграммы', diagrams);
                       },
                       error => console.log(error)
-                    )
+                    );
   }
-    public getTechnologies(){
+    public getTechnologies() {
     this.globalService.getElements('technologies')
                     .subscribe(
                       technologies => {
@@ -112,37 +115,37 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                         console.log('Технологии', technologies);
                       },
                       error => console.log(error)
-                    )
+                    );
   }
 
-  public getDisciplines(slug: string){
+  public getDisciplines(slug: string) {
     this.globalService.getElementsBySlug('get_program_disciplines', slug)
                     .subscribe(
                       disciplines => {
                         this.disciplines = disciplines;
-                        console.log('Список дисциплин', disciplines)
+                        console.log('Список дисциплин', disciplines);
                       },
                       error => console.log(error)
-                    )
+                    );
   }
 
-  public getDisciplineId(slug: string){
-    console.log("getDisciplineId", slug)
+  public getDisciplineId(slug: string) {
+    console.log('getDisciplineId', slug);
     this.globalService.getElementsBySlug('get_program_discipline/' + this.program_id, slug)
       .subscribe(
         discipline => {
-          const iter = this.disciplines.findIndex((element) => {return element.id === slug;} )
-          console.log('Дисциплина', this.disciplines[iter])
+          const iter = this.disciplines.findIndex((element) => { return element.id === slug; } );
+          console.log('Дисциплина', this.disciplines[iter]);
           console.log('Дисциплина замена', discipline);
 
            this.disciplines[iter] = discipline;
         },
         error => console.log(error)
-      )
+      );
   }
 
-  public getDisciplinesVariants(slug: string){
-    console.log("test");
+  public getDisciplinesVariants(slug: string) {
+    console.log('test');
     this.globalService.getElementsBySlug('get_program_variants', slug)
                     .subscribe(
                       variants => {
