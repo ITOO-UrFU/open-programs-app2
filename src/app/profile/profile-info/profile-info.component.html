@@ -1,0 +1,9 @@
+<div *ngIf="person" [ngStyle]="{ 'background-color': 'floralwhite' }">
+  <h3>Ваш профиль: </h3>
+  <p>Имя пользователя: {{person.user.username || emptyFieldText}}</p>
+  <p>Фамилия: {{person.last_name || emptyFieldText}}</p>
+  <p>Имя: {{person.first_name || emptyFieldText}}</p>
+  <p>Отчество: {{person.second_name || emptyFieldText}}</p>
+  <p>Пол: {{person.sex}}</p>
+  <p>Электронная почта: {{person.user.email}}</p>
+</div>

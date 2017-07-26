@@ -1,0 +1,35 @@
+<div *ngIf="person" [ngStyle]="{ 'background-color': 'azure' }">    
+  <h3>Блок редактирования профиля</h3>
+    <form name="form" (ngSubmit)="update()" #f="ngForm" novalidate>
+        <div class="form-group">
+            <label for="last_name">Фамилия:</label>
+            <input value="{{person.last_name}}" type="text" class="form-control" name="last_name" [(ngModel)]="model.last_name" #last_name="ngModel" required />
+        </div>
+        <div class="form-group">
+            <label for="first_name">Имя:</label>
+            <input value="{{person.first_name}}" type="text" class="form-control" name="first_name" [(ngModel)]="model.first_name" #first_name="ngModel" required />
+        </div>
+        <div class="form-group">
+            <label for="second_name">Отчество:</label>
+            <input value="{{person.second_name}}" type="text" class="form-control" name="second_name" [(ngModel)]="model.second_name" #second_name="ngModel" required />
+        </div>
+        <div class="form-group">
+            <label for="alt_email">Дополнительный e-mail</label>
+            <input value="{{person.alt_email}}" type="text" class="form-control" name="alt_email" [(ngModel)]="model.alt_email" #alt_email="ngModel" required />
+        </div>
+        <!--<div class="form-group">
+        <label for="sex">Пол:</label>
+            <select value="{{person.sex}}"  name="sex" [(ngModel)]="model.sex" #sex="ngModel" >
+            <option value="M">Мужской</option>
+            <option value="F">Женский</option>
+            </select>
+        </div>-->
+        
+        <app-change-password></app-change-password>
+        
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Сохранить</button>
+            <!--<a [routerLink]="['/profile']" class="btn btn-link">Отмена</a>-->
+        </div>
+    </form>
+</div>

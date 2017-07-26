@@ -1,0 +1,15 @@
+<div *ngIf="userTrajectories?.length > 0">
+  <h3>Ваши траектории: </h3>
+  <div *ngFor="let trajectory of userTrajectories">
+  <div [ngStyle]="{ 'background-color': 'floralwhite', 'padding': '5px', 'margin': '5px' }">
+    <div app-user-trajectory-block [trajectory]="trajectory"> </div> 
+    <button (click)="removeTrajectory(trajectory)">Удалить траекторию</button>
+    <button (click)="copyTrajectory(trajectory)">Копировать траекторию</button>
+  </div>
+  </div>
+</div>
+
+<div *ngIf="userTrajectories?.length == 0">
+  <h3> Пока траекторий нет</h3>
+  <a [routerLink]="['/constructor/programlist']">Создать</a>
+</div>

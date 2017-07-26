@@ -32,6 +32,30 @@ export class ProfileService {
       });
   }
 
+  public updateProfile(user: any) {
+        return this.http.post(this.config.apiEndpoint + 'change_person/', user, this.authService.jwt())
+          .map(response => {
+            const profile = response.json();
+            return profile;
+          })
+          .catch((error: any) => {
+            console.error("Error updating profile!");
+            return Observable.throw(error);
+          });
+    }
+
+  public changePassword(model: any){
+        return this.http.post(this.config.apiEndpoint + 'change_password/', model, this.authService.jwt());
+  }
+
+  public removeTrajectory(id: string){
+        return this.http.post(this.config.apiEndpoint + 'delete_trajectory/', {id: id}, this.authService.jwt());
+  }
+
+  public copyTrajectory(id: string){
+        return this.http.post(this.config.apiEndpoint + 'copy_trajectory/', {id: id}, this.authService.jwt());
+  }
+
   public GetUserTrajectories(){
     return this.http.get(this.config.apiEndpoint + 'get_trajectories/', this.authService.jwt())
       .map(response => {
@@ -43,6 +67,19 @@ export class ProfileService {
         return Observable.throw(error);
       });
   }
+
+  public GetPrograms() {
+    return this.http.get(this.config.apiEndpoint + 'programs/', this.authService.jwt())
+      .map(response => {
+        const programs = response.json();
+        return programs;
+      })
+      .catch((error: any) => {
+        console.error("Error retrieving programs!");
+        return Observable.throw(error);
+      });
+  }
+
 
   public setPerson(value: any) {
     person = value;
