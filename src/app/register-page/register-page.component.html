@@ -46,7 +46,9 @@
          </div>
 
       <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !agreementOfDataProcessing.valid }">
+          
         <input class="form-control" name="agreementOfDataProcessing" [(ngModel)]="registerModel.agreementOfDataProcessing" #agreementOfDataProcessing="ngModel" type="checkbox" required/>
+          <label for="password2">Я принимаю все соглашения.</label>
          <div *ngIf="f.submitted && !agreementOfDataProcessing.valid" class="help-block">Поставьте галку</div>
       </div>
 

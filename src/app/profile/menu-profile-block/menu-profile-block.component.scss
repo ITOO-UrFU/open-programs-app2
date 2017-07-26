@@ -4,8 +4,10 @@ a{
     color: black;
     font-family: "Open Sans";
     padding: 0px 0px;
-    // display: block;
     padding: 12px 9px;
+    &:hover{
+        background: antiquewhite;
+    }
 }
 .profile-photo{   
     border: 0;

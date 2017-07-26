@@ -16,13 +16,15 @@ export class MenuProfileBlockComponent implements OnInit {
     private profileService: ProfileService,
     private authService: AuthService,
     ) {
-     this.authService.logged.subscribe((mode: boolean) => {
-        this.setProfileInfo();
+     this.authService.isLogged.subscribe((mode: boolean) => {
+        if(mode){
+          this.setProfileInfo();
+        }
       });
   }
 
   ngOnInit() {
-    console.log('Инициализировал блок профиля в меню');
+    // console.log('Инициализировал блок профиля в меню');
     this.setProfileInfo();
   }
 
@@ -30,12 +32,11 @@ export class MenuProfileBlockComponent implements OnInit {
   this.profileService.getProfile().subscribe(
         data => {
           this.person = data;
-          this.person.profile_photo = 'http://barbershop-man.ru/wp-content/uploads/icon-man-3.png';
+          this.person.profile_photo = 'https://openedu.urfu.ru/files/icons8-Cat Profile-96.png';
         },
         error => {
           console.error('Ошибка при получении данных пользователя');
         });
   }
-  
 
 }

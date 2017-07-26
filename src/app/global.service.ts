@@ -1,5 +1,5 @@
 // Angular
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Http, Response } from '@angular/http';
 
 // Classes

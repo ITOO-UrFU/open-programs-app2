@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
-  selector: 'app-login-page',
+  selector: '[app-login-page]',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
@@ -49,7 +49,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       .subscribe(
       data => {
         // console.log("Вы точно авторизованы");
-        this.authService.logged.emit(true);
+
         this.router.navigate(['profile']);
       },
       error => {

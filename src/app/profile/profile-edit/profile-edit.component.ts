@@ -33,7 +33,8 @@ export class ProfileEditComponent implements OnInit {
       .subscribe(
       data => {
         console.log('Профиль успешно обновлен');
-        this.authService.logged.emit(true);
+        alert('Профиль успешно обновлен');
+        this.authService.isLogged.emit(true);
       },
       error => {
         console.error('Ошибка при обновлении профиля пользователя');
