@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { APP_CONFIG, IAppConfig } from '../app.config';
@@ -7,16 +7,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/bufferTime';
-// import { ProfileService } from '../profile/profile.service';
+
 let idleCount = 0;
 
 @Injectable()
 export class AuthService {
 
+  public logged: EventEmitter<boolean> = new EventEmitter();
+
   constructor(
     private http: Http,
     private router: Router,
-    // private profileService: ProfileService,
 
     @Inject(APP_CONFIG) private config: IAppConfig,
 
@@ -41,7 +42,7 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('currentUser');
-        //location.reload();
+        this.logged.emit(false);
         this.router.navigate(['login']);
         //
     }

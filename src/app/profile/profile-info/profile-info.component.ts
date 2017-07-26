@@ -11,7 +11,8 @@ export class ProfileInfoComponent implements OnInit {
   public person: any;
   public emptyFieldText = 'Не заполнено';
 
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService) {
+  }
 
   ngOnInit() {
     this.profileService.getProfile().subscribe(

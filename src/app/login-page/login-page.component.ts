@@ -3,6 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -17,6 +18,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private activateRoute: ActivatedRoute,
+
   ) {
     this.subscription = activateRoute.url.subscribe(
       params => {
@@ -47,6 +49,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       .subscribe(
       data => {
         // console.log("Вы точно авторизованы");
+        this.authService.logged.emit(true);
         this.router.navigate(['profile']);
       },
       error => {

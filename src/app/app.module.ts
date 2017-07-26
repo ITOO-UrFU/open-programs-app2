@@ -28,6 +28,7 @@ import { APP_CONFIG, AppConfig } from './app.config';
 import { AuthGuard } from './auth.guard';
 import { VariantsComponent } from './program-disciplines-constructor/variants/variants.component';
 import { VariantComponent } from './program-disciplines-constructor/variant/variant.component';
+import { MenuProfileBlockComponent } from './profile/menu-profile-block/menu-profile-block.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { VariantComponent } from './program-disciplines-constructor/variant/vari
     RegisterPageComponent,
     VariantsComponent,
     VariantComponent,
+    MenuProfileBlockComponent,
   ],
   imports: [
     BrowserModule,
