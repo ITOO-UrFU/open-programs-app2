@@ -24,7 +24,13 @@ canActivate(route: ActivatedRouteSnapshot,
             }
             const intersectRoles = allowedRoles.filter(function(n) { return userRoles.indexOf(n) !== -1; });
             // console.log("Роли текущего пользователя", userRoles);
-            return (allowedRoles == null || intersectRoles.length !== 0 );
+            if(allowedRoles == null || intersectRoles.length !== 0 ){
+                return true;
+            }
+            else{
+                alert("Вам туда нельзя!");
+                return false;
+            }
         } else {
             this.router.navigate(['/login']);
             return false;

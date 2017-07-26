@@ -33,6 +33,7 @@ export class AuthService {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 console.log(user);
                 this.activity();
+                this.logged.emit(true);
               //  this.profileService.setPerson(user.person);
             }
             console.log('Вы авторизованы!');

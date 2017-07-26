@@ -49,7 +49,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       .subscribe(
       data => {
         // console.log("Вы точно авторизованы");
-        this.authService.logged.emit(true);
+
         this.router.navigate(['profile']);
       },
       error => {
