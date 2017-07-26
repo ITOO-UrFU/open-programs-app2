@@ -9,11 +9,12 @@ import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/bufferTime';
 
 let idleCount = 0;
+let activity;
 
 @Injectable()
 export class AuthService {
 
-  public logged: EventEmitter<boolean> = new EventEmitter();
+  public isLogged: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private http: Http,
@@ -33,7 +34,7 @@ export class AuthService {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 console.log(user);
                 this.activity();
-                this.logged.emit(true);
+                this.isLogged.emit(true);
               //  this.profileService.setPerson(user.person);
             }
             console.log('Вы авторизованы!');
@@ -43,16 +44,15 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('currentUser');
-        this.logged.emit(false);
+        this.isLogged.emit(false);
         this.router.navigate(['login']);
-        //
+        activity.unsubscribe();
     }
 
     register(user: any) {
         return this.http.post(this.config.apiEndpoint + 'register/', user, this.jwt())
                           .map((response: Response) => {
-                            // response.json()
-                            console.log('Вы зарегистрированы!');
+                            console.log('Вы зарегистрированы');
                           });
     }
 
@@ -88,7 +88,7 @@ export class AuthService {
 
   activity() {
     this.refreshAction();
-    Observable.fromEvent(document, 'click').bufferTime(60000).subscribe((clickBuffer) => {
+    activity = Observable.fromEvent(document, 'click').bufferTime(60000).subscribe((clickBuffer) => {
       console.log(idleCount);
         if (clickBuffer.length > 0) {
           idleCount = 0;

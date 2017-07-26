@@ -21,7 +21,7 @@ export class AppComponent implements OnInit  {
     private globalService: GlobalService,
     private authService: AuthService,
   ) {
-      this.authService.logged.subscribe((mode: boolean) => {
+      this.authService.isLogged.subscribe((mode: boolean) => {
         this.isLogged = mode;
       });
   }

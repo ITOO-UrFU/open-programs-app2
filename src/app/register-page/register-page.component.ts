@@ -14,21 +14,22 @@ export class RegisterPageComponent implements OnInit {
     private router: Router,
   ) { }
 
-
   ngOnInit() {
   }
 
   register() {
     this.authService.register(this.registerModel)
-        .subscribe(
-            data => {
-              this.authService.login(this.registerModel.email, this.registerModel.password1).subscribe(data => {
-                this.router.navigate(['profile']);
-              }, error => {});
-            },
-            error => {
-                console.error("Ошибка при регистрации. Проверьте правильность введенных данных.");
-            });
+      .subscribe(
+      data => {
+        this.authService.login(this.registerModel.email, this.registerModel.password1).subscribe(login_data => {
+          this.router.navigate(['profile']);
+        }, error => {
+          console.log('Ошибка при входе.');
+        });
+      },
+      error => {
+        console.error('Ошибка при регистрации. Проверьте правильность введенных данных.');
+      });
   }
 
 }

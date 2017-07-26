@@ -16,7 +16,7 @@ export class MenuProfileBlockComponent implements OnInit {
     private profileService: ProfileService,
     private authService: AuthService,
     ) {
-     this.authService.logged.subscribe((mode: boolean) => {
+     this.authService.isLogged.subscribe((mode: boolean) => {
         if(mode){
           this.setProfileInfo();
         }
@@ -24,7 +24,7 @@ export class MenuProfileBlockComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Инициализировал блок профиля в меню');
+    // console.log('Инициализировал блок профиля в меню');
     this.setProfileInfo();
   }
 
@@ -38,6 +38,5 @@ export class MenuProfileBlockComponent implements OnInit {
           console.error('Ошибка при получении данных пользователя');
         });
   }
-  
 
 }
