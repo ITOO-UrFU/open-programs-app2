@@ -12,6 +12,7 @@ export class MenuProfileBlockComponent implements OnInit {
   public person: any;
   public emptyFieldText = 'Не заполнено';
 
+
   constructor(
     private profileService: ProfileService,
     private authService: AuthService,
