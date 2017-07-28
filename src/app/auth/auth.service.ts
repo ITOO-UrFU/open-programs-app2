@@ -46,6 +46,7 @@ export class AuthService {
         localStorage.removeItem('currentUser');
         this.isLogged.emit(false);
         this.router.navigate(['login']);
+        idleCount = 0;
         activity.unsubscribe();
     }
 
