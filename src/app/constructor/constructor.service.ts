@@ -1,6 +1,7 @@
 // Angular
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Headers, RequestOptions, Http, Response } from '@angular/http';
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 // Classes
 
@@ -17,27 +18,28 @@ export class ConstructorService {
 
   public consoleStatus: boolean = false; // вынести настройки в отдельный файл
 
-   // private serverURL = 'http://212.193.94.145:8080/api/v11/';
-   private serverURL = 'http://10.16.208.154:8080/api/v11/';
-
-  constructor(private http: Http, private authService: AuthService) { }
+  constructor(
+    @Inject(APP_CONFIG) private config: IAppConfig,
+    private http: Http,
+    private authService: AuthService
+    ) { }
 
   // Получение элементов Открытой образовательной программы
 
   public getElements(type: string):any {
     if (this.consoleStatus) {
-      console.log("[URL API]: ", this.serverURL + type);
+      console.log("[URL API]: ", this.config.apiEndpoint + type);
     }
-    return this.http.get(this.serverURL + type +'/?format=json')
+    return this.http.get(this.config.apiEndpoint + type +'/?format=json')
                     .map(res => res.json())
                     .catch(this.handleError);
   }
 
   public getElementsBySlug(type: string, slug: string):any {
     if (this.consoleStatus) {
-      console.log("[URL API]: ", this.serverURL + type + '/' + slug);
+      console.log("[URL API]: ", this.config.apiEndpoint + type + '/' + slug);
     }
-    return this.http.get(this.serverURL + type + '/' + slug + '/?format=json')
+    return this.http.get(this.config.apiEndpoint + type + '/' + slug + '/?format=json')
                     .map(res => res.json())
                     .catch(this.handleError);
   }
@@ -45,7 +47,7 @@ export class ConstructorService {
   public postResponse(api, value): any {
       const headers = new Headers({ 'Content-Type': 'application/json' });
      // const options = new RequestOptions({ headers: headers });
-      return this.http.post(this.serverURL + api + '/', value, this.authService.jwt())
+      return this.http.post(this.config.apiEndpoint + api + '/', value, this.authService.jwt())
                     .map( res => res.json() )
                     .catch( this.handleError );
   }

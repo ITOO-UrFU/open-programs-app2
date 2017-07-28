@@ -28,7 +28,7 @@ canActivate(route: ActivatedRouteSnapshot,
                 return true;
             }
             else{
-                alert("Вам туда нельзя!");
+                alert('Вам туда нельзя!');
                 return false;
             }
         } else {

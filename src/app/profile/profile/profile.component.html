@@ -1,16 +1,7 @@
-
-<!--<button (click)="toggleEditing()">Редактировать</button>-->
-<!--<div [ngSwitch]="isEditing">-->
-
-<!--<div app-profile-info></div>-->
-
-<!--<div *ngSwitchCase="true" app-profile-edit></div>-->
-
-<!--<div app-user-trajectories-list></div>-->
 <div>
-<a [routerLink]="['edit']">Редактрировать профиль</a>
-<a [routerLink]="['trajectories']">Смотреть траектории</a>
-<a [routerLink]="['/logout']">Выйти</a>
-
-<router-outlet></router-outlet> 
+    <a [routerLink]="['edit']">Редактрировать профиль</a>
+    <a [routerLink]="['trajectories']">Смотреть траектории</a>
+    <a [routerLink]="['/logout']">Выйти</a>
 </div>
+
+<router-outlet></router-outlet>
