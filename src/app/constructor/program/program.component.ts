@@ -57,6 +57,58 @@ export class ProgramComponent implements OnInit {
                private data: DataService ) { }
 
 
+  public variantSelected(discipline, variant, semester) {
+    if (variant.semester) {
+      if (discipline.default_semester[this.term] === semester) {
+        if (variant.semester.term === this.term) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } else{
+      return false
+    }
+  }
+
+  public variantSelected1(discipline, variants, variant, semester){
+    if (variants && discipline.default_semester[this.term] === semester) {
+      const elements1 = variants.filter((element) => {
+        return element.technology;
+      })
+      const elements2 = elements1.filter((element) => {
+        return element.technology.technology_type === this.technology_type;
+      })
+      const elements3 = elements2.filter((element) => {
+        return element.technology.presence === this.presence;
+      })
+      const elements4 = elements3.filter((element) => {
+        return element.semester;
+      })
+      const elements5 = elements4.filter((element) => {
+        return element.semester.term === this.term;
+      });
+      if (elements5.length){
+        return elements5[0].id === variant.id;
+      } else if (elements4.length){
+        return elements4[0].id === variant.id;
+      } else if (elements3.length){
+        return elements3[0].id === variant.id;
+      } else if (elements2.length){
+        return elements2[0].id === variant.id;
+      } else if (elements1.length){
+        return elements1[0].id === variant.id;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+
+  }
+
 
   public getProgram( program_id: string ) {
     this.service.getElementsBySlug( 'programs', program_id )
