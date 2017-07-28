@@ -80,18 +80,19 @@
     </div>
 
     <div *ngIf="steps.disciplines">
-        <h2> Дисциплины {{ term }} {{presence}} {{ technology_type }}</h2>
-        <a (click)="funcLength([1,2,3,4,5,6,7], '3,5 года')">3,5 года</a>
-        <a (click)="funcLength([1,2,3,4,5,6,7,8] , '4 года')">4 года</a>
-        <a (click)="funcLength([1,2,3,4,5,6,7,8,9,10], '5 лет')">5 лет</a>
-        <hr />
-        <a (click)="setPresence('o')">Очно</a>
-        <a (click)="setPresence('z')">Заочно</a>
-        <hr />
-        <a (click)="setTechnologyType('t')">Традиционно</a>
-        <a (click)="setTechnologyType('d')">Удаленно</a>
-
-
+        <h2> Дисциплины расчитаны на {{ term }} обучения, {{(presence=='o')? 'очная' : 'заочная'}} форма  с применением {{ (technology_type==='t')? 'традиционных' : 'дистанционных' }} технологий</h2>
+      <div>
+        <button [style.border] = "(term === '3,5 года') ? '2px solid green' : '1px solid gray'" (click)="funcLength([1,2,3,4,5,6,7], '3,5 года')">3,5 года</button>
+        <button [style.border] = "(term === '4 года') ? '2px solid green' : '1px solid gray'" (click)="funcLength([1,2,3,4,5,6,7,8] , '4 года')">4 года</button>
+        <button [style.border] = "(term === '5 лет') ? '2px solid green' : '1px solid gray'" (click)="funcLength([1,2,3,4,5,6,7,8,9,10], '5 лет')">5 лет</button>
+        |
+        <button [style.border] = "(presence === 'o') ? '2px solid green' : '1px solid gray'" (click)="setPresence('o')">Очно</button>
+        <button [style.border] = "(presence === 'z') ? '2px solid green' : '1px solid gray'" (click)="setPresence('z')">Заочно</button>
+        |
+        <button [style.border] = "(technology_type === 't') ? '2px solid green' : '1px solid gray'" (click)="setTechnologyType('t')">Традиционно</button>
+        <button [style.border] = "(technology_type === 'd') ? '2px solid green' : '1px solid gray'" (click)="setTechnologyType('d')">Удаленно</button>
+      </div>
+      <div app-disciplines></div>
 
         <div *ngIf="build" class="build">
             <table width="100%" border="1">
@@ -107,7 +108,45 @@
                                     </td>
                                     <ng-template ngFor let-semester [ngForOf]="eduLength">
                                         <td [style.background-color]="discipline.default_semester[term] == semester ? 'rgba(128, 0, 0, 0.21)' : 'rgba(0, 128, 0, 0.21)'">
-                                            <ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]">
+                                          <ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]">
+                                            <div [style.background-color] = "variantSelected1(discipline, program.variants[discipline.id], variant, semester) ? 'green' : '' ">
+                                            <!--<div *ngIf="variantSelected1(discipline, program.variants[discipline.id], variant, semester)">-->
+                                            <ng-template [ngIf]="variant.technology?.presence=='online'">
+                                              <button>Онлайн курс: {{variant.course?.title}}</button>
+                                            </ng-template>
+                                            <ng-template [ngIf]="variant.parity">
+                                              <ng-template [ngIf]="variant.parity && semester%2==variant.parity && variant.technology?.presence=='z' && variant.technology.technology_type==='t'">
+                                                <button>Тр.Заоч (parity {{ variant.parity }})</button>
+                                              </ng-template>
+                                              <ng-template [ngIf]="variant.parity && semester%2==variant.parity && variant.technology?.presence=='z' && variant.technology.technology_type==='вd'">
+                                                <button>Дист.Заоч (parity {{ variant.parity }})}</button>
+                                              </ng-template>
+                                              <ng-template [ngIf]="variant.parity && semester%2==variant.parity && variant.technology?.presence=='o' && variant.technology.technology_type==='t'">
+                                                <button>Тр.Oч (parity {{ variant.parity }})</button>
+                                              </ng-template>
+                                              <ng-template [ngIf]="variant.parity && semester%2==variant.parity && variant.technology?.presence=='o' && variant.technology.technology_type==='d'">
+                                                <button> Дист.Оч (parity {{ variant.parity }})</button>
+                                              </ng-template>
+                                            </ng-template>
+                                            <ng-template [ngIf]="!variant.parity && discipline.default_semester[term] == semester && variant.technology?.presence=='z' && variant.technology.technology_type==='t'">
+                                              <button>Тр.Заоч {{ variant.semester?.term }}</button>
+                                            </ng-template>
+                                            <ng-template [ngIf]="!variant.parity && discipline.default_semester[term] == semester && variant.technology?.presence=='z' && variant.technology.technology_type==='d'">
+                                              <button>Дист.Заоч {{ variant.semester?.term }}</button>
+                                            </ng-template>
+                                            <ng-template [ngIf]="!variant.parity && discipline.default_semester[term] == semester && variant.technology?.presence=='o' && variant.technology.technology_type==='t'">
+                                              <button>Тр.Оч {{ variant.semester?.term }}</button>
+                                            </ng-template>
+                                            <ng-template [ngIf]="!variant.parity && discipline.default_semester[term] == semester && variant.technology?.presence=='o' && variant.technology.technology_type==='d'">
+                                              <button>Дист.Оч {{ variant.semester?.term }}</button>
+                                            </ng-template>
+                                            </div>
+                                          </ng-template>
+
+
+
+
+                                            <!--<ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]">
                                                 <div *ngIf=" variant.semester?.term && discipline.default_semester[term] == semester
                           && (variant.technology.presence == presence || variant.technology.presence == 'online')
                           && variant.technology.technology_type == technology_type
@@ -131,7 +170,7 @@
                                                         <div *ngSwitchCase="0">{{variant.semester.term}} </div>
                                                     </div>
                                                 </ng-template>
-                                            </ng-template>
+                                            </ng-template>-->
                                         </td>
                                     </ng-template>
                                 </tr>
