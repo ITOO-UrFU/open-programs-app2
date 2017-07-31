@@ -7,6 +7,9 @@
         <thead>
             <tr>
                 <td>
+                  <p>Н#</p>
+                </td>
+                <td>
                     <p>Дисциплина программы</p>
                 </td>
                 <td>
@@ -24,8 +27,11 @@
             </tr>
         </thead>
         <tbody>
-            <ng-template ngFor let-discipline [ngForOf]="disciplines">
+            <ng-template ngFor let-discipline [ngForOf]="disciplines" let-i="index">
                 <tr>
+                  <td>
+                    <p>{{i}}<p>
+                  </td>
                     <td>
                         <p><span id="discipline-title">{{discipline?.title}}</span><br /><span id="subscription">{{discipline?.module}} <strong>{{ discipline?.module_uni_number }}</strong></span></p>
                     </td>
