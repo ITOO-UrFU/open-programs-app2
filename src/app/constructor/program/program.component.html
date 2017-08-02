@@ -11,64 +11,49 @@
     <div *ngIf="data.program?.targets" id="targets">
         <ul class="target_choices">
             <ng-template ngFor let-target [ngForOf]="data.program?.targets">
-                <!-- <li (click)="selectTarget(target?.id)" [class.selected]="selected == target?.id"></li> -->
                 <li app-target [class.selected]="data.trajectory.target_id == target.id" [target_id] = "target.id"></li>
             </ng-template>
         </ul>
     </div>
-    <div *ngIf="data.trajectory.target_id"> {{data.trajectory.target_id}} </div>
-    <div *ngIf="competences" id="competences">
-        <ul>
-            <ng-template ngFor let-competence [ngForOf]="data.program?.competences">
-                 <li>{{ competence?.title }} <!--<em>{{ competences[competence.id] }}</em> %--></li> 
-            </ng-template>
-        </ul>
+    <div *ngIf="data.trajectory.target_id">
+        <div id="competences">
+            <ul>
+                <ng-template ngFor let-competence [ngForOf]="data.program?.competences">
+                    <li>{{ competence?.title }} <!--<em>{{ competences[competence.id] }}</em> %--></li> 
+                </ng-template>
+            </ul>
+        </div>
+        <h2> {{ data.program?.targets_by_id[data.trajectory?.target_id].title }}</h2>
+        <ng-template ngFor let-choiceGroup [ngForOf]="data?.program.targets_by_id[data.trajectory?.target_id]?.choice_groups">
+            <div class="build">
+                <h3>{{ data?.program.choice_groups_by_id[choiceGroup].title }} </h3>
+
+                <ul class="left">
+                    <ng-template ngFor let-module [ngForOf]="data.program?.choice_groups_by_id[choiceGroup].get_program_modules">
+                        <li>
+                            <hr> {{ data.program?.modules_by_id[module].title }} {{ data.program?.modules_by_id[module]?.discipline }} з.е.
+                            <ol>
+                                <ng-template ngFor let-discipline [ngForOf]="data.program?.modules_by_id[module]?.disciplines">
+                                    <li><span>{{discipline.title}}</span></li>
+                                </ng-template>
+                            </ol>
+                            <hr>
+                        </li>
+
+                    </ng-template>
+                </ul>
+            </div>
+        </ng-template>
     </div>
-
-
-    <!-- </div> -->
 
 
 
     <!-- 
 
-        <div *ngIf="data?.competences">
 
-            <h2> {{ data?.program.targets_by_id[selected]?.title }}</h2>
-            <ng-template ngFor let-choiceGroup [ngForOf]="data?.program.targets_by_id[selected]?.choice_groups">
-                <div class="build">
-                    <h3>{{ data?.program.choice_groups_by_id[choiceGroup].title }} {{ data?.program.choice_groups_by_id[choiceGroup].labor }} з.е. выбрано: <span [class.alert]="modules[choiceGroup].labor_selected > modules[choiceGroup].labor">{{modules[choiceGroup].labor_selected}} з.е.</span></h3>
 
-                    <ul class="left">
-                        <ng-template ngFor let-module [ngForOf]="data?.program.choice_groups_by_id[choiceGroup].get_data?.program_modules">
-                            <li *ngIf="modules[choiceGroup].default.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'default')">
-                                <hr> {{ data?.program.modules_by_id[module].title }} {{ data?.program.modules_by_id[module].get_labor }} з.е.
-                                <ol>
-                                    <ng-template ngFor let-discipline [ngForOf]="data?.program.modules_by_id[module].disciplines">
-                                        <li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
-                                    </ng-template>
-                                </ol>
-                                <hr>
-                            </li>
+           
 
-                        </ng-template>
-                    </ul>
-                    <ul class="right">
-                        <ng-template ngFor let-module [ngForOf]="data?.program.choice_groups_by_id[choiceGroup].get_data?.program_modules">
-                            <li *ngIf="modules[choiceGroup].variative.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'variative')">
-                                <hr> {{ data?.program.modules_by_id[module].title }} {{ data?.program.modules_by_id[module].get_labor }} з.е.
-                                <ol>
-                                    <ng-template ngFor let-discipline [ngForOf]="data?.program.modules_by_id[module].disciplines">
-                                        <li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
-                                    </ng-template>
-                                </ol>
-                                <hr>
-                            </li>
-                        </ng-template>
-                    </ul>
-
-                </div>
-            </ng-template>
         </div>
         <div *ngIf="data?.program?.targets">
 		<h2> {{ data?.program?.targets_by_id[trajectory.target_id]?.title }}</h2>
