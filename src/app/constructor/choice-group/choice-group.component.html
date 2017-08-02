@@ -1,0 +1,18 @@
+<div class="build">
+    <h3>{{ choice_group.title }}</h3>                  
+    <ul *ngIf="data.program.modules" class="left">
+        <ng-template ngFor let-module [ngForOf]="choice_group.get_program_modules">
+            <li app-module [module]="data.program?.modules_by_id[module]">
+                 
+                <ol>
+                    <ng-template ngFor let-discipline [ngForOf]="data.program?.modules_by_id[module]?.disciplines">
+                        <li><span>{{discipline.title}}</span></li>
+                    </ng-template>
+                </ol>
+                <hr>
+            </li>
+
+        </ng-template>
+    </ul>
+    
+</div>

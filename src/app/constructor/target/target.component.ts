@@ -9,12 +9,12 @@ import { DataService } from '../data.service';
 })
 export class TargetComponent implements OnInit {
 
-  @Input() target_id: string;
+  @Input() target;
 
   constructor(public data: DataService) { }
 
   click(){
-    this.data.trajectory.setTarget(this.target_id)
+    this.data.trajectory.setTarget(this.target.id)
   }
 
   ngOnInit() {

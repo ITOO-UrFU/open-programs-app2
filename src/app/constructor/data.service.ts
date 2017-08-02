@@ -53,8 +53,7 @@ export class DataService {
     this.service.getElementsBySlug('get_program_targets', program_id)
                 .subscribe(
                   (targets: any) => {
-                    this.program.getTargets(targets);
-                    this.target = true;
+                    this.program.setTargets(targets);
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
                 );
@@ -64,7 +63,7 @@ export class DataService {
     this.service.getElementsBySlug('get_program_choice_groups', program_id)
                 .subscribe(
                   (choiceGroups: any) => {
-                    this.program.getChoicGroup(choiceGroups);
+                    this.program.setChoicGroup(choiceGroups);
                   },
                   (error) => { console.error('Ошибка получения групп выбора. API: /get_program_choice_groups', error); }
                 );
@@ -74,7 +73,7 @@ export class DataService {
     this.service.getElementsBySlug('get_program_modules', program_id)
                 .subscribe(
                   (modules: any) => {
-                    this.program.getModules(modules);
+                    this.program.setModules(modules);
                   },
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
                 );
@@ -84,8 +83,7 @@ export class DataService {
     this.service.getElementsBySlug('get_program_competences', program_id)
                 .subscribe(
                   (competences: any) => {
-                    this.program.getCompetences(competences);
-                    this.competences = true;
+                    this.program.setCompetences(competences);
                   },
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
@@ -94,7 +92,7 @@ export class DataService {
     this.service.getElementsBySlug('get_program_variants', program_id)
                 .subscribe(
                   (variants: any) => {
-                    this.program.getVariants(variants);
+                    this.program.setVariants(variants);
                   },
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_variants', error); }
                 );

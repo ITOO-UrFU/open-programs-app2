@@ -33,7 +33,7 @@ export class Program {
       this.chief = chief;
       this.competences = competences;
     }
-    getModules(modules) {
+    setModules(modules) {
       this.modules = modules.map(
         (module: any) => {
           const _module = new Module ( module.id,
@@ -51,7 +51,7 @@ export class Program {
         }
       );
     }
-    getChoicGroup(choice_groups){
+    setChoicGroup(choice_groups){
       this.choice_groups = choice_groups.map(
         (choice_group: any) => {
           const _choice_group = new ChoicGroup( choice_group.id,
@@ -66,7 +66,7 @@ export class Program {
         }
       );
     }
-    getTargets(targets) {
+    setTargets(targets) {
       this.targets = targets.map(
         (target) => {
           const _target = new Target( target.id,
@@ -79,7 +79,7 @@ export class Program {
         }
       );
     }
-    getCompetences(competences) {
+    setCompetences(competences) {
       this.competences = competences.map(
         (competence) => {
           const _competence = new Competence( competence.id,
@@ -90,7 +90,7 @@ export class Program {
         }
       );
     }
-    getVariants(variants) {
+    setVariants(variants) {
       console.log('variants', variants);
       const _variants = variants;
       this.variants = _variants;
