@@ -90,7 +90,7 @@ export class ProgramListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let x = this.authService.userIsLogged();
+    // let x = this.authService.userIsLogged();
     // if(!this.isLogged) {
     //   if (localStorage.getItem('trajectoriesCandidates')) {
     //     this.trajectoriesCandidates = localStorage.getItem('trajectoriesCandidates').split(',');

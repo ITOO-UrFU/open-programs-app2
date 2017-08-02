@@ -1,9 +1,10 @@
 // Angular
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Headers, RequestOptions, Http, Response } from '@angular/http';
 
 // Classes
 import { Program } from './program';
+import { APP_CONFIG, IAppConfig } from '././app.config';
 
 // Observable
 import { Observable } from 'rxjs/Observable';
@@ -16,8 +17,6 @@ import { AuthService } from './auth/auth.service';
 export class GlobalService {
   public consoleStatus: boolean = true; // вынести настройки в отдельный файл
 
-  // private serverURL = 'http://212.193.94.145:8080/api/v11/';
-  private serverURL = 'http://10.16.208.154:8080/api/v11/';
   private index: number = 0;
   private result: any;
   private footer: any;
@@ -25,6 +24,7 @@ export class GlobalService {
   constructor (
     private http: Http,
     private authService: AuthService,
+    @Inject(APP_CONFIG) private config: IAppConfig,
     ) {};
 
 
@@ -33,7 +33,7 @@ export class GlobalService {
       if (this.consoleStatus) {
         console.log('getConsntainers(): Запрос двнных')
       }
-      this.result = this.http.get(this.serverURL + 'containers/?format=json')
+      this.result = this.http.get(this.config.apiEndpoint + 'containers/?format=json')
                              .map(this.extractData)
                              .catch(this.handleError.bind(this));
     }
@@ -43,19 +43,19 @@ export class GlobalService {
   }
   getFooter(): any {
     if (!this.footer){
-      this.footer = this.http.get(this.serverURL + 'containers_by_type/footer/?format=json')
+      this.footer = this.http.get(this.config.apiEndpoint + 'containers_by_type/footer/?format=json')
                       .map(this.extractData)
                       .catch(this.handleError.bind(this));
     }
     return this.footer;
   }
   getBySlug(slug:string):any {
-    return this.http.get(this.serverURL + 'container_by_slug/'+ slug +'/?format=json')
+    return this.http.get(this.config.apiEndpoint + 'container_by_slug/'+ slug +'/?format=json')
                       .map(this.extractData)
                       .catch(this.handleError.bind(this));
   }
   getByType(type:string):any {
-    return this.http.get(this.serverURL + 'containers_by_type/' + type +'/?format=json')
+    return this.http.get(this.config.apiEndpoint + 'containers_by_type/' + type +'/?format=json')
                     .map(this.extractData)
                     .catch(this.handleError.bind(this));
   }
@@ -69,18 +69,18 @@ export class GlobalService {
 
   getElements(type:string):any {
     if (this.consoleStatus) {
-      console.log("[URL API]: ", this.serverURL + type);
+      console.log("[URL API]: ", this.config.apiEndpoint + type);
     }
-    return this.http.get(this.serverURL + type +'/?format=json')
+    return this.http.get(this.config.apiEndpoint + type +'/?format=json')
                     .map(res => res.json())
                     .catch(this.handleError.bind(this));
   }
 
   getElementsBySlug(type:string, slug:string):any {
     if (this.consoleStatus) {
-      console.log("[URL API]: ", this.serverURL + type + '/' + slug);
+      console.log("[URL API]: ", this.config.apiEndpoint + type + '/' + slug);
     }
-    return this.http.get(this.serverURL + type + '/' + slug + '/?format=json')
+    return this.http.get(this.config.apiEndpoint + type + '/' + slug + '/?format=json')
                     .map(res => res.json())
                     .catch(this.handleError.bind(this));
   }
@@ -92,10 +92,10 @@ export class GlobalService {
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
       if (this.consoleStatus) {
-        console.log('POST to ' + api + ':', this.serverURL + api);
+        console.log('POST to ' + api + ':', this.config.apiEndpoint + api);
         console.log('value:', value);
       }
-      return this.http.post(this.serverURL + api + '/', value, this.jwt())
+      return this.http.post(this.config.apiEndpoint + api + '/', value, this.jwt())
                     .map(res => res.json())
                     .catch(this.handleError.bind(this));
   }
@@ -104,10 +104,10 @@ export class GlobalService {
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
       if (this.consoleStatus) {
-        console.log('POST to ' + api + ':', this.serverURL + api);
+        console.log('POST to ' + api + ':', this.config.apiEndpoint + api);
         console.log('value:', value);
       }
-      return this.http.post(this.serverURL + api + '/', value, this.jwt())
+      return this.http.post(this.config.apiEndpoint + api + '/', value, this.jwt())
                     .map(res => res)
                     .catch(this.handleError.bind(this));
   }
