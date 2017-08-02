@@ -1,7 +1,6 @@
 // Angular
 import { Injectable, Inject } from '@angular/core';
 import { Headers, RequestOptions, Http, Response } from '@angular/http';
-import { APP_CONFIG, IAppConfig } from '../app.config';
 
 // Classes
 import { APP_CONFIG, IAppConfig } from '../app.config';
