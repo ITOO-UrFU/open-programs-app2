@@ -20,7 +20,7 @@ export class UserTrajectoriesListComponent implements OnInit {
     this.profileService.GetUserTrajectories().subscribe(
       trajectories => {
         this.userTrajectories = trajectories;
-        console.log("Список траекторий пользователя: ", this.userTrajectories);
+        // console.log("Список траекторий пользователя: ", this.userTrajectories);
       },
       trajectory_error => {
         console.error('Ошибка при получении траекторий');

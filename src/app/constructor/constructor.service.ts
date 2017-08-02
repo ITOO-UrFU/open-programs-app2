@@ -1,6 +1,7 @@
 // Angular
 import { Injectable, Inject } from '@angular/core';
 import { Headers, RequestOptions, Http, Response } from '@angular/http';
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 // Classes
 import { APP_CONFIG, IAppConfig } from '../app.config';
@@ -21,6 +22,7 @@ export class ConstructorService {
     private http: Http,
     private authService: AuthService,
     @Inject(APP_CONFIG) private config: IAppConfig,
+
     ) { }
 
   // Получение элементов Открытой образовательной программы

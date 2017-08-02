@@ -44,12 +44,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   login() {
-
     this.authService.login(this.loginModel.email, this.loginModel.password)
       .subscribe(
       data => {
         // console.log("Вы точно авторизованы");
-
         this.router.navigate(['profile']);
       },
       error => {
