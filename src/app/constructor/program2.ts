@@ -14,6 +14,7 @@ export class Program {
     choice_groups_by_id = {};
     targets: Target[];
     targets_by_id = {};
+    targets_positions = {};
     variants = {};
 
     constructor( id: string,
@@ -34,6 +35,7 @@ export class Program {
       this.competences = competences;
     }
     setModules(modules) {
+      console.log("modules", modules);
       this.modules = modules.map(
         (module: any) => {
           const _module = new Module ( module.id,
@@ -46,6 +48,15 @@ export class Program {
                               module.semester,
                               module.targets_positions,
                               module.targets_positions_indexed );
+
+          for ( let target_id in module.targets_positions_indexed ){
+            if (!this.targets_positions[target_id]) {
+              this.targets_positions[target_id] = []
+            }
+            if (module.targets_positions_indexed[target_id] === 1) {
+               this.targets_positions[target_id].push(module.id)
+            } 
+          }
           this.modules_by_id[module.id] = _module;
           return _module;
         }

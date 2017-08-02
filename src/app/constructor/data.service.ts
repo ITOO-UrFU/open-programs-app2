@@ -24,6 +24,7 @@ export class DataService {
   target = false;
   competences = false;
   selected: string;
+  modules = false;
 
   constructor(private service: ConstructorService) { }
 
@@ -44,7 +45,7 @@ export class DataService {
                     this.getChoiceGroups(program_id);
                     this.getModules(program_id);
                     this.getVariants(program_id);
-
+                      console.log(this.program)
                   },
                   (error) => { console.log('Ошибка получения программы. API: /programs', error); }
                 );
@@ -74,6 +75,7 @@ export class DataService {
                 .subscribe(
                   (modules: any) => {
                     this.program.setModules(modules);
+                    this.modules = true;
                   },
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
                 );

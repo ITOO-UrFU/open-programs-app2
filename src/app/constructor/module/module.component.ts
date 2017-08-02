@@ -8,7 +8,17 @@ import { DataService } from '../data.service';
   styleUrls: ['./module.component.scss']
 })
 export class ModuleComponent implements OnInit {
+
   @Input() module;
+
+  click(){
+    if ( this.data.program.targets_positions[this.data.trajectory.target_id].indexOf(this.module.id) === -1 ){
+    console.log("перемещешие", this.module.id)
+    this.data.program.targets_positions[this.data.trajectory.target_id].push(this.module.id);
+    } else { this.data.program.targets_positions[this.data.trajectory.target_id].splice(this.data.program.targets_positions[this.data.trajectory.target_id].indexOf(this.module.id), 1)
+
+    }
+  }
 
   constructor(private data: DataService) { }
 
