@@ -1,39 +1,48 @@
-<div class="header">
+<div *ngIf="data?.program" class="header">
     <h1>
-        {{ program?.title }}
+        {{ data?.program?.title }}
     </h1>
     <div>
         <a (click)="step()">Назад</a>
         <a (click)="step()">Start</a>
         <a (click)="step()">Вперед</a>
     </div>
-    <div *ngIf="steps.modules">
-        <div *ngIf="program?.targets" id="targets">
-            <ul class="target_choices">
-                <ng-template ngFor let-target [ngForOf]="program?.targets">
-                    <li (click)="selectTarget(target?.id)" [class.selected]="selected == target?.id">{{ target?.title }}</li>
-                </ng-template>
-            </ul>
-        </div>
-        <div *ngIf="build">
-            <div id="competences">
-                <ul>
-                    <ng-template ngFor let-competence [ngForOf]="program?.competences">
-                        <li>{{ competence?.title }} <em>{{ competences[competence.id] }}</em> %</li>
-                    </ng-template>
-                </ul>
-            </div>
-            <h2> {{ program.targets_by_id[selected]?.title }}</h2>
-            <ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups">
+    <!-- <div *ngIf="steps.modules"> -->
+    <div *ngIf="data.program?.targets" id="targets">
+        <ul class="target_choices">
+            <ng-template ngFor let-target [ngForOf]="data?.program?.targets">
+                <li (click)="selectTarget(target?.id)" [class.selected]="selected == target?.id">{{ target?.title }}</li>
+            </ng-template>
+        </ul>
+    </div>
+    <div *ngIf="competences" id="competences">
+        <ul>
+            <ng-template ngFor let-competence [ngForOf]="data.program?.competences">
+                <li>{{ competence?.title }} <em>{{ competences[competence.id] }}</em> %</li>
+            </ng-template>
+        </ul>
+    </div>
+
+
+    <!-- </div> -->
+
+
+
+    <!-- 
+
+        <div *ngIf="data?.competences">
+
+            <h2> {{ data?.program.targets_by_id[selected]?.title }}</h2>
+            <ng-template ngFor let-choiceGroup [ngForOf]="data?.program.targets_by_id[selected]?.choice_groups">
                 <div class="build">
-                    <h3>{{ program.choice_groups_by_id[choiceGroup].title }} {{ program.choice_groups_by_id[choiceGroup].labor }} з.е. выбрано: <span [class.alert]="modules[choiceGroup].labor_selected > modules[choiceGroup].labor">{{modules[choiceGroup].labor_selected}} з.е.</span></h3>
+                    <h3>{{ data?.program.choice_groups_by_id[choiceGroup].title }} {{ data?.program.choice_groups_by_id[choiceGroup].labor }} з.е. выбрано: <span [class.alert]="modules[choiceGroup].labor_selected > modules[choiceGroup].labor">{{modules[choiceGroup].labor_selected}} з.е.</span></h3>
 
                     <ul class="left">
-                        <ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
+                        <ng-template ngFor let-module [ngForOf]="data?.program.choice_groups_by_id[choiceGroup].get_data?.program_modules">
                             <li *ngIf="modules[choiceGroup].default.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'default')">
-                                <hr> {{ program.modules_by_id[module].title }} {{ program.modules_by_id[module].get_labor }} з.е.
+                                <hr> {{ data?.program.modules_by_id[module].title }} {{ data?.program.modules_by_id[module].get_labor }} з.е.
                                 <ol>
-                                    <ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines">
+                                    <ng-template ngFor let-discipline [ngForOf]="data?.program.modules_by_id[module].disciplines">
                                         <li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
                                     </ng-template>
                                 </ol>
@@ -43,11 +52,11 @@
                         </ng-template>
                     </ul>
                     <ul class="right">
-                        <ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
+                        <ng-template ngFor let-module [ngForOf]="data?.program.choice_groups_by_id[choiceGroup].get_data?.program_modules">
                             <li *ngIf="modules[choiceGroup].variative.indexOf(module)!=-1" (click)="toggle(module, choiceGroup, 'variative')">
-                                <hr> {{ program.modules_by_id[module].title }} {{ program.modules_by_id[module].get_labor }} з.е.
+                                <hr> {{ data?.program.modules_by_id[module].title }} {{ data?.program.modules_by_id[module].get_labor }} з.е.
                                 <ol>
-                                    <ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines">
+                                    <ng-template ngFor let-discipline [ngForOf]="data?.program.modules_by_id[module].disciplines">
                                         <li><em discipline [discipline]="discipline"></em><span>{{discipline.labor}} з.е.</span></li>
                                     </ng-template>
                                 </ol>
@@ -59,24 +68,24 @@
                 </div>
             </ng-template>
         </div>
-        <!--<div *ngIf="program?.targets">
-		<h2> {{ program?.targets_by_id[trajectory.target_id]?.title }}</h2>
+        <div *ngIf="data?.program?.targets">
+		<h2> {{ data?.program?.targets_by_id[trajectory.target_id]?.title }}</h2>
 		<ul>
-		<ng-template ngFor let-choiceGroup [ngForOf]="program?.targets_by_id[trajectory?.target_id]?.choice_groups" >
-			<h3>Группа: {{ program?.choice_groups_by_id[choiceGroup]?.title }} ___ из {{ program?.choice_groups_by_id[choiceGroup]?.labor }} з.e</h3>
-			<ng-template ngFor let-module [ngForOf]="program?.choice_groups_by_id[choiceGroup]?.get_program_modules">
-				<li class="module_title"><span class="is_selected" *ngIf="program?.modules_by_id[module]?.targets_positions_indexed[trajectory.target_id] == 1">[x]</span>
-				<span *ngIf="program?.modules_by_id[module]?.targets_positions_indexed[trajectory.target_id] == 2">[ ]</span>
-					{{ program?.modules_by_id[module]?.title }} - <span class="labor_display">{{ program?.modules_by_id[module]?.get_labor }} з.е.</span></li>
+		<ng-template ngFor let-choiceGroup [ngForOf]="data?.program?.targets_by_id[trajectory?.target_id]?.choice_groups" >
+			<h3>Группа: {{ data?.program?.choice_groups_by_id[choiceGroup]?.title }} ___ из {{ data?.program?.choice_groups_by_id[choiceGroup]?.labor }} з.e</h3>
+			<ng-template ngFor let-module [ngForOf]="data?.program?.choice_groups_by_id[choiceGroup]?.get_data?.program_modules">
+				<li class="module_title"><span class="is_selected" *ngIf="data?.program?.modules_by_id[module]?.targets_positions_indexed[trajectory.target_id] == 1">[x]</span>
+				<span *ngIf="data?.program?.modules_by_id[module]?.targets_positions_indexed[trajectory.target_id] == 2">[ ]</span>
+					{{ data?.program?.modules_by_id[module]?.title }} - <span class="labor_display">{{ data?.program?.modules_by_id[module]?.get_labor }} з.е.</span></li>
 					<div class="disciplines">
-						<ng-template ngFor let-discipline [ngForOf]="program?.modules_by_id[module]?.disciplines" >
+						<ng-template ngFor let-discipline [ngForOf]="data?.program?.modules_by_id[module]?.disciplines" >
 							<p> - <em discipline [discipline]="discipline"></em><span class="labor_display">{{discipline.labor}} з.е.</span></p>
 						</ng-template>
 					</div>
 			</ng-template>
 		</ng-template>
 		</ul>
-	</div>-->
+	</div>
     </div>
 
     <div *ngIf="steps.disciplines">
@@ -92,25 +101,25 @@
         <button [style.border] = "(technology_type === 't') ? '2px solid green' : '1px solid gray'" (click)="setTechnologyType('t')">Традиционно</button>
         <button [style.border] = "(technology_type === 'd') ? '2px solid green' : '1px solid gray'" (click)="setTechnologyType('d')">Удаленно</button>
       </div>
-      <div app-disciplines *ngIf="program?.id" [programId]="program.id"></div>
+      <div app-disciplines *ngIf="data?.program?.id" [programId]="data?.program.id"></div>
 
-        <div *ngIf="build" class="build">
+        <div *ngif="data?.target" class="build">
             <table width="100%" border="1">
-                <ng-template ngFor let-choiceGroup [ngForOf]="program.targets_by_id[selected]?.choice_groups">
+                <ng-template ngFor let-choiceGroup [ngForOf]="data?.program.targets_by_id[selected]?.choice_groups">
 
 
-                    <ng-template ngFor let-module [ngForOf]="program.choice_groups_by_id[choiceGroup].get_program_modules">
+                    <ng-template ngFor let-module [ngForOf]="data?.program.choice_groups_by_id[choiceGroup].get_data?.program_modules">
                         <ng-template [ngIf]="modules[choiceGroup].default.indexOf(module)!=-1">
-                            <ng-template ngFor let-discipline [ngForOf]="program.modules_by_id[module].disciplines">
+                            <ng-template ngFor let-discipline [ngForOf]="data?.program.modules_by_id[module].disciplines">
                                 <tr>
                                     <td>
-                                        <em discipline [discipline]="discipline" [variants]="program.variants[discipline.id]"></em>
+                                        <em discipline [discipline]="discipline" [variants]="data?.program.variants[discipline.id]"></em>
                                     </td>
                                     <ng-template ngFor let-semester [ngForOf]="eduLength">
                                         <td [style.background-color]="discipline.default_semester[term] == semester ? 'rgba(128, 0, 0, 0.21)' : 'rgba(0, 128, 0, 0.21)'">
-                                          <ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]">
-                                            <div [style.background-color] = "variantSelected1(discipline, program.variants[discipline.id], variant, semester) ? 'green' : '' ">
-                                            <!--<div *ngIf="variantSelected1(discipline, program.variants[discipline.id], variant, semester)">-->
+                                          <ng-template ngFor let-variant [ngForOf]="data?.program.variants[discipline.id]">
+                                            <div [style.background-color] = "variantSelected1(discipline, data?.program.variants[discipline.id], variant, semester) ? 'green' : '' ">
+                                            <div *ngIf="variantSelected1(discipline, data?.program.variants[discipline.id], variant, semester)">
                                             <ng-template [ngIf]="variant.technology?.presence=='online'">
                                               <button>Онлайн курс: {{variant.course?.title}}</button>
                                             </ng-template>
@@ -146,7 +155,7 @@
 
 
 
-                                            <!--<ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]">
+                                            <ng-template ngFor let-variant [ngForOf]="data?.program.variants[discipline.id]">
                                                 <div *ngIf=" variant.semester?.term && discipline.default_semester[term] == semester
                           && (variant.technology.presence == presence || variant.technology.presence == 'online')
                           && variant.technology.technology_type == technology_type
@@ -170,7 +179,7 @@
                                                         <div *ngSwitchCase="0">{{variant.semester.term}} </div>
                                                     </div>
                                                 </ng-template>
-                                            </ng-template>-->
+                                            </ng-template>
                                         </td>
                                     </ng-template>
                                 </tr>
@@ -181,5 +190,5 @@
             </table>
 
         </div>
-    </div>
+    </div> -->
 </div>

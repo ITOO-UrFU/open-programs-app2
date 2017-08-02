@@ -17,13 +17,7 @@ export class DisciplinesComponent implements OnInit {
 
   constructor(public data: DataService) { }
 
-  click() {console.warn( this.programId );
-
-    
-  }
-
   ngOnInit() {
-    console.warn( this.programId );
     this.data.getProgram(this.programId);
   }
 }

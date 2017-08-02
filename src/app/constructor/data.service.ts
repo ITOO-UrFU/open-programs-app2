@@ -19,6 +19,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
   program: Program;
+  target = false;
+  competences = false;
 
   constructor(private service: ConstructorService) { }
 
@@ -49,6 +51,7 @@ export class DataService {
                 .subscribe(
                   (targets: any) => {
                     this.program.getTargets(targets);
+                    this.target = true;
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
                 );
@@ -79,6 +82,7 @@ export class DataService {
                 .subscribe(
                   (competences: any) => {
                     this.program.getCompetences(competences);
+                    this.competences = true;
                   },
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
