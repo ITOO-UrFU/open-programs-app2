@@ -4,7 +4,7 @@ import { Headers, RequestOptions, Http, Response } from '@angular/http';
 import { APP_CONFIG, IAppConfig } from '../app.config';
 
 // Classes
-
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 // Observable
 import { Observable } from 'rxjs/Observable';
@@ -19,9 +19,10 @@ export class ConstructorService {
   public consoleStatus: boolean = false; // вынести настройки в отдельный файл
 
   constructor(
-    @Inject(APP_CONFIG) private config: IAppConfig,
     private http: Http,
-    private authService: AuthService
+    private authService: AuthService,
+    @Inject(APP_CONFIG) private config: IAppConfig,
+
     ) { }
 
   // Получение элементов Открытой образовательной программы

@@ -79,10 +79,10 @@ export class ProgramComponent implements OnInit {
         return element.technology;
       })
       const elements2 = elements1.filter((element) => {
-        return element.technology.technology_type === this.technology_type;
+        return element.technology.presence === this.presence;
       })
       const elements3 = elements2.filter((element) => {
-        return element.technology.presence === this.presence;
+        return element.technology.technology_type === this.technology_type;
       })
       const elements4 = elements3.filter((element) => {
         return element.semester;

@@ -4,7 +4,9 @@ import { Headers, RequestOptions, Http, Response } from '@angular/http';
 
 // Classes
 import { Program } from './program';
-import { APP_CONFIG, IAppConfig } from './app.config';
+
+import { APP_CONFIG, IAppConfig } from '././app.config';
+
 
 // Observable
 import { Observable } from 'rxjs/Observable';
@@ -25,6 +27,7 @@ export class GlobalService {
     @Inject(APP_CONFIG) private config: IAppConfig,
     private http: Http,
     private authService: AuthService,
+    @Inject(APP_CONFIG) private config: IAppConfig,
     ) {};
 
 
