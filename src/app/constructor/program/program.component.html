@@ -92,7 +92,7 @@
         <button [style.border] = "(technology_type === 't') ? '2px solid green' : '1px solid gray'" (click)="setTechnologyType('t')">Традиционно</button>
         <button [style.border] = "(technology_type === 'd') ? '2px solid green' : '1px solid gray'" (click)="setTechnologyType('d')">Удаленно</button>
       </div>
-      <div app-disciplines></div>
+      <div app-disciplines *ngIf="program?.id" [programId]="program.id"></div>
 
         <div *ngIf="build" class="build">
             <table width="100%" border="1">

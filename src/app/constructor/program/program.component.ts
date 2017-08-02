@@ -8,7 +8,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { ConstructorService } from '../constructor.service';
 import { DataService } from '../data.service';
-// import { DisciplineComponent } from '../discipline/discipline.component'
+//import { DisciplinesComponent } from '../disciplines/disciplines.component';
 
 import { Program } from '../program';
 import { Trajectory } from '../trajectory';
@@ -79,10 +79,10 @@ export class ProgramComponent implements OnInit {
         return element.technology;
       })
       const elements2 = elements1.filter((element) => {
-        return element.technology.presence === this.presence;
+        return element.technology.technology_type === this.technology_type;
       })
       const elements3 = elements2.filter((element) => {
-        return element.technology.technology_type === this.technology_type;
+        return element.technology.presence === this.presence;
       })
       const elements4 = elements3.filter((element) => {
         return element.semester;

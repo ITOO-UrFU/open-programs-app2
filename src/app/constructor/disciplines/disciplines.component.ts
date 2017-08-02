@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { DataService } from '../data.service';
+import { Program } from '../program';
+
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: '[app-disciplines]',
@@ -6,10 +13,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./disciplines.component.scss']
 })
 export class DisciplinesComponent implements OnInit {
+  @Input() programId: string;
 
-  constructor() { }
+  constructor(public data: DataService) { }
 
-  ngOnInit() {
+  click() {console.warn( this.programId );
+
+    
   }
 
+  ngOnInit() {
+    console.warn( this.programId );
+    this.data.getProgram(this.programId);
+  }
 }
