@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ConstructorService } from '../constructor.service';
 
 import { Program } from '../program';
-
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-program-list',
@@ -18,8 +18,18 @@ export class ProgramListComponent implements OnInit {
 
   public programList: Program[];
   public trajectories = {};
+  public trajectoriesCandidates = [];
+  public isLogged = false;
+  subscription: any;
 
-  constructor( private router: Router, private service: ConstructorService ) { }
+  constructor(
+    private router: Router,
+    private service: ConstructorService,
+    private authService: AuthService,
+    )
+    {
+
+    }
 
   // Функции работы с траекториями
   // Создание траектории
@@ -27,6 +37,11 @@ export class ProgramListComponent implements OnInit {
     this.service.postResponse('new_trajectory', JSON.stringify({program_id: program_id, data: {}}))
                 .subscribe(
                       (trajectory: any) => {
+                        //  console.log(trajectory.id);
+                        //  if(!this.isLogged) {
+                        //     this.trajectoriesCandidates.push(trajectory.id);
+                        //     localStorage.setItem('trajectoriesCandidates', this.trajectoriesCandidates.toString());
+                        //  }
                          this.router.navigate(['/constructor', 'program', trajectory.id]);
                       },
                       error => {
@@ -75,8 +90,18 @@ export class ProgramListComponent implements OnInit {
   }
 
   ngOnInit() {
+    let x = this.authService.userIsLogged();
+    // if(!this.isLogged) {
+    //   if (localStorage.getItem('trajectoriesCandidates')) {
+    //     this.trajectoriesCandidates = localStorage.getItem('trajectoriesCandidates').split(',');
+    //   } else {
+    //     localStorage.setItem('trajectoriesCandidates', this.trajectoriesCandidates.toString());
+    //   }
+    // }
+
     this.getPrograms();
   }
+
 }
 
 
