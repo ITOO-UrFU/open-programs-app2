@@ -231,6 +231,7 @@ export class ProgramComponent implements OnInit {
                              .subscribe(
                                 (trajectory: any) => {
                                   this.trajectory = new Trajectory( trajectory.id, trajectory.program );
+                                  this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
                                   if ( trajectory.data ) {
                                     this.selected = trajectory.data.selected;
                                     this.modules = trajectory.data.modules;

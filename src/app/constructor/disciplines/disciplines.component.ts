@@ -1,11 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { DataService } from '../data.service';
-import { Program } from '../program';
-
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: '[app-disciplines]',

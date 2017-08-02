@@ -11,10 +11,10 @@ export class Trajectory {
       this.id = id;
       this.program_id = program_id;
     }
-    getTarget ( target_id: string ) {
+    setTarget ( target_id: string ) {
         this.target_id = target_id;
     }
-    getChoiceGroups ( choice_groups: string[] ) {
+    setChoiceGroups ( choice_groups: string[] ) {
         this.choice_groups = choice_groups ;
     }
     getModules(modulesList) {

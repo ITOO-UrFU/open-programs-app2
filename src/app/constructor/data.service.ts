@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 // Class
 import { Program } from './program2';
+import { Trajectory } from './trajectory';
 
 // Services
 import {ConstructorService} from './constructor.service';
@@ -19,8 +20,10 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
   program: Program;
+  trajectory: Trajectory;
   target = false;
   competences = false;
+  selected: string;
 
   constructor(private service: ConstructorService) { }
 

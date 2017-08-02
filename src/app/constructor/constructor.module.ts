@@ -7,7 +7,8 @@ import { ConstructorService } from './constructor.service';
 import { DataService } from './data.service';
 import { ProgramComponent } from './program/program.component';
 import { DisciplineComponent } from './discipline/discipline.component';
-import { DisciplinesComponent } from './disciplines/disciplines.component'
+import { DisciplinesComponent } from './disciplines/disciplines.component';
+import { TargetComponent } from './target/target.component'
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { DisciplinesComponent } from './disciplines/disciplines.component'
     ConstructorRoutingModule
   ],
   providers: [ConstructorService, DataService],
-  declarations: [ProgramListComponent, ProgramComponent, DisciplineComponent, DisciplinesComponent]
+  declarations: [ProgramListComponent, ProgramComponent, DisciplineComponent, DisciplinesComponent, TargetComponent]
 })
 export class ConstructorModule { }

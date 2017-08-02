@@ -10,15 +10,17 @@
     <!-- <div *ngIf="steps.modules"> -->
     <div *ngIf="data.program?.targets" id="targets">
         <ul class="target_choices">
-            <ng-template ngFor let-target [ngForOf]="data?.program?.targets">
-                <li (click)="selectTarget(target?.id)" [class.selected]="selected == target?.id">{{ target?.title }}</li>
+            <ng-template ngFor let-target [ngForOf]="data.program?.targets">
+                <!-- <li (click)="selectTarget(target?.id)" [class.selected]="selected == target?.id"></li> -->
+                <li app-target [class.selected]="data.trajectory.target_id == target.id" [target_id] = "target.id"></li>
             </ng-template>
         </ul>
     </div>
+    <div *ngIf="data.trajectory.target_id"> {{data.trajectory.target_id}} </div>
     <div *ngIf="competences" id="competences">
         <ul>
             <ng-template ngFor let-competence [ngForOf]="data.program?.competences">
-                <li>{{ competence?.title }} <em>{{ competences[competence.id] }}</em> %</li>
+                 <li>{{ competence?.title }} <!--<em>{{ competences[competence.id] }}</em> %--></li> 
             </ng-template>
         </ul>
     </div>
