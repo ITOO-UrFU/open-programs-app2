@@ -9,7 +9,9 @@ import { DataService } from '../data.service';
 })
 export class ModuleComponent implements OnInit {
 
-  @Input() module;
+  @Input() module_id: string;
+  public module;
+
 
   click(){
     if ( this.data.program.targets_positions[this.data.trajectory.target_id].indexOf(this.module.id) === -1 ){
@@ -20,9 +22,11 @@ export class ModuleComponent implements OnInit {
     }
   }
 
+
   constructor(private data: DataService) { }
 
   ngOnInit() {
+    this.module =  this.data.program.getModule(this.module_id);
   }
 
 }

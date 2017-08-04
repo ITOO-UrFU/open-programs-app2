@@ -1,8 +1,7 @@
 <span (click)="click()">{{module.title}}</span>
-
-<ol>
+ <ol>
     <ng-template ngFor let-discipline [ngForOf]="module.disciplines">
         <li app-discipline [discipline]="discipline" ></li>
     </ng-template>
-</ol>
+</ol> 
 <hr>

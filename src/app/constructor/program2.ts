@@ -1,6 +1,7 @@
 export class Program {
-    id: string;
-    title: string;
+    debug: boolean;
+    id: string;                         // Id программы
+    title: string;                      // Название программы
     training_direction: string;
     get_level_display: string;
     get_competences_diagram: any;
@@ -10,7 +11,7 @@ export class Program {
     competences_by_id = {};
     modules: Module[];
     modules_by_id = {};
-    choice_groups: ChoicGroup[];
+    choice_groups: ChoiceGroup[];
     choice_groups_by_id = {};
     targets: Target[];
     targets_by_id = {};
@@ -24,7 +25,8 @@ export class Program {
                 get_competences_diagram: any,
                 get_choice_groups: string[],
                 chief: any,
-                competences: any[] ) {
+                competences: any[],
+                debug: boolean ) {
       this.id = id;
       this.title = title;
       this.training_direction = training_direction;
@@ -33,9 +35,14 @@ export class Program {
       this.get_choice_groups = get_choice_groups;
       this.chief = chief;
       this.competences = competences;
+      this.debug = debug;
+    }
+    getModule(module_id) {
+      if ( this.debug ) { console.log('Program: getModule id' + module_id, 'result:', this.modules_by_id[module_id]); };
+      return this.modules_by_id[module_id];
     }
     setModules(modules) {
-      console.log("modules", modules);
+      if ( this.debug ) { console.log('Program: setModule id', modules); };
       this.modules = modules.map(
         (module: any) => {
           const _module = new Module ( module.id,
@@ -62,10 +69,15 @@ export class Program {
         }
       );
     }
-    setChoicGroup(choice_groups){
+    getChoiceGroup(choice_group_id) {
+      if ( this.debug ) { console.log('Program: getModule id' + choice_group_id, 'result:', this.choice_groups_by_id[choice_group_id]); };
+      return this.choice_groups_by_id[choice_group_id];
+    };
+    setChoiceGroup(choice_groups){
+      if ( this.debug ) { console.log('Program: setChoiceGroup ', choice_groups); };
       this.choice_groups = choice_groups.map(
         (choice_group: any) => {
-          const _choice_group = new ChoicGroup( choice_group.id,
+          const _choice_group = new ChoiceGroup( choice_group.id,
                                                 choice_group.title,
                                                 choice_group.program,
                                                 choice_group.labor,
@@ -77,7 +89,12 @@ export class Program {
         }
       );
     }
+    getTarget(target_id) {
+      if ( this.debug ) { console.log('Program: getTarget id' + target_id, 'result:', this.targets_by_id[target_id]); };
+      return this.targets_by_id[target_id];
+    }
     setTargets(targets) {
+      if ( this.debug ) { console.log('Program: setTargets ', targets); };
       this.targets = targets.map(
         (target) => {
           const _target = new Target( target.id,
@@ -91,6 +108,7 @@ export class Program {
       );
     }
     setCompetences(competences) {
+      if ( this.debug ) { console.log('Program: setCompetences ', competences); };
       this.competences = competences.map(
         (competence) => {
           const _competence = new Competence( competence.id,
@@ -102,13 +120,13 @@ export class Program {
       );
     }
     setVariants(variants) {
-      console.log('variants', variants);
+      if ( this.debug ) { console.log('Program: setVariants ', variants); };
       const _variants = variants;
       this.variants = _variants;
     }
 }
 
-class Module {
+export class Module {
     id: string;
     title: string;
     choice_group: string;
@@ -143,7 +161,7 @@ class Module {
     };
 }
 
-class ChoicGroup {
+export class ChoiceGroup {
     id: string;
     title: string;
     program: string;
@@ -169,7 +187,7 @@ class ChoicGroup {
     };
 }
 
-class Target {
+export class Target {
     id: string;
     title: string;
     program: string;
@@ -189,7 +207,7 @@ class Target {
     };
 }
 
-class Competence {
+export class Competence {
     id: string;
     title: string;
     number: number;

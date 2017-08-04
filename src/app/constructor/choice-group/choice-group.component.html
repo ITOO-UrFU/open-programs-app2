@@ -1,14 +1,14 @@
 <div class="build">
     <h3>{{ choice_group.title }}  {{data.modules}}</h3>                  
-    <ng-template ngIf="data.modules">
+    <ng-template [ngIf]="data.modules">
     <ul  class="left">
-        <ng-template ngFor let-module [ngForOf]="choice_group.get_program_modules">
-            <li  *ngIf="data.program?.targets_positions[data.trajectory.target_id].indexOf(module)!==-1" app-module [module]="data.program?.modules_by_id[module]"></li>
+        <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
+            <li  app-module [module_id]="module_id"></li>
         </ng-template>
     </ul>
-        <ul  class="right">
-        <ng-template ngFor let-module [ngForOf]="choice_group.get_program_modules">
-            <li  *ngIf="data.program?.targets_positions[data.trajectory.target_id].indexOf(module)===-1" app-module [module]="data.program?.modules_by_id[module]"></li>
+    <ul  class="right">
+        <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
+            <li  app-module [module_id]="module_id"></li>
         </ng-template>
     </ul>
     </ng-template>

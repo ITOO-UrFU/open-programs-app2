@@ -4,32 +4,40 @@
     </h1>
     <div>
         <a (click)="step()">Назад</a>
-        <a (click)="step()">Start</a>
-        <a (click)="step()">Вперед</a>
+
     </div>
-    <!-- <div *ngIf="steps.modules"> -->
-    <div *ngIf="data.program?.targets" id="targets">
+    <div *ngIf = "data.targets" id="targets">
         <ul class="target_choices">
             <ng-template ngFor let-target [ngForOf]="data.program?.targets">
                 <li app-target [class.selected]="data.trajectory.target_id == target.id" [target] = "target"></li>
             </ng-template>
         </ul>
     </div>
-    <div *ngIf="data.trajectory.target_id">
-        <div id="competences">
-            <ul>
-                <ng-template ngFor let-competence [ngForOf]="data.program?.competences">
-                    <li>{{ competence?.title }} <!--<em>{{ competences[competence.id] }}</em> %--></li> 
-                </ng-template>
-            </ul>
-        </div>
-        <h2> {{ data.program?.targets_by_id[data.trajectory?.target_id].title }}</h2>
-        <ng-template ngIf = "data.program.choice_groups">
-            <ng-template ngFor let-choiceGroup [ngForOf]="data?.program.targets_by_id[data.trajectory?.target_id]?.choice_groups">
-                <div app-choice-group class="ChoiceGroup" [choice_group] = "data.program.choice_groups_by_id[choiceGroup]"></div>
+    <div *ngIf = "data.competences">
+        <ul>
+            <ng-template ngFor let-competence [ngForOf]="data.program?.competences">
+                <li>{{ competence?.title }} </li> 
             </ng-template>
-        </ng-template>
+        </ul>
     </div>
+    <div *ngIf = "data.choice_groups">
+        <ng-template ngFor let-choice_group [ngForOf]="data.program.choice_groups">
+            <div app-choice-group class="ChoiceGroup" [choice_group_id] = "choice_group.id"></div>
+        </ng-template>
+
+    </div>
+
+    <!-- <div *ngIf="data.trajectory.target_id">
+
+        <ng-template ngIf="data.modules">
+            <h2> {{ data.program?.targets_by_id[data.trajectory?.target_id].title }}</h2>
+            <ng-template ngIf = "data.choice_groups">
+                <ng-template ngFor let-choice_group_id [ngForOf]="data?.program.targets_by_id[data.trajectory?.target_id]?.choice_groups">
+                    <div app-choice-group class="ChoiceGroup" [choice_group_id] = "choice_group_id"></div>
+                </ng-template>
+            </ng-template> 
+        </ng-template> 
+    </div> -->
 
 
 

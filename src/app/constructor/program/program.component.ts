@@ -115,7 +115,6 @@ export class ProgramComponent implements OnInit {
       this.steps.disciplines = !this.steps.disciplines;
     }
     this.saveTrajectory();
-    console.log(this.data.program.modules);
   }
 
 
@@ -147,7 +146,7 @@ export class ProgramComponent implements OnInit {
         }, 0
       );
     }
-    console.log({ modules: obj, array: array })
+    
     return { modules: obj, array: array };
   }
   private collectCompetences(array: any[]): any {
@@ -230,7 +229,7 @@ export class ProgramComponent implements OnInit {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
                                 (trajectory: any) => {
-                                  this.trajectory = new Trajectory( trajectory.id, trajectory.program );
+                                  // this.trajectory = new Trajectory( trajectory.id, trajectory.program );
                                   this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
                                   if ( trajectory.data ) {
                                     this.selected = trajectory.data.selected;

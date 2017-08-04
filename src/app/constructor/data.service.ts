@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // Class
-import { Program } from './program2';
+import { Program, Target } from './program2';
 import { Trajectory } from './trajectory';
 
 // Services
@@ -21,10 +21,16 @@ import 'rxjs/add/operator/map';
 export class DataService {
   program: Program;
   trajectory: Trajectory;
-  target = false;
+
+
+  targetSelected: Target;
+
+
+  targets = false;
   competences = false;
-  selected: string;
   modules = false;
+  choice_groups = false;
+  variants = false;
 
   constructor(private service: ConstructorService) { }
 
@@ -39,13 +45,13 @@ export class DataService {
                                                 program.get_competences_diagram,
                                                 program.get_choice_groups,
                                                 program.chief,
-                                                program.competences );
+                                                program.competences,
+                                                true );
                     this.getTargets(program_id);
                     this.getCompetences(program_id);
                     this.getChoiceGroups(program_id);
                     this.getModules(program_id);
                     this.getVariants(program_id);
-                      console.log(this.program)
                   },
                   (error) => { console.log('Ошибка получения программы. API: /programs', error); }
                 );
@@ -55,6 +61,10 @@ export class DataService {
                 .subscribe(
                   (targets: any) => {
                     this.program.setTargets(targets);
+                    this.targetSelected = this.program.targets[0];
+                    this.trajectory.setTarget(this.targetSelected.id);
+                    this.targets = true;
+                    console.log('dataService: Targets', true);
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
                 );
@@ -64,7 +74,9 @@ export class DataService {
     this.service.getElementsBySlug('get_program_choice_groups', program_id)
                 .subscribe(
                   (choiceGroups: any) => {
-                    this.program.setChoicGroup(choiceGroups);
+                    this.program.setChoiceGroup(choiceGroups);
+                    this.choice_groups = true;
+                    console.log('dataService: ChoiceGroups', true);
                   },
                   (error) => { console.error('Ошибка получения групп выбора. API: /get_program_choice_groups', error); }
                 );
@@ -76,6 +88,7 @@ export class DataService {
                   (modules: any) => {
                     this.program.setModules(modules);
                     this.modules = true;
+                    console.log('dataService: Modules', true);
                   },
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
                 );
@@ -86,6 +99,8 @@ export class DataService {
                 .subscribe(
                   (competences: any) => {
                     this.program.setCompetences(competences);
+                    this.competences = true;
+                    console.log('dataService: Competences', true);
                   },
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
@@ -95,6 +110,8 @@ export class DataService {
                 .subscribe(
                   (variants: any) => {
                     this.program.setVariants(variants);
+                    this.variants = true;
+                    console.log('dataService: Variants', true);
                   },
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_variants', error); }
                 );
