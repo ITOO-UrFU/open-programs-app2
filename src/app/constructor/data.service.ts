@@ -46,7 +46,7 @@ export class DataService {
                                                 program.get_choice_groups,
                                                 program.chief,
                                                 program.competences,
-                                                true );
+                                                false );
                     this.getTargets(program_id);
                     this.getCompetences(program_id);
                     this.getChoiceGroups(program_id);
@@ -62,7 +62,7 @@ export class DataService {
                   (targets: any) => {
                     this.program.setTargets(targets);
                     this.targetSelected = this.program.targets[0];
-                    this.trajectory.setTarget(this.targetSelected.id);
+                    this.trajectory.setTarget(this.targetSelected);
                     this.targets = true;
                     console.log('dataService: Targets', true);
                   },
@@ -115,6 +115,13 @@ export class DataService {
                   },
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_variants', error); }
                 );
-  }
+  };
+  // Работает после загрузки модулей вызывается в Групе Выбора
+ public getModuleDefault(choice_groups_id){
+   const modules_id = this.program.choice_groups_by_id[choice_groups_id].get_program_modules;
+   const modules = modules_id.map((module_id) => {return this.program.getModule(module_id); });
+   const modulesDefault = modules.filter((module) => {return module.targets_positions_indexed[this.trajectory.getTargetId()] === 1; });
+   return modulesDefault.map(module => module.id);
+ }
 
 }

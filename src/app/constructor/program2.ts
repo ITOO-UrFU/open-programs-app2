@@ -15,7 +15,6 @@ export class Program {
     choice_groups_by_id = {};
     targets: Target[];
     targets_by_id = {};
-    targets_positions = {};
     variants = {};
 
     constructor( id: string,
@@ -56,14 +55,6 @@ export class Program {
                               module.targets_positions,
                               module.targets_positions_indexed );
 
-          for ( let target_id in module.targets_positions_indexed ){
-            if (!this.targets_positions[target_id]) {
-              this.targets_positions[target_id] = []
-            }
-            if (module.targets_positions_indexed[target_id] === 1) {
-               this.targets_positions[target_id].push(module.id)
-            } 
-          }
           this.modules_by_id[module.id] = _module;
           return _module;
         }
@@ -167,7 +158,7 @@ export class ChoiceGroup {
     program: string;
     labor: number;
     get_choice_group_type_display: string;
-    get_program_modules: string[];
+    get_program_modules: string[]; //ID модулей
     number: number;
 
     constructor( id: string,

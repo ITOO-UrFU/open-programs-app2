@@ -1,7 +1,8 @@
-<span (click)="click()">{{module.title}}</span>
- <ol>
-    <ng-template ngFor let-discipline [ngForOf]="module.disciplines">
-        <li app-discipline [discipline]="discipline" ></li>
-    </ng-template>
-</ol> 
-<hr>
+
+    <span (click)="click()">{{module.title}}</span>
+    <button (click)="toggle()">Toggle</button>
+    <ol>
+        <ng-template ngFor let-discipline [ngForOf]="module.disciplines">
+            <li app-discipline [discipline]="discipline" ></li>
+        </ng-template>
+    </ol>

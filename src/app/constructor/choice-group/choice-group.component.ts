@@ -18,7 +18,6 @@ export class ChoiceGroupComponent implements OnInit {
 
   ngOnInit() {
     this.choice_group = this.data.program.getChoiceGroup(this.choice_group_id);
-    console.log(this.choice_group)
   }
 
 }

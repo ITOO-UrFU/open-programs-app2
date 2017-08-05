@@ -2,16 +2,13 @@
     <h1>
         {{ data?.program?.title }}
     </h1>
-    <div>
-        <a (click)="step()">Назад</a>
-
-    </div>
     <div *ngIf = "data.targets" id="targets">
         <ul class="target_choices">
-            <ng-template ngFor let-target [ngForOf]="data.program?.targets">
+            <ng-template ngFor let-target [ngForOf]="data.program.targets">
                 <li app-target [class.selected]="data.trajectory.target_id == target.id" [target] = "target"></li>
             </ng-template>
         </ul>
+        {{data.trajectory.getTargetId()}}
     </div>
     <div *ngIf = "data.competences">
         <ul>
@@ -20,11 +17,10 @@
             </ng-template>
         </ul>
     </div>
-    <div *ngIf = "data.choice_groups">
-        <ng-template ngFor let-choice_group [ngForOf]="data.program.choice_groups">
-            <div app-choice-group class="ChoiceGroup" [choice_group_id] = "choice_group.id"></div>
+    <div *ngIf = "data.modules">
+        <ng-template ngFor let-choice_group [ngForOf]="data.trajectory.choice_groups">
+            <div app-choice-group class="ChoiceGroup" [choice_group_id] = "choice_group"></div>
         </ng-template>
-
     </div>
 
     <!-- <div *ngIf="data.trajectory.target_id">

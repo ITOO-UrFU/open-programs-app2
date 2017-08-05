@@ -12,16 +12,9 @@ export class ModuleComponent implements OnInit {
   @Input() module_id: string;
   public module;
 
-
-  click(){
-    if ( this.data.program.targets_positions[this.data.trajectory.target_id].indexOf(this.module.id) === -1 ){
-    console.log("перемещешие", this.module.id)
-    this.data.program.targets_positions[this.data.trajectory.target_id].push(this.module.id);
-    } else { this.data.program.targets_positions[this.data.trajectory.target_id].splice(this.data.program.targets_positions[this.data.trajectory.target_id].indexOf(this.module.id), 1)
-
-    }
+  toggle(){
+    console.log( "Toggle!", this.module );
   }
-
 
   constructor(private data: DataService) { }
 

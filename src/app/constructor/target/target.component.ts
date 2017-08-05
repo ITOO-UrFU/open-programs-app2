@@ -16,8 +16,9 @@ export class TargetComponent implements OnInit {
 
   constructor(public data: DataService) { }
 
-  click(){
-    this.data.trajectory.setTarget(this.target.id);
+  selectTarget(){
+    this.data.trajectory.setTarget(this.target);
+    console.log(this.target)
   }
 
   ngOnInit() {

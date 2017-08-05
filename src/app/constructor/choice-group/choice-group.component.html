@@ -1,15 +1,15 @@
 <div class="build">
-    <h3>{{ choice_group.title }}  {{data.modules}}</h3>                  
+    <h3>{{ choice_group.title }}  </h3>                  
     <ng-template [ngIf]="data.modules">
-    <ul  class="left">
+    <div  class="left">
         <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
-            <li  app-module [module_id]="module_id"></li>
+            <div *ngIf ="this.data.getModuleDefault(choice_group.id).indexOf(module_id) !== -1" app-module [module_id]="module_id"></div>
         </ng-template>
-    </ul>
-    <ul  class="right">
+    </div>
+    <div class="right">
         <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
-            <li  app-module [module_id]="module_id"></li>
+            <div *ngIf ="this.data.getModuleDefault(choice_group.id).indexOf(module_id) === -1" app-module [module_id]="module_id"></div>
         </ng-template>
-    </ul>
+    </div>
     </ng-template>
 </div>
