@@ -12,11 +12,6 @@ export class ModuleComponent implements OnInit {
   @Input() module_id: string;
   public module;
 
-  toggle(){
-    console.log( "Toggle!", this.module );
-    this.data.trajectory.toggleModule(this.module);
-  }
-
   constructor(private data: DataService) { }
 
   ngOnInit() {

@@ -18,7 +18,10 @@ export class TargetComponent implements OnInit {
 
   selectTarget(){
     this.data.trajectory.setTarget(this.target);
-    console.log(this.target)
+    if(this.data.modules){
+      this.data.trajectory.setModulesDefault(this.data.program.modules);
+    }
+    console.log(this.target);
   }
 
   ngOnInit() {

@@ -10,7 +10,8 @@ import { DisciplineComponent } from './discipline/discipline.component';
 import { DisciplinesComponent } from './disciplines/disciplines.component';
 import { TargetComponent } from './target/target.component';
 import { ChoiceGroupComponent } from './choice-group/choice-group.component';
-import { ModuleComponent } from './module/module.component'
+import { ModuleComponent } from './module/module.component';
+import { CompetenceComponent } from './competence/competence.component'
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ModuleComponent } from './module/module.component'
     ConstructorRoutingModule
   ],
   providers: [ConstructorService, DataService],
-  declarations: [ProgramListComponent, ProgramComponent, DisciplineComponent, DisciplinesComponent, TargetComponent, ChoiceGroupComponent, ModuleComponent]
+  declarations: [ProgramListComponent, ProgramComponent, DisciplineComponent, DisciplinesComponent, TargetComponent, ChoiceGroupComponent, ModuleComponent, CompetenceComponent]
 })
 export class ConstructorModule { }

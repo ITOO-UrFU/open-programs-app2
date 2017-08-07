@@ -22,7 +22,14 @@ export class ChoiceGroupComponent implements OnInit {
     ).reduce((a, b) => a + b, 0);
   }
 
-  index(){return 3}
+  toggle( module_id ) {
+    if(this.data.trajectory.getModulesDefault(this.choice_group_id).indexOf(module_id) !== -1 ||
+       this.choice_group.labor - this.laborSelectedModules() >= this.data.program.getModule(module_id).get_labor){
+      this.data.trajectory.toggleModule(this.data.program.getModule(module_id));
+    }
+  }
+
+
   ngOnInit() {
     this.choice_group = this.data.program.getChoiceGroup(this.choice_group_id);
   }

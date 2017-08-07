@@ -37,7 +37,7 @@ export class Trajectory {
         return this.modules_selected[this.choice_groups.indexOf(choice_group_id)];
     }
 
-    getChoiceGroupEditeble(choice_group){
+    getChoiceGroupEditable(choice_group){
         return this.choice_groups_editeble.indexOf(choice_group) !== -1;
     }
 
