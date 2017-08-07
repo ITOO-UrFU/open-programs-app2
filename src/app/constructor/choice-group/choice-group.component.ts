@@ -23,12 +23,21 @@ export class ChoiceGroupComponent implements OnInit {
   }
 
   toggle( module_id ) {
-    if(this.data.trajectory.getModulesDefault(this.choice_group_id).indexOf(module_id) !== -1 ||
-       this.choice_group.labor - this.laborSelectedModules() >= this.data.program.getModule(module_id).get_labor){
+    { if (this.canToggle( module_id))
       this.data.trajectory.toggleModule(this.data.program.getModule(module_id));
     }
   }
+canToggle( module_id) {
+  if(this.data.trajectory.getModulesDefault(this.choice_group_id).indexOf(module_id) !== -1 ||
+       this.choice_group.labor - this.laborSelectedModules() >= this.data.program.getModule(module_id).get_labor)
+  {
+    return true;
+  }
+  else {
+    return false;
+  }
 
+}
 
   ngOnInit() {
     this.choice_group = this.data.program.getChoiceGroup(this.choice_group_id);

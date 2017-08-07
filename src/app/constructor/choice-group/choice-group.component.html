@@ -9,7 +9,7 @@
     </div>
     <div *ngIf = "data.trajectory.getChoiceGroupEditable(choice_group.id)" class="right">
         <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
-             <div *ngIf ="data.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) === -1" app-module  (click)="toggle(module_id)"  [module_id]="module_id"></div> 
+             <div *ngIf ="data.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) === -1" [style.background]="canToggle(module_id)? 'grey' : 'red'" app-module  (click)="toggle(module_id)"  [module_id]="module_id"></div> 
         </ng-template>
     </div>
     </ng-template>

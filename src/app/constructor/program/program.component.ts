@@ -225,6 +225,28 @@ export class ProgramComponent implements OnInit {
     this.saveTrajectory();
   }
 
+
+
+
+  getLabor(){
+    const laborAll = this.data.trajectory.modules_selected.reduce(
+      (a,b) => a.concat(b), []
+    ).map(
+      modules_id => this.data.program.getModule(modules_id).get_labor
+    ).reduce(
+      (a, b) => a + b, 0
+    )
+
+    const laborChoiceGroup = this.data.trajectory.choice_groups.map(
+      choice_group_id => this.data.program.getChoiceGroup(choice_group_id).labor
+   ).reduce(
+      (a, b) => a + b, 0
+    )
+    return laborChoiceGroup === laborAll;
+    
+  }
+
+
   ngOnInit() {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
@@ -236,3 +258,33 @@ export class ProgramComponent implements OnInit {
                               );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
