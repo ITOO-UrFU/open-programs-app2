@@ -228,7 +228,7 @@ export class ProgramComponent implements OnInit {
 
 
 
-  getLabor(){
+  isModulesDone(){
     const laborAll = this.data.trajectory.modules_selected.reduce(
       (a,b) => a.concat(b), []
     ).map(
@@ -243,7 +243,6 @@ export class ProgramComponent implements OnInit {
       (a, b) => a + b, 0
     )
     return laborChoiceGroup === laborAll;
-    
   }
 
 

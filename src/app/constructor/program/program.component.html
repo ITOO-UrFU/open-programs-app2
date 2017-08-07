@@ -22,7 +22,9 @@
         </ng-template>
     </div>
 
-    <div *ngIf = "data.modules && getLabor()">Далее</div>
+    <div *ngIf = "data.modules && isModulesDone()">
+        
+    </div>
     <!-- <div *ngIf="data.trajectory.target_id">
 
         <ng-template ngIf="data.modules">
