@@ -17,7 +17,7 @@
             </ng-template>
         </ul>
     </div>
-    <div *ngIf = "data.modules">
+    <div *ngIf = "data.choice_groups">
         <ng-template ngFor let-choice_group [ngForOf]="data.trajectory.choice_groups">
             <div app-choice-group class="ChoiceGroup" [choice_group_id] = "choice_group"></div>
         </ng-template>

@@ -16,6 +16,13 @@ export class ChoiceGroupComponent implements OnInit {
 
   constructor(public data: DataService) { }
 
+  laborSelectedModules(){
+    return this.data.trajectory.getModulesDefault(this.choice_group_id).map(
+      module_id => this.data.program.getModule(module_id).get_labor
+    ).reduce((a, b) => a + b, 0);
+  }
+
+  index(){return 3}
   ngOnInit() {
     this.choice_group = this.data.program.getChoiceGroup(this.choice_group_id);
   }

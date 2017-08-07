@@ -14,6 +14,7 @@ export class ModuleComponent implements OnInit {
 
   toggle(){
     console.log( "Toggle!", this.module );
+    this.data.trajectory.toggleModule(this.module);
   }
 
   constructor(private data: DataService) { }

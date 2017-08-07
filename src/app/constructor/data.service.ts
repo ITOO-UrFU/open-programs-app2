@@ -28,8 +28,8 @@ export class DataService {
 
   targets = false;
   competences = false;
-  modules = false;
   choice_groups = false;
+  modules = false;
   variants = false;
 
   constructor(private service: ConstructorService) { }

@@ -1,14 +1,15 @@
 <div class="build">
-    <h3>{{ choice_group.title }}  </h3>                  
+                  
     <ng-template [ngIf]="data.modules">
+        <h3>{{ choice_group.title }} {{ choice_group.labor }} з.е. из {{ laborSelectedModules() }} з.е. </h3>    
     <div  class="left">
         <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
-            <div *ngIf ="this.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) !== -1" app-module [module_id]="module_id"></div>
+             <div *ngIf ="data.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) !== -1" app-module [module_id]="module_id"></div> 
         </ng-template>
     </div>
-    <div class="right">
+    <div *ngIf = "data.trajectory.getChoiceGroupEditeble(choice_group.id)" class="right">
         <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
-            <div *ngIf ="this.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) === -1" app-module [module_id]="module_id"></div>
+             <div *ngIf ="data.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) === -1" app-module [module_id]="module_id"></div> 
         </ng-template>
     </div>
     </ng-template>

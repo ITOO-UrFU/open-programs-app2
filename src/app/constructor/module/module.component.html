@@ -1,6 +1,6 @@
 
     <span (click)="click()">{{module.title}}</span>
-    <button (click)="toggle()">Toggle</button>
+    <button *ngIf = "data.trajectory.getChoiceGroupEditeble(module.choice_group)" (click)="toggle()">Toggle</button>
     <ol>
         <ng-template ngFor let-discipline [ngForOf]="module.disciplines">
             <li app-discipline [discipline]="discipline" ></li>

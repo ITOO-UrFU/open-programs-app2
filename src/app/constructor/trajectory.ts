@@ -3,7 +3,8 @@ export class Trajectory {
     public program_id: string;
     public target_id: string;
     public choice_groups: string[];
-    public modules_default: any;
+    public choice_groups_editeble: string[];
+    public modules_selected: any;
 
     constructor ( id: string, program_id: string  ) {
       this.id = id;
@@ -17,16 +18,36 @@ export class Trajectory {
         this.choice_groups = target.choice_groups;
     }
     setModulesDefault(modules: any){
-        this.modules_default = this.choice_groups.map(
+        this.modules_selected = this.choice_groups.map(
             (choice_group) => {
                return modules.filter(
                    module => module.choice_group === choice_group && module.targets_positions_indexed[this.target_id] === 1
-                ).map(module=>module.id)
+                ).map(module => module.id)
+            }
+        )
+        this.choice_groups_editeble = this.choice_groups.filter(
+            (choice_group) => {
+               return modules.filter(
+                   module => module.choice_group === choice_group && module.targets_positions_indexed[this.target_id] !== 1
+                ).length > 0;
             }
         )
     }
     getModulesDefault( choice_group_id: string ){
-        return this.modules_default[this.choice_groups.indexOf(choice_group_id)];
+        return this.modules_selected[this.choice_groups.indexOf(choice_group_id)];
+    }
+
+    getChoiceGroupEditeble(choice_group){
+        return this.choice_groups_editeble.indexOf(choice_group) !== -1;
+    }
+
+    toggleModule(module){
+        let currentModules = this.modules_selected[this.choice_groups.indexOf(module.choice_group)]
+        if (currentModules.indexOf(module.id) === -1) {
+            currentModules.push(module.id);
+        } else {
+            currentModules.splice(currentModules.indexOf(module.id),1);
+        }
     }
 }
 
