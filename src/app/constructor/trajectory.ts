@@ -3,9 +3,7 @@ export class Trajectory {
     public program_id: string;
     public target_id: string;
     public choice_groups: string[];
-    public modulesList: any[];
-    public modules_by_id_group = {};
-
+    public modules_default: any;
 
     constructor ( id: string, program_id: string  ) {
       this.id = id;
@@ -18,17 +16,17 @@ export class Trajectory {
         this.target_id = target.id;
         this.choice_groups = target.choice_groups;
     }
-    setChoiceGroups ( choice_groups: string[] ) {
-        this.choice_groups = choice_groups ;
-    }
-    getModules(modulesList) {
-        this.modulesList = modulesList.map(
-            (modules, index) => {
-                const _modules = modules;
-                this.modules_by_id_group[this.choice_groups[index]] = _modules;
-                return _modules;
+    setModulesDefault(modules: any){
+        this.modules_default = this.choice_groups.map(
+            (choice_group) => {
+               return modules.filter(
+                   module => module.choice_group === choice_group && module.targets_positions_indexed[this.target_id] === 1
+                ).map(module=>module.id)
             }
         )
+    }
+    getModulesDefault( choice_group_id: string ){
+        return this.modules_default[this.choice_groups.indexOf(choice_group_id)];
     }
 }
 

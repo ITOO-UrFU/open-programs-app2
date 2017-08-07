@@ -61,8 +61,7 @@ export class DataService {
                 .subscribe(
                   (targets: any) => {
                     this.program.setTargets(targets);
-                    this.targetSelected = this.program.targets[0];
-                    this.trajectory.setTarget(this.targetSelected);
+                    this.trajectory.setTarget(this.program.targets[0]);
                     this.targets = true;
                     console.log('dataService: Targets', true);
                   },
@@ -87,6 +86,8 @@ export class DataService {
                 .subscribe(
                   (modules: any) => {
                     this.program.setModules(modules);
+                    this.trajectory.setModulesDefault(this.program.modules)
+                    console.log(this.trajectory);
                     this.modules = true;
                     console.log('dataService: Modules', true);
                   },

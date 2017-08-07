@@ -3,12 +3,12 @@
     <ng-template [ngIf]="data.modules">
     <div  class="left">
         <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
-            <div *ngIf ="this.data.getModuleDefault(choice_group.id).indexOf(module_id) !== -1" app-module [module_id]="module_id"></div>
+            <div *ngIf ="this.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) !== -1" app-module [module_id]="module_id"></div>
         </ng-template>
     </div>
     <div class="right">
         <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
-            <div *ngIf ="this.data.getModuleDefault(choice_group.id).indexOf(module_id) === -1" app-module [module_id]="module_id"></div>
+            <div *ngIf ="this.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) === -1" app-module [module_id]="module_id"></div>
         </ng-template>
     </div>
     </ng-template>
