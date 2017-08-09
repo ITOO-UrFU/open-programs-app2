@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 // Variables
 
@@ -24,7 +25,7 @@ export class DataService {
 
 
   targetSelected: Target;
-
+  changesSubject: ReplaySubject<any> = new ReplaySubject();
 
   targets = false;
   competences = false;
@@ -33,6 +34,8 @@ export class DataService {
   variants = false;
 
   constructor(private service: ConstructorService) { }
+
+  
 
    public getProgram( program_id: string ) {
     this.service.getElementsBySlug( 'programs', program_id )
@@ -47,6 +50,7 @@ export class DataService {
                                                 program.chief,
                                                 program.competences,
                                                 false );
+                    this.changesSubject.next(program)
                     this.getTargets(program_id);
                     this.getCompetences(program_id);
                     this.getChoiceGroups(program_id);
@@ -63,6 +67,7 @@ export class DataService {
                     this.program.setTargets(targets);
                     this.trajectory.setTarget(this.program.targets[0]);
                     this.targets = true;
+                    this.changesSubject.next(targets)
                     console.log('dataService: Targets', true);
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
