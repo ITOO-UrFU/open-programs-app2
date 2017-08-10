@@ -16,7 +16,7 @@ export class ModuleComponent implements OnInit {
 
   ngOnInit() {
     this.module =  this.data.program.getModule(this.module_id);
-    this.data.changesSubject.subscribe((val) => console.log('modules ',val))
+    //this.data.changesSubject.subscribe((val) => console.log('modules ',val))
   }
 
 }

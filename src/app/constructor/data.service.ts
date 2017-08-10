@@ -33,6 +33,28 @@ export class DataService {
   modules = false;
   variants = false;
 
+
+  public eduLength = [1,2,3,4,5,6,7,8];
+  public term = '4 года';
+  public presence: string = 'z';
+  public technology_type = 'd';
+
+  public stepNext = false;
+
+  public funcLength(val, term) {
+    this.eduLength = val;
+    this.term = term;
+  }
+
+  public setPresence(val){
+    this.presence = val;
+  }
+
+  public setTechnologyType(val){
+    this.technology_type = val;
+  }
+
+
   constructor(private service: ConstructorService) { }
 
   

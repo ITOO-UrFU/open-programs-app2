@@ -1,34 +1,62 @@
-<ng-template ngFor let-semester [ngForOf]="semesters"><div class="semester" [style.width] ="98/semesters.length +'%'">
+<ng-template ngFor let-semester [ngForOf]="data.eduLength"><div class="semester" [style.width] ="98/data.eduLength.length +'%'">
   <ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]">
-      <div [style.background-color] = "variantSelected1(discipline, data?.program.variants[discipline.id], variant, semester) ? 'green' : '' ">
-        <div *ngIf="variantSelected1(discipline, data?.program.variants[discipline.id], variant, semester)">
+      <div [style.background-color] = "variantSelected(discipline, program.variants[discipline.id], variant, semester) ? 'green' : '' ">
+        <div>
         <ng-template [ngIf]="variant.technology?.presence=='online'">
           <button>Онлайн курс: {{variant.course?.title}}</button>
         </ng-template>
-        <ng-template [ngIf]="variant.parity">
-          <ng-template [ngIf]="variant.parity && semester%2==variant.parity && variant.technology?.presence=='z' && variant.technology.technology_type==='t'">
+        <ng-template [ngIf]="variant.parity&& variant.parity == 1 && semester%2==variant.parity">
+          <ng-template [ngIf]="variant.technology?.presence=='z' && variant.technology.technology_type==='t'">
             <button>Тр.Заоч (parity {{ variant.parity }})</button>
           </ng-template>
-          <ng-template [ngIf]="variant.parity && semester%2==variant.parity && variant.technology?.presence=='z' && variant.technology.technology_type==='вd'">
+          <ng-template [ngIf]="variant.technology?.presence=='z' && variant.technology.technology_type==='d'">
             <button>Дист.Заоч (parity {{ variant.parity }})}</button>
           </ng-template>
-          <ng-template [ngIf]="variant.parity && semester%2==variant.parity && variant.technology?.presence=='o' && variant.technology.technology_type==='t'">
+          <ng-template [ngIf]="variant.technology?.presence=='o' && variant.technology.technology_type==='t'">
             <button>Тр.Oч (parity {{ variant.parity }})</button>
           </ng-template>
-          <ng-template [ngIf]="variant.parity && semester%2==variant.parity && variant.technology?.presence=='o' && variant.technology.technology_type==='d'">
+          <ng-template [ngIf]="variant.technology?.presence=='o' && variant.technology.technology_type==='d'">
             <button> Дист.Оч (parity {{ variant.parity }})</button>
           </ng-template>
         </ng-template>
-        <ng-template [ngIf]="!variant.parity && discipline.default_semester[term] == semester && variant.technology?.presence=='z' && variant.technology.technology_type==='t'">
+        <ng-template [ngIf]="variant.parity && variant.parity == 2 && semester%variant.parity == 0">
+          <ng-template [ngIf]="variant.technology?.presence=='z' && variant.technology.technology_type==='t'">
+            <button>Тр.Заоч (parity {{ variant.parity }})</button>
+          </ng-template>
+          <ng-template [ngIf]="variant.technology?.presence=='z' && variant.technology.technology_type==='d'">
+            <button>Дист.Заоч (parity {{ variant.parity }})}</button>
+          </ng-template>
+          <ng-template [ngIf]="variant.technology?.presence=='o' && variant.technology.technology_type==='t'">
+            <button>Тр.Oч (parity {{ variant.parity }})</button>
+          </ng-template>
+          <ng-template [ngIf]="variant.technology?.presence=='o' && variant.technology.technology_type==='d'">
+            <button> Дист.Оч (parity {{ variant.parity }})</button>
+          </ng-template>
+        </ng-template>
+        <ng-template [ngIf]="variant.parity && variant.parity == 3">
+          <ng-template [ngIf]="variant.technology?.presence=='z' && variant.technology.technology_type==='t'">
+            <button>Тр.Заоч (parity {{ variant.parity }})</button>
+          </ng-template>
+          <ng-template [ngIf]="variant.technology?.presence=='z' && variant.technology.technology_type==='d'">
+            <button>Дист.Заоч (parity {{ variant.parity }})}</button>
+          </ng-template>
+          <ng-template [ngIf]="variant.technology?.presence=='o' && variant.technology.technology_type==='t'">
+            <button>Тр.Oч (parity {{ variant.parity }})</button>
+          </ng-template>
+          <ng-template [ngIf]="variant.technology?.presence=='o' && variant.technology.technology_type==='d'">
+            <button> Дист.Оч (parity {{ variant.parity }})</button>
+          </ng-template>
+        </ng-template>
+        <ng-template [ngIf]="!variant.parity && discipline.default_semester[data.term] == semester && variant.technology?.presence=='z' && variant.technology.technology_type==='t'">
           <button>Тр.Заоч {{ variant.semester?.term }}</button>
         </ng-template>
-        <ng-template [ngIf]="!variant.parity && discipline.default_semester[term] == semester && variant.technology?.presence=='z' && variant.technology.technology_type==='d'">
+        <ng-template [ngIf]="!variant.parity && discipline.default_semester[data.term] == semester && variant.technology?.presence=='z' && variant.technology.technology_type==='d'">
           <button>Дист.Заоч {{ variant.semester?.term }}</button>
         </ng-template>
-        <ng-template [ngIf]="!variant.parity && discipline.default_semester[term] == semester && variant.technology?.presence=='o' && variant.technology.technology_type==='t'">
+        <ng-template [ngIf]="!variant.parity && discipline.default_semester[data.term] == semester &&  variant.technology?.presence=='o' && variant.technology.technology_type==='t'">
           <button>Тр.Оч {{ variant.semester?.term }}</button>
         </ng-template>
-        <ng-template [ngIf]="!variant.parity && discipline.default_semester[term] == semester && variant.technology?.presence=='o' && variant.technology.technology_type==='d'">
+        <ng-template [ngIf]="!variant.parity && discipline.default_semester[data.term] == semester &&  variant.technology?.presence=='o' && variant.technology.technology_type==='d'">
           <button>Дист.Оч {{ variant.semester?.term }}</button>
         </ng-template>
         </div>

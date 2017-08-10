@@ -14,7 +14,7 @@ export class DisciplinesComponent implements OnInit {
   trajectory: Trajectory;
   program: Program;
   disciplines: any[];
-
+  
   constructor(public data: DataService) { }
 
   getDisciplines(){

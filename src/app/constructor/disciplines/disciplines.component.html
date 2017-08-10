@@ -1,11 +1,20 @@
+
+<h2> Дисциплины расчитаны на {{ data.term }} обучения, {{(data.presence=='o')? 'очная' : 'заочная'}} форма  с применением {{ (data.technology_type==='t')? 'традиционных' : 'дистанционных' }} технологий</h2>
+      <div>
+        <button [style.border] = "(data.term === '3,5 года') ? '2px solid green' : '1px solid gray'" (click)="data.funcLength([1,2,3,4,5,6,7], '3,5 года')">3,5 года</button>
+        <button [style.border] = "(data.term === '4 года') ? '2px solid green' : '1px solid gray'" (click)="data.funcLength([1,2,3,4,5,6,7,8] , '4 года')">4 года</button>
+        <button [style.border] = "(data.term === '5 лет') ? '2px solid green' : '1px solid gray'" (click)="data.funcLength([1,2,3,4,5,6,7,8,9,10], '5 лет')">5 лет</button>
+        |
+        <button [style.border] = "(data.presence === 'o') ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('o')">Очно</button>
+        <button [style.border] = "(data.presence === 'z') ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('z')">Заочно</button>
+        |
+        <button [style.border] = "(data.technology_type === 't') ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('t')">Традиционно</button>
+        <button [style.border] = "(data.technology_type === 'd') ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('d')">Удаленно</button>
+      </div>
+
 <ng-template ngFor let-discipline [ngForOf]="disciplines">
   <div class="discipline">
-  <div class="title">
-    <h3>{{discipline.title}}</h3>
-  <div class="info">
-    Information
-  </div>
-</div>
-  <div class="calendar" app-discipline-calendar [discipline]="discipline" [semesters]="[1,2,3,4,5,6,7,8,9,10]"></div>
+    <div class="title" app-discipline-information [discipline]="discipline"></div>
+    <div class="calendar" app-discipline-calendar [discipline]="discipline"></div>
   </div>
 </ng-template>
