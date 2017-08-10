@@ -58,7 +58,11 @@ export class DisciplineCalendarComponent implements OnInit {
   public variantSelected(discipline, variants, variant, semester){
     if (variants && discipline.default_semester[this.data.term] === semester) {
       let elements = variants.filter((element) => {
-        if ( element.technology && element.technology.technology_type === this.data.technology_type ) {
+        if ( element.technology && element.technology.technology_type === this.data.technology_type && this.data.technology_type === 'd'){
+          if ( element.technology.presence === 'online' ) {
+            return true;
+          }
+        } else if ( element.technology && element.technology.technology_type === this.data.technology_type ) {
           if ( element.technology.presence === this.data.presence ) {
             if ( element.semester && element.semester.term === this.data.term ) {
               return true;
