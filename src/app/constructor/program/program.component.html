@@ -23,7 +23,11 @@
     </div>
 
     <div *ngIf = "data.modules && isModulesDone()">
-        
+        <button (click)="toggleStep()"> Далее </button>
+    </div>
+
+    <div *ngIf = "data.modules && !stepNext"> <div app-disciplines></div>
+
     </div>
     <!-- <div *ngIf="data.trajectory.target_id">
 

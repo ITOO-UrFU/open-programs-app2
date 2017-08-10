@@ -35,6 +35,8 @@ export class ProgramComponent implements OnInit {
   public presence: string = 'z';
   public technology_type = 'd';
 
+  public stepNext = false;
+
   public funcLength(val, term) {
     this.eduLength = val;
     this.term = term;
@@ -230,7 +232,7 @@ export class ProgramComponent implements OnInit {
 
   isModulesDone(){
     const laborAll = this.data.trajectory.modules_selected.reduce(
-      (a,b) => a.concat(b), []
+      (a, b) => a.concat(b), []
     ).map(
       modules_id => this.data.program.getModule(modules_id).get_labor
     ).reduce(
@@ -243,6 +245,9 @@ export class ProgramComponent implements OnInit {
       (a, b) => a + b, 0
     )
     return laborChoiceGroup === laborAll;
+  }
+  toggleStep(){
+    this.stepNext = !this.stepNext
   }
 
 

@@ -1,4 +1,11 @@
-<p *ngIf="data?.program?.id">
-  ProgramId : {{data.program.id}} <br />
-
-</p>
+<ng-template ngFor let-discipline [ngForOf]="disciplines">
+  <div class="discipline">
+  <div class="title">
+    <h1>{{discipline.title}}</h1>
+  <div class="info">
+    Information
+  </div>
+</div>
+  <div class="calendar" app-discipline-calendar></div>
+  </div>
+</ng-template>
