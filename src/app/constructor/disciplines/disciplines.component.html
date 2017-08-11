@@ -5,11 +5,13 @@
         <button [style.border] = "(data.term === '4 года') ? '2px solid green' : '1px solid gray'" (click)="data.funcLength([1,2,3,4,5,6,7,8] , '4 года')">4 года</button>
         <button [style.border] = "(data.term === '5 лет') ? '2px solid green' : '1px solid gray'" (click)="data.funcLength([1,2,3,4,5,6,7,8,9,10], '5 лет')">5 лет</button>
         |
-        <button [style.border] = "(data.presence === 'o') ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('o')">Очно</button>
-        <button [style.border] = "(data.presence === 'z') ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('z')">Заочно</button>
+        <button [style.border] = "(data.sync === 100) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('o', 100)">Очно</button>
+        <button [style.border] = "(data.sync === 50) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('z', 50)">Заочно</button>
+        <button [style.border] = "(data.sync === 0) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('z', 0)">Заочно</button>
         |
-        <button [style.border] = "(data.technology_type === 't') ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('t')">Традиционно</button>
-        <button [style.border] = "(data.technology_type === 'd') ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('d')">Удаленно</button>
+        <button [style.border] = "(data.campus === 100) ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('t', 100)">Традиционно</button>
+        <button [style.border] = "(data.campus === 50) ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('d', 50)">С частичным посящением</button>
+        <button [style.border] = "(data.campus === 0) ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('d', 0)">Удаленно</button>
       </div>
 
 <ng-template ngFor let-discipline [ngForOf]="disciplines">

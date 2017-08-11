@@ -3,7 +3,7 @@
       <tr class="variant">
 
         <ng-template [ngIf]="variant.course">
-        <td class="variant-title"><p>Курс</p></td>
+        <td class="variant-title"><p>Курс (свободное)</p></td>
         <td>
           <select (change)="changeVariant({variant_id:variant.id,course_id:$event.target.value})">
             <option  [disabled]="true">Выберите</option>
@@ -14,7 +14,7 @@
         </td>
         </ng-template>
         <ng-template [ngIf]="variant.parity">
-        <td class="variant-title"><p>По&nbsp;четности</p></td>
+        <td class="variant-title"><p>По четности<br />(не конфликтное)</p></td>
         <td>
           <select (change)="changeVariant({variant_id:variant.id,parity:$event.target.value})">
             <option  [value]="1" [selected]="variant?.parity==1">Осенний семестр</option>
@@ -24,7 +24,7 @@
         </td>
         </ng-template>
         <ng-template [ngIf]="variant.semester">
-        <td class="variant-title"><p>Семестр</p></td>
+        <td class="variant-title"><p>Семестр (конфликтное)</p></td>
         <td>
           <select (change)="changeVariant({variant_id:variant.id,semester:$event.target.value})">
             <option *ngIf="discipline.terms['3,5 года']"  [value]="'3,5 года'" [selected]="variant?.semester.term=='3,5 года'">3,5 года</option>
@@ -56,7 +56,7 @@
       </ng-template>
 
       <p id="actions">
-      <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,course_id:52})">Курс</a>
-      <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,parity_id:3})">По четности</a>
-      <a (click)="addVariantSemester()" [style.background-color] ="disabledButton() ? 'red' : 'green'">Семестр</a><p>
+      <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,course_id:52})">Курс (свободное планирование)</a>
+      <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,parity_id:3})">По четности (не конфликтное планирование)</a>
+      <a (click)="addVariantSemester()" [style.background-color] ="disabledButton() ? 'red' : 'green'">Семестр (конфликтное планирование)</a><p>
 </ng-template>
