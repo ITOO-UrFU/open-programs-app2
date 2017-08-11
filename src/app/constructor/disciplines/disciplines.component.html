@@ -6,7 +6,7 @@
         <button [style.border] = "(data.term === '5 лет') ? '2px solid green' : '1px solid gray'" (click)="data.funcLength([1,2,3,4,5,6,7,8,9,10], '5 лет')">5 лет</button>
         |
         <button [style.border] = "(data.sync === 100) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('o', 100)">Очно</button>
-        <button [style.border] = "(data.sync === 50) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('z', 50)">Заочно</button>
+        <button [style.border] = "(data.sync === 50) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('z', 50)">очно-заочно</button>
         <button [style.border] = "(data.sync === 0) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('z', 0)">Заочно</button>
         |
         <button [style.border] = "(data.campus === 100) ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('t', 100)">Традиционно</button>

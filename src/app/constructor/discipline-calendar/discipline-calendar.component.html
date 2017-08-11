@@ -1,7 +1,7 @@
 <ng-template ngFor let-semester [ngForOf]="data.eduLength"><div class="semester" [style.width] ="98/data.eduLength.length +'%'">
   <ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]">
       <div [style.background-color] = "variantSelected(discipline, program.variants[discipline.id], variant, semester) ? 'green' : '' ">
-        <div>
+        <div [style.background-color] = "selectDefault(discipline, program.variants[discipline.id], variant, semester) ? 'red' : '' " >
         <ng-template [ngIf]="variant.technology?.presence=='online'">
           <button>Онлайн курс: {{variant.course?.title}}</button>
         </ng-template>

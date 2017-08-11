@@ -20,9 +20,25 @@ export class DisciplineCalendarComponent implements OnInit {
   constructor(public data: DataService) { }
   
 
-  public selectDefault(discipline, variants, variant, semester){
+  public selectDefault(discipline, variants, variant, semester) {
     if (variants && discipline.default_semester[this.data.term] === semester) {
-      
+      let elements = variants.filter((element) => {
+        if ( element.technology && element.technology.presence === 'online' && this.data.technology_type === 'd'){
+          if ( element.technology.technology_type === this.data.technology_type ) {
+            this.trajectory.setVariants(discipline.id, variant.id)
+            return true;
+          }
+        } else if ( element.technology && element.technology.presence === this.data.presence ) {
+          if ( element.technology.technology_type === this.data.technology_type ) {
+            if ( element.semester && element.semester.term === this.data.term ) {
+              return true;
+            }
+          }
+        }
+      });
+      if (elements.length){
+        return elements[0].id === variant.id;
+      }
     }
   }
 
