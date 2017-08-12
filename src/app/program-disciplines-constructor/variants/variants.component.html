@@ -54,8 +54,11 @@
                   <option [selected]="diagram.id==variant.diagram?.id" [value]="diagram.id">{{diagram.title}}</option>
             </ng-template>
         </select>
-                <p>Синхронно: {{variant.technology.sync}}</p>
-                <p>Кампус: {{variant.technology.campus}}</p>
+            </td>
+            <td>
+                <p>
+                    <span style="font-size:55%">Синхрон: {{variant.technology.sync}} Кампус: {{variant.technology.campus}}</span>
+                </p>
             </td>
             <td (click)="removeVariant({variant_id:variant.id})">
                 [x]
