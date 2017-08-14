@@ -13,31 +13,36 @@ import { Program } from '../program2';
 export class DisciplineCalendarComponent implements OnInit {
   trajectory: Trajectory;
   program: Program;
-  
+
 
   @Input() discipline;
 
   constructor(public data: DataService) { }
-  
+
 
   public selectDefault(discipline, variants, variant, semester) {
     if (variants && discipline.default_semester[this.data.term] === semester) {
-      let elements = variants.filter((element) => {
-        if ( element.technology && element.technology.presence === 'online' && this.data.technology_type === 'd'){
-          if ( element.technology.technology_type === this.data.technology_type ) {
-            this.trajectory.setVariants(discipline.id, variant.id)
+      const elements = variants.filter(
+        (element) => {
+          if (element.technology && element.technology.mobility > 0) {
             return true;
-          }
-        } else if ( element.technology && element.technology.presence === this.data.presence ) {
-          if ( element.technology.technology_type === this.data.technology_type ) {
-            if ( element.semester && element.semester.term === this.data.term ) {
-              return true;
-            }
+          } else if (element.technology && element.technology.mobility === 0) {
+            return element.semester.term === this.data.term;
           }
         }
-      });
+      ).filter(
+        (element) => {
+          if ( element.technology.sync === this.data.sync && element.technology.campus === this.data.campus ) {
+            return true;
+          } else if ( element.technology.campus === this.data.campus ) {
+            return true;
+          } else if ( element.technology.sync === this.data.sync ) {
+            return true;
+          }
+        }
+      );
       if (elements.length){
-        return elements[0].id === variant.id;
+          return elements[0].id === variant.id;
       }
     }
   }
@@ -47,7 +52,6 @@ export class DisciplineCalendarComponent implements OnInit {
       let elements = variants.filter((element) => {
         if ( element.technology && element.technology.presence === 'online' && this.data.technology_type === 'd'){
           if ( element.technology.technology_type === this.data.technology_type ) {
-            this.trajectory.setVariants(discipline.id, variant.id)
             return true;
           }
         } else if ( element.technology && element.technology.presence === this.data.presence ) {
