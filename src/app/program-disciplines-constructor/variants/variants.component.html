@@ -56,7 +56,7 @@
         </select>
             </td>
             <td>
-                <p>
+                <p *ngIf="variant.technology">
                     <span style="font-size:55%">Синхрон: {{variant.technology.sync}} Кампус: {{variant.technology.campus}}</span>
                 </p>
             </td>

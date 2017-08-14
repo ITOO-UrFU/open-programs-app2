@@ -21,6 +21,11 @@ export class DisciplineCalendarComponent implements OnInit {
 
 
   public selectDefault(discipline, variants, variant, semester) {
+
+    function mycomparator(a, b) {
+  return parseInt(a.price, 10) - parseInt(b.price, 10);
+}
+
     if (variants && discipline.default_semester[this.data.term] === semester) {
       let elements = variants.filter(
         (element) => {
@@ -30,7 +35,15 @@ export class DisciplineCalendarComponent implements OnInit {
             return element.semester.term === this.data.term;
           }
         }
-      )
+      );
+      if (this.data.campus === 0) {
+        console.log("Campus: ", "lth")
+      } else if ( this.data.campus === 100 ) {
+        console.log("Campus: ", "htl")
+      } else {
+        console.log("Campus: ", "50");
+      }
+
     }
   }
 
@@ -49,7 +62,7 @@ export class DisciplineCalendarComponent implements OnInit {
           }
         }
       });
-      if (elements.length){
+      if (elements.length) {
         return elements[0].id === variant.id;
       } else {
         elements = variants.filter((element) => {
