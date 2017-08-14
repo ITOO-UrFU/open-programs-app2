@@ -19,23 +19,26 @@ export class DisciplineCalendarComponent implements OnInit {
 
   constructor(public data: DataService) { }
 
-//   private sort_by = function(field, reverse, primer){
 
-//    const key = primer ?
-//        function(x) {return primer(x[field])} :
-//        function(x) {return x[field]};
-
-//    reverse = !reverse ? 1 : -1;
-
-//    return function (a, b) {
-//      a = key(a);
-//      b = key(b);
-//      return reverse * ((a > b) - (b > a));
-//     } 
-// }
 
   public selectDefault(discipline, variants, variant, semester) {
 
+    function compareValues(key, order) {
+      return function(a, b) {
+        const varA = a.technology[key];
+        const varB = b.technology[key];
+
+        let comparison = 0;
+        if (varA > varB) {
+          comparison = 1;
+        } else if (varA < varB) {
+          comparison = -1;
+        }
+        return (
+          (order === 'htl') ? (comparison * -1) : comparison
+        );
+      };
+    }
 
     if (variants && discipline.default_semester[this.data.term] === semester) {
       let elements = variants.filter(
@@ -48,13 +51,46 @@ export class DisciplineCalendarComponent implements OnInit {
         }
       );
       if (this.data.campus === 0) {
-        console.log("Campus: ", "lth")
+        elements.sort(compareValues("campus", "lth"))
       } else if ( this.data.campus === 100 ) {
-        console.log("Campus: ", "htl")
+        elements.sort(compareValues("campus", "htl"))
       } else {
-        console.log("Campus: ", "50");
+        elements.sort(compareValues("campus", "lth"))
+      }
+      const campus_elements = elements.filter(
+        (element) => {
+          if (this.data.campus !== 50 && element.technology.campus === 100 - this.data.campus) {
+            return false;
+          } else {return true; }
+        }
+      );
+      if (campus_elements.length) {
+        elements = campus_elements;
       }
 
+      if (this.data.sync === 0) {
+        elements.sort(compareValues("sync", "lth"))
+      } else if ( this.data.sync === 100 ) {
+        elements.sort(compareValues("sync", "htl"))
+      } else {
+        elements.sort(compareValues("sync", "lth"))
+      }
+      const sync_elements = elements.filter(
+        (element) => {
+          if (this.data.sync !== 50 && element.technology.sync === 100 - this.data.sync) {
+            return false;
+          } else {return true; }
+        }
+      );
+      if (sync_elements.length) {
+        return sync_elements[0].id === variant.id;
+      } else {
+        if (elements.length) {
+          return elements[0].id === variant.id;
+        } else {
+          return variants[0].id === variant.id;
+        }
+        }
     }
   }
 
