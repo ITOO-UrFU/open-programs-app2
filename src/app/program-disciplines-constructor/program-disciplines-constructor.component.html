@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <td>
-                  <p>Н#</p>
+                    <p>Н#</p>
                 </td>
                 <td>
                     <p>Дисциплина программы</p>
@@ -29,9 +29,10 @@
         <tbody>
             <ng-template ngFor let-discipline [ngForOf]="disciplines" let-i="index">
                 <tr>
-                  <td>
-                    <p>{{i}}<p>
-                  </td>
+                    <td>
+                        <p>{{i}}
+                            <p>
+                    </td>
                     <td>
                         <p><span id="discipline-title">{{discipline?.title}}</span><br /><span id="subscription">{{discipline?.module}} <strong>{{ discipline?.module_uni_number }}</strong></span></p>
                     </td>
@@ -70,12 +71,12 @@
           <option [selected]="discipline.terms['5 лет']==10" [value] = "10">10 семестр</option>
 </select></td>
 
-    <td *ngIf="program?.id && discipline && courses && diagrams && technologies && variants"  class="variants-table" app-variants [program_id]="program?.id" [discipline]="discipline" [courses]="courses" [diagrams]="diagrams" [technologies]="technologies" [variants]="variants[discipline.id]">
+                    <td *ngIf="program?.id && discipline && courses && diagrams && variants" class="variants-table" app-variants [program_id]="program?.id" [discipline]="discipline" [courses]="courses" [diagrams]="diagrams" [variants]="variants[discipline.id]">
 
-    </td>
+                    </td>
 
-    </tr>
-    </ng-template>
-  </tbody>
-</table>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
 </div>

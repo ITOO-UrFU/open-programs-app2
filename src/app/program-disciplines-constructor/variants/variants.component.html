@@ -1,62 +1,74 @@
 <ng-template [ngIf]="variants">
- <ng-template ngFor let-variant [ngForOf]="variants">
-      <tr class="variant">
+    <ng-template ngFor let-variant [ngForOf]="variants">
+        <tr class="variant">
 
-        <ng-template [ngIf]="variant.course">
-        <td class="variant-title"><p>Курс (свободное)</p></td>
-        <td>
-          <select (change)="changeVariant({variant_id:variant.id,course_id:$event.target.value})">
+            <ng-template [ngIf]="variant.course">
+                <td class="variant-title">
+                    <p>Свободный</p>
+                </td>
+                <td>
+                    <select (change)="changeVariant({variant_id:variant.id,course_id:$event.target.value})">
             <option  [disabled]="true">Выберите</option>
             <ng-template ngFor let-course [ngForOf]="courses">
                   <option [selected]="course.title==variant.course.title" [value]="course.id">{{course.title}}</option>
             </ng-template>
         </select>
-        </td>
-        </ng-template>
-        <ng-template [ngIf]="variant.parity">
-        <td class="variant-title"><p>По четности<br />(не конфликтное)</p></td>
-        <td>
-          <select (change)="changeVariant({variant_id:variant.id,parity:$event.target.value})">
-            <option  [value]="1" [selected]="variant?.parity==1">Осенний семестр</option>
-            <option  [value]="2" [selected]="variant?.parity==2">Весенний семестр</option>
-            <option  [value]="3" [selected]="variant?.parity==3">Любой семестр</option>
-          </select>
-        </td>
-        </ng-template>
-        <ng-template [ngIf]="variant.semester">
-        <td class="variant-title"><p>Семестр (конфликтное)</p></td>
-        <td>
-          <select (change)="changeVariant({variant_id:variant.id,semester:$event.target.value})">
-            <option *ngIf="discipline.terms['3,5 года']"  [value]="'3,5 года'" [selected]="variant?.semester.term=='3,5 года'">3,5 года</option>
-            <option *ngIf="discipline.terms['4 года']"  [value]="'4 года'" [selected]="variant?.semester.term=='4 года'">4 года</option>
-            <option *ngIf="discipline.terms['5 лет']"  [value]="'5 лет'" [selected]="variant?.semester.term=='5 лет'">5 лет</option>
-          </select>
-        </td>
-        </ng-template>
+                </td>
+            </ng-template>
+            <ng-template [ngIf]="variant.parity">
+                <td class="variant-title">
+                    <p>Не конфликтный</p>
+                </td>
                 <td>
+                    <select (change)="changeVariant({variant_id:variant.id,parity:$event.target.value})">
+            <option [value]="1" [selected]="variant?.parity==1">Осенний семестр</option>
+            <option [value]="2" [selected]="variant?.parity==2">Весенний семестр</option>
+            <option [value]="3" [selected]="variant?.parity==3">Любой семестр</option>
+          </select>
+                </td>
+            </ng-template>
+            <ng-template [ngIf]="variant.semester">
+                <td class="variant-title">
+                    <p>Конфликтный</p>
+                </td>
+                <td>
+                    <select (change)="changeVariant({variant_id:variant.id,semester:$event.target.value})">
+            <option *ngIf="discipline.terms['3,5 года']" [value]="'3,5 года'" [selected]="variant?.semester.term=='3,5 года'">3,5 года</option>
+            <option *ngIf="discipline.terms['4 года']" [value]="'4 года'" [selected]="variant?.semester.term=='4 года'">4 года</option>
+            <option *ngIf="discipline.terms['5 лет']" [value]="'5 лет'" [selected]="variant?.semester.term=='5 лет'">5 лет</option>
+          </select>
+                </td>
+            </ng-template>
+            <!-- <td>
           <select (change)="changeVariant({variant_id:variant.id,technology_id:$event.target.value})">
               <option  [disabled]="true" >Выберите</option>
               <ng-template ngFor let-technology  [ngForOf]="technologies">
                     <option [selected]="technology.id==variant.technology?.id" [value]="technology.id">{{technology.title}}</option>
               </ng-template>
           </select>
-        </td>
-        <td>
-          <select (change)="changeVariant({variant_id:variant.id,diagram_id:$event.target.value})">
-            <option  [disabled]="true" >Выберите</option>
+        </td> -->
+            <td>
+                <select (change)="changeVariant({variant_id:variant.id,diagram_id:$event.target.value})">
+            <option  [disabled]="true">Выберите</option>
             <ng-template ngFor let-diagram [ngForOf]="diagrams">
                   <option [selected]="diagram.id==variant.diagram?.id" [value]="diagram.id">{{diagram.title}}</option>
             </ng-template>
         </select>
-        </td>
-        <td (click)="removeVariant({variant_id:variant.id})">
-          [x]
-        </td>
-      </tr>
-      </ng-template>
+            </td>
+            <td>
+                <p>
+                    <span style="font-size:55%">Синхрон: {{variant.technology.sync}} Кампус: {{variant.technology.campus}}</span>
+                </p>
+            </td>
+            <td (click)="removeVariant({variant_id:variant.id})">
+                [x]
+            </td>
+        </tr>
+    </ng-template>
 
-      <p id="actions">
-      <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,course_id:52})">Курс (свободное планирование)</a>
-      <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,parity_id:3})">По четности (не конфликтное планирование)</a>
-      <a (click)="addVariantSemester()" [style.background-color] ="disabledButton() ? 'red' : 'green'">Семестр (конфликтное планирование)</a><p>
+    <p id="actions">
+        <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,course_id:52})">Свободный</a>
+        <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,parity_id:3})">Не конфликтный</a>
+        <a (click)="addVariantSemester()" [style.background-color]="disabledButton() ? 'red' : 'green'">Конфликтный</a>
+        <p>
 </ng-template>

@@ -23,7 +23,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
   public courses: any = [];
   public variants: any;
   public diagrams: any;
-  public technologies: any;
+  // public technologies: any;
 
   callType(discipline_id, term_title, target_value) {
     const value = {program_id: this.program_id, discipline_id: discipline_id, term_title: term_title, semester: target_value};
@@ -65,7 +65,7 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                         this.getProgram(this.program_id);
                         this.getCourses();
                         this.getDiagrams();
-                        this.getTechnologies();
+                        // this.getTechnologies();
                       },
                       error => this.errorMessage = 'Неверный адрес!'
                     );
@@ -107,16 +107,16 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       error => console.log(error)
                     );
   }
-    public getTechnologies() {
-    this.globalService.getElements('technologies')
-                    .subscribe(
-                      technologies => {
-                        this.technologies = technologies;
-                        console.log('Технологии', technologies);
-                      },
-                      error => console.log(error)
-                    );
-  }
+  //   public getTechnologies() {
+  //   this.globalService.getElements('technologies')
+  //                   .subscribe(
+  //                     technologies => {
+  //                       this.technologies = technologies;
+  //                       console.log('Технологии', technologies);
+  //                     },
+  //                     error => console.log(error)
+  //                   );
+  // }
 
   public getDisciplines(slug: string) {
     this.globalService.getElementsBySlug('get_program_disciplines', slug)
