@@ -22,7 +22,7 @@ export class DisciplineCalendarComponent implements OnInit {
 
   public selectDefault(discipline, variants, variant, semester) {
     if (variants && discipline.default_semester[this.data.term] === semester) {
-      const elements = variants.filter(
+      let elements = variants.filter(
         (element) => {
           if (element.technology && element.technology.mobility > 0) {
             return true;
@@ -30,20 +30,7 @@ export class DisciplineCalendarComponent implements OnInit {
             return element.semester.term === this.data.term;
           }
         }
-      ).filter(
-        (element) => {
-          if ( element.technology.sync === this.data.sync && element.technology.campus === this.data.campus ) {
-            return true;
-          } else if ( element.technology.campus === this.data.campus ) {
-            return true;
-          } else if ( element.technology.sync === this.data.sync ) {
-            return true;
-          }
-        }
-      );
-      if (elements.length){
-          return elements[0].id === variant.id;
-      }
+      )
     }
   }
 
