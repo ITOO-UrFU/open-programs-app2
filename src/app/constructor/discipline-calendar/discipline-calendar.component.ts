@@ -19,12 +19,23 @@ export class DisciplineCalendarComponent implements OnInit {
 
   constructor(public data: DataService) { }
 
+//   private sort_by = function(field, reverse, primer){
+
+//    const key = primer ?
+//        function(x) {return primer(x[field])} :
+//        function(x) {return x[field]};
+
+//    reverse = !reverse ? 1 : -1;
+
+//    return function (a, b) {
+//      a = key(a);
+//      b = key(b);
+//      return reverse * ((a > b) - (b > a));
+//     } 
+// }
 
   public selectDefault(discipline, variants, variant, semester) {
 
-    function mycomparator(a, b) {
-  return parseInt(a.price, 10) - parseInt(b.price, 10);
-}
 
     if (variants && discipline.default_semester[this.data.term] === semester) {
       let elements = variants.filter(
