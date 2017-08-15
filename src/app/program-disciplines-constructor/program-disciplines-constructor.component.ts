@@ -62,18 +62,6 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       );
   }
 
-  addDefaultVariants(value) {
-    console.log("addDefaultVariants", value);
-    this.globalService.postResponse('add_default_variants', JSON.stringify(value))
-                      .subscribe(
-                      status => {
-                        this.getDisciplineVariants(value.discipline_id);
-                      },
-                     error => {
-                        if (error.indexOf('401') !== -1) { this.authService.logout(); }
-                      }
-                      );
-  }
 
   removeDiscipline(value) {
     this.globalService.postResponse('remove_discipline', JSON.stringify(value))
