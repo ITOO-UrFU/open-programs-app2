@@ -70,5 +70,6 @@
         <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,course_id:52})">Свободный</a>
         <a (click)="addVariant({program_id:program_id,discipline_id:discipline.id,parity_id:3})">Не конфликтный</a>
         <a (click)="addVariantSemester()" [style.background-color]="disabledButton() ? 'red' : 'green'">Конфликтный</a>
+        <span class="add-default-variants" (click)="addDefaultVariants()">[add defaults]</span>
         <p>
 </ng-template>

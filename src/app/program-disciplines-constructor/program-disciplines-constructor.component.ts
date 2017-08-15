@@ -38,6 +38,17 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                       }
                       );
   }
+
+  public getDisciplineVariants(slug: string) {
+    this.globalService.getElementsBySlug('get_variants/' + this.program_id, slug)
+                    .subscribe(
+                      variants => {
+                        this.variants = variants;
+                      },
+                      error => console.log(error)
+                    );
+  }
+
   changeVariant(value) {
     console.log(value);
     this.globalService.postResponse('change_variant', JSON.stringify(value))
@@ -49,6 +60,32 @@ export class ProgramDisciplinesConstructorComponent implements OnInit {
                         if (error.indexOf('401') !== -1) { this.authService.logout(); }
                       }
                       );
+  }
+
+  addDefaultVariants(value) {
+    console.log("addDefaultVariants", value);
+    this.globalService.postResponse('add_default_variants', JSON.stringify(value))
+                      .subscribe(
+                      status => {
+                        this.getDisciplineVariants(value.discipline_id);
+                      },
+                     error => {
+                        if (error.indexOf('401') !== -1) { this.authService.logout(); }
+                      }
+                      );
+  }
+
+  removeDiscipline(value) {
+    this.globalService.postResponse('remove_discipline', JSON.stringify(value))
+                      .subscribe(
+                      status => {
+                         console.log(status);
+                      },
+                     error => {
+                        if (error.indexOf('401') !== -1) { this.authService.logout(); }
+                      }
+                      );
+                    document.getElementById(value.id).className = 'deleted';
   }
 
     constructor ( private router: Router,

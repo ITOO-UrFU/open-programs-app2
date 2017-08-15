@@ -30,6 +30,21 @@ export class VariantsComponent implements OnInit {
                       error => console.log(error)
                     );
   }
+addDefaultVariants() {
+    this.globalService.postResponse('add_default_variants', JSON.stringify(
+      {"discipline_id": this.discipline.id,
+      "program_id": this.program_id
+    }
+  ))
+                      .subscribe(
+                      status => {
+                        this.getDisciplinesVariants(this.discipline.id);
+                        console.log(status);
+                      },
+                      error => console.log(error)
+                      );
+  }
+
   public addVariant(value) {
     console.log('addVariant', value);
        this.globalService.postResponseAdmin('create_variant', JSON.stringify(value))

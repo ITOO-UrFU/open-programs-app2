@@ -28,13 +28,17 @@
         </thead>
         <tbody>
             <ng-template ngFor let-discipline [ngForOf]="disciplines" let-i="index">
-                <tr>
+                <tr id="{{discipline?.id}}">
                     <td>
                         <p>{{i}}
                             <p>
                     </td>
                     <td>
-                        <p><span id="discipline-title">{{discipline?.title}}</span><br /><span id="subscription">{{discipline?.module}} <strong>{{ discipline?.module_uni_number }}</strong></span></p>
+                        <span class="discipline-remove" (click)="removeDiscipline({'id': discipline?.id})">[x]</span>
+                        <p>
+                            <span id="discipline-title">{{discipline?.title}}</span><br /><span id="subscription">{{discipline?.module}} <strong>{{ discipline?.module_uni_number }}</strong></span>
+                        </p>
+                        <span class="add-default-variants" (click)="addDefaultVariants({'discipline_id': discipline?.id, 'program_id': program?.id})">[add defaults]</span>
                     </td>
                     <td [style.background-color]="discipline.terms['3,5 года'] ? 'rgba(0, 128, 0, 0.21)' : 'rgba(128, 0, 0, 0.21)'"><select (change)="callType(discipline.id, '3,5 года', $event.target.value)">
           <option [disabled]="true" [selected]="discipline.terms['3,5 года']==0">Семестр</option>
