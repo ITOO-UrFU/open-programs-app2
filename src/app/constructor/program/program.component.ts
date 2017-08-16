@@ -54,7 +54,7 @@ export class ProgramComponent implements OnInit {
                private activateRoute: ActivatedRoute,
                private titleService: Title,
                private service: ConstructorService,
-               private data: DataService ) { }
+               public data: DataService ) { }
 
 
   public variantSelected(discipline, variant, semester) {

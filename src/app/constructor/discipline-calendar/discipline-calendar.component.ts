@@ -20,7 +20,6 @@ export class DisciplineCalendarComponent implements OnInit {
   constructor(public data: DataService) { }
 
 
-
   public selectDefault(discipline, variants, variant, semester) {
 
     function compareValues(key, order) {
@@ -28,19 +27,28 @@ export class DisciplineCalendarComponent implements OnInit {
         const varA = a.technology[key];
         const varB = b.technology[key];
 
-        let comparison = 0;
-        if (varA > varB) {
-          comparison = 1;
-        } else if (varA < varB) {
-          comparison = -1;
+        if (order === '50') {
+          let comparison = 0;
+          if (Math.abs(varA - 49) > Math.abs(varB - 49)) {
+            comparison = 1;
+          } else if (Math.abs(varA - 49) < Math.abs(varB - 49)) {
+            comparison = -1;
+          }
+        } else {
+
+          let comparison = 0;
+          if (varA > varB) {
+            comparison = 1;
+          } else if (varA < varB) {
+            comparison = -1;
+          }
+          return (
+            (order === 'htl') ? (comparison * -1) : comparison
+          );
         }
-        return (
-          (order === 'htl') ? (comparison * -1) : comparison
-        );
       };
     }
-
-    if (variants && discipline.default_semester[this.data.term] === semester) {
+    if (variants) {
       let elements = variants.filter(
         (element) => {
           if (element.technology && element.technology.mobility > 0) {
@@ -55,25 +63,29 @@ export class DisciplineCalendarComponent implements OnInit {
       } else if ( this.data.campus === 100 ) {
         elements.sort(compareValues("campus", "htl"))
       } else {
-        elements.sort(compareValues("campus", "lth"))
+        elements.sort(compareValues("campus", "50"))
+        console.log('Campus', elements)
       }
       const campus_elements = elements.filter(
         (element) => {
           if (this.data.campus !== 50 && element.technology.campus === 100 - this.data.campus) {
             return false;
+          } else if (this.data.campus === 50) {
+            return element.technology.campus === 0;
           } else {return true; }
         }
       );
       if (campus_elements.length) {
         elements = campus_elements;
       }
+      console.log('Campus2', elements, campus_elements)
 
       if (this.data.sync === 0) {
         elements.sort(compareValues("sync", "lth"))
       } else if ( this.data.sync === 100 ) {
         elements.sort(compareValues("sync", "htl"))
       } else {
-        elements.sort(compareValues("sync", "lth"))
+        elements.sort(compareValues("sync", "50"))
       }
       const sync_elements = elements.filter(
         (element) => {
