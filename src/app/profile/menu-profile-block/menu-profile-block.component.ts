@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ProfileService } from '../profile.service';
 import { AuthService } from '../../auth/auth.service';
 
@@ -11,6 +11,7 @@ export class MenuProfileBlockComponent implements OnInit {
 
   public person: any;
   public emptyFieldText = 'Не заполнено';
+  public is_hidden = true;
 
 
   constructor(
@@ -27,6 +28,10 @@ export class MenuProfileBlockComponent implements OnInit {
   ngOnInit() {
     // console.log('Инициализировал блок профиля в меню');
     this.setProfileInfo();
+  }
+
+  dropdown() {
+    this.is_hidden = !this.is_hidden;
   }
 
   setProfileInfo() {

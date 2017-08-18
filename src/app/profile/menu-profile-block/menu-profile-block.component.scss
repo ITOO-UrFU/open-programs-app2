@@ -1,17 +1,26 @@
-a{
-    background: azure;
+.profile_menu {
     text-decoration: none;
-    color: black;
-    font-family: "Open Sans";
-    padding: 0px 0px;
-    padding: 12px 9px;
-    &:hover{
-        background: antiquewhite;
-    }
+    font-weight: 300;
+    color: white;
+    height: 55px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
 }
 .profile-photo{   
     border: 0;
     width: 35px;
     margin-right: 5px;
     vertical-align: middle;
+}
+.dropdown {
+    background-color: #4A96AD;
+    padding-bottom: 1em;
+    a {
+        display: block;
+        padding: 0.5em;
+        text-decoration: none;
+        font-weight: 300;
+        color: white;
+    }
 }

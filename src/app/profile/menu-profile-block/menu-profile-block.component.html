@@ -1,4 +1,12 @@
-<a *ngIf="person" [routerLink]="['/', 'profile']"> 
- <img src="{{person.profile_photo}}" alt="Фото профиля" class="profile-photo">
- <span>{{person.first_name || 'Безымянный'}} {{person.last_name || 'человек'}}</span>
-</a>
+<div class="profile_menu" *ngIf="person" (click)="dropdown()"> 
+    <img src="{{person.profile_photo}}" alt="Фото профиля" class="profile-photo">
+    <span>{{person.first_name || 'Безымянный'}} {{person.last_name || 'человек'}}</span>
+    <i class="fa fa-caret-down" aria-hidden="true"></i>
+</div>
+
+<div class="dropdown" [hidden]="is_hidden">
+    <a href="/profile/edit">Редактрировать профиль</a>
+    <a href="/profile/trajectories">Смотреть траектории</a>
+    <hr>
+    <a href="/logout">Выйти</a>
+</div>

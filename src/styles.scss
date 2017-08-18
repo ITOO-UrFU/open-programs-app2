@@ -2,6 +2,7 @@
 
 body[app-root] {
     font-family: 'Roboto', sans-serif;
+    margin: 0;
 }
 
 div[element-open-program] {
@@ -276,12 +277,17 @@ diagram {
     color: red;
 }
 
-.widget__login, .widget__register {
+.widget__login, .widget__register, .widget__profile_edit {
     margin: 0 auto;
-    margin-top: 3em;
+    margin-top: 7em;
     width: 500px;
     background-color: white;
     padding: 1em;
+
+    .title > p {
+        font-size: 2em;
+        font-weight: 300;
+    }
     
     h2 {
         text-align: center;
@@ -384,4 +390,8 @@ diagram {
             }
         }
     }
+}
+
+.widget__profile_edit > div {
+    margin-bottom: 2em;
 }

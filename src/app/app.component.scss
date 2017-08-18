@@ -1,15 +1,27 @@
 .menu{
-    height: 46px;
-    padding: 0px;
-    a{
-        background: azure;
-        text-decoration: none;
-        color: black;
-        font-family: "Open Sans";
-        padding: 0px 0px;
-        padding: 12px 9px;
-        &:hover{
-            background: antiquewhite;
+    height: 55px;
+    width: 100%;
+    background-color: #4A96AD;
+    .content{
+        display: flex;
+        justify-content: space-between;
+        width: 970px;
+        margin: 0 auto;
+        overflow: hidden;
+        .item {
+            padding: 0px 1em;
+            height: 55px;
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            &:hover{
+                background: #295a69;
+            }
+            a {
+                text-decoration: none;
+                color: white;
+                font-weight: 300;
+            }
         }
     }
 }

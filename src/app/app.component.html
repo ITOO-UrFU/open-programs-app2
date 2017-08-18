@@ -1,13 +1,25 @@
 <div *ngIf="menu" class="menu">
-  <ng-template ngFor let-container [ngForOf]="menu" let-i="index">
-    <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
-  </ng-template>
-  <ng-template [ngIf]="isLogged" [ngIfElse]='elseBlock'>
-    <app-menu-profile-block></app-menu-profile-block>
-  </ng-template>
-  <ng-template #elseBlock>
-    <a [routerLink]="['/', 'login']">Вход</a>
-  </ng-template>
+  <div class="content">
+    <div class="left">
+      <ng-template ngFor let-container [ngForOf]="menu" let-i="index">
+        <div class="item">
+          <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
+        </div>  
+      </ng-template>
+    </div>
+    <div class="right">
+      <ng-template [ngIf]="isLogged" [ngIfElse]='elseBlock'>
+        <div class="dropdown">
+          <app-menu-profile-block></app-menu-profile-block>
+        </div>
+      </ng-template>
+      <ng-template #elseBlock>
+        <div class="item right">
+          <a [routerLink]="['/', 'login']">Вход</a>
+        </div>
+      </ng-template>
+    </div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
