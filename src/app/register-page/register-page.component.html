@@ -1,3 +1,4 @@
+<div class="widget__register">
 <h2>Регистрация</h2>
 <form name="form" (ngSubmit)="register()" #f="ngForm" validate>
 
@@ -45,14 +46,15 @@
              <div *ngIf="f.submitted && !password2.valid" class="help-block">Необходимо повторно ввести пароль</div>
          </div>
 
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !agreementOfDataProcessing.valid }">
+      <div class="form-group oneline" [ngClass]="{ 'has-error': f.submitted && !agreementOfDataProcessing.valid }">
           
         <input class="form-control" name="agreementOfDataProcessing" [(ngModel)]="registerModel.agreementOfDataProcessing" #agreementOfDataProcessing="ngModel" type="checkbox" required/>
-          <label for="password2">Я принимаю все соглашения.</label>
-         <div *ngIf="f.submitted && !agreementOfDataProcessing.valid" class="help-block">Поставьте галку</div>
+        <label for="agreementOfDataProcessing">Я согласен с условиями предоставления сервиса.</label>
+         <div *ngIf="f.submitted && !agreementOfDataProcessing.valid" class="help-block">Необходимо ваше согласие с условиями предоставления сервиса.</div>
       </div>
 
          <div class="form-group">
              <button [disabled]="f.invalid" class="btn btn-primary">Зарегистрироваться</button>
          </div>
     </form>
+</div>

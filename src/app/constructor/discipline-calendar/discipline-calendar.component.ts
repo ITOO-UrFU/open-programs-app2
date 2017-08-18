@@ -29,9 +29,9 @@ export class DisciplineCalendarComponent implements OnInit {
 
         if (order === '50') {
           let comparison = 0;
-          if (Math.abs(varA - 49) > Math.abs(varB - 49)) {
+          if (Math.abs(varA - 50) > Math.abs(varB - 50)) {
             comparison = 1;
-          } else if (Math.abs(varA - 49) < Math.abs(varB - 49)) {
+          } else if (Math.abs(varA - 50) < Math.abs(varB - 50)) {
             comparison = -1;
           }
         } else {

@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 body[app-root] {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 div[element-open-program] {
@@ -274,4 +274,63 @@ diagram {
 
 .alert {
     color: red;
+}
+
+.widget__login, .widget__register {
+    margin: 0 auto;
+    margin-top: 3em;
+    width: 500px;
+    background-color: white;
+    padding: 1em;
+    
+    h2 {
+        text-align: center;
+        padding-bottom: 1em;
+    }
+    .form-group {
+        padding-bottom: 1em;
+        line-height: 150%;
+        label {
+            padding:0px;
+            display:block;
+            font-weight: 300;
+        }
+        input {
+            width: 100%;
+            font-size: 20px;
+        }
+        button {
+            padding: .5em;
+            margin-top: 0.5em;
+            width: 100%;
+            background-color: #4A96AD;
+            color: white;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #295a69;
+        }
+    }
+    .form-group.oneline {
+        input, label {
+            display: inline;
+            font-weight: 400;
+        }
+        input {
+            width: 30px !important;
+        }
+    }
+    .reset-password {
+        margin-top: 1em;
+        text-align: center;
+        a {
+            text-decoration: none;
+            color: #4A96AD;
+        }
+        a:hover {
+            color: #295a69;
+        }
+    }
 }
