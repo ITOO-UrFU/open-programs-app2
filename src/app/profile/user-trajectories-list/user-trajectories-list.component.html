@@ -1,15 +1,22 @@
-<div *ngIf="userTrajectories?.length > 0">
-  <h3>Ваши траектории: </h3>
-  <div *ngFor="let trajectory of userTrajectories">
-  <div [ngStyle]="{ 'background-color': 'floralwhite', 'padding': '5px', 'margin': '5px' }">
-    <div app-user-trajectory-block [trajectory]="trajectory"> </div> 
-    <button (click)="removeTrajectory(trajectory)">Удалить траекторию</button>
-    <button (click)="copyTrajectory(trajectory)">Копировать траекторию</button>
+<div class="widget__trajectories">
+  <div class="title">
+    <p>Ваши траектории:</p>
   </div>
+  <div class="content">
+    <ng-template [ngIf]="userTrajectories?.length > 0">
+      <ng-template ngFor let-trajectory [ngForOf]="userTrajectories">
+        <div class="trajectory">
+          <div app-user-trajectory-block [trajectory]="trajectory" class="trajectory__content"></div>
+          <div class="trajectory__actions">
+            <i class="fa fa-trash-o remove" aria-hidden="true" (click)="removeTrajectory(trajectory)"></i>
+            <i class="fa fa-clone copy" aria-hidden="true" (click)="copyTrajectory(trajectory)"></i>
+          </div>
+        </div>
+      </ng-template>
+    </ng-template>
   </div>
-</div>
-
-<div *ngIf="userTrajectories?.length == 0">
-  <h3> Пока траекторий нет</h3>
-  <a [routerLink]="['/constructor/programlist']">Создать</a>
+  <div *ngIf="userTrajectories?.length == 0">
+    <h3> Пока траекторий нет</h3>
+    <a [routerLink]="['/constructor/programlist']">Создать</a>
+  </div>
 </div>

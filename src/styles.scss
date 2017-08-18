@@ -334,3 +334,54 @@ diagram {
         }
     }
 }
+
+.widget__trajectories {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2em;
+    padding: 1em;
+
+    .title > p {
+        font-size: 2em;
+        font-weight: 300;
+    }
+
+    .content {
+        display: flex;
+        flex-flow: row wrap;
+        
+        .trajectory {
+            display: flex;
+            margin-right: 1em;
+            margin-bottom: 1em;
+            width: 400px;
+            min-height: 120px;
+            padding-left: 1em;
+            background-color: white;
+            position: relative;
+            .trajectory__content {
+                cursor: pointer;
+                margin-top: 1em;
+                height: 100%;
+                .title>a {
+                    text-decoration: none;
+                    color: black;
+                    font-weight: 300;
+                }
+            }
+            .trajectory__actions {
+                cursor: pointer;
+                display: inline;
+                position:absolute;
+                top: 5px;
+                right: 5px;
+                .remove {
+                    color:red;
+                }
+                .copy {
+                    color: blue;
+                }
+            }
+        }
+    }
+}
