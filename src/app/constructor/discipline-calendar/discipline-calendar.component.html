@@ -1,24 +1,24 @@
 <ng-template ngFor let-semester [ngForOf]="data.eduLength"><div class="semester" [style.width] ="98/data.eduLength.length +'%'">
   <ng-template ngFor let-variant [ngForOf]="program.variants[discipline.id]">
-      <div [style.background-color] = "variantSelected(discipline, program.variants[discipline.id], variant, semester) ? '' : '' ">
-        <div [style.background-color] = "selectDefault(discipline, program.variants[discipline.id], variant, semester) ? 'red' : '' " >
+      <div [style.background-color] = "variantSelected(discipline, program.variants[discipline.id], variant, semester) ? 'green' : '' ">
+        <div [style.background-color] = "selectDefault(discipline, program.variants[discipline.id], variant, semester) ? '' : '' " >
         <ng-template [ngIf]="variant.technology?.mobility === 100">
-          <button>Онлайн курс: {{ variant.course?.title }} <br /> mobility: {{ variant.technology.mobility }}% sync:{{ variant.technology.sync }}% campus:{{ variant.technology.campus }}%</button>
+          <button>Онлайн курс: {{ variant.course?.title }} <br /> mobility: {{ variant.mobility }}% sync:{{ variant.sync }}% campus:{{ variant.campus }}%</button>
         </ng-template>
         <ng-template [ngIf]="variant.technology?.mobility === 50 && semester%2==variant.parity">
-            <button> parity {{ variant.parity }} <br /> mobility: {{ variant.technology.mobility }}% sync:{{ variant.technology.sync }}% campus:{{ variant.technology.campus }}%</button>
+            <button> parity {{ variant.parity }} <br /> mobility: {{ variant.mobility }}% sync:{{ variant.sync }}% campus:{{ variant.campus }}%</button>
         </ng-template>
         <ng-template [ngIf]="variant.parity!=1 && variant.technology?.mobility === 50 && semester%variant.parity == 0">
-            <button> parity {{ variant.parity }} <br /> mobility: {{ variant.technology.mobility }}% sync:{{ variant.technology.sync }}% campus:{{ variant.technology.campus }}%</button>
+            <button> parity {{ variant.parity }} <br /> mobility: {{ variant.mobility }}% sync:{{ variant.sync }}% campus:{{ variant.campus }}%</button>
         </ng-template>
         <ng-template [ngIf]="variant.technology?.mobility === 50 && variant.parity == 3">
-            <button> parity {{ variant.parity }} <br /> mobility: {{ variant.technology.mobility }}% sync:{{ variant.technology.sync }}% campus:{{ variant.technology.campus }}%</button>
+            <button> parity {{ variant.parity }} <br /> mobility: {{ variant.mobility }}% sync:{{ variant.sync }}% campus:{{ variant.campus }}%</button>
         </ng-template>
         <ng-template [ngIf]="variant.technology?.mobility === 0 && discipline.default_semester[data.term] == semester && variant.semester?.term === data.term">
-            <button> {{ variant.semester?.term }} <br /> mobility: {{ variant.technology.mobility }}% sync:{{ variant.technology.sync }}% campus:{{ variant.technology.campus }}%</button>
+            <button> {{ variant.semester?.term }} <br /> mobility: {{ variant.mobility }}% sync:{{ variant.sync }}% campus:{{ variant.campus }}%</button>
         </ng-template>
         <ng-template [ngIf]="variant.technology?.mobility === 0  && discipline.default_semester[data.term] == semester && variant.semester?.term !== data.term">
-            <button disabled>{{ variant.semester?.term }} <br /> mobility: {{ variant.technology.mobility }}% sync:{{ variant.technology.sync }}% campus:{{ variant.technology.campus }}%</button>
+            <button disabled>{{ variant.semester?.term }} <br /> mobility: {{ variant.mobility }}% sync:{{ variant.sync }}% campus:{{ variant.campus }}%</button>
         </ng-template>
         </div>
       </div>

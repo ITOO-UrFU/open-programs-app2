@@ -64,7 +64,7 @@ export class DisciplineCalendarComponent implements OnInit {
         elements.sort(compareValues("campus", "htl"))
       } else {
         elements.sort(compareValues("campus", "50"))
-        console.log('Campus', elements)
+        //console.log('Campus', elements)
       }
       const campus_elements = elements.filter(
         (element) => {
@@ -78,7 +78,7 @@ export class DisciplineCalendarComponent implements OnInit {
       if (campus_elements.length) {
         elements = campus_elements;
       }
-      console.log('Campus2', elements, campus_elements)
+      //console.log('Campus2', elements, campus_elements)
 
       if (this.data.sync === 0) {
         elements.sort(compareValues("sync", "lth"))
@@ -106,7 +106,78 @@ export class DisciplineCalendarComponent implements OnInit {
     }
   }
 
-  public variantSelected(discipline, variants, variant, semester){
+  public variantSelected( discipline, variants, variant, semester ) {
+    if ( variants ) {
+      let elements = variants.filter(
+        (element) => {
+          if ( element.mobility > 0 ) {
+            return true;
+          } else if ( element.mobility === 0 ) {
+            return element.semester.term === this.data.term;
+          }
+        }
+      );
+      elements = elements.filter(
+          (element) => {
+            if ( element.campus === this.data.campus && element.sync === this.data.sync ) {
+              return true;
+            } else if ( element.campus === this.data.campus ) {
+              return true;
+            } else if ( element.sync === this.data.sync  ) {
+              return true;
+            } else {
+              return true;
+            }
+          }
+        );
+      elements = elements.sort(
+        (a, b) => {
+          if ( this.data.campus === 0 && this.data.sync === 0) {
+            if (a.campus > b.campus) {
+              return 1;
+            } else if (a.campus < b.campus){
+              return -1;
+            } else {
+              return 0;
+            }
+          }
+        }
+      )
+      //console.log('1111', elements.map((element) => element.campus))
+      if (elements.length) {
+        return elements[0].id === variant.id;
+      } else {
+        return false;
+      };
+
+      // if (elements.length) {
+      //   return elements[0].id === variant.id;
+      // } else {
+      //   elements = variants.filter((element) => {
+      //     if ( element.technology && element.technology.presence === this.data.presence ) {
+      //       if ( element.semester && element.semester.term === this.data.term ) {
+      //         return true;
+      //       }
+      //     }
+      //   });
+      //   if (elements.length){
+      //     return elements[0].id === variant.id;
+      //   } else {
+      //     elements = variants.filter((element) => {
+      //     if ( element.technology && element.technology.presence === this.data.presence ) {
+      //         return true;
+      //     }
+      //   });
+      //   if (elements.length){
+      //     return elements[0].id === variant.id;
+      //   } else {
+      //     return false;
+      //   }
+      // }
+    }
+  }
+
+  public variantSelected1(discipline, variants, variant, semester){
     if (variants && discipline.default_semester[this.data.term] === semester) {
       let elements = variants.filter((element) => {
         if ( element.technology && element.technology.presence === 'online' && this.data.technology_type === 'd'){
@@ -148,7 +219,6 @@ export class DisciplineCalendarComponent implements OnInit {
       }
     } else {return false;}
   }
-
 
 
 
