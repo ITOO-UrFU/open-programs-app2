@@ -13,7 +13,7 @@ import { ChoiceGroupComponent } from './choice-group/choice-group.component';
 import { ModuleComponent } from './module/module.component';
 import { CompetenceComponent } from './competence/competence.component';
 import { DisciplineCalendarComponent } from './discipline-calendar/discipline-calendar.component';
-import { DisciplineInformationComponent } from './discipline-information/discipline-information.component'
+import { DisciplineInformationComponent } from './discipline-information/discipline-information.component';
 
 @NgModule({
   imports: [
