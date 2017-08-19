@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../data.service';
 
 import { Trajectory } from '../trajectory';
-import { Program } from '../program2';
+import { Program } from '../../models/program';
 
 @Component({
   selector: '[app-discipline-calendar]',

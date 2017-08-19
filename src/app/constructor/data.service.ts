@@ -2,7 +2,9 @@
 import { Injectable } from '@angular/core';
 
 // Class
-import { Program, Target } from './program2';
+
+import { Target } from '../models/target';
+import { Program } from '../models/program';
 import { Trajectory } from './trajectory';
 
 // Services
