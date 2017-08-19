@@ -8,8 +8,8 @@
         <div class="trajectory">
           <div app-user-trajectory-block [trajectory]="trajectory" class="trajectory__content"></div>
           <div class="trajectory__actions">
-            <i class="fa fa-trash-o remove" aria-hidden="true" (click)="removeTrajectory(trajectory)"></i>
             <i class="fa fa-clone copy" aria-hidden="true" (click)="copyTrajectory(trajectory)"></i>
+            <i class="fa fa-trash-o remove" aria-hidden="true" (click)="removeTrajectory(trajectory)"></i>
           </div>
         </div>
       </ng-template>
