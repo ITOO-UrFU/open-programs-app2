@@ -1,9 +1,10 @@
+@import "variables";
+
 .menu{
     height: 55px;
     width: 100%;
-    background-color: #4A96AD;
+    background-color: $primary-color;
     user-select: none;
-    z-index: 1000;
     .content{
         display: flex;
         justify-content: space-between;
@@ -11,6 +12,9 @@
         min-width: 600px;
         margin: 0 auto;
         overflow: hidden;
+        div {
+            z-index: 1000;
+        }
         .item {
             padding: 0px 1em;
             height: 55px;
@@ -19,11 +23,11 @@
             vertical-align: middle;
             cursor: pointer;
             &:hover{
-                background: #295a69;
+                background: $primary-color-darken;
             }
             a {
                 text-decoration: none;
-                color: white;
+                color: $white-color;
                 font-weight: 300;
             }
         }

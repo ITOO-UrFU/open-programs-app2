@@ -1,7 +1,9 @@
+@import "../../variables";
+
 .profile_menu {
     text-decoration: none;
     font-weight: 300;
-    color: white;
+    color: $white-color;
     height: 55px;
     display: table-cell;
     text-align: center;
@@ -16,7 +18,7 @@
     vertical-align: middle;
 }
 .dropdown {
-    background-color: #4A96AD;
+    background-color: $primary-color;
     padding-bottom: 1em;
     overflow: hidden;
 
@@ -27,11 +29,11 @@
         a {
             text-decoration: none;
             font-weight: 300;
-            color: white;
+            color: $white-color;
             width: 100%;
         }
         &:hover {
-            background-color: #295a69;
+            background-color: $primary-color-darken;
         }
     }
 }

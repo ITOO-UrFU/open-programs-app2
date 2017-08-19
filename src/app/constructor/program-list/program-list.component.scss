@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .widget__program_list {
     display: flex;
     flex-flow: row wrap;
@@ -12,7 +14,7 @@
     li {
         display: flex;
         flex-flow: column;
-        background: white;
+        background: $white-color;
         margin-right: 1em;
         margin-bottom: 1em;
         width: 400px;

@@ -1,6 +1,8 @@
+@import "../../variables";
+
 .semester{
 	display: inline-block;
-	border: 1px solid white;
+	border: 1px solid $white-color;
 	background-color: #e6e6e6;
 	margin: 2px 0px 5px;
 	padding: 5px 0px;

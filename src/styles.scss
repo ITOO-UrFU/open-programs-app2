@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "app/variables";
 
 body[app-root] {
     font-family: 'Roboto', sans-serif;
@@ -18,10 +19,10 @@ div[element-open-program] {
                 font-weight: 600;
             }
             a {
-                background-color: #4A96AD;
+                background-color: $primary-color;
                 padding: 5px;
                 border-radius: 2px;
-                color: white;
+                color: $white-color;
                 text-decoration: none;
             }
         }
@@ -31,8 +32,8 @@ div[element-open-program] {
 div[constructor] {
     table {
         thead {
-            background: #4A96AD;
-            color: white;
+            background: $primary-color;
+            color: $white-color;
             font-weight: 600;
             tr {
                 td {
@@ -89,7 +90,7 @@ figure {
 
 // GOWENCODE
 // #7D1935
-// #4A96AD
+// $primary-color
 // #F5F3EE
 // #FFFFFF
 body {
@@ -106,10 +107,10 @@ body {
 #actions {
     text-align: initial;
     a {
-        background-color: #4A96AD;
+        background-color: $primary-color;
         padding: 3px;
         border-radius: 2px;
-        color: white;
+        color: $white-color;
         text-decoration: none;
         cursor: pointer;
         font-size: 80%;
@@ -126,14 +127,14 @@ body {
 
 .variant-title {
     font-size: 80%;
-    color: white;
+    color: $white-color;
 }
 
 span.discipline-remove {
     position: relative;
     float: right;
     cursor: pointer;
-    color: #7D1935;
+    color: $accent-color;
 }
 
 .tooltiptext {
@@ -217,11 +218,11 @@ diagram {
         width: 200px;
         &.selected {
             background-color: #656565;
-            color: white;
+            color: $white-color;
         }
         &:hover {
             background-color: #565656;
-            color: white;
+            color: $white-color;
         }
     }
 }
@@ -229,7 +230,7 @@ diagram {
 .is_selected {
     padding: 3px;
     background-color: #76323f;
-    color: white;
+    color: $white-color;
     font-weight: 700;
     border-radius: 7px;
 }
@@ -251,7 +252,7 @@ diagram {
 .labor_display {
     padding: 3px 7px;
     background-color: #76323f;
-    color: white;
+    color: $white-color;
     font-weight: 700;
     border-radius: 7px;
 }
@@ -280,7 +281,7 @@ diagram {
     margin: 0 auto;
     margin-top: 7em;
     width: 500px;
-    background-color: white;
+    background-color: $white-color;
     padding: 1em;
 
     .title > p {
@@ -311,14 +312,14 @@ diagram {
             padding: .5em;
             margin-top: 0.5em;
             width: 100%;
-            background-color: #4A96AD;
-            color: white;
+            background-color: $primary-color;
+            color: $white-color;
             font-size: 20px;
             border: none;
             cursor: pointer;
         }
         button:hover {
-            background-color: #295a69;
+            background-color: $primary-color-darken;
         }
     }
     .form-group.oneline {
@@ -336,10 +337,10 @@ diagram {
         text-align: center;
         a {
             text-decoration: none;
-            color: #4A96AD;
+            color: $primary-color;
         }
         a:hover {
-            color: #295a69;
+            color: $primary-color-darken;
         }
     }
 }
@@ -366,7 +367,7 @@ diagram {
             width: 400px;
             min-height: 120px;
             padding-left: 1em;
-            background-color: white;
+            background-color: $white-color;
             position: relative;
             .trajectory__content {
                 cursor: pointer;
