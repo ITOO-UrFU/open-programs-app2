@@ -302,8 +302,10 @@ diagram {
             font-weight: 300;
         }
         input {
+            padding: 3px;
             width: 100%;
             font-size: 20px;
+            color: #295a69;
         }
         button {
             padding: .5em;
@@ -320,12 +322,13 @@ diagram {
         }
     }
     .form-group.oneline {
+        padding-top: 10px;
         input, label {
             display: inline;
             font-weight: 400;
         }
         input {
-            width: 30px !important;
+            width: auto;
         }
     }
     .reset-password {

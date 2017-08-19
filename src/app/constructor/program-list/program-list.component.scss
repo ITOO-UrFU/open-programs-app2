@@ -1,0 +1,35 @@
+.widget__program_list {
+    display: flex;
+    flex-flow: row wrap;
+
+    .widget_header {
+        display: block;
+        width: 100%;
+        font-size: 2em;
+        font-weight: 300;
+    }
+
+    li {
+        display: flex;
+        flex-flow: column;
+        background: white;
+        margin-right: 1em;
+        margin-bottom: 1em;
+        width: 400px;
+        min-height: 120px;
+        padding: 1em;
+        cursor: pointer;
+        position: relative;
+        .title {
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+        .stats {
+            display: inline;
+            position:absolute;
+            bottom: 5px;
+            right: 14px;
+            font-weight: 300;
+        }
+    }
+}

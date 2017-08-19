@@ -2,8 +2,8 @@
   <div class="content">
     <div class="left">
       <ng-template ngFor let-container [ngForOf]="menu" let-i="index">
-        <div class="item">
-          <a href="" [routerLink]="['/', container.slug]">{{ container.title }}</a>
+        <div class="item" [routerLink]="['/', container.slug]">
+          <a href="">{{ container.title }}</a>
         </div>  
       </ng-template>
     </div>
@@ -15,7 +15,7 @@
       </ng-template>
       <ng-template #elseBlock>
         <div class="item right">
-          <a [routerLink]="['/', 'login']">Вход</a>
+          <a [routerLink]="['/', 'login']"><i class="fa fa-sign-in" aria-hidden="true"></i> Вход</a>
         </div>
       </ng-template>
     </div>
