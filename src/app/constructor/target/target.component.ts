@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { DataService } from '../data.service';
 
-import { Target } from '../program2';
+import { Target } from '../../models/target';
 
 @Component({
   selector: '[app-target]',

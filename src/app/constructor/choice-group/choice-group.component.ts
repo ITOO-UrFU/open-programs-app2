@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../data.service';
-
-import { ChoiceGroup } from '../program2';
-
+import { ChoiceGroup } from '../../models/choice-group';
 
 @Component({
   selector: '[app-choice-group]',
