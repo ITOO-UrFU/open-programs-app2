@@ -5,8 +5,15 @@
 </div>
 
 <div class="dropdown" [hidden]="is_hidden">
-    <a href="/profile/edit">Редактрировать профиль</a>
-    <a href="/profile/trajectories">Смотреть траектории</a>
+    <div class="action" (click)="dropdown()" [routerLink]="['profile', 'edit']">
+        <a>Редактрировать профиль</a>
+    </div>
+
+    <div class="action" (click)="dropdown()" [routerLink]="['profile', 'trajectories']">
+        <a>Смотреть траектории</a>
+    </div>
     <hr>
-    <a href="/logout">Выйти</a>
+    <div class="action" [routerLink]="['/', 'logout']">
+        <a>Выйти</a>
+    </div>
 </div>

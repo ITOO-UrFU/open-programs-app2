@@ -26,7 +26,7 @@ export class MenuProfileBlockComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log('Инициализировал блок профиля в меню');
+    console.log('Инициализировал блок профиля в меню');
     this.setProfileInfo();
   }
 

@@ -3,6 +3,7 @@
     width: 100%;
     background-color: #4A96AD;
     user-select: none;
+    z-index: 1000;
     .content{
         display: flex;
         justify-content: space-between;

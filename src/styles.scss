@@ -99,9 +99,8 @@ body {
 }
 
 #header {
-    color: white;
-    background-color: #7D1935;
     padding: 1em;
+    font-weight: 300;
 }
 
 #actions {
@@ -302,10 +301,11 @@ diagram {
             font-weight: 300;
         }
         input {
-            padding: 3px;
+            padding-left: 3px;
             width: 100%;
             font-size: 20px;
-            color: #295a69;
+            color: #1f414b;
+            font-weight: 300;
         }
         button {
             padding: .5em;
