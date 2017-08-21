@@ -36,8 +36,8 @@ export class DataService {
   variants = false;
 
 
-  public sync: number = 0;
-  public campus: number = 0;
+  public sync: number = 100;
+  public campus: number = 100;
   public mobility: number = 100;
   public eduLength = [1,2,3,4,5,6,7,8];
   public term = '4 года';
@@ -54,13 +54,13 @@ export class DataService {
   public setPresence(val, number){
     this.presence = val;
     this.sync = number;
-    this.changesSubject.next("sync")
+    this.changesSubject.next("sync");
   }
 
   public setTechnologyType(val, number){
     this.technology_type = val;
     this.campus = number;
-    this.changesSubject.next("campus")
+    this.changesSubject.next("campus");
   }
 
 
@@ -81,7 +81,7 @@ export class DataService {
                                                 program.chief,
                                                 program.competences,
                                                 false );
-                    this.changesSubject.next(program)
+                    // this.changesSubject.next(program)
                     this.getTargets(program_id);
                     this.getCompetences(program_id);
                     this.getChoiceGroups(program_id);
@@ -98,7 +98,7 @@ export class DataService {
                     this.program.setTargets(targets);
                     this.trajectory.setTarget(this.program.targets[0]);
                     this.targets = true;
-                    this.changesSubject.next(targets)
+                    // this.changesSubject.next(targets)
                     console.log('dataService: Targets', true);
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
