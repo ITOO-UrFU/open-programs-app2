@@ -260,7 +260,6 @@ export class ProgramComponent implements OnInit {
                                   this.data.getProgram(trajectory.program);
                                 }
                               );
-  this.data.changesSubject.subscribe((val) => console.log('213123edwefw3fdwefdwrwefwef',val))
   }
 }
 

@@ -13,6 +13,7 @@ import { Program } from '../../models/program';
 export class DisciplineCalendarComponent implements OnInit {
   trajectory: Trajectory;
   program: Program;
+  variants: any[];
 
 
   @Input() discipline;
@@ -142,7 +143,7 @@ export class DisciplineCalendarComponent implements OnInit {
             }
           }
         }
-      )
+      );
       //console.log('1111', elements.map((element) => element.campus))
       if (elements.length) {
         return elements[0].id === variant.id;
@@ -226,6 +227,51 @@ export class DisciplineCalendarComponent implements OnInit {
   ngOnInit() {
     this.trajectory = this.data.trajectory;
     this.program = this.data.program;
-  }
+    this.variants = this.program.variants[this.discipline.id];
+    console.log(this.discipline.title+':', this.variants.map((element) =>{ return {m: element.mobility, c: element.campus, s: element.sync} }))
+    this.variants = this.variants.sort(
+      (a, b) => {
+        const am = Number(a.mobility);
+        const bm = Number(b.mobility);
+        const ac = Number(a.campus);
+        const bc = Number(b.campus);
+        const as = Number(a.sync);
+        const bs = Number(b.sync);
+        //console.log(this.discipline.title+': mobility: ' + am +' , '+ bm + ' | campus: ' + ac +' , '+ bc + ' | sync: ' + as +' , '+ bs , Number(am < bm) - Number(am > bm) || Number(ac < bc) - Number(ac > bc) || Number(as < bs) - Number(as > bs) );
+        //return  Number(am < bm) - Number(am > bm) || Number(ac < bc) - Number(ac > bc) || Number(asy < bsy) - Number(asy > bsy);
+        if ( this.data.campus === 100 && this.data.sync === 100 ) {
+          return bm - am || bc - ac  || bs - as;
+        } else if (this.data.campus === 100 && this.data.sync < 100) {
+          return bm - am || bc - ac  || -1 * (bs - as);
+        } else if ( this.data.campus < 100 && this.data.sync < 100 ) {
+          return bm - am || -1 * (bc - ac)  || -1 * (bs - as);
+        }
+      }
+    );
+    console.log(this.discipline.title+':', this.variants.map((element) => { return {m: element.mobility, c: element.campus, s: element.sync} }))
 
+    this.data.changesSubject.subscribe((val) => {
+      console.log(val)
+      this.variants = this.variants.sort(
+        (a, b) => {
+          const am = Number(a.mobility);
+          const bm = Number(b.mobility);
+          const ac = Number(a.campus);
+          const bc = Number(b.campus);
+          const as = Number(a.sync);
+          const bs = Number(b.sync);
+          //console.log(this.discipline.title+': mobility: ' + am +' , '+ bm + ' | campus: ' + ac +' , '+ bc + ' | sync: ' + as +' , '+ bs , Number(am < bm) - Number(am > bm) || Number(ac < bc) - Number(ac > bc) || Number(as < bs) - Number(as > bs) );
+          //return  Number(am < bm) - Number(am > bm) || Number(ac < bc) - Number(ac > bc) || Number(asy < bsy) - Number(asy > bsy);
+          if ( this.data.campus === 100 && this.data.sync === 100 ) {
+            return bm - am || bc - ac  || bs - as;
+          } else if (this.data.campus === 100 && this.data.sync > 100) {
+            return bm - am || bc - ac  || -1 * (bs - as);
+          } else if ( this.data.campus > 100 && this.data.sync > 100 ) {
+            return bm - am || -1 * (bc - ac)  || -1 * (bs - as);
+          }
+        }
+      );
+      console.log(this.discipline.title+':', this.variants.map((element) => { return {m: element.mobility, c: element.campus, s: element.sync} }))
+    });
+  }
 }

@@ -36,8 +36,8 @@ export class DataService {
   variants = false;
 
 
-  public sync: number = 100;
-  public campus: number = 100;
+  public sync: number = 0;
+  public campus: number = 0;
   public mobility: number = 100;
   public eduLength = [1,2,3,4,5,6,7,8];
   public term = '4 года';
@@ -54,11 +54,13 @@ export class DataService {
   public setPresence(val, number){
     this.presence = val;
     this.sync = number;
+    this.changesSubject.next("sync")
   }
 
   public setTechnologyType(val, number){
     this.technology_type = val;
     this.campus = number;
+    this.changesSubject.next("campus")
   }
 
 
