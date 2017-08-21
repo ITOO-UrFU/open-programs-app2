@@ -49,6 +49,7 @@ export class DataService {
   public funcLength(val, term) {
     this.eduLength = val;
     this.term = term;
+    this.sortSubject.next("term");
   }
 
   public setPresence(val, number){

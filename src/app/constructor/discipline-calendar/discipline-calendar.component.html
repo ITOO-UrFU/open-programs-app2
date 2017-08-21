@@ -21,7 +21,7 @@
       </div>
   </ng-template>
   <br />
-    <ng-template ngFor let-variant [ngForOf]="variants">
+    <ng-template ngFor let-variant [ngForOf]="variants_other">
         <ng-template [ngIf]="variant.technology?.mobility === 0  && discipline.default_semester[data.term] == semester && variant.semester?.term !== data.term">
             <button disabled>{{ variant.semester?.term }} <br /> m: {{ variant.mobility }}% s: {{ variant.sync }}% c: {{ variant.campus }}%</button>
         </ng-template>

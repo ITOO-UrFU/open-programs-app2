@@ -14,6 +14,7 @@ export class DisciplineCalendarComponent implements OnInit {
   trajectory: Trajectory;
   program: Program;
   variants: any[];
+  variants_other: any[];
 
 
   @Input() discipline;
@@ -249,10 +250,12 @@ export class DisciplineCalendarComponent implements OnInit {
     this.program = this.data.program;
     this.variants = this.program.variants[this.discipline.id];
     // console.log(this.discipline.title + ':', this.variants.map((element) => { return { m: element.mobility, c: element.campus, s: element.sync } }));
-    this.variants = this.sortVariants(this.variants);
+    this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
+    this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term === this.data.term }));
     // console.log(this.discipline.title + ':', this.variants.map((element) => { return { m: element.mobility, c: element.campus, s: element.sync } }));
     this.data.sortSubject.subscribe((val) => {
-      this.variants = this.sortVariants(this.variants);
+      this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
+    this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term === this.data.term }));
     });
   }
 
