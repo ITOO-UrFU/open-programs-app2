@@ -27,7 +27,7 @@ export class DataService {
 
 
   targetSelected: Target;
-  changesSubject: ReplaySubject<any> = new ReplaySubject();
+  sortSubject: ReplaySubject<any> = new ReplaySubject();
 
   targets = false;
   competences = false;
@@ -54,13 +54,13 @@ export class DataService {
   public setPresence(val, number){
     this.presence = val;
     this.sync = number;
-    this.changesSubject.next("sync");
+    this.sortSubject.next("sync");
   }
 
   public setTechnologyType(val, number){
     this.technology_type = val;
     this.campus = number;
-    this.changesSubject.next("campus");
+    this.sortSubject.next("campus");
   }
 
 

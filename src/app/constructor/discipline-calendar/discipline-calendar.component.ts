@@ -251,8 +251,8 @@ export class DisciplineCalendarComponent implements OnInit {
     // console.log(this.discipline.title + ':', this.variants.map((element) => { return { m: element.mobility, c: element.campus, s: element.sync } }));
     this.variants = this.sortVariants(this.variants);
     // console.log(this.discipline.title + ':', this.variants.map((element) => { return { m: element.mobility, c: element.campus, s: element.sync } }));
-    this.data.changesSubject.subscribe((val) => {
-    this.variants = this.sortVariants(this.variants);
+    this.data.sortSubject.subscribe((val) => {
+      this.variants = this.sortVariants(this.variants);
     });
   }
 
