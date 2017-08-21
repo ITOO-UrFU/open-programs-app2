@@ -5,7 +5,7 @@ export class Trajectory {
     public choice_groups: string[];
     public choice_groups_editeble: string[];
     public modules_selected: any;
-    public variants: any = {};
+    public variants_selected: any = {};
 
     constructor ( id: string, program_id: string  ) {
       this.id = id;
@@ -41,12 +41,12 @@ export class Trajectory {
     getChoiceGroupEditable(choice_group){
         return this.choice_groups_editeble.indexOf(choice_group) !== -1;
     }
-    setVariants(discipline_id, variant_id){
-        this.variants[discipline_id] = variant_id;
-    }
 
-    getVariants(discipline_id){
-        return this.variants[discipline_id];
+    setVariantSelected(discipline_id, variant_id){
+        this.variants_selected[discipline_id] = variant_id;
+    }
+    getVariantSelected(discipline_id){
+        return this.variants_selected[discipline_id];
     }
 
     toggleModule(module){
