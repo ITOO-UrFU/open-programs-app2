@@ -2,6 +2,8 @@
     <h1>
         {{ data?.program?.title }}
     </h1>
+    <button (click)="data.saveTrajectory()">Сохранить</button>
+    <button (click)="data.getTrajectory()">Получить</button>
     <div *ngIf = "data.targets" id="targets">
         <ul class="target_choices">
             <ng-template ngFor let-target [ngForOf]="data.program.targets">

@@ -82,7 +82,6 @@ export class DataService {
                                                 program.chief,
                                                 program.competences,
                                                 false );
-                    // this.changesSubject.next(program)
                     this.getTargets(program_id);
                     this.getCompetences(program_id);
                     this.getChoiceGroups(program_id);
@@ -97,9 +96,8 @@ export class DataService {
                 .subscribe(
                   (targets: any) => {
                     this.program.setTargets(targets);
-                    this.trajectory.setTarget(this.program.targets[0]);
+                   // this.trajectory.setTarget(this.program.targets[0]);
                     this.targets = true;
-                    // this.changesSubject.next(targets)
                     console.log('dataService: Targets', true);
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
@@ -123,8 +121,8 @@ export class DataService {
                 .subscribe(
                   (modules: any) => {
                     this.program.setModules(modules);
-                    this.trajectory.setModulesDefault(this.program.modules);
-                    console.log(this.trajectory);
+                    //this.trajectory.setModulesDefault(this.program.modules);
+                   // console.log(this.trajectory);
                     this.modules = true;
                     console.log('dataService: Modules', true);
                   },
@@ -154,4 +152,28 @@ export class DataService {
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_variants', error); }
                 );
   };
+
+  public saveTrajectory() {
+    this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
+                                                                  program_id:  this.trajectory.program_id,
+                                                                  data: this.trajectory })
+                             )
+                .subscribe(
+                      (trajectory) => {
+                         console.log('ok');
+                      },
+                      error => {
+                        console.log(error);
+                      });
+  }
+
+  public getTrajectory() {
+    this.service.getElementsBySlug('get_trajectory_id', this.trajectory.id).subscribe(
+                  (trajectory: any) => {
+                    console.log(trajectory) ;
+                  },
+                  (error) => { console.log('Ошибка получения траектории', error); }
+                );
+  }
+
 }

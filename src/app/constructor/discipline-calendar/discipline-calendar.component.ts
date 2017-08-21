@@ -256,11 +256,15 @@ export class DisciplineCalendarComponent implements OnInit {
     // console.log(this.discipline.title + ':', this.variants.map((element) => { return { m: element.mobility, c: element.campus, s: element.sync } }));
     this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
     this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term === this.data.term }));
-    this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id);
+      // if (this.variants.length){
+      //   this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id);
+      // }
     this.data.sortSubject.subscribe((val) => {
       this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
       this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term === this.data.term }));
-      this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id);
+      if (this.variants.length){
+        this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id);
+      }
     });
   }
 

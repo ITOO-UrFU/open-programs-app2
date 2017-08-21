@@ -24,8 +24,8 @@ export class ProgramComponent implements OnInit {
   // Временные переменные
   public selected: string;
   public build = false;
-  public modules: object;
-  public competences: object;
+  public modules: any = {};
+  public competences: any = {};
   public steps = {
     modules: false,
     disciplines: false
@@ -255,9 +255,15 @@ export class ProgramComponent implements OnInit {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
                                 (trajectory: any) => {
-                                  // this.trajectory = new Trajectory( trajectory.id, trajectory.program );
-                                  this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
                                   this.data.getProgram(trajectory.program);
+                                  if (trajectory.data){
+                                    this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
+                                    for (let key in trajectory.data){
+                                      this.data.trajectory[key] = trajectory.data[key];
+                                    }
+                                  } else {
+                                     this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
+                                  }
                                 }
                               );
   }
