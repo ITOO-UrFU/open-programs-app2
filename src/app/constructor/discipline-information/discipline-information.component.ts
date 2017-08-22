@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { DataService } from '../data.service';
 
-import { Trajectory } from '../trajectory';
+// Custom Models
+import { Trajectory } from '../../models/trajectory';
 import { Program } from '../../models/program';
 
 @Component({
@@ -24,7 +25,7 @@ export class DisciplineInformationComponent implements OnInit {
 
   ngOnInit() {
         this.trajectory = this.data.trajectory;
-    this.program = this.data.program;
+        this.program = this.data.program;
   }
 
 }

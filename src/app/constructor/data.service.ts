@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 import { Target } from '../models/target';
 import { Program } from '../models/program';
-import { Trajectory } from './trajectory';
+import { Trajectory } from '../models/trajectory';
 
 // Services
 import {ConstructorService} from './constructor.service';

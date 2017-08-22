@@ -5,9 +5,10 @@ import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ConstructorService } from '../constructor.service';
-
-import { Program } from '../program';
 import { AuthService } from '../../auth/auth.service';
+
+// custom models
+import { Program } from '../../models/program';
 
 @Component({
   selector: 'app-program-list',
@@ -79,7 +80,8 @@ export class ProgramListComponent implements OnInit {
                                     program.get_competences_diagram,
                                     program.get_choice_groups,
                                     program.chief,
-                                    program.competences );
+                                    program.competences,
+                                    false);
                       }
                     );
                   },
