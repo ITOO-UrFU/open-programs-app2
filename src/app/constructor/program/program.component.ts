@@ -9,8 +9,9 @@ import 'rxjs/add/operator/switchMap';
 import { ConstructorService } from '../constructor.service';
 import { DataService } from '../data.service';
 
-import { Program } from '../program';
-import { Trajectory } from '../trajectory';
+// Custom Models
+import { Program } from '../../models/program';
+import { Trajectory } from '../../models/trajectory';
 
 @Component({
   selector: 'app-program',
