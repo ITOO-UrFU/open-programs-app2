@@ -21,6 +21,11 @@ import { Trajectory } from '../../models/trajectory';
 
 export class ProgramComponent implements OnInit {
   public trajectory: Trajectory;
+
+
+
+
+
   public create: boolean;
   // Временные переменные
   public selected: string;
@@ -231,25 +236,24 @@ export class ProgramComponent implements OnInit {
 
 
 
-  isModulesDone(){
+  isModulesDone() {
+    console.log('1', this.data.trajectory.modules_selected)
     const laborAll = this.data.trajectory.modules_selected.reduce(
       (a, b) => a.concat(b), []
     ).map(
       modules_id => this.data.program.getModule(modules_id).get_labor
     ).reduce(
       (a, b) => a + b, 0
-    )
+    );
 
     const laborChoiceGroup = this.data.trajectory.choice_groups.map(
       choice_group_id => this.data.program.getChoiceGroup(choice_group_id).labor
    ).reduce(
       (a, b) => a + b, 0
-    )
+    );
     return laborChoiceGroup === laborAll;
   }
-  toggleStep(){
-    this.stepNext = !this.stepNext
-  }
+
 
 
   ngOnInit() {
@@ -257,11 +261,13 @@ export class ProgramComponent implements OnInit {
                              .subscribe(
                                 (trajectory: any) => {
                                   this.data.getProgram(trajectory.program);
-                                  if (trajectory.data){
+                                  if (trajectory.data) {
                                     this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
-                                    for (let key in trajectory.data){
+                                    //ГовноКОД
+                                    for (let key in trajectory.data) {
                                       this.data.trajectory[key] = trajectory.data[key];
                                     }
+                                    //ГовноКОД
                                   } else {
                                      this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
                                   }

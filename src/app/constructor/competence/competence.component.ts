@@ -12,9 +12,9 @@ export class CompetenceComponent implements OnInit {
 
   constructor( public data: DataService ) { }
 
-  getCompetenceLabor(){
+  getCompetenceLabor() {
     const labor = this.data.trajectory.modules_selected.reduce(
-      (a,b) => a.concat(b), []
+      (a, b) => a.concat(b), []
     ).map(
       modules_id => this.data.program.getModule(modules_id)
     ).filter(
@@ -23,10 +23,10 @@ export class CompetenceComponent implements OnInit {
       module => module.get_labor
     ).reduce(
       (a, b) => a + b, 0
-    )
+    );
 
     const laborAll = this.data.trajectory.modules_selected.reduce(
-      (a,b) => a.concat(b), []
+      (a, b) => a.concat(b), []
     ).map(
       modules_id => this.data.program.getModule(modules_id)
     ).filter(
@@ -35,10 +35,8 @@ export class CompetenceComponent implements OnInit {
       module => module.get_labor
     ).reduce(
       (a, b) => a + b, 0
-    )
-
-    return Math.round( labor / laborAll * 100 )
-    
+    );
+    return Math.round( labor / laborAll * 100 );
   }
 
   ngOnInit() {

@@ -157,8 +157,7 @@ export class DataService {
     this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
                                                                   program_id:  this.trajectory.program_id,
                                                                   data: this.trajectory })
-                             )
-                .subscribe(
+                              ).subscribe(
                       (trajectory) => {
                          console.log('ok');
                       },
