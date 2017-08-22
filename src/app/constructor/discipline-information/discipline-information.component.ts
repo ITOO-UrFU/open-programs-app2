@@ -25,7 +25,7 @@ export class DisciplineInformationComponent implements OnInit {
 
   ngOnInit() {
         this.trajectory = this.data.trajectory;
-    this.program = this.data.program;
+        this.program = this.data.program;
   }
 
 }
