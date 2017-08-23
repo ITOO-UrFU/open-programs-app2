@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { Subscription } from 'rxjs/Subscription';
-
-import { ConstructorService } from '../constructor.service';
 import { AuthService } from '../../auth/auth.service';
+import { ConstructorService } from '../constructor.service';
+import { DataService } from '../data.service';
 
-// custom models
+// Custom Models
 import { Program } from '../../models/program';
+import { Trajectory } from '../../models/trajectory';
+
 
 @Component({
   selector: 'app-program-list',
@@ -18,19 +19,19 @@ import { Program } from '../../models/program';
 export class ProgramListComponent implements OnInit {
 
   public programList: Program[];
-  public trajectories = {};
-  public trajectoriesCandidates = [];
-  public isLogged = false;
-  subscription: any;
+  public trajectories: Object;
 
-  constructor(
-    private router: Router,
-    private service: ConstructorService,
-    private authService: AuthService,
-    )
-    {
+  public setTrajectoriesByProgramId( program_id: string, trajectories: Trajectory[] ){
+    this.trajectories[program_id] = trajectories;
+  }
 
-    }
+
+  // public trajectoriesCandidates = [];
+  // public isLogged = false;
+
+  constructor ( private router: Router,
+                private service: ConstructorService,
+                private authService: AuthService ){ }
 
   // Функции работы с траекториями
   // Создание траектории
@@ -55,7 +56,7 @@ export class ProgramListComponent implements OnInit {
   }
 
   // Функция получения созданных траекторий по крнкретной программе
-  public getTrajectories(program: any) {
+  public getTrajectories(program: Program) {
     this.service.getElementsBySlug('get_program_trajectory', program.id)
                 .subscribe(
                   (trajectories: any) => {
