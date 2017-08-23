@@ -19,7 +19,7 @@ import { Trajectory } from '../../models/trajectory';
 export class ProgramListComponent implements OnInit {
 
   public programList: Program[];
-  public trajectories: Object;
+  public trajectories = {};
 
   public setTrajectoriesByProgramId( program_id: string, trajectories: Trajectory[] ){
     this.trajectories[program_id] = trajectories;
@@ -56,7 +56,7 @@ export class ProgramListComponent implements OnInit {
   }
 
   // Функция получения созданных траекторий по крнкретной программе
-  public getTrajectories(program: Program) {
+  public getTrajectories(program: any) {
     this.service.getElementsBySlug('get_program_trajectory', program.id)
                 .subscribe(
                   (trajectories: any) => {

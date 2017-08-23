@@ -7,10 +7,18 @@ export class Trajectory {
     public modules_selected: any;
     public variants_selected: any = {};
 
+    private data: any = {};
+
     constructor ( id: string, program_id: string  ) {
       this.id = id;
       this.program_id = program_id;
     }
+
+    setData(){
+        this.data["target_id"] = this.target_id;
+        this.data["choice_groups"] = this.choice_groups;
+    }
+
     getTargetId(){
         return this.target_id;
     }
@@ -48,6 +56,7 @@ export class Trajectory {
     getVariantSelected(discipline_id){
         return this.variants_selected[discipline_id];
     }
+
     toggleModule(module){
         let currentModules = this.modules_selected[this.choice_groups.indexOf(module.choice_group)]
         if (currentModules.indexOf(module.id) === -1) {
