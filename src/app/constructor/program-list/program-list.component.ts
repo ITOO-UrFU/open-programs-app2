@@ -39,11 +39,6 @@ export class ProgramListComponent implements OnInit {
     this.service.postResponse('new_trajectory', JSON.stringify({program_id: program_id, data: {}}))
                 .subscribe(
                       (trajectory: any) => {
-                        //  console.log(trajectory.id);
-                        //  if(!this.isLogged) {
-                        //     this.trajectoriesCandidates.push(trajectory.id);
-                        //     localStorage.setItem('trajectoriesCandidates', this.trajectoriesCandidates.toString());
-                        //  }
                          this.router.navigate(['/constructor', 'program', trajectory.id]);
                       },
                       error => {
@@ -93,15 +88,6 @@ export class ProgramListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let x = this.authService.userIsLogged();
-    // if(!this.isLogged) {
-    //   if (localStorage.getItem('trajectoriesCandidates')) {
-    //     this.trajectoriesCandidates = localStorage.getItem('trajectoriesCandidates').split(',');
-    //   } else {
-    //     localStorage.setItem('trajectoriesCandidates', this.trajectoriesCandidates.toString());
-    //   }
-    // }
-
     this.getPrograms();
   }
 
