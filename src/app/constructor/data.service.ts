@@ -184,13 +184,13 @@ public setModulesDefault(modules: any) {
           this.choice_groups_status[target] = {};
         }
         if(!this.choice_groups_status[target][module.choice_group]) {
-          console.log('первый раз',this.choice_groups_status[target] , module.targets_positions_indexed[target] )
+          console.log('первый раз' )
           this.choice_groups_status[target][module.choice_group] = true;
         }
-        if ( module.targets_positions_indexed[target] === 1 && this.choice_groups_status[target][module.choice_group] ){
-          this.choice_groups_status[target][module.choice_group] = true;
-        } else if ( module.targets_positions_indexed[target] === 2 ) {
+        if ( module.targets_positions_indexed[target] === 2 && this.choice_groups_status[target][module.choice_group] ){
           this.choice_groups_status[target][module.choice_group] = false;
+        } else if ( module.targets_positions_indexed[target] === 1 ) {
+          this.choice_groups_status[target][module.choice_group] = true;
         } else if ( module.targets_positions_indexed[target] === 0 ){
           delete this.choice_groups_status[target][module.choice_group]
         }
