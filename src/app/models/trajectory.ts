@@ -70,9 +70,9 @@ export class Trajectory {
             }
         )
     }
-    getModulesDefault( choice_group_id: string ){
-        return this.modules_selected[this.choice_groups.indexOf(choice_group_id)];
-    }
+    // getModulesDefault( choice_group_id: string ){
+    //     return this.modules_selected[this.choice_groups.indexOf(choice_group_id)];
+    // }
 
     getChoiceGroupEditable(choice_group){
         return this.choice_groups_editeble.indexOf(choice_group) !== -1;

@@ -260,17 +260,8 @@ export class ProgramComponent implements OnInit {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
                                 (trajectory: any) => {
-                                  this.data.getProgram(trajectory.program);
-                                  if (trajectory.data) {
-                                    this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
-                                    //ГовноКОД
-                                    for (let key in trajectory.data) {
-                                      this.data.trajectory[key] = trajectory.data[key];
-                                    }
-                                    //ГовноКОД
-                                  } else {
-                                     this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
-                                  }
+                                  this.data.getProgram( trajectory.program );
+                                  this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
                                 }
                               );
   }

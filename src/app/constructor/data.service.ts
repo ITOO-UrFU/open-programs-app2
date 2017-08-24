@@ -24,9 +24,8 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 export class DataService {
   program: Program;
   trajectory: Trajectory;
+  choice_groups_status = {};
 
-
-  targetSelected: Target;
   sortSubject: ReplaySubject<any> = new ReplaySubject();
   loadSubject: ReplaySubject<any> = new ReplaySubject();
 // old
@@ -75,6 +74,9 @@ export class DataService {
     this.loadSubject.subscribe(
       (value: string) => {
         status[value] = true;
+        if (status['targets']) {
+          this.trajectory.setTarget(this.program.targets[0])
+        };
         console.log(status);
       }
     );
@@ -138,6 +140,7 @@ export class DataService {
                     //  old
                     //   this.trajectory.setModulesDefault(this.program.modules);
                     this.modules = true;
+                    this.setModulesDefault(modules)
                     this.loadSubject.next('modules');
                     console.log('dataService: Modules', true);
                   },
@@ -169,6 +172,39 @@ export class DataService {
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_variants', error); }
                 );
   };
+
+
+
+// +++++++++++
+public setModulesDefault(modules: any) {
+  modules.forEach(
+    (module) => {
+      for ( let target in module.targets_positions_indexed ) {
+        if(!this.choice_groups_status[target]) {
+          this.choice_groups_status[target] = {};
+        }
+        if(!this.choice_groups_status[target][module.choice_group]) {
+          console.log('первый раз',this.choice_groups_status[target] , module.targets_positions_indexed[target] )
+          this.choice_groups_status[target][module.choice_group] = true;
+        }
+        if ( module.targets_positions_indexed[target] === 1 && this.choice_groups_status[target][module.choice_group] ){
+          this.choice_groups_status[target][module.choice_group] = true;
+        } else if ( module.targets_positions_indexed[target] === 2 ) {
+          this.choice_groups_status[target][module.choice_group] = false;
+        } else if ( module.targets_positions_indexed[target] === 0 ){
+          delete this.choice_groups_status[target][module.choice_group]
+        }
+      }
+    }
+  )
+  console.log(this.choice_groups_status);
+}
+// +++++++++++
+
+
+
+
+
 
   public saveTrajectory() {
     this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
