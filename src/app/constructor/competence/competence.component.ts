@@ -12,7 +12,7 @@ export class CompetenceComponent implements OnInit {
 
   constructor( public data: DataService ) { }
 
-  getCompetenceLabor() {
+  old_getCompetenceLabor() {
     const labor = this.data.trajectory.modules_selected.reduce(
       (a, b) => a.concat(b), []
     ).map(

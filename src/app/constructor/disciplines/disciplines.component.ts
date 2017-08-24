@@ -30,6 +30,6 @@ export class DisciplinesComponent implements OnInit {
   ngOnInit() {
     this.trajectory = this.data.trajectory;
     this.program = this.data.program;
-    this.getDisciplines();
+    //this.getDisciplines();
   }
 }

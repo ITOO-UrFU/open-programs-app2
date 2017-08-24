@@ -1,6 +1,17 @@
+import { Target } from './target';
+import { Module } from './module';
+
 export class Trajectory {
     public id: string;
     public program_id: string;
+    public target: Target;
+
+    public module_ids: String[];
+    public modules: Module[];
+    public modules_by_id: Object = {};
+
+
+
     public target_id: string;
     public choice_groups: string[];
     public choice_groups_editeble: string[];
@@ -14,18 +25,35 @@ export class Trajectory {
       this.program_id = program_id;
     }
 
-    setData(){
-        this.data["target_id"] = this.target_id;
-        this.data["choice_groups"] = this.choice_groups;
+    getTargetId() {
+        return this.target.id;
     }
+    setTarget ( target: Target ) {
+        this.target = target;
 
-    getTargetId(){
-        return this.target_id;
-    }
-    setTarget ( target: any ) {
+        // old
         this.target_id = target.id;
         this.choice_groups = target.choice_groups;
+        // old
     }
+    addModule( module: Module ) {
+        if ( this.module_ids.indexOf(module.id) === -1 ) {
+            this.modules.push(module);
+            this.module_ids.push(module.id);
+            this.modules_by_id[module.id] = module;
+        }
+    }
+    removeModule( module: Module ) {
+        if ( this.module_ids.indexOf(module.id) !== -1 ) {
+            this.modules.slice(this.modules.indexOf(module), 1);
+            this.module_ids.slice(this.module_ids.indexOf(module.id), 1);
+            delete this.modules_by_id[module.id];
+        }
+    }
+
+
+
+
     setModulesDefault(modules: any){
         this.modules_selected = this.choice_groups.map(
             (choice_group) => {

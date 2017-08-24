@@ -131,13 +131,13 @@ export class ProgramComponent implements OnInit {
     let array = [];
     for (const group of this.data.program.choice_groups ){
       obj[group.id] = {};
-      obj[group.id].default = group.get_program_modules.filter(
+      obj[group.id].default = group.modules.filter(
         (module_id: any) => {
           return this.data.program.modules_by_id[module_id].targets_positions_indexed[this.selected] === 1;
         }
       );
       array = array.concat(obj[group.id].default);
-      obj[group.id].variative = group.get_program_modules.filter(
+      obj[group.id].variative = group.modules.filter(
         (module_id: any) => {
           return this.data.program.modules_by_id[module_id].targets_positions_indexed[this.selected] === 2;
         }

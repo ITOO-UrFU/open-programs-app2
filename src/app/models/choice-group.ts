@@ -1,11 +1,11 @@
 export class ChoiceGroup {
-    id: string;
-    title: string;
-    program: string;
-    labor: number;
-    get_choice_group_type_display: string;
-    get_program_modules: string[]; //ID модулей
-    number: number;
+    public id: string;
+    public title: string;
+    public program: string;
+    public labor: number;
+    public type: string; // Майнор, Модуль по выбору и др.
+    public modules: string[]; // ID модулей
+    public number: number;
 
     constructor( id: string,
                  title: string,
@@ -18,8 +18,8 @@ export class ChoiceGroup {
       this.title = title;
       this.program = program;
       this.labor = labor;
-      this.get_choice_group_type_display = get_choice_group_type_display;
-      this.get_program_modules = get_program_modules;
+      this.type = get_choice_group_type_display;
+      this.modules = get_program_modules;
       this.number = number;
     };
 }

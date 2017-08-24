@@ -1,7 +1,7 @@
 export class Competence {
-    id: string;
-    title: string;
-    number: number;
+    public id: string;
+    public title: string;
+    public number: number;
 
     constructor( id: string,
                  title: string,

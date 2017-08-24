@@ -16,14 +16,10 @@ export class TargetComponent implements OnInit {
 
   constructor(public data: DataService) { }
 
-  selectTarget(){
+  selectTarget() {
     this.data.trajectory.setTarget(this.target);
-    if(this.data.modules){
-      this.data.trajectory.setModulesDefault(this.data.program.modules);
-    }
     console.log(this.target);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }

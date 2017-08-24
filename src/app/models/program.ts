@@ -8,9 +8,9 @@ export class Program {
     id: string;                         // Id программы
     title: string;                      // Название программы
     training_direction: string;
-    get_level_display: string;
-    get_competences_diagram: any;
-    get_choice_groups: string[];
+    level: string;
+    competences_diagram: any;
+    choice_group_ids: string[];
     chief: any;
     competences: any[];
     competences_by_id = {};
@@ -34,9 +34,9 @@ export class Program {
       this.id = id;
       this.title = title;
       this.training_direction = training_direction;
-      this.get_level_display = get_level_display;
-      this.get_competences_diagram = get_competences_diagram;
-      this.get_choice_groups = get_choice_groups;
+      this.level = get_level_display;
+      this.competences_diagram = get_competences_diagram;
+      this.choice_group_ids = get_choice_groups;
       this.chief = chief;
       this.competences = competences;
       this.debug = debug;
