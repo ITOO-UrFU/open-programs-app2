@@ -78,7 +78,9 @@ export class DataService {
       (value: string) => {
         status[value] = true;
         if (status['targets']) {
+          if (!this.trajectory.getTargetId()){
           this.trajectory.setTarget(this.program.targets[0]);
+        }
         };
         if (status['modules'] && status['choice_groups']) {
           this.setModulesDefault();
@@ -87,7 +89,8 @@ export class DataService {
           this.choice_groups = true;
         }
         if (status['modules'] && status['choice_groups'] && status['targets']){
-          this.func()
+          if (!this.trajectory.getTargetId()){
+          this.func()}
         }
         console.log(status);
       }
@@ -111,6 +114,9 @@ export class DataService {
 
   public createTrajectory(trajectory: any): Trajectory {
     this.trajectory = new Trajectory( trajectory.id, trajectory.program );
+    if (trajectory.data){
+      this.trajectory.setTrajectoryData(trajectory.data);
+    }
     return this.trajectory;
   }
   
@@ -226,7 +232,7 @@ public setModulesDefault() {
   public saveTrajectory() {
     this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
                                                                   program_id:  this.trajectory.program_id,
-                                                                  data: this.trajectory }) )
+                                                                  data: this.trajectory.getTrajectoryData() }) )
                 .subscribe(
                       (trajectory) => {
                          console.log('ok');

@@ -23,8 +23,24 @@ export class Trajectory {
       this.program_id = program_id;
     }
 
+    getTrajectoryData(){
+        this.data['modules'] = this.modules;
+        this.data['target'] = this.target;
+        return this.data;
+    }
+    setTrajectoryData(data){
+        data['modules'].forEach(
+            module => this.getModule(module)
+        );
+        this.setTarget(data['target']);
+    }
+
     getTargetId() {
-        return this.target.id;
+        if (this.target) {
+            return this.target.id;
+        } else {
+            return undefined;
+        };
     }
     setTarget ( target: Target ) {
         this.target = target;
