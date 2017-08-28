@@ -2,37 +2,34 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { DataService } from '../data.service';
 
+import { Program } from '../../models/program';
+import { Trajectory } from '../../models/trajectory';
+
 @Component({
   selector: '[app-competence]',
   templateUrl: './competence.component.html',
   styleUrls: ['./competence.component.scss']
 })
 export class CompetenceComponent implements OnInit {
-  @Input() public competence;
+  @Input() competence;
+  public trajectory: Trajectory;
+  public program: Program;
 
   constructor( public data: DataService ) { }
 
   getCompetenceLabor() {
-    const labor = this.data.trajectory.modules_selected.reduce(
-      (a, b) => a.concat(b), []
-    ).map(
-      modules_id => this.data.program.getModule(modules_id)
-    ).filter(
+    const labor = this.trajectory.modules.filter(
       module => module.competence === this.competence.id
     ).map(
-      module => module.get_labor
+      module => module.labor
     ).reduce(
       (a, b) => a + b, 0
     );
 
-    const laborAll = this.data.trajectory.modules_selected.reduce(
-      (a, b) => a.concat(b), []
-    ).map(
-      modules_id => this.data.program.getModule(modules_id)
-    ).filter(
+    const laborAll = this.trajectory.modules.filter(
       module => module.competence
     ).map(
-      module => module.get_labor
+      module => module.labor
     ).reduce(
       (a, b) => a + b, 0
     );
@@ -40,5 +37,7 @@ export class CompetenceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.trajectory = this.data.trajectory;
+    this.program = this.data.program;
   }
 }

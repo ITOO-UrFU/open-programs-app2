@@ -21,15 +21,17 @@ import { Trajectory } from '../../models/trajectory';
 
 export class ProgramComponent implements OnInit {
   public trajectory: Trajectory;
+  public program: Program;
 
   ngOnInit() {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
                                 (trajectory: any) => {
                                   this.data.getProgram( trajectory.program );
-                                  this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
-                                  this.trajectory = this.data.trajectory;
-                                  
+                                  this.trajectory = this.data.createTrajectory(trajectory);
+                                  // Надо подписаться на прогром после его наполнения
+                                  //this.program = this.data.program;
+                                  console.log('program', this.program);
                                 }
                               );
   }

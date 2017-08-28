@@ -33,6 +33,10 @@ export class DataService {
   choice_groups = false;
   modules = false;
   variants = false;
+
+  public complete_load(): boolean {
+    return [ this.competences, this.modules, this.choice_groups, this.targets, this.variants ].indexOf(false) === -1;
+  };
 // old 
 
   public sync: number = 100;
@@ -91,7 +95,6 @@ export class DataService {
   }
 
   func(){
-    console.log('модули в траекторию')
     this.program.choice_groups.forEach(
       choice_group => {
         if (choice_group.modules_default[this.trajectory.getTargetId()]) {
@@ -106,7 +109,12 @@ export class DataService {
     console.log(this.trajectory);
   }
 
-   public getProgram( program_id: string ) {
+  public createTrajectory(trajectory: any): Trajectory {
+    this.trajectory = new Trajectory( trajectory.id, trajectory.program );
+    return this.trajectory;
+  }
+  
+  public getProgram( program_id: string ) {
     this.service.getElementsBySlug( 'programs', program_id )
                 .subscribe(
                   (program: any) => {

@@ -34,10 +34,12 @@ export class ChoiceGroupComponent implements OnInit {
   }
 
   toggle( module_id: string ) {
+    if (!this.isFixed() && this.canToggle(module_id)){
       this.trajectory.toggleModule(this.program.getModule(module_id));
+    }
   }
   isFixed() {
-    if (this.choice_group.modules.length === this.choice_group.modules_default[this.trajectory.getTargetId()].length){
+    if (this.choice_group.modules.length === this.choice_group.modules_default[this.trajectory.getTargetId()].length) {
       return this.choice_group.modules_default[this.trajectory.getTargetId()].map(
         element => {
           return this.choice_group.modules.indexOf(element) !== -1;
@@ -46,6 +48,17 @@ export class ChoiceGroupComponent implements OnInit {
     } else {
       return false;
     }
+  }
+  canToggle( module_id: string ) {
+    if (!this.trajectory.getModule(module_id) && this.choice_group.labor - this.laborSelectedModules() >= this.program.getModule(module_id).labor)
+    {
+      return true;
+    } else if (this.trajectory.getModule(module_id)) {
+      return true;
+    } else {
+      return false;
+    }
+  
   }
 
   // laborSelectedModules(){
@@ -59,17 +72,7 @@ export class ChoiceGroupComponent implements OnInit {
 //       this.data.trajectory.toggleModule(this.data.program.getModule(module_id));
 //     }
 //   }
-// canToggle( module_id) {
-//   if(this.data.trajectory.getModulesDefault(this.choice_group_id).indexOf(module_id) !== -1 ||
-//        this.choice_group.labor - this.laborSelectedModules() >= this.data.program.getModule(module_id).get_labor)
-//   {
-//     return true;
-//   }
-//   else {
-//     return false;
-//   }
 
-// }
 
   ngOnInit() {
     this.choice_group = this.data.program.getChoiceGroup(this.choice_group_id);

@@ -10,7 +10,7 @@
     <ng-template [ngIf] = "!isFixed()">
     <div class="right">
         <ng-template ngFor let-module_id [ngForOf]="choice_group.modules">
-             <div *ngIf ="!trajectory.getModule(module_id)" app-module (click)="toggle(module_id)" [module_id]="module_id"></div> 
+             <div *ngIf ="!trajectory.getModule(module_id)" app-module (click)="toggle(module_id)" [style.background]="canToggle(module_id) ? '#e325a4': '#4ea324'" [module_id]="module_id"></div> 
         </ng-template>
     </div> 
     </ng-template>
