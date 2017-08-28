@@ -38,12 +38,11 @@ export class ChoiceGroupComponent implements OnInit {
   }
   isFixed() {
     if (this.choice_group.modules.length === this.choice_group.modules_default[this.trajectory.getTargetId()].length){
-      const array = this.choice_group.modules_default[this.trajectory.getTargetId()].map(
+      return this.choice_group.modules_default[this.trajectory.getTargetId()].map(
         element => {
           return this.choice_group.modules.indexOf(element) !== -1;
         }
       );
-      console.log(array)
     } else {
       return false;
     }
