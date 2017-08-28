@@ -1,6 +1,6 @@
 <ng-template [ngIf]="data.modules">
     <h3>{{ choice_group.title }} {{ laborSelectedModules() }} з.е. из {{ choice_group.labor }} з.е.</h3>
-    <div class="choice_grou">
+    <div class="choice_group">
         <div class="modules">
             <ng-template ngFor let-module_id [ngForOf]="choice_group.modules">
                 <div *ngIf="trajectory.getModule(module_id)" app-module (click)="toggle(module_id)" [module_id]="module_id"></div>
