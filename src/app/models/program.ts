@@ -41,11 +41,11 @@ export class Program {
       this.competences = competences;
       this.debug = debug;
     }
-    getModule(module_id) {
+    getModule(module_id: string): Module {
       if ( this.debug ) { console.log('Program: getModule id' + module_id, 'result:', this.modules_by_id[module_id]); };
       return this.modules_by_id[module_id];
     }
-    setModules(modules) {
+    setModules(modules): void {
       if ( this.debug ) { console.log('Program: setModule id', modules); };
       this.modules = modules.map(
         (module: any) => {
@@ -85,7 +85,7 @@ export class Program {
         }
       );
     }
-    getTarget(target_id) {
+    getTarget(target_id): Target {
       if ( this.debug ) { console.log('Program: getTarget id' + target_id, 'result:', this.targets_by_id[target_id]); };
       return this.targets_by_id[target_id];
     }

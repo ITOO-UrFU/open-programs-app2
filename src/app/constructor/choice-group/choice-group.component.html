@@ -1,16 +1,18 @@
-<div class="build">
-                  
+<div class="build">        
     <ng-template [ngIf]="data.modules">
-        <!-- <h3>{{ choice_group.title }} {{ choice_group.labor }} з.е. из {{ laborSelectedModules() }} з.е. </h3>     -->
-    <!-- <div  class="left">
-        <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
-             <div *ngIf ="data.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) !== -1" app-module (click)="toggle(module_id)" [module_id]="module_id"></div> 
+            <h3>{{ choice_group.title }} {{ laborSelectedModules() }} з.е. из {{ choice_group.labor }} з.е.</h3>
+  
+    <div class="left">
+        <ng-template ngFor let-module_id [ngForOf]="choice_group.modules">
+             <div *ngIf ="trajectory.getModule(module_id)" app-module (click)="toggle(module_id)" [module_id]="module_id"></div> 
         </ng-template>
-    </div> -->
-    <!-- <div *ngIf = "data.trajectory.getChoiceGroupEditable(choice_group.id)" class="right">
-        <ng-template ngFor let-module_id [ngForOf]="choice_group.get_program_modules">
-             <div *ngIf ="data.trajectory.getModulesDefault(choice_group.id).indexOf(module_id) === -1" [style.background]="canToggle(module_id)? 'grey' : 'red'" app-module  (click)="toggle(module_id)"  [module_id]="module_id"></div> 
+    </div>
+    <ng-template [ngIf] = "!isFixed()">
+    <div class="right">
+        <ng-template ngFor let-module_id [ngForOf]="choice_group.modules">
+             <div *ngIf ="!trajectory.getModule(module_id)" app-module (click)="toggle(module_id)" [module_id]="module_id"></div> 
         </ng-template>
-    </div> -->
+    </div> 
+    </ng-template>
     </ng-template>
 </div>

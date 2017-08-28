@@ -24,7 +24,6 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 export class DataService {
   program: Program;
   trajectory: Trajectory;
-  choice_groups_status = {};
 
   sortSubject: ReplaySubject<any> = new ReplaySubject();
   loadSubject: ReplaySubject<any> = new ReplaySubject();
@@ -75,11 +74,36 @@ export class DataService {
       (value: string) => {
         status[value] = true;
         if (status['targets']) {
-          this.trajectory.setTarget(this.program.targets[0])
+          this.trajectory.setTarget(this.program.targets[0]);
         };
+        if (status['modules'] && status['choice_groups']) {
+          this.setModulesDefault();
+        }
+        if (status['choice_groups'] && status['targets']){
+          this.choice_groups = true;
+        }
+        if (status['modules'] && status['choice_groups'] && status['targets']){
+          this.func()
+        }
         console.log(status);
       }
     );
+  }
+
+  func(){
+    console.log('модули в траекторию')
+    this.program.choice_groups.forEach(
+      choice_group => {
+        if (choice_group.modules_default[this.trajectory.getTargetId()]) {
+          choice_group.modules_default[this.trajectory.getTargetId()].forEach(
+            module_id => {
+              console.log(this.trajectory.addModule(this.program.getModule(module_id)));
+            }
+          );
+        }
+      }
+    );
+    console.log(this.trajectory);
   }
 
    public getProgram( program_id: string ) {
@@ -124,7 +148,6 @@ export class DataService {
                 .subscribe(
                   (choiceGroups: any) => {
                     this.program.setChoiceGroup(choiceGroups);
-                    this.choice_groups = true;
                     this.loadSubject.next('choice_groups');
                     console.log('dataService: ChoiceGroups', true);
                   },
@@ -137,12 +160,9 @@ export class DataService {
                 .subscribe(
                   (modules: any) => {
                     this.program.setModules(modules);
-                    //  old
-                    //   this.trajectory.setModulesDefault(this.program.modules);
                     this.modules = true;
-                    this.setModulesDefault(modules)
+                    console.log('dataService: Modules', true, this.program);
                     this.loadSubject.next('modules');
-                    console.log('dataService: Modules', true);
                   },
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
                 );
@@ -175,31 +195,20 @@ export class DataService {
 
 
 
-// +++++++++++
-public setModulesDefault(modules: any) {
-  modules.forEach(
+
+public setModulesDefault() {
+  this.program.modules.forEach(
     (module) => {
-      for ( let target in module.targets_positions_indexed ) {
-        if(!this.choice_groups_status[target]) {
-          this.choice_groups_status[target] = {};
-        }
-        if(!this.choice_groups_status[target][module.choice_group]) {
-          console.log('первый раз' )
-          this.choice_groups_status[target][module.choice_group] = true;
-        }
-        if ( module.targets_positions_indexed[target] === 2 && this.choice_groups_status[target][module.choice_group] ){
-          this.choice_groups_status[target][module.choice_group] = false;
-        } else if ( module.targets_positions_indexed[target] === 1 ) {
-          this.choice_groups_status[target][module.choice_group] = true;
-        } else if ( module.targets_positions_indexed[target] === 0 ){
-          delete this.choice_groups_status[target][module.choice_group]
+      for (const key in module.targets_positions_indexed) {
+        if (module.targets_positions_indexed.hasOwnProperty(key)) {
+          if (module.targets_positions_indexed[key] === 1) {
+            this.program.choice_groups_by_id[module.choice_group].setModulesDefault(module.id, key);
+          }
         }
       }
     }
-  )
-  console.log(this.choice_groups_status);
+  );
 }
-// +++++++++++
 
 
 

@@ -6,8 +6,8 @@ export class Trajectory {
     public program_id: string;
     public target: Target;
 
-    public module_ids: String[];
-    public modules: Module[];
+    public module_ids: String[] = [];
+    public modules: Module[] = [];
     public modules_by_id: Object = {};
 
 
@@ -29,22 +29,39 @@ export class Trajectory {
     setTarget ( target: Target ) {
         this.target = target;
     }
-    addModule( module: Module ) {
+    addModule( module: Module ): boolean {
         if ( this.module_ids.indexOf(module.id) === -1 ) {
             this.modules.push(module);
             this.module_ids.push(module.id);
             this.modules_by_id[module.id] = module;
+            return true;
         }
+        return false;
     }
-    removeModule( module: Module ) {
+    removeModule( module: Module ): boolean {
         if ( this.module_ids.indexOf(module.id) !== -1 ) {
-            this.modules.slice(this.modules.indexOf(module), 1);
-            this.module_ids.slice(this.module_ids.indexOf(module.id), 1);
+            this.modules.splice(this.modules.indexOf(module), 1);
+            this.module_ids.splice(this.module_ids.indexOf(module.id), 1);
             delete this.modules_by_id[module.id];
+            return true;
+        }
+        return false;
+    }
+    toggleModule(module: Module ) {
+        if ( this.module_ids.indexOf(module.id) === -1 ) {
+            console.log('add:', this.addModule( module ) );
+        } else {
+            console.log('remove:', this.removeModule( module ) );
         }
     }
 
-
+    getModule( module_id: string ){
+        if ( this.module_ids.indexOf(module_id) !== -1 ) {
+            return this.modules_by_id[module_id];
+        } else {
+            return false;
+        }
+    }
 
 
     setModulesDefault(modules: any){
@@ -63,9 +80,9 @@ export class Trajectory {
             }
         )
     }
-    // getModulesDefault( choice_group_id: string ){
-    //     return this.modules_selected[this.choice_groups.indexOf(choice_group_id)];
-    // }
+    getModulesDefault( choice_group_id: string ){
+        return this.modules_selected[this.choice_groups.indexOf(choice_group_id)];
+    }
 
     getChoiceGroupEditable(choice_group){
         return this.choice_groups_editeble.indexOf(choice_group) !== -1;
@@ -76,15 +93,6 @@ export class Trajectory {
     }
     getVariantSelected(discipline_id){
         return this.variants_selected[discipline_id];
-    }
-
-    toggleModule(module){
-        let currentModules = this.modules_selected[this.choice_groups.indexOf(module.choice_group)]
-        if (currentModules.indexOf(module.id) === -1) {
-            currentModules.push(module.id);
-        } else {
-            currentModules.splice(currentModules.indexOf(module.id),1);
-        }
     }
 }
 

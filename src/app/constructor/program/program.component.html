@@ -5,7 +5,7 @@
     <div *ngIf = "data.targets" id="targets">
         <ul class="target_choices">
             <ng-template ngFor let-target [ngForOf]="data.program.targets">
-                <li app-target [class.selected]="data.trajectory.target.id == target.id" [target] = "target"></li>
+                <li app-target [class.selected]="data.trajectory.target.id == target.id" [target]="target"></li>
             </ng-template>
         </ul>
     </div>
@@ -17,13 +17,15 @@
         </ul>
     </div>
     <div *ngIf = "data.choice_groups">
-        <ng-template ngFor let-choice_group [ngForOf]="data.trajectory.choice_groups">
+        <ng-template ngFor let-choice_group [ngForOf]="trajectory.target.choice_groups">
             <div app-choice-group class="ChoiceGroup" [choice_group_id] = "choice_group"></div>
         </ng-template>
     </div>
-    <div> <div app-disciplines></div>
+    <div *ngIf="data.modules && data.variants && false"> 
+        <div app-disciplines></div>
     </div>
 </div>
+
 
 <button (click)="data.saveTrajectory()">Сохранить</button>
 <button (click)="data.getTrajectory()">Получить</button>

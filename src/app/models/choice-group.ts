@@ -7,6 +7,8 @@ export class ChoiceGroup {
     public modules: string[]; // ID модулей
     public number: number;
 
+    public modules_default: object = {};
+
     constructor( id: string,
                  title: string,
                  program: string,
@@ -22,4 +24,20 @@ export class ChoiceGroup {
       this.modules = get_program_modules;
       this.number = number;
     };
+
+    public setModulesDefault(module_default_id, target_id) {
+        if (!this.modules_default[target_id]) {
+            this.modules_default[target_id] = [];
+        }
+        this.modules_default[target_id].push(module_default_id);
+    }
+    public getModulesDefault(target_id) {
+        if (this.modules_default[target_id]){
+            return this.modules_default[target_id];
+        }  else {
+            console.warn('Данный target:' + target_id + 'не связан ни с одним модулем из данной Группы выбора:' + this.title)
+            return false;
+        }
+
+    }
 }

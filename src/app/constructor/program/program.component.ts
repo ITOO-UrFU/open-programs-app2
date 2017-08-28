@@ -248,23 +248,23 @@ export class ProgramComponent implements OnInit {
 
 
 
-  isModulesDone() {
-    console.log('1', this.data.trajectory.modules_selected)
-    const laborAll = this.data.trajectory.modules_selected.reduce(
-      (a, b) => a.concat(b), []
-    ).map(
-      modules_id => this.data.program.getModule(modules_id).get_labor
-    ).reduce(
-      (a, b) => a + b, 0
-    );
+  // isModulesDone() {
+  //   console.log('1', this.data.trajectory.modules_selected)
+  //   const laborAll = this.data.trajectory.modules_selected.reduce(
+  //     (a, b) => a.concat(b), []
+  //   ).map(
+  //     modules_id => this.data.program.getModule(modules_id).labor
+  //   ).reduce(
+  //     (a, b) => a + b, 0
+  //   );
 
-    const laborChoiceGroup = this.data.trajectory.choice_groups.map(
-      choice_group_id => this.data.program.getChoiceGroup(choice_group_id).labor
-   ).reduce(
-      (a, b) => a + b, 0
-    );
-    return laborChoiceGroup === laborAll;
-  }
+  //   const laborChoiceGroup = this.data.trajectory.choice_groups.map(
+  //     choice_group_id => this.data.program.getChoiceGroup(choice_group_id).labor
+  //  ).reduce(
+  //     (a, b) => a + b, 0
+  //   );
+  //   return laborChoiceGroup === laborAll;
+  // }
 
 
 

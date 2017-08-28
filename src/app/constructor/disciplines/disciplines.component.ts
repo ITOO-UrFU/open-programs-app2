@@ -19,17 +19,16 @@ export class DisciplinesComponent implements OnInit {
   constructor(public data: DataService) { }
 
   getDisciplines(){
-    this.disciplines = this.trajectory.modules_selected.reduce(
-      (a,b) => a.concat(b), []
-    ).map(
-      module => this.program.getModule(module).disciplines
+    this.disciplines = this.trajectory.modules.map(
+      module => module.disciplines
     ).reduce(
       (a,b) => a.concat(b), []
     );
+    console.log('!!!', this.disciplines)
   }
   ngOnInit() {
     this.trajectory = this.data.trajectory;
     this.program = this.data.program;
-    //this.getDisciplines();
+    this.getDisciplines();
   }
 }
