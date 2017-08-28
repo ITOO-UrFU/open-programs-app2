@@ -21,11 +21,12 @@
             <div app-choice-group class="ChoiceGroup" [choice_group_id] = "choice_group"></div>
         </ng-template>
     </div>
-    <div *ngIf="data.modules && data.variants && false"> 
-        <div app-disciplines></div>
-    </div>
+</div>
+
+<div *ngIf="data.modules && data.variants"> 
+    <div app-disciplines></div>
 </div>
 
 
-<button (click)="data.saveTrajectory()">Сохранить</button>
-<button (click)="data.getTrajectory()">Получить</button>
+<!-- <button (click)="data.saveTrajectory()">Сохранить</button>
+<button (click)="data.getTrajectory()">Получить</button> -->

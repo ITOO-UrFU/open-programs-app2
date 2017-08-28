@@ -9,7 +9,7 @@
         <ng-template [ngIf]="!isFixed()">
             <div class="modules">
                 <ng-template ngFor let-module_id [ngForOf]="choice_group.modules">
-                    <div *ngIf="!trajectory.getModule(module_id)" app-module (click)="toggle(module_id)" [style.background]="canToggle(module_id) ? '#4ea324': 'red'"
+                    <div *ngIf="!trajectory.getModule(module_id)" app-module (click)="toggle(module_id)" [style.background]="canToggle(module_id) ? 'rgba(163, 234, 98, 0.8)': 'rgba(253, 168, 184, 0.8)'"
                         [module_id]="module_id"></div>
                 </ng-template>
             </div>
