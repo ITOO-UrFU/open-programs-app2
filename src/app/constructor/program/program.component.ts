@@ -22,6 +22,18 @@ import { Trajectory } from '../../models/trajectory';
 export class ProgramComponent implements OnInit {
   public trajectory: Trajectory;
 
+  ngOnInit() {
+    this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
+                             .subscribe(
+                                (trajectory: any) => {
+                                  this.data.getProgram( trajectory.program );
+                                  this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
+                                  this.trajectory = this.data.trajectory;
+                                  
+                                }
+                              );
+  }
+
 
 
 
@@ -256,15 +268,7 @@ export class ProgramComponent implements OnInit {
 
 
 
-  ngOnInit() {
-    this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
-                             .subscribe(
-                                (trajectory: any) => {
-                                  this.data.getProgram( trajectory.program );
-                                  this.data.trajectory = new Trajectory( trajectory.id, trajectory.program );
-                                }
-                              );
-  }
+
 }
 
 

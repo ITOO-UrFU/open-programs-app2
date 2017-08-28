@@ -1,13 +1,11 @@
-<div *ngIf="data?.program && data?.trajectory" class="header">
+<div *ngIf="data?.program" class="header">
     <h1>
         {{ data?.program?.title }}
     </h1>
-    <button (click)="data.saveTrajectory()">Сохранить</button>
-    <button (click)="data.getTrajectory()">Получить</button>
     <div *ngIf = "data.targets" id="targets">
         <ul class="target_choices">
             <ng-template ngFor let-target [ngForOf]="data.program.targets">
-                <li app-target [class.selected]="data.trajectory.target_id == target.id" [target] = "target"></li>
+                <li app-target [class.selected]="data.trajectory.target.id == target.id" [target] = "target"></li>
             </ng-template>
         </ul>
     </div>
@@ -26,3 +24,6 @@
     <div> <div app-disciplines></div>
     </div>
 </div>
+
+<button (click)="data.saveTrajectory()">Сохранить</button>
+<button (click)="data.getTrajectory()">Получить</button>

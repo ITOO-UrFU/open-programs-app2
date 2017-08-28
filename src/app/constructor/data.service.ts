@@ -209,8 +209,8 @@ public setModulesDefault(modules: any) {
   public saveTrajectory() {
     this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
                                                                   program_id:  this.trajectory.program_id,
-                                                                  data: this.trajectory })
-                              ).subscribe(
+                                                                  data: this.trajectory }) )
+                .subscribe(
                       (trajectory) => {
                          console.log('ok');
                       },

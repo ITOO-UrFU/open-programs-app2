@@ -11,8 +11,6 @@ export class Trajectory {
     public modules_by_id: Object = {};
 
 
-
-    public target_id: string;
     public choice_groups: string[];
     public choice_groups_editeble: string[];
     public modules_selected: any;
@@ -30,11 +28,6 @@ export class Trajectory {
     }
     setTarget ( target: Target ) {
         this.target = target;
-
-        // old
-        this.target_id = target.id;
-        this.choice_groups = target.choice_groups;
-        // old
     }
     addModule( module: Module ) {
         if ( this.module_ids.indexOf(module.id) === -1 ) {
@@ -58,14 +51,14 @@ export class Trajectory {
         this.modules_selected = this.choice_groups.map(
             (choice_group) => {
                return modules.filter(
-                   module => module.choice_group === choice_group && module.targets_positions_indexed[this.target_id] === 1
+                   module => module.choice_group === choice_group && module.targets_positions_indexed[this.target.id] === 1
                 ).map(module => module.id)
             }
         )
         this.choice_groups_editeble = this.choice_groups.filter(
             (choice_group) => {
                return modules.filter(
-                   module => module.choice_group === choice_group && module.targets_positions_indexed[this.target_id] !== 1
+                   module => module.choice_group === choice_group && module.targets_positions_indexed[this.target.id] !== 1
                 ).length > 0;
             }
         )
