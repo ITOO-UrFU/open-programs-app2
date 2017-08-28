@@ -3,11 +3,16 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    padding: 4px;
+
     .modules { 
         flex-basis: 50%;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
+        border: 2px dashed gray;
+        border-radius: 6px;
+        margin: 2px;
 
         div[app-module]{
             height: 40px;
