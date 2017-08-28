@@ -1,5 +1,21 @@
-div[app-module] {
-    width: 100%;
-    border: 1px solid gray;
-    border-radius: 3px;
+
+.choice_group{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    .modules { 
+        flex-basis: 50%;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+
+        div[app-module]{
+            height: 40px;
+            border: 1px solid gray;
+            margin: 2px;
+            border-radius: 6px;
+            padding: 4px;  
+            background: rgba(255, 255, 255, 0.8);
+        }
+    }
 }
