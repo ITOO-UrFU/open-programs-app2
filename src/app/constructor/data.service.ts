@@ -33,9 +33,10 @@ export class DataService {
   choice_groups = false;
   modules = false;
   variants = false;
+  trajectoryBool = false
 
   public complete_load(): boolean {
-    return [ this.competences, this.modules, this.choice_groups, this.targets, this.variants ].indexOf(false) === -1;
+    return [ this.competences, this.modules, this.choice_groups, this.targets, this.variants, this.trajectoryBool].indexOf(false) === -1;
   };
 // old 
 
@@ -73,14 +74,19 @@ export class DataService {
 
   public constructorTrajectory() {
     let status: Object = {};
+    let getTarget = true;
 
     this.loadSubject.subscribe(
       (value: string) => {
         status[value] = true;
-        if (status['targets']) {
+        if (status['targets'] && status['trajectory'] && status['program'] && getTarget) {
+          console.log(this.program);
+          console.log(this.program.targets);
+          console.log(!this.trajectory.getTargetId())
           if (!this.trajectory.getTargetId()) {
-          this.trajectory.setTarget(this.program.targets[0]);
-        }
+            this.trajectory.setTarget(this.program.targets[0]);
+          }
+          getTarget = false;
         };
         if (status['modules'] && status['choice_groups']) {
           this.setModulesDefault();
@@ -93,7 +99,6 @@ export class DataService {
             this.func()
         }
         }
-        console.log(status);
       }
     );
   }
@@ -105,23 +110,20 @@ export class DataService {
         if (choice_group.modules_default[this.trajectory.getTargetId()]) {
           choice_group.modules_default[this.trajectory.getTargetId()].forEach(
             module_id => {
-              console.log(this.trajectory.addModule(this.program.getModule(module_id)));
+             this.trajectory.addModule(this.program.getModule(module_id));
             }
           );
         }
       }
     );
-    console.log(this.trajectory);
   }
 
   public createTrajectory(trajectory: any): Trajectory {
-    console.log('tr',trajectory.data);
     this.trajectory = new Trajectory( trajectory.id, trajectory.program );
     if (trajectory.data){
-      console.log('зашел')
       this.trajectory.setTrajectoryData(trajectory.data);
-      console.log(this.trajectory);
     }
+    this.loadSubject.next('trajectory');
     return this.trajectory;
   }
   
@@ -154,9 +156,10 @@ export class DataService {
                 .subscribe(
                   (targets: any) => {
                     this.program.setTargets(targets);
+                    console.log(this.program.targets)
                     this.targets = true;
                     this.loadSubject.next('targets');
-                    console.log('dataService: Targets', true);
+                    console.debug('dataService: Targets', true);
                   },
                   (error) => { console.log('Ошибка получения целей программы. API: /get_program_targets', error); }
                 );
@@ -168,7 +171,7 @@ export class DataService {
                   (choiceGroups: any) => {
                     this.program.setChoiceGroup(choiceGroups);
                     this.loadSubject.next('choice_groups');
-                    console.log('dataService: ChoiceGroups', true);
+                    console.debug('dataService: ChoiceGroups', true);
                   },
                   (error) => { console.error('Ошибка получения групп выбора. API: /get_program_choice_groups', error); }
                 );
@@ -180,7 +183,7 @@ export class DataService {
                   (modules: any) => {
                     this.program.setModules(modules);
                     this.modules = true;
-                    console.log('dataService: Modules', true, this.program);
+                    console.debug('dataService: Modules');
                     this.loadSubject.next('modules');
                   },
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
@@ -194,7 +197,7 @@ export class DataService {
                     this.program.setCompetences(competences);
                     this.competences = true;
                     this.loadSubject.next('competences');
-                    console.log('dataService: Competences', true);
+                    console.debug('dataService: Competences', true);
                   },
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_competences', error); }
                 );
@@ -206,7 +209,7 @@ export class DataService {
                     this.program.setVariants(variants);
                     this.variants = true;
                     this.loadSubject.next('variants');
-                    console.log('dataService: Variants', true);
+                    console.debug('dataService: Variants', true);
                   },
                   (error) => { console.log('Ошибка получения компетенций программы. API: /get_program_variants', error); }
                 );

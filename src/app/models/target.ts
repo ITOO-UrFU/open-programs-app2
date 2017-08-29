@@ -15,6 +15,7 @@ export class Target {
         this.program = program;
         this.choice_groups = choice_groups;
         this.number = number;
+        console.log('target est')
     };
 
     getChoiceGroups() {

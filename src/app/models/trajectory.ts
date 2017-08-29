@@ -65,6 +65,7 @@ export class Trajectory {
     }
     setTarget ( target: Target ) {
         this.target = target;
+        console.log(this.target);
     }
     addModule( module: Module ): boolean {
         if ( this.module_ids.indexOf(module.id) === -1 ) {
@@ -88,8 +89,8 @@ export class Trajectory {
         this.modules = [];
         this.modules_by_id = {};
         this.module_ids = [];
-        console.log(this.modules)
     }
+
     toggleModule(module: Module ) {
         if ( this.module_ids.indexOf(module.id) === -1 ) {
             console.log('add:', this.addModule( module ) );
