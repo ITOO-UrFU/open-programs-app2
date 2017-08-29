@@ -78,7 +78,7 @@ export class DataService {
       (value: string) => {
         status[value] = true;
         if (status['targets']) {
-          if (!this.trajectory.getTargetId()){
+          if (!this.trajectory.getTargetId()) {
           this.trajectory.setTarget(this.program.targets[0]);
         }
         };
@@ -90,14 +90,16 @@ export class DataService {
         }
         if (status['modules'] && status['choice_groups'] && status['targets']){
           if (!this.trajectory.getTargetId()){
-          this.func()}
+          this.func()
+        }
         }
         console.log(status);
       }
     );
   }
 
-  func(){
+  func() {
+    this.trajectory.removeAllModule();
     this.program.choice_groups.forEach(
       choice_group => {
         if (choice_group.modules_default[this.trajectory.getTargetId()]) {
@@ -113,9 +115,12 @@ export class DataService {
   }
 
   public createTrajectory(trajectory: any): Trajectory {
+    console.log('tr',trajectory.data);
     this.trajectory = new Trajectory( trajectory.id, trajectory.program );
     if (trajectory.data){
+      console.log('зашел')
       this.trajectory.setTrajectoryData(trajectory.data);
+      console.log(this.trajectory);
     }
     return this.trajectory;
   }

@@ -52,7 +52,7 @@ export class DisciplineCalendarComponent implements OnInit {
     this.trajectory = this.data.trajectory;
     this.program = this.data.program;
     this.variants = this.program.variants[this.discipline.id];
-    console.log(":", this.variants.map((element) => { return { c: element.campus, s: element.sync } }));
+    //console.log(":", this.variants.map((element) => { return { c: element.campus, s: element.sync } }));
     this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
     this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility > 0 || element.mobility === 0 && element.semester.term === this.data.term }));
     if (this.variants.length){
@@ -60,7 +60,7 @@ export class DisciplineCalendarComponent implements OnInit {
     }
 
     this.data.sortSubject.subscribe((val) => {
-      console.log(':', this.variants.map((element) => { return {  c: element.campus, s: element.sync } }));
+      //console.log(':', this.variants.map((element) => { return {  c: element.campus, s: element.sync } }));
       this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
       this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility > 0 || element.mobility === 0 && element.semester.term === this.data.term }));
       if (this.variants.length){

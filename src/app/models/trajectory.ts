@@ -24,15 +24,36 @@ export class Trajectory {
     }
 
     getTrajectoryData(){
-        this.data['modules'] = this.modules;
         this.data['target'] = this.target;
+        this.data['modules'] = this.modules;
         return this.data;
     }
-    setTrajectoryData(data){
+
+    setTrajectoryData(data) {
+        const target = data['target'];
+        const modules = data['modules'];
+
+        this.setTarget( new Target ( target.id,
+                                     target.title,
+                                     target.program,
+                                     target.choice_groups,
+                                     target.number ) );
+
+
         data['modules'].forEach(
-            module => this.getModule(module)
+            module => {
+                this.addModule( new Module( module.id,
+                                            module.title,
+                                            module.choice_group,
+                                            module.competence,
+                                            module.disciplines,
+                                            module.labor,
+                                            module.priority,
+                                            module.semester,
+                                            module.targets_positions,
+                                            module.targets_positions_indexed ) );
+            }
         );
-        this.setTarget(data['target']);
     }
 
     getTargetId() {
@@ -62,6 +83,12 @@ export class Trajectory {
             return true;
         }
         return false;
+    }
+    removeAllModule(){
+        this.modules = [];
+        this.modules_by_id = {};
+        this.module_ids = [];
+        console.log(this.modules)
     }
     toggleModule(module: Module ) {
         if ( this.module_ids.indexOf(module.id) === -1 ) {
