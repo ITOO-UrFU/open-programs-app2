@@ -40,7 +40,7 @@ export class Trajectory {
                                      target.number ) );
 
 
-        data['modules'].forEach(
+        modules.forEach(
             module => {
                 this.addModule( new Module( module.id,
                                             module.title,

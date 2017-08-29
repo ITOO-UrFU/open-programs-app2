@@ -28,7 +28,7 @@ export class ProgramComponent implements OnInit {
                              .subscribe(
                                 (trajectory: any) => {
                                   this.data.getProgram( trajectory.program );
-                                  console.log('tr1', trajectory)
+                                  console.log('tr1', trajectory);
                                   this.trajectory = this.data.createTrajectory(trajectory);
                                   // Надо подписаться на прогром после его наполнения
                                   //this.program = this.data.program;

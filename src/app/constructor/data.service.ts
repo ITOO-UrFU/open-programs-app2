@@ -90,7 +90,7 @@ export class DataService {
         }
         if (status['modules'] && status['choice_groups'] && status['targets']){
           if (!this.trajectory.getTargetId()){
-          this.func()
+            this.func()
         }
         }
         console.log(status);
