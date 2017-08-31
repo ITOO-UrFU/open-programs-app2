@@ -22,8 +22,8 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class DataService {
-  program: Program;
-  trajectory: Trajectory;
+  public program: Program;
+  public trajectory: Trajectory;
 
   sortSubject: ReplaySubject<any> = new ReplaySubject();
   loadSubject: ReplaySubject<any> = new ReplaySubject();
@@ -38,6 +38,8 @@ export class DataService {
   public complete_load(): boolean {
     return [ this.competences, this.modules, this.choice_groups, this.targets, this.variants, this.trajectoryBool].indexOf(false) === -1;
   };
+
+
 // old 
 
   public sync: number = 100;
@@ -73,37 +75,53 @@ export class DataService {
 
 
   public constructorTrajectory() {
-    let status: Object = {};
-    let getTarget = true;
+    const loading = {
+      program: false,
+      trajectory: false,
+      targets: false,
+      competences: false,
+      choice_groups: false,
+      modules: false,
+      variants: false
+    };
+
+    const status = {
+      getTrajectory: false,
+      getTarget: false,
+      getModules: false
+    }
+
 
     this.loadSubject.subscribe(
       (value: string) => {
-        status[value] = true;
-        if (status['targets'] && status['trajectory'] && status['program'] && getTarget) {
-          console.log(this.program);
-          console.log(this.program.targets);
-          console.log(!this.trajectory.getTargetId())
-          if (!this.trajectory.getTargetId()) {
+        loading[value] = true;
+        console.log( 'Загрузка ' + value + ' завершена!' );
+
+        if (loading.program) {
+          console.log( 'Загрузка программы завершена!' );
+          delete loading.program;
+        }
+        if (loading.trajectory && loading.targets && !status.getTarget) {
+          if (!this.trajectory.getStatus()){
             this.trajectory.setTarget(this.program.targets[0]);
           }
-          getTarget = false;
-        };
-        if (status['modules'] && status['choice_groups']) {
+          this.trajectoryBool = true;
+          status.getTarget = true;
+        }
+        if (loading.choice_groups && loading.modules && !status.getModules){
           this.setModulesDefault();
+          status.getModules = true;
         }
-        if (status['choice_groups'] && status['targets']){
-          this.choice_groups = true;
-        }
-        if (status['modules'] && status['choice_groups'] && status['targets']){
-          if (!this.trajectory.getTargetId()){
-            this.func()
-        }
+        if (status.getTarget && status.getModules){
+          if (!this.trajectory.getStatus()){
+            this.defaultModulesInTrajectory();
+          }
         }
       }
     );
   }
 
-  func() {
+  defaultModulesInTrajectory() {
     this.trajectory.removeAllModule();
     this.program.choice_groups.forEach(
       choice_group => {
@@ -120,8 +138,9 @@ export class DataService {
 
   public createTrajectory(trajectory: any): Trajectory {
     this.trajectory = new Trajectory( trajectory.id, trajectory.program );
-    if (trajectory.data){
-      this.trajectory.setTrajectoryData(trajectory.data);
+    console.log('DATA', trajectory, trajectory.data);
+    if (trajectory.data) {
+       this.trajectory.setTrajectoryData(trajectory.data);
     }
     this.loadSubject.next('trajectory');
     return this.trajectory;
@@ -170,6 +189,7 @@ export class DataService {
                 .subscribe(
                   (choiceGroups: any) => {
                     this.program.setChoiceGroup(choiceGroups);
+                    this.choice_groups = true;
                     this.loadSubject.next('choice_groups');
                     console.debug('dataService: ChoiceGroups', true);
                   },
@@ -183,8 +203,9 @@ export class DataService {
                   (modules: any) => {
                     this.program.setModules(modules);
                     this.modules = true;
-                    console.debug('dataService: Modules');
                     this.loadSubject.next('modules');
+                    console.debug('dataService: Modules', true);
+                    
                   },
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
                 );

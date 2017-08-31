@@ -2,22 +2,22 @@
     <h1>
         {{ data?.program?.title }}
     </h1>
-    <div *ngIf = "data.targets" id="targets">
+    <div id="targets">
         <ul class="target_choices">
             <ng-template ngFor let-target [ngForOf]="data.program.targets">
-                <li app-target [class.selected]="trajectory.target.id == target.id" [target]="target"></li>
+                <li app-target [class.selected]="data?.trajectory?.target?.id == target.id" [target]="target"></li>
             </ng-template>
         </ul>
     </div>
-    <div *ngIf = "data.competences">
+    <div *ngIf = "data?.competences">
         <ul>
-            <ng-template ngFor let-competence [ngForOf]="data.program?.competences">
+            <ng-template ngFor let-competence [ngForOf]="data?.program?.competences">
                 <li app-competence [competence] = competence></li> 
             </ng-template>
         </ul>
     </div>
-    <div *ngIf = "data.choice_groups">
-        <ng-template ngFor let-choice_group [ngForOf]="trajectory.target.choice_groups">
+    <div *ngIf = "data?.choice_groups">
+        <ng-template ngFor let-choice_group [ngForOf]="trajectory?.target?.choice_groups">
             <div app-choice-group class="ChoiceGroup" [choice_group_id] = "choice_group"></div>
         </ng-template>
     </div>

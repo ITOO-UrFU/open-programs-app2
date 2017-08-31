@@ -20,7 +20,7 @@ export class TargetComponent implements OnInit {
 
   selectTarget() {
     this.trajectory.setTarget(this.target);
-    this.data.func();
+    this.data.defaultModulesInTrajectory();
   }
 
   ngOnInit() {

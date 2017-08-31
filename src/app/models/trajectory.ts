@@ -16,20 +16,27 @@ export class Trajectory {
     public modules_selected: any;
     public variants_selected: any = {};
 
-    private data: any = {};
+    private data = {
+        status: false
+    };
 
     constructor ( id: string, program_id: string  ) {
       this.id = id;
       this.program_id = program_id;
     }
+    getStatus() {
+        return this.data.status;
+    }
 
     getTrajectoryData(){
+        this.data.status = true;
         this.data['target'] = this.target;
         this.data['modules'] = this.modules;
         return this.data;
     }
 
     setTrajectoryData(data) {
+        this.data.status = data.status;
         const target = data['target'];
         const modules = data['modules'];
 
@@ -65,7 +72,7 @@ export class Trajectory {
     }
     setTarget ( target: Target ) {
         this.target = target;
-        console.log(this.target);
+        console.log('Цель выброна: ', this.target);
     }
     addModule( module: Module ): boolean {
         if ( this.module_ids.indexOf(module.id) === -1 ) {
