@@ -99,16 +99,12 @@ export class DataService {
         loading[value] = true;
         console.log( 'Загрузка ' + value + ' завершена!', loading, status );
         if (value === 'program'){
-          loading = {
-            program: false,
-            trajectory: false,
-            targets: false,
-            competences: false,
-            choice_groups: false,
-            modules: false,
-            variants: false
-          };
-      
+            loading.targets = false;
+            loading.competences = false;
+            loading.choice_groups = false;
+            loading.modules = false;
+            loading.variants = false;
+
           status = {
             getTrajectory: false,
             getTarget: false,
