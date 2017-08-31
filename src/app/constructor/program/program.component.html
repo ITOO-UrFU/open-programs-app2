@@ -8,8 +8,8 @@
     </h1>
     <div id="targets">
         <ul class="target_choices">
-            <ng-template ngFor let-target [ngForOf]="data.program.targets">
-                <li app-target [class.selected]="data?.trajectory?.target?.id == target.id" [target]="target"></li>
+            <ng-template ngFor let-target [ngForOf]="data?.program?.targets">
+                <li app-target [class.selected]="data?.trajectory?.target?.id == target?.id" [target]="target"></li>
             </ng-template>
         </ul>
     </div>

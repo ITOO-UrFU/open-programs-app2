@@ -71,11 +71,13 @@ export class DataService {
   }
 
 
-  constructor(private service: ConstructorService) { }
+  constructor(private service: ConstructorService) {
+    this.constructorTrajectory()
+   }
 
 
   public constructorTrajectory() {
-    const loading = {
+    let loading = {
       program: false,
       trajectory: false,
       targets: false,
@@ -85,7 +87,7 @@ export class DataService {
       variants: false
     };
 
-    const status = {
+    let status = {
       getTrajectory: false,
       getTarget: false,
       getModules: false
@@ -95,7 +97,24 @@ export class DataService {
     this.loadSubject.subscribe(
       (value: string) => {
         loading[value] = true;
-        console.log( 'Загрузка ' + value + ' завершена!' );
+        console.log( 'Загрузка ' + value + ' завершена!', loading, status );
+        if (value === 'program'){
+          loading = {
+            program: false,
+            trajectory: false,
+            targets: false,
+            competences: false,
+            choice_groups: false,
+            modules: false,
+            variants: false
+          };
+      
+          status = {
+            getTrajectory: false,
+            getTarget: false,
+            getModules: false
+          }
+        }
 
         if (loading.program) {
           console.log( 'Загрузка программы завершена!' );
@@ -145,7 +164,7 @@ export class DataService {
     this.loadSubject.next('trajectory');
     return this.trajectory;
   }
-  
+
   public getProgram( program_id: string ) {
     this.service.getElementsBySlug( 'programs', program_id )
                 .subscribe(
@@ -164,7 +183,6 @@ export class DataService {
                     this.getChoiceGroups(program_id);
                     this.getModules(program_id);
                     this.getVariants(program_id);
-                    this.constructorTrajectory();
                     this.loadSubject.next('program');
                   },
                   (error) => { console.log('Ошибка получения программы. API: /programs', error); }
@@ -175,7 +193,6 @@ export class DataService {
                 .subscribe(
                   (targets: any) => {
                     this.program.setTargets(targets);
-                    console.log(this.program.targets)
                     this.targets = true;
                     this.loadSubject.next('targets');
                     console.debug('dataService: Targets', true);

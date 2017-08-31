@@ -72,7 +72,6 @@ export class Trajectory {
     }
     setTarget ( target: Target ) {
         this.target = target;
-        console.log('Цель выброна: ', this.target);
     }
     addModule( module: Module ): boolean {
         if ( this.module_ids.indexOf(module.id) === -1 ) {

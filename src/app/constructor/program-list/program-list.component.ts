@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../../auth/auth.service';
 import { ConstructorService } from '../constructor.service';
-import { DataService } from '../data.service';
+//import { DataService } from '../data.service';
 
 // Custom Models
 import { Program } from '../../models/program';
@@ -40,7 +40,7 @@ export class ProgramListComponent implements OnInit {
                 .subscribe(
                       (trajectory: any) => {
                          this.router.navigate(['/constructor', 'program', trajectory.id]);
-                      },
+                        },
                       error => {
                         console.log(error);
                       });
