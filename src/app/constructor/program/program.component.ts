@@ -23,6 +23,24 @@ export class ProgramComponent implements OnInit {
   public trajectory: Trajectory;
   public program: Program;
 
+  public steps = {
+    modules: true,
+    disciplines: false
+  };
+
+  public step(value) {
+    if ( !this.steps.modules && !this.steps.disciplines ) {
+      this.steps.modules = !this.steps.modules;
+    } else if (value === 'modules'){
+      this.steps.modules = true;
+      this.steps.disciplines = false;
+    } else if (value === 'disciplines'){
+      this.steps.modules = false;
+      this.steps.disciplines = true;
+    }
+
+  }
+
   ngOnInit() {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
                              .subscribe(
@@ -44,10 +62,7 @@ export class ProgramComponent implements OnInit {
   public build = false;
   public modules: any = {};
   public competences: any = {};
-  public steps = {
-    modules: false,
-    disciplines: false
-  };
+
   public eduLength = [1,2,3,4,5,6,7,8];
   public term = '4 года';
   public presence: string = 'z';
@@ -127,15 +142,7 @@ export class ProgramComponent implements OnInit {
 
   }
 
-  public step() {
-    if ( !this.steps.modules && !this.steps.disciplines ) {
-      this.steps.modules = !this.steps.modules;
-    } else {
-      this.steps.modules = !this.steps.modules;
-      this.steps.disciplines = !this.steps.disciplines;
-    }
-    this.saveTrajectory();
-  }
+
 
 
   private collectModules(): any {

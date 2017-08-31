@@ -90,7 +90,8 @@ export class DataService {
     let status = {
       getTrajectory: false,
       getTarget: false,
-      getModules: false
+      getModules: false,
+      getVariants: false
     }
 
 
@@ -108,7 +109,8 @@ export class DataService {
           status = {
             getTrajectory: false,
             getTarget: false,
-            getModules: false
+            getModules: false,
+            getVariants: false
           }
         }
 
@@ -131,6 +133,10 @@ export class DataService {
           if (!this.trajectory.getStatus()){
             this.defaultModulesInTrajectory();
           }
+        }
+        if (loading.variants && !status.getVariants){
+          console.log(this.program.variants)
+          status.getVariants = true;
         }
       }
     );

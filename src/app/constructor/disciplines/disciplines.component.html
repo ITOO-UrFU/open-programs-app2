@@ -14,14 +14,14 @@
         <button [style.border] = "(data.campus === 0) ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('d', 0)">Удаленно (0%)</button>
       </div>
 
-      <div style='position:fixed; top: 1px; width: 400px;'>
+      <!-- <div style='position:fixed; top: 1px; width: 400px;'>
         <h1>{{ trajectory?.modules?.length }} ({{ getDis()?.length }})</h1>
         <ol>
         <ng-template ngFor let-module [ngForOf]="trajectory?.modules">
           <li style="font-size:10pt">{{module.title}}</li>
         </ng-template>
         </ol>
-      </div>
+      </div> -->
 <ng-template ngFor let-discipline [ngForOf]="getDis()">
   
   <div class="discipline">

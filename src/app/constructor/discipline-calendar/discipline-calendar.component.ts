@@ -12,6 +12,7 @@ import { Program } from '../../models/program';
   styleUrls: ['./discipline-calendar.component.scss']
 })
 export class DisciplineCalendarComponent implements OnInit {
+
   trajectory: Trajectory;
   program: Program;
   variants: any[];
@@ -19,6 +20,7 @@ export class DisciplineCalendarComponent implements OnInit {
 
 
   @Input() discipline;
+
 
   constructor(public data: DataService) { }
 
@@ -44,27 +46,26 @@ export class DisciplineCalendarComponent implements OnInit {
     );
   }
 
-  changeVariantSelected(variant_id) {
-    this.trajectory.setVariantSelected(this.discipline.id, variant_id);
+  changeVariantSelected(variant_id, semester) {
+    this.trajectory.setVariantSelected(this.discipline.id, variant_id, semester);
   }
 
   ngOnInit() {
     this.trajectory = this.data.trajectory;
     this.program = this.data.program;
     this.variants = this.program.variants[this.discipline.id];
-    //console.log(":", this.variants.map((element) => { return { c: element.campus, s: element.sync } }));
+
     this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
     this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility > 0 || element.mobility === 0 && element.semester.term === this.data.term }));
-    if (this.variants.length){
-      this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id);
+    if (this.variants.length && !this.trajectory.getVariants){
+      this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id, this.discipline.default_semester[this.data.term]);
     }
 
     this.data.sortSubject.subscribe((val) => {
-      //console.log(':', this.variants.map((element) => { return {  c: element.campus, s: element.sync } }));
       this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
       this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility > 0 || element.mobility === 0 && element.semester.term === this.data.term }));
       if (this.variants.length){
-        this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id);
+        this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id, this.discipline.default_semester[this.data.term]);
       }
 
     });

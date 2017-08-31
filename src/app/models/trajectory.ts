@@ -9,12 +9,13 @@ export class Trajectory {
     public module_ids: String[] = [];
     public modules: Module[] = [];
     public modules_by_id: Object = {};
+    public variants: Object = {};
 
 
     public choice_groups: string[];
     public choice_groups_editeble: string[];
     public modules_selected: any;
-    public variants_selected: any = {};
+
 
     private data = {
         status: false
@@ -32,6 +33,7 @@ export class Trajectory {
         this.data.status = true;
         this.data['target'] = this.target;
         this.data['modules'] = this.modules;
+        this.data['variants'] = this.variants;
         return this.data;
     }
 
@@ -39,6 +41,7 @@ export class Trajectory {
         this.data.status = data.status;
         const target = data['target'];
         const modules = data['modules'];
+        const variants = data['variants'];
 
         this.setTarget( new Target ( target.id,
                                      target.title,
@@ -61,6 +64,7 @@ export class Trajectory {
                                             module.targets_positions_indexed ) );
             }
         );
+       this.variants = variants;
     }
 
     getTargetId() {
@@ -73,6 +77,9 @@ export class Trajectory {
     setTarget ( target: Target ) {
         this.target = target;
     }
+
+
+
     addModule( module: Module ): boolean {
         if ( this.module_ids.indexOf(module.id) === -1 ) {
             this.modules.push(module);
@@ -97,6 +104,7 @@ export class Trajectory {
         this.module_ids = [];
     }
 
+
     toggleModule(module: Module ) {
         if ( this.module_ids.indexOf(module.id) === -1 ) {
             console.log('add:', this.addModule( module ) );
@@ -114,35 +122,43 @@ export class Trajectory {
     }
 
 
-    setModulesDefault(modules: any){
-        this.modules_selected = this.choice_groups.map(
-            (choice_group) => {
-               return modules.filter(
-                   module => module.choice_group === choice_group && module.targets_positions_indexed[this.target.id] === 1
-                ).map(module => module.id)
-            }
-        )
-        this.choice_groups_editeble = this.choice_groups.filter(
-            (choice_group) => {
-               return modules.filter(
-                   module => module.choice_group === choice_group && module.targets_positions_indexed[this.target.id] !== 1
-                ).length > 0;
-            }
-        )
+    // setModulesDefault(modules: any){
+    //     this.modules_selected = this.choice_groups.map(
+    //         (choice_group) => {
+    //            return modules.filter(
+    //                module => module.choice_group === choice_group && module.targets_positions_indexed[this.target.id] === 1
+    //             ).map(module => module.id)
+    //         }
+    //     )
+    //     this.choice_groups_editeble = this.choice_groups.filter(
+    //         (choice_group) => {
+    //            return modules.filter(
+    //                module => module.choice_group === choice_group && module.targets_positions_indexed[this.target.id] !== 1
+    //             ).length > 0;
+    //         }
+    //     )
+    // }
+    // getModulesDefault( choice_group_id: string ){
+    //     return this.modules_selected[this.choice_groups.indexOf(choice_group_id)];
+    // }
+
+    // getChoiceGroupEditable(choice_group){
+    //     return this.choice_groups_editeble.indexOf(choice_group) !== -1;
+    // }
+    setVariantSelected(discipline_id, variant_id, semester){
+        const variant = {id: variant_id, semester: semester};
+        this.variants[discipline_id] = variant;
     }
-    getModulesDefault( choice_group_id: string ){
-        return this.modules_selected[this.choice_groups.indexOf(choice_group_id)];
+    getVariantSelected(discipline_id) {
+        if (this.variants[discipline_id]) {
+            return this.variants[discipline_id];
+        } else {
+            return false;
+        }
+    }
+    getVariants(){
+        return this.variants;
     }
 
-    getChoiceGroupEditable(choice_group){
-        return this.choice_groups_editeble.indexOf(choice_group) !== -1;
-    }
-
-    setVariantSelected(discipline_id, variant_id){
-        this.variants_selected[discipline_id] = variant_id;
-    }
-    getVariantSelected(discipline_id){
-        return this.variants_selected[discipline_id];
-    }
 }
 
