@@ -109,7 +109,8 @@ export class Program {
         (competence) => {
           const _competence = new Competence( competence.id,
                                               competence.title,
-                                              competence.number );
+                                              competence.number,
+                                              competence.color, );
           this.competences_by_id[competence.id] = _competence;
           return _competence;
         }

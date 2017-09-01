@@ -3,8 +3,11 @@
     align-items: center;
     background-color: pink;
     min-height: 38px;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 1s cubic-bezier(0,-0.005,0.755,1.105);
     .title {
-        font-weight: 300;
+        font-weight: 400;
         white-space: nowrap;
         padding-left: .5em;
     }
