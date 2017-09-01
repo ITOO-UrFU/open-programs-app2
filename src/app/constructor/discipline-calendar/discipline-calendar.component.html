@@ -1,29 +1,41 @@
-<ng-template ngFor let-semester [ngForOf]="data.eduLength"><div class="semester" [style.width] ="90/data.eduLength.length +'%'">
-  <ng-template ngFor let-variant [ngForOf]="variants">
-        <div [style.background-color] = "(trajectory.getVariantSelected(discipline.id).id === variant.id && trajectory.getVariantSelected(discipline.id).semester === semester) ? 'red' : 'gray' " >  
-        <ng-template [ngIf]="variant.mobility === 100">
-          <button (click)="changeVariantSelected(variant.id, semester)">Онлайн курс: {{ variant.course?.title }} <br /> m: {{ variant.mobility }}% s: {{ variant.sync }}% c: {{ variant.campus }}%</button>
-        </ng-template>
-        <ng-template [ngIf]="variant.mobility === 50 && semester%2==variant.parity">
-            <button (click)="changeVariantSelected(variant.id, semester)"> parity {{ variant.parity }} <br /> m: {{ variant.mobility }}% s: {{ variant.sync }}% c: {{ variant.campus }}%</button>
-        </ng-template>
-        <ng-template [ngIf]="variant.parity!=1 && variant.mobility === 50 && semester%variant.parity == 0">
-            <button (click)="changeVariantSelected(variant.id, semester)"> parity {{ variant.parity }} <br /> m: {{ variant.mobility }}% s: {{ variant.sync }}% c: {{ variant.campus }}%</button>
-        </ng-template>
-        <ng-template [ngIf]="variant.mobility === 50 && variant.parity == 3">
-            <button (click)="changeVariantSelected(variant.id, semester)"> parity {{ variant.parity }} <br /> m: {{ variant.mobility }}% s: {{ variant.sync }}% c: {{ variant.campus }}%</button>
-        </ng-template>
-        <ng-template [ngIf]="variant.mobility === 0 && discipline.default_semester[data.term] == semester && variant.semester?.term === data.term">
-            <button (click)="changeVariantSelected(variant.id, semester)"> {{ variant.semester?.term }} <br /> m: {{ variant.mobility }}% s: {{ variant.sync }}% c: {{ variant.campus }}%</button>
-        </ng-template>
-        </div>
+<ng-template ngFor let-semester [ngForOf]="data.eduLength">
+    <div class="semester" [style.width]="90/data.eduLength.length +'%'">
+        <ng-template ngFor let-variant [ngForOf]="variants">
+            <div class="variant" [ngClass]="{'active': (trajectory.getVariantSelected(discipline.id).id === variant.id && trajectory.getVariantSelected(discipline.id).semester === semester)}">
+                <ng-template [ngIf]="variant.mobility === 100">
+                    <button (click)="changeVariantSelected(variant.id, semester)">Онлайн курс: {{ variant.course?.title }}</button>
+                </ng-template>
+                <ng-template [ngIf]="variant.mobility === 50 && semester%2==variant.parity">
+                    <button (click)="changeVariantSelected(variant.id, semester)"> parity {{ variant.parity }}</button>
+                </ng-template>
+                <ng-template [ngIf]="variant.parity!=1 && variant.mobility === 50 && semester%variant.parity == 0">
+                    <button (click)="changeVariantSelected(variant.id, semester)"> parity {{ variant.parity }}</button>
+                </ng-template>
+                <ng-template [ngIf]="variant.mobility === 50 && variant.parity == 3">
+                    <button (click)="changeVariantSelected(variant.id, semester)"> parity {{ variant.parity }}</button>
+                </ng-template>
+                <ng-template [ngIf]="variant.mobility === 0 && discipline.default_semester[data.term] == semester && variant.semester?.term === data.term">
+                    <button (click)="changeVariantSelected(variant.id, semester)"> {{ variant.semester?.term }}</button>
+                </ng-template>
+            </div>
 
-  </ng-template>
-  <br />
-    <ng-template ngFor let-variant [ngForOf]="variants_other">
-        <ng-template [ngIf]="variant.mobility === 0  && discipline.default_semester[data.term] == semester && variant.semester?.term !== data.term">
-            <button disabled>{{ variant.semester?.term }} <br /> m: {{ variant.mobility }}% s: {{ variant.sync }}% c: {{ variant.campus }}%</button>
         </ng-template>
-    </ng-template>
-</div>
+        <br />
+        <div class="unabled">
+            <ng-template ngFor let-variant [ngForOf]="variants_other" let-i="index">
+                <ng-template [ngIf]="variant.mobility === 0  && discipline.default_semester[data.term] == semester && variant.semester?.term !== data.term">
+
+                    <div class="show" *ngIf="i === 0" (click)="show_another_variants = !show_another_variants">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="another_variant" [hidden]="!show_another_variants">
+                        <button disabled>{{ variant.semester?.term }}</button>
+                    </div>
+
+                </ng-template>
+            </ng-template>
+
+        </div>
+    </div>
 </ng-template>

@@ -1,14 +1,53 @@
-.discipline{
-	border: 1px solid gray;
-	div {
-		display: inline-block
-	}
-	.title{
-		width: 24%;
-	}
-	.calendar{
-		width: 75%;
-		position: relative;
-		vertical-align: top ;
-	}
+@import "../../variables";
+.discipline {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 0 1em 0 1em;
+    border: 1px dashed gray;
+    .title {
+        font-size: 20px;
+        font-weight: 300;
+    }
+    .calendar {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-content: space-around;
+    }
+}
+
+.widget__disciplines {}
+
+.widget__variants_filter {
+    background: $white-color;
+    padding: 1em;
+    margin-bottom: 1em;
+    display: flex;
+    align-content: space-around;
+    .row {
+        margin: 0 1em 0 1em;
+        display: flex;
+        flex-flow: row nowrap;
+        &:first-child {
+            width: 60%;
+        }
+        .filter {
+            margin: 0 1em 0 1em;
+            button {
+                min-width: 180px;
+                padding: .5em;
+                margin-bottom: 0.5em;
+                border: none;
+                background-color: lighten($primary-color, 30%);
+                color: $white-color;
+            }
+            button.active {
+                background-color: $primary-color;
+            }
+        }
+        .diagram {
+            display: flex;
+            align-items: center;
+        }
+    }
 }

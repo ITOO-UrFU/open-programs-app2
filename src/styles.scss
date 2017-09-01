@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "app/variables";
 
+@import "app/variables";
 body[app-root] {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -160,15 +160,14 @@ span.add-default-variants {
     color: darkgreen;
 }
 
-.variant {
-    background-color: rgba(74, 150, 173, 0.2);
-    p {
-        margin: 0;
-    }
-}
-
 .variants-table {
     width: 30%;
+    .variant {
+        background-color: rgba(74, 150, 173, 0.2);
+        p {
+            margin: 0;
+        }
+    }
 }
 
 .deleted {
@@ -277,18 +276,18 @@ diagram {
     color: $accent-color;
 }
 
-.widget__login, .widget__register, .widget__profile_edit {
+.widget__login,
+.widget__register,
+.widget__profile_edit {
     margin: 0 auto;
     margin-top: 7em;
     width: 500px;
     background-color: $white-color;
     padding: 1em;
-
-    .title > p {
+    .title>p {
         font-size: 2em;
         font-weight: 300;
     }
-    
     h2 {
         text-align: center;
         padding-bottom: 1em;
@@ -297,8 +296,8 @@ diagram {
         padding-bottom: 1em;
         line-height: 150%;
         label {
-            padding:0px;
-            display:block;
+            padding: 0px;
+            display: block;
             font-weight: 300;
         }
         input {
@@ -324,7 +323,8 @@ diagram {
     }
     .form-group.oneline {
         padding-top: 10px;
-        input, label {
+        input,
+        label {
             display: inline;
             font-weight: 400;
         }
@@ -350,16 +350,13 @@ diagram {
     margin: 0 auto;
     margin-top: 2em;
     padding: 1em;
-
-    .title > p {
+    .title>p {
         font-size: 2em;
         font-weight: 300;
     }
-
     .content {
         display: flex;
         flex-flow: row wrap;
-        
         .trajectory {
             display: flex;
             margin-right: 1em;
@@ -382,11 +379,11 @@ diagram {
             .trajectory__actions {
                 cursor: pointer;
                 display: inline;
-                position:absolute;
+                position: absolute;
                 top: 5px;
                 right: 5px;
                 .remove {
-                    color:$accent-color;
+                    color: $accent-color;
                 }
                 .copy {
                     color: $primary-color;
@@ -397,6 +394,6 @@ diagram {
     }
 }
 
-.widget__profile_edit > div {
+.widget__profile_edit>div {
     margin-bottom: 2em;
 }

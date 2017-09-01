@@ -18,6 +18,8 @@ export class DisciplineCalendarComponent implements OnInit {
   variants: any[];
   variants_other: any[];
 
+  show_another_variants = false;
+
 
   @Input() discipline;
 

@@ -1,20 +1,30 @@
+<h2> Дисциплины расчитаны на {{ data.term }} обучения, {{(data.presence=='o')? 'очная' : 'заочная'}} форма с применением {{ (data.technology_type==='t')? 'традиционных' : 'дистанционных' }} технологий</h2>
+<div class="widget__variants_filter">
+    <div class="row">
+        <div class="filter term_filter">
+            <button [ngClass]="{'active': data.term === '3,5 года' }" (click)="data.funcLength([1,2,3,4,5,6,7], '3,5 года')">3,5 года</button>
+            <button [ngClass]="{'active': data.term === '4 года' }" (click)="data.funcLength([1,2,3,4,5,6,7,8] , '4 года')">4 года</button>
+            <button [ngClass]="{'active': data.term === '5 лет' }" (click)="data.funcLength([1,2,3,4,5,6,7,8,9,10], '5 лет')">5 лет</button>
+        </div>
+        <div class="filter sync_filter">
+            <button [ngClass]="{'active': data.sync === 100 }" (click)="data.setPresence('o', 100)">Очно</button>
+            <button [ngClass]="{'active': data.sync === 50 }" (click)="data.setPresence('z', 50)">Очно-заочно</button>
+            <button [ngClass]="{'active': data.sync === 0 }" (click)="data.setPresence('z', 0)">Заочно</button>
+        </div>
+        <div class="filter campus_filter">
+            <button [ngClass]="{'active': data.campus === 100 }" (click)="data.setTechnologyType('t', 100)">Традиционно</button>
+            <button [ngClass]="{'active': data.campus === 50 }" (click)="data.setTechnologyType('d', 50)">С частичным посещением</button>
+            <button [ngClass]="{'active': data.campus === 0 }" (click)="data.setTechnologyType('d', 0)">Удаленно</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="diagram">
+            <p>Место для диаграмм</p>
+        </div>
+    </div>
+</div>
 
-<h2> Дисциплины расчитаны на {{ data.term }} обучения, {{(data.presence=='o')? 'очная' : 'заочная'}} форма  с применением {{ (data.technology_type==='t')? 'традиционных' : 'дистанционных' }} технологий</h2>
-      <div>
-        <button [style.border] = "(data.term === '3,5 года') ? '2px solid green' : '1px solid gray'" (click)="data.funcLength([1,2,3,4,5,6,7], '3,5 года')">3,5 года</button>
-        <button [style.border] = "(data.term === '4 года') ? '2px solid green' : '1px solid gray'" (click)="data.funcLength([1,2,3,4,5,6,7,8] , '4 года')">4 года</button>
-        <button [style.border] = "(data.term === '5 лет') ? '2px solid green' : '1px solid gray'" (click)="data.funcLength([1,2,3,4,5,6,7,8,9,10], '5 лет')">5 лет</button>
-        | SYNC:
-        <button [style.border] = "(data.sync === 100) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('o', 100)">Очно (100%)</button>
-        <button [style.border] = "(data.sync === 50) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('z', 50)">очно-заочно (50%)</button>
-        <button [style.border] = "(data.sync === 0) ? '2px solid green' : '1px solid gray'" (click)="data.setPresence('z', 0)">Заочно (0%)</button>
-        | CAMPUS:
-        <button [style.border] = "(data.campus === 100) ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('t', 100)">Традиционно (100%)</button>
-        <button [style.border] = "(data.campus === 50) ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('d', 50)">С частичным посящением (50%)</button>
-        <button [style.border] = "(data.campus === 0) ? '2px solid green' : '1px solid gray'" (click)="data.setTechnologyType('d', 0)">Удаленно (0%)</button>
-      </div>
-
-      <!-- <div style='position:fixed; top: 1px; width: 400px;'>
+<!-- <div style='position:fixed; top: 1px; width: 400px;'>
         <h1>{{ trajectory?.modules?.length }} ({{ getDis()?.length }})</h1>
         <ol>
         <ng-template ngFor let-module [ngForOf]="trajectory?.modules">
@@ -22,10 +32,12 @@
         </ng-template>
         </ol>
       </div> -->
-<ng-template ngFor let-discipline [ngForOf]="getDis()">
-  
-  <div class="discipline">
-    <div class="title" app-discipline-information [discipline]="discipline"></div>
-    <div class="calendar" app-discipline-calendar [discipline]="discipline"></div>
-  </div>
-</ng-template>
+<div class="widget__disciplines">
+    <ng-template ngFor let-discipline [ngForOf]="getDis()">
+
+        <div class="discipline">
+            <div class="title" app-discipline-information [discipline]="discipline"></div>
+            <div class="calendar" app-discipline-calendar [discipline]="discipline"></div>
+        </div>
+    </ng-template>
+</div>
