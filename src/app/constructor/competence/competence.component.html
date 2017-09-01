@@ -1,4 +1,5 @@
 
-  {{ competence?.title }} 
-  <span *ngIf="data.modules">{{ getCompetenceLabor() }} % </span>
+<div class="competence_diagram_col" [style.width.%]="getCompetenceLabor() * 2">  
+  <div class="title"><span *ngIf="data.modules">{{ getCompetenceLabor() }}% </span>{{ competence?.title }} </div>
+</div>
 

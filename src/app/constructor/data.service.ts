@@ -224,7 +224,6 @@ export class DataService {
                     this.modules = true;
                     this.loadSubject.next('modules');
                     console.debug('dataService: Modules', true);
-                    
                   },
                   (error) => { console.error('Ошибка получения модулей программы. API: /get_program_modules', error); }
                 );
@@ -272,12 +271,7 @@ public setModulesDefault() {
   );
 }
 
-
-
-
-
-
-  public saveTrajectory() {
+public saveTrajectory() {
     this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
                                                                   program_id:  this.trajectory.program_id,
                                                                   data: this.trajectory.getTrajectoryData() }) )
@@ -300,3 +294,4 @@ public setModulesDefault() {
   }
 
 }
+

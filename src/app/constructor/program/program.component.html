@@ -10,12 +10,11 @@
             </ng-template>
         </ul>
     </div>
-    <div *ngIf = "data?.competences">
-        <ul>
+    
+    <div *ngIf = "data?.competences" class="widget__competences_diagram">
             <ng-template ngFor let-competence [ngForOf]="data?.program?.competences">
-                <li app-competence [competence] = competence></li> 
-            </ng-template>
-        </ul>
+                <div app-competence [competence] = competence></div> 
+            </ng-template> 
     </div>
     <div *ngIf = "data?.choice_groups">
         <ng-template ngFor let-choice_group [ngForOf]="trajectory?.target?.choice_groups">

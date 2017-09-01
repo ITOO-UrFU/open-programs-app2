@@ -1,3 +1,32 @@
+@import "../../variables";
+
+.target_choices {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    li {
+        margin: 0 4px;
+        height: 5em;
+        padding: 18px 10px;
+        display: inline;
+        background-color: lighten($primary-color, 20%);
+        color: $white-color;
+        cursor: pointer;
+        text-align: center;
+        float: left;
+        width: 200px;
+        &.selected {
+            background-color: $primary-color;
+            color: $white-color;
+        }
+        &:hover {
+            background-color: lighten($primary-color, 20%);
+            color: $white-color;
+        }
+    }
+}
+
 :host { 
     display: flex;
     flex-flow: column;
@@ -7,4 +36,18 @@
  .header{
     width: 1140px;
     margin: auto;
+ }
+
+
+ .widget__competences_diagram {
+     display: flex;
+     flex-flow: column nowrap;
+     justify-content: space-around;
+     align-items: flex-start;
+     width: 100%;
+     height: $competences_diagram;
+     margin-top: 1em;
+     div {
+        width: 100%;
+     }
  }

@@ -15,10 +15,13 @@ import { CompetenceComponent } from './competence/competence.component';
 import { DisciplineCalendarComponent } from './discipline-calendar/discipline-calendar.component';
 import { DisciplineInformationComponent } from './discipline-information/discipline-information.component';
 
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+
 @NgModule({
   imports: [
     CommonModule,
-    ConstructorRoutingModule
+    ConstructorRoutingModule,
+    ChartsModule
   ],
   providers: [ConstructorService, DataService],
   declarations: [ProgramListComponent, ProgramComponent, DisciplineComponent, DisciplinesComponent, TargetComponent, ChoiceGroupComponent, ModuleComponent, CompetenceComponent, DisciplineCalendarComponent, DisciplineInformationComponent]

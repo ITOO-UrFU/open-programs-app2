@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -12,6 +12,8 @@ import { DataService } from '../data.service';
 // Custom Models
 import { Program } from '../../models/program';
 import { Trajectory } from '../../models/trajectory';
+
+import { ChartsModule } from 'ng2-charts';
 
 @Component({
   selector: 'app-program',
@@ -272,9 +274,6 @@ export class ProgramComponent implements OnInit {
   //   );
   //   return laborChoiceGroup === laborAll;
   // }
-
-
-
 
 }
 

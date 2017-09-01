@@ -1,0 +1,12 @@
+.competence_diagram_col {
+    display: flex;
+    align-items: center;
+    background-color: pink;
+    min-height: 38px;
+    .title {
+        font-weight: 300;
+        white-space: nowrap;
+        padding-left: .5em;
+    }
+}
+
