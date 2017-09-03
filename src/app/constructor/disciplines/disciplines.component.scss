@@ -1,18 +1,20 @@
 @import "../../variables";
 .discipline {
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow:  nowrap;
     padding: 0 1em 0 1em;
     border: 1px dashed gray;
     .title {
         font-size: 20px;
         font-weight: 300;
+        width: 20%;
     }
     .calendar {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
         align-content: space-around;
+        width: 80%;
     }
 }
 

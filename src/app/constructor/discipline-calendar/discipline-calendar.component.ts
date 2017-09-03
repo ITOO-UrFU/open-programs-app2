@@ -17,12 +17,16 @@ export class DisciplineCalendarComponent implements OnInit {
   program: Program;
   variants: any[];
   variants_other: any[];
+  show_variants = false;
 
   show_another_variants = false;
 
 
   @Input() discipline;
 
+  toogle_view(){
+    this.show_variants = !this.show_variants;
+  }
 
   constructor(public data: DataService) { }
 

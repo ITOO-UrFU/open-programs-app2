@@ -22,19 +22,22 @@ export class DisciplinesComponent implements OnInit {
     this.disciplines = modules.map(
       module => module.disciplines
     ).reduce(
-      (a,b) => a.concat(b), []
+      (a, b) => a.concat(b), []
     );
   }
   getDis(){
     return this.trajectory.modules.map(
       module => module.disciplines
     ).reduce(
-      (a,b) => a.concat(b), []
+      (a, b) => a.concat(b), []
     );
   }
   ngOnInit() {
     this.trajectory = this.data.trajectory;
     this.program = this.data.program;
     this.getDisciplines(this.trajectory.modules);
+    // костыль
+    this.data.setTechnologyType('', 0)
   }
 }
+
