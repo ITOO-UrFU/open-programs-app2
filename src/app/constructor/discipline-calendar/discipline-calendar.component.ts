@@ -28,6 +28,17 @@ export class DisciplineCalendarComponent implements OnInit {
     this.show_variants = !this.show_variants;
   }
 
+  getIcons(sync, campus){
+    if (campus==100){
+      return 'assets/campus.png';
+    } else if (sync===0 && campus === 0){
+      return "assets/online.png";
+    } else {
+      return "assets/webinar.png"
+    }
+
+  }
+
   constructor(public data: DataService) { }
 
   public sortVariants(variants) {

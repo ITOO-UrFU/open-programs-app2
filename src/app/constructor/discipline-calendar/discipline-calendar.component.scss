@@ -4,16 +4,18 @@
     background-color: $white-color;
     .active.variant {
         button {
-            background-color: $primary-color;
+           // background-color: $primary-color;
             color: $white-color;
             font-weight: 700;
+            filter: grayscale(00%);
         }
     }
     .variant {
         button {
             margin-bottom: 3px;
             padding: 3px;
-            background-color: lighten($primary-color, 20%);
+            filter: grayscale(90%);
+            background-color: white; //lighten($primary-color, 20%);
             border: none;
             color: $white-color;
             width: 100%;
