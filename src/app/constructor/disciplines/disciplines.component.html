@@ -33,6 +33,18 @@
         </ol>
       </div> -->
 <div class="widget__disciplines">
+        <div class="discipline">
+      <div class="title">
+
+        </div>
+      <div class="calendar">
+      <ng-template ngFor let-semester [ngForOf]="data.eduLength">
+<div [style.width]="90/data.eduLength.length +'%'"><p style='font-size: 14px; text-align: center;font-weight: 300;'>{{ semester }} семестр</p></div>
+      </ng-template>
+      <button disabled >Показать<br/>все</button>
+</div>
+</div>
+
     <ng-template ngFor let-discipline [ngForOf]="getDis()">
 
         <div class="discipline">

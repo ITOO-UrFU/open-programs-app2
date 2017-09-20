@@ -30,7 +30,7 @@
             </div>
 
         </ng-template>
-        <br />
+
         <div *ngIf="show_variants" class="unabled">
             <ng-template ngFor let-variant [ngForOf]="variants_other" let-i="index">
                 <ng-template [ngIf]="variant.mobility === 0  && discipline.default_semester[data.term] == semester && variant.semester?.term !== data.term">
