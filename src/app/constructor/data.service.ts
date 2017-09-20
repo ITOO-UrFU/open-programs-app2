@@ -135,7 +135,7 @@ export class DataService {
           }
         }
         if (loading.variants && !status.getVariants){
-          console.log(this.program.variants)
+          console.log(this.program.variants);
           status.getVariants = true;
         }
       }

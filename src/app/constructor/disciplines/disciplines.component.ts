@@ -36,8 +36,11 @@ export class DisciplinesComponent implements OnInit {
     this.trajectory = this.data.trajectory;
     this.program = this.data.program;
     this.getDisciplines(this.trajectory.modules);
-    // костыль
-    this.data.setTechnologyType('', 0)
+    if (!this.trajectory.getStatus()) {
+// костыль   
+ this.data.setTechnologyType('', 0)
+    }
+    
   }
 }
 
