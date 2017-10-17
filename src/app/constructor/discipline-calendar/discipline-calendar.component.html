@@ -3,27 +3,27 @@
         <ng-template ngFor let-variant [ngForOf]="variants">
             <div *ngIf="(trajectory.getVariantSelected(discipline.id).id === variant.id && trajectory.getVariantSelected(discipline.id).semester === semester) || show_variants" class="variant" [ngClass]="{'active': (trajectory.getVariantSelected(discipline.id).id === variant.id && trajectory.getVariantSelected(discipline.id).semester === semester)}">
                 <ng-template [ngIf]="variant.mobility === 100">
-                    <button (click)="changeVariantSelected(variant.id, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
+                    <button (click)="changeVariantSelected(variant, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
                         <!-- Онлайн курс: {{ variant.course?.title }} -->
                     </button>
                 </ng-template>
                 <ng-template [ngIf]="variant.mobility === 50 && semester%2==variant.parity">
-                    <button (click)="changeVariantSelected(variant.id, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
+                    <button (click)="changeVariantSelected(variant, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
                         <!-- parity {{ variant.parity }} -->
                     </button>
                 </ng-template>
                 <ng-template [ngIf]="variant.parity!=1 && variant.mobility === 50 && semester%variant.parity == 0">
-                    <button (click)="changeVariantSelected(variant.id, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
+                    <button (click)="changeVariantSelected(variant, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
                         <!-- parity {{ variant.parity }} -->
                     </button>
                 </ng-template>
                 <ng-template [ngIf]="variant.mobility === 50 && variant.parity == 3">
-                    <button (click)="changeVariantSelected(variant.id, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
+                    <button (click)="changeVariantSelected(variant, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
                         <!-- parity {{ variant.parity }} -->
                     </button>
                 </ng-template>
                 <ng-template [ngIf]="variant.mobility === 0 && discipline.default_semester[data.term] == semester && variant.semester?.term === data.term">
-                    <button (click)="changeVariantSelected(variant.id, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
+                    <button (click)="changeVariantSelected(variant, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
                         <!-- {{ variant.semester?.term }} -->
                     </button>
                 </ng-template>

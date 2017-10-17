@@ -17,21 +17,21 @@ export class DisciplineCalendarComponent implements OnInit {
   program: Program;
   variants: any[];
   variants_other: any[];
-  show_variants = false;
 
   show_another_variants = false;
 
 
   @Input() discipline;
+  @Input() show_variants;
 
   toogle_view(){
     this.show_variants = !this.show_variants;
   }
 
   getIcons(sync, campus){
-    if (campus==100){
+    if (campus == 100) {
       return 'assets/campus.png';
-    } else if (sync===0 && campus === 0){
+    } else if (sync === 0 && campus === 0){
       return "assets/online.png";
     } else {
       return "assets/webinar.png"
@@ -63,8 +63,8 @@ export class DisciplineCalendarComponent implements OnInit {
     );
   }
 
-  changeVariantSelected(variant_id, semester) {
-    this.trajectory.setVariantSelected(this.discipline.id, variant_id, semester);
+  changeVariantSelected(variant, semester) {
+    this.trajectory.setVariantSelected(this.discipline.id, variant, semester);
   }
 
   ngOnInit() {
@@ -75,14 +75,14 @@ export class DisciplineCalendarComponent implements OnInit {
     this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
     this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility > 0 || element.mobility === 0 && element.semester.term === this.data.term }));
     if (this.variants.length && !this.trajectory.getVariants){
-      this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id, this.discipline.default_semester[this.data.term]);
+      this.trajectory.setVariantSelected(this.discipline.id, this.variants[0], this.discipline.default_semester[this.data.term]);
     }
 
     this.data.sortSubject.subscribe((val) => {
       this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
       this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility > 0 || element.mobility === 0 && element.semester.term === this.data.term }));
       if (this.variants.length){
-        this.trajectory.setVariantSelected(this.discipline.id, this.variants[0].id, this.discipline.default_semester[this.data.term]);
+        this.trajectory.setVariantSelected(this.discipline.id, this.variants[0], this.discipline.default_semester[this.data.term]);
       }
 
     });

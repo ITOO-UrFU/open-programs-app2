@@ -1,5 +1,41 @@
 <div class="title">
-    <p>{{discipline.title}} {{discipline.id}}</p>
+
+    <p>{{discipline.title}}</p>
+
+    <ng-template [ngIf]="show_variants">
+
+    <canvas baseChart width="300" height="200"
+                [datasets]="getGraphic().datasets"
+                [labels]="getGraphic().labels"
+                [chartType]="pieChartType"
+                [options]="{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation : false,
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        display: false,
+                        labels: {
+                            display: false
+                        }
+                    }
+                    }">
+                </canvas>
+    </ng-template>
+            <button (click)='toogle_view()'>toogle_view</button>
+    
     <div class="info">
         <button (click)='getVariants()'>getVariants</button>
+        
     </div>
