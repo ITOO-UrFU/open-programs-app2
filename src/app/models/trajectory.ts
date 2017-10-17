@@ -145,9 +145,9 @@ export class Trajectory {
     // getChoiceGroupEditable(choice_group){
     //     return this.choice_groups_editeble.indexOf(choice_group) !== -1;
     // }
-    setVariantSelected(discipline_id, variant_id, semester){
-        const variant = {id: variant_id, semester: semester};
-        this.variants[discipline_id] = variant;
+    setVariantSelected(discipline_id, variant, semester){
+        const current_variant = {id: variant.id, semester: semester, diagram: variant.diagram};
+        this.variants[discipline_id] = current_variant;
     }
     getVariantSelected(discipline_id) {
         if (this.variants[discipline_id]) {

@@ -7,6 +7,6 @@ export class IAppConfig {
 };
 
 export const AppConfig: IAppConfig = {
-     apiEndpoint: 'http://10.16.208.129:8080/api/v11/'
+     apiEndpoint: 'https://openedu.urfu.ru/oop/api/v11/'
      // apiEndpoint: 'http://212.193.94.145:8080/api/v11/'
 };

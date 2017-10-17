@@ -15,6 +15,7 @@ export class DisciplinesComponent implements OnInit {
   trajectory: Trajectory;
   program: Program;
   disciplines: any[];
+  show_variants = false;
   
   constructor(public data: DataService) { }
 
