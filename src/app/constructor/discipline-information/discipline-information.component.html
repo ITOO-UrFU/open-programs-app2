@@ -1,6 +1,6 @@
 <div class="title">
 
-    <p (click)='toogle_view()'>{{discipline.title}}</p>
+    <p>{{ !discipline.open ? "►": "▼"}} {{discipline.title}}</p>
 
     <ng-template [ngIf]="discipline.open">
     <p>{{ trajectory.getVariantSelected(discipline.id).diagram.title }}</p>

@@ -35,22 +35,22 @@
 <div class="widget__disciplines">
         <div class="discipline">
       <div class="title">
-
+            <div (click) = toggleAll()> <p>Свернуть все </p></div>
         </div>
       <div class="calendar">
       <ng-template ngFor let-semester [ngForOf]="data.eduLength">
-<div [style.width]="90/data.eduLength.length +'%'"><p style='font-size: 14px; text-align: center;font-weight: 300;'>{{ semester }} семестр</p></div>
+            <div [style.width]="90/data.eduLength.length +'%'"><p style='font-size: 14px; text-align: center;font-weight: 300;'>{{ semester }} семестр</p></div>
       </ng-template>
 </div>
 </div>
-<div (click) = toggleAll()> Свернуть все </div>
+
     <ng-template ngFor let-discipline [ngForOf]="getDis()">
         
         <div class="discipline">
 
-            <div (click)='toogle_view(discipline)'><p>{{ !discipline.open ? "►": "▼"}}</p></div>
-            <div class="title" app-discipline-information [discipline]="discipline"></div>
-            <div class="calendar" app-discipline-calendar [discipline]="discipline"></div>
+            <!-- <div (click)='toogle_view(discipline)'> <p>{{ !discipline.open ? "►": "▼"}}</p></div> -->
+            <div (click)='toogle_view(discipline)' class="title" app-discipline-information [discipline]="discipline"></div>
+            <div (click)='(!discipline.open)? toogle_view(discipline): Null ' class="calendar" app-discipline-calendar [discipline]="discipline"></div>
         </div>
         
     </ng-template>
