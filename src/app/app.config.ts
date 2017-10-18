@@ -7,7 +7,5 @@ export class IAppConfig {
 };
 
 export const AppConfig: IAppConfig = {
-
      apiEndpoint: 'https://openedu.urfu.ru/oop/api/v11/'
-
-};
+}

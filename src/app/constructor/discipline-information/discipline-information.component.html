@@ -2,9 +2,13 @@
 
     <p>{{ !discipline.open ? "►": "▼"}} {{discipline.title}}</p>
 
+<<<<<<< HEAD
     <ng-template [ngIf]="discipline.open">
     <p>{{ trajectory.getVariantSelected(discipline.id).diagram.title }}</p>
     <canvas baseChart width="300" height="200"
+=======
+    <canvas baseChart width="300" height="120"
+>>>>>>> origin/global_refactoring
                 [datasets]="getGraphic().datasets"
                 [labels]="getGraphic().labels"
                 [chartType]="pieChartType"
@@ -33,9 +37,16 @@
                     }">
                 </canvas>
     </ng-template>
+<<<<<<< HEAD
             
     <!-- <button (click)='toogle_view()'>Подробнее</button> -->
     <!-- <div class="info">
         <button (click)='getVariants()'>getVariants</button>
+=======
+        <button (click)='toogle_view()'>Показать/скрыть диаграмму</button>
+    
+    <div class="info">
+        <button (click)='getVariants()'>Показать все варианты</button>
+>>>>>>> origin/global_refactoring
         
     </div> -->
