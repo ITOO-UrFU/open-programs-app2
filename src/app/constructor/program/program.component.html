@@ -23,6 +23,9 @@
     </div>
 </div>
 <div *ngIf="data.complete_load() && steps.disciplines" class="header"> 
+        <h1>
+                {{ data?.program?.title }}
+            </h1>
     <div app-disciplines></div>
 </div>
 

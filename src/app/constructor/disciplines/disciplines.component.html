@@ -35,7 +35,7 @@
 <div class="widget__disciplines">
         <div class="discipline">
       <div class="title">
-            <div (click) = toggleAll()> <p>Свернуть все </p></div>
+            <div> <button (click) = "toggleAll()"> Свернуть все </button></div>
         </div>
       <div class="calendar">
       <ng-template ngFor let-semester [ngForOf]="data.eduLength">
