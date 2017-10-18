@@ -1,7 +1,7 @@
 <ng-template ngFor let-semester [ngForOf]="data.eduLength">
     <div class="semester" [style.width]="90/data.eduLength.length +'%'">
         <ng-template ngFor let-variant [ngForOf]="variants">
-            <div *ngIf="(trajectory.getVariantSelected(discipline.id).id === variant.id && trajectory.getVariantSelected(discipline.id).semester === semester) || show_variants" class="variant" [ngClass]="{'active': (trajectory.getVariantSelected(discipline.id).id === variant.id && trajectory.getVariantSelected(discipline.id).semester === semester)}">
+            <div *ngIf="(trajectory.getVariantSelected(discipline.id).id === variant.id && trajectory.getVariantSelected(discipline.id).semester === semester) || discipline.open" class="variant" [ngClass]="{'active': (trajectory.getVariantSelected(discipline.id).id === variant.id && trajectory.getVariantSelected(discipline.id).semester === semester)}">
                 <ng-template [ngIf]="variant.mobility === 100">
                     <button (click)="changeVariantSelected(variant, semester)"><img [src]="getIcons(variant.sync, variant.campus)" /> 
                         <!-- Онлайн курс: {{ variant.course?.title }} -->
@@ -49,4 +49,4 @@
         </div>
     </div>
 </ng-template>
-<button (click) = "toogle_view()">{{show_variants ? "Скрыть" : "Показать"}}<br />варианты</button>
+<!-- <button (click) = "toogle_view()">{{show_variants ? "Скрыть" : "Показать"}}<br />варианты</button> -->

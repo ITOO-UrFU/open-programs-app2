@@ -16,10 +16,24 @@ export class DisciplinesComponent implements OnInit {
   program: Program;
   disciplines: any[];
   show_variants = false;
-  
+
+  toogle_view(discipline) {
+    if (discipline.open == undefined)
+    {discipline.open == false}
+    discipline.open = !discipline.open;
+  }
+  toggleAll(){
+    var arr = this.getDis();
+    console.log(arr)
+    for (let el of arr){
+      console.log(el.open)
+      el.open = false
+    }
+  }
+
   constructor(public data: DataService) { }
 
-  getDisciplines(modules){
+  getDisciplines(modules) {
     this.disciplines = modules.map(
       module => module.disciplines
     ).reduce(
@@ -38,10 +52,9 @@ export class DisciplinesComponent implements OnInit {
     this.program = this.data.program;
     this.getDisciplines(this.trajectory.modules);
     if (!this.trajectory.getStatus()) {
-// костыль   
+// костыль
  this.data.setTechnologyType('', 0)
     }
-    
   }
 }
 

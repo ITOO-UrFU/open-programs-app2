@@ -28,9 +28,6 @@ export class DisciplineInformationComponent implements OnInit {
     console.log(this.discipline.title, this.discipline.default_semester, this.program.variants[this.discipline.id])
   }
 
-  toogle_view(){
-    this.show_variants = !this.show_variants;
-  }
 
   getGraphic() {
     if (this.trajectory.getVariantSelected(this.discipline.id)) {

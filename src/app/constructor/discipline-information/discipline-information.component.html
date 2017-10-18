@@ -1,9 +1,9 @@
 <div class="title">
 
-    <p>{{discipline.title}}</p>
+    <p (click)='toogle_view()'>{{discipline.title}}</p>
 
-    <ng-template [ngIf]="show_variants">
-
+    <ng-template [ngIf]="discipline.open">
+    <p>{{ trajectory.getVariantSelected(discipline.id).diagram.title }}</p>
     <canvas baseChart width="300" height="200"
                 [datasets]="getGraphic().datasets"
                 [labels]="getGraphic().labels"
@@ -33,9 +33,9 @@
                     }">
                 </canvas>
     </ng-template>
-            <button (click)='toogle_view()'>toogle_view</button>
-    
-    <div class="info">
+            
+    <!-- <button (click)='toogle_view()'>Подробнее</button> -->
+    <!-- <div class="info">
         <button (click)='getVariants()'>getVariants</button>
         
-    </div>
+    </div> -->

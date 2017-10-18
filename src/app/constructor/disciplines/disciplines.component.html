@@ -41,15 +41,17 @@
       <ng-template ngFor let-semester [ngForOf]="data.eduLength">
 <div [style.width]="90/data.eduLength.length +'%'"><p style='font-size: 14px; text-align: center;font-weight: 300;'>{{ semester }} семестр</p></div>
       </ng-template>
-      <button disabled >Показать<br/>все</button>
 </div>
 </div>
-
+<div (click) = toggleAll()> Свернуть все </div>
     <ng-template ngFor let-discipline [ngForOf]="getDis()">
-
+        
         <div class="discipline">
+
+            <div (click)='toogle_view(discipline)'><p>{{ !discipline.open ? "►": "▼"}}</p></div>
             <div class="title" app-discipline-information [discipline]="discipline"></div>
             <div class="calendar" app-discipline-calendar [discipline]="discipline"></div>
         </div>
+        
     </ng-template>
 </div>
