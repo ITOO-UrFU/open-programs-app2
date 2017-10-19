@@ -7,14 +7,15 @@
            // background-color: $primary-color;
             color: $white-color;
             font-weight: 700;
-            filter: grayscale(00%);
+            img{filter: grayscale(00%);}
         }
     }
     .variant {
         button {
             margin-bottom: 3px;
             padding: 3px;
-            filter: grayscale(10%) opacity(70%);
+            img{filter: grayscale(10%) opacity(70%);}
+            
             background-color: white; //lighten($primary-color, 20%);
             border: none;
             color: $white-color;
