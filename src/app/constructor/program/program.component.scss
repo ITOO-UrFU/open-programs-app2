@@ -1,6 +1,7 @@
 @import "../../variables";
 
 .target_choices {
+    width: 100%;
     list-style-type: none;
     margin: 0px;
     padding: 1em;
@@ -37,6 +38,7 @@
 
  .header{
     background: #FFF;
+    width: 100%;
  }
 
 
@@ -88,6 +90,7 @@
 .steps-block-container{
     background: #8598cc;
     .steps-block{
+        z-index: 1000;
         width: 1140px;
         margin: auto;
         .step-item{
