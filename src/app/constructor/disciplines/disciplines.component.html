@@ -1,4 +1,3 @@
-<h2> Дисциплины расчитаны на {{ data.term }} обучения, {{(data.sync === 100)? 'очная' : 'заочная'}} форма с применением {{ (data.campus === 100 )? 'традиционных' : 'дистанционных' }} технологий</h2>
 <div class="widget__variants_filter">
     <div class="row">
         <div class="filter term_filter">
@@ -23,6 +22,7 @@
         </div>
     </div>
 </div>
+<p> Дисциплины расчитаны на {{ data.term }} обучения, {{(data.sync === 100)? 'очная' : 'заочная'}} форма с применением {{ (data.campus === 100 )? 'традиционных' : 'дистанционных' }} технологий</p>
 
 <!-- <div style='position:fixed; top: 1px; width: 400px;'>
         <h1>{{ trajectory?.modules?.length }} ({{ getDis()?.length }})</h1>

@@ -1,38 +1,65 @@
-<div *ngIf="data.complete_load() && steps.modules" class="header">
+<div class="step-menu big-menu" [ngClass]="{'hidden': menuIsSmall }">
+    <div class="steps-block-container">
+        <div class="steps-block">
+        <div  class="steps-header">
+            Программа "{{ data?.program?.title }}"
+        </div>
+                <div class="step-item" [ngClass]="{'active': steps.modules }" (click)="step('modules')"><a>Модули</a></div>
+                <div class="step-item" [ngClass]="{'active': steps.disciplines }" (click)="step('disciplines')"><a>Дисциплины</a></div>    
+                <div class="step-item right"><a (click)="data.getTrajectory()">&#9881;</a></div>
+                <div class="step-item right"><a (click)="data.saveTrajectory()">Сохранить</a></div>
+        </div>
+    </div>
+    <div *ngIf="data.complete_load() && steps.modules" class="header">
+        <div id="targets">
+            <ul class="target_choices">
+                <ng-template ngFor let-target [ngForOf]="data?.program?.targets">
+                    <li app-target [class.selected]="data?.trajectory?.target?.id == target?.id" [target]="target"></li>
+                </ng-template>
+            </ul>
+        </div>
+        
+        <div *ngIf = "data?.competences" class="widget__competences_diagram">
+                <ng-template ngFor let-competence [ngForOf]="data?.program?.competences">
+                    <div app-competence [competence] = competence></div> 
+                </ng-template> 
+        </div>
+    </div>
+</div>
+<div [hidden]="!menuIsSmall" class="step-menu small-menu">
+    <div class="steps-block-container">
+        <div class="steps-block">
+        <div  class="steps-header">
+            {{ data?.program?.title }}
+        </div>
+                <div class="step-item" [ngClass]="{'active': steps.modules }" (click)="step('modules')"><a>Модули</a></div>
+                <div class="step-item" [ngClass]="{'active': steps.disciplines }" (click)="step('disciplines')"><a>Дисциплины</a></div>    
+                <div class="step-item right"><a (click)="data.getTrajectory()">&#9881;</a></div>
+                <div class="step-item right"><a (click)="data.saveTrajectory()">Сохранить</a></div>
+        </div>
+    </div>
+    <div *ngIf="data.complete_load() && steps.modules" class="header">
+        <div id="targets" app-target [class.selected]="true" [target]="data?.trajectory?.target">
+        </div>
+        
+        <div *ngIf = "data?.competences" class="widget__competences_diagram">
+                <ng-template ngFor let-competence [ngForOf]="data?.program?.competences">
+                    <div app-competence [competence] = competence></div> 
+                </ng-template> 
+        </div>
+    </div>
+</div>
 
-    <h1>
-        {{ data?.program?.title }}
-    </h1>
-    <div id="targets">
-        <ul class="target_choices">
-            <ng-template ngFor let-target [ngForOf]="data?.program?.targets">
-                <li app-target [class.selected]="data?.trajectory?.target?.id == target?.id" [target]="target"></li>
-            </ng-template>
-        </ul>
-    </div>
-    
-    <div *ngIf = "data?.competences" class="widget__competences_diagram">
-            <ng-template ngFor let-competence [ngForOf]="data?.program?.competences">
-                <div app-competence [competence] = competence></div> 
-            </ng-template> 
-    </div>
+<div *ngIf="data.complete_load() && steps.modules" class="body">
     <div *ngIf = "data?.choice_groups">
         <ng-template ngFor let-choice_group [ngForOf]="trajectory?.target?.choice_groups">
             <div app-choice-group class="ChoiceGroup" [choice_group_id] = "choice_group"></div>
         </ng-template>
     </div>
 </div>
-<div *ngIf="data.complete_load() && steps.disciplines" class="header"> 
-        <h1>
-                {{ data?.program?.title }}
-            </h1>
+
+<div *ngIf="data.complete_load() && steps.disciplines" class="body"> 
     <div app-disciplines></div>
 </div>
 
-<div style='position:fixed; top: -1px; right: 10px; background: #475fa1; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; padding: 5px'>
-        <button (click)="step('modules')">Модули</button>
-        <button (click)="step('disciplines')">Дисциплины</button>    
-        ||
-    <button (click)="data.saveTrajectory()">Сохранить</button>
-        <button (click)="data.getTrajectory()">Получить</button>
-</div>
+

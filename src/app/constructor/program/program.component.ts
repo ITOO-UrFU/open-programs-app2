@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -55,8 +55,19 @@ export class ProgramComponent implements OnInit {
   }
 
 
-
-
+  public menuIsSmall = false;
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    let offset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    
+    const menu_height = this.menuIsSmall ? document.querySelector(".small-menu").clientHeight: document.querySelector(".big-menu").clientHeight;
+    console.log(menu_height);
+    if (offset > 239) {
+      this.menuIsSmall = true;
+    } else {
+        this.menuIsSmall = false;
+    }
+  }
 
   public create: boolean;
   // Временные переменные
