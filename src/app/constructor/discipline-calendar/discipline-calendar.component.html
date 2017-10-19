@@ -27,6 +27,11 @@
                         <!-- {{ variant.semester?.term }} -->
                     </button>
                 </ng-template>
+                <ng-template [ngIf]="variant.semester?.term === data.term && discipline.default_semester[data.term] !== semester">
+                    <button style="width:40px; height:48px">
+                        <!-- {{ variant.semester?.term }} -->
+                    </button>
+                </ng-template>
             </div>
 
         </ng-template>
