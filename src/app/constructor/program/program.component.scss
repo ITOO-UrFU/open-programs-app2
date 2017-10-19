@@ -47,19 +47,21 @@
     top: 0px;
     margin-right: auto;
     margin-left: auto;
-    min-height: 10em;
+    // min-height: 10em;
+    z-index: 1000;
     width: 100%;
      .header{
          display:flex;
          justify-content: center;
-         padding: 14px;
-        //  opacity: 0.8;
+         padding: 6px;
+         background: rgba(255, 255, 255, 0.95);
         .widget__competences_diagram{
             height: auto;
             margin: 0;
             justify-content: start;
             align-items: center;
-            width: auto;
+            width: 810px;
+    margin-left: 100px;
             .comp{
                 .competence_diagram_col{
                     padding: 14px;
@@ -69,12 +71,22 @@
                 }
             }
         }
+
+        .current-target{
+            user-select: none;
+            align-self: center;
+            margin: 0px 24px;
+            height: 5em;
+            padding: 18px 10px;
+            display: inline;
+            background-color: #8597c9;
+            color: #FFF;
+            text-align: center;
+            float: left;
+            width: 200px;
+        }
      }
-     #targets{
-         margin: 20px;
-         width: 270px;
-         align-self: center;
-     }
+
  }
  .hidden{
      visibility: hidden;
@@ -131,6 +143,7 @@
      width: 1140px;
      height: $competences_diagram;
      margin: 0 auto;
+     padding: 14px 0px;
      div {
         width: 100%;
      }
