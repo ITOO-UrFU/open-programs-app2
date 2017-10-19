@@ -39,7 +39,7 @@
         </div>
     </div>
     <div *ngIf="data.complete_load() && steps.modules" class="header">
-        <div id="targets" app-target [class.selected]="true" [target]="data?.trajectory?.target">
+        <div app-target class="current-target" [target]="data?.trajectory?.target">
         </div>
         
         <div *ngIf = "data?.competences" class="widget__competences_diagram">
