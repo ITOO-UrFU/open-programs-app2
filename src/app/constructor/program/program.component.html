@@ -58,8 +58,8 @@
     </div>
 </div>
 
-<div *ngIf="data.complete_load() && steps.disciplines" class="body"> 
-    <div app-disciplines></div>
+<div *ngIf="data.complete_load() && steps.disciplines"> 
+    <div app-disciplines [menuIsSmall]="menuIsSmall"></div>
 </div>
 
 

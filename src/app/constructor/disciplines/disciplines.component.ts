@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 
 import { DataService } from '../data.service';
 
@@ -16,6 +16,7 @@ export class DisciplinesComponent implements OnInit {
   program: Program;
   disciplines: any[];
   show_variants = false;
+  @Input() menuIsSmall;
 
   toogle_view(discipline) {
     if (discipline.open == undefined)
@@ -32,6 +33,8 @@ export class DisciplinesComponent implements OnInit {
   }
 
   constructor(public data: DataService) { }
+
+  public steps_menu_height = document.querySelector(".steps-block").getBoundingClientRect().height;
 
   getDisciplines(modules) {
     this.disciplines = modules.map(

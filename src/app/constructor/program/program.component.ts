@@ -31,41 +31,41 @@ export class ProgramComponent implements OnInit {
   };
 
   public step(value) {
-    if ( !this.steps.modules && !this.steps.disciplines ) {
+    if (!this.steps.modules && !this.steps.disciplines) {
       this.steps.modules = !this.steps.modules;
-    } else if (value === 'modules'){
+    } else if (value === 'modules') {
       this.steps.modules = true;
       this.steps.disciplines = false;
-    } else if (value === 'disciplines'){
+      this.smallMenuDistance = 270;
+    } else if (value === 'disciplines') {
       this.steps.modules = false;
       this.steps.disciplines = true;
+      this.smallMenuDistance = 50;
     }
 
   }
 
   ngOnInit() {
     this.activateRoute.params.switchMap((params: Params) => this.service.getElementsBySlug('get_trajectory_id', params['id']))
-                             .subscribe(
-                                (trajectory: any) => {
-                                  this.data.getProgram( trajectory.program );
-                                  this.trajectory = this.data.createTrajectory(trajectory);
+      .subscribe(
+      (trajectory: any) => {
+        this.data.getProgram(trajectory.program);
+        this.trajectory = this.data.createTrajectory(trajectory);
 
-                                }
-                              );
+      }
+      );
   }
 
 
   public menuIsSmall = false;
+  public smallMenuDistance =270;
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    let offset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    
-    const menu_height = this.menuIsSmall ? document.querySelector(".small-menu").clientHeight: document.querySelector(".big-menu").clientHeight;
-    console.log(menu_height);
-    if (offset > 239) {
+    const offset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (offset > this.smallMenuDistance) {
       this.menuIsSmall = true;
     } else {
-        this.menuIsSmall = false;
+      this.menuIsSmall = false;
     }
   }
 
@@ -76,7 +76,7 @@ export class ProgramComponent implements OnInit {
   public modules: any = {};
   public competences: any = {};
 
-  public eduLength = [1,2,3,4,5,6,7,8];
+  public eduLength = [1, 2, 3, 4, 5, 6, 7, 8];
   public term = '4 года';
   public presence: string = 'z';
   public technology_type = 'd';
@@ -88,19 +88,19 @@ export class ProgramComponent implements OnInit {
     this.term = term;
   }
 
-  public setPresence(val){
+  public setPresence(val) {
     this.presence = val;
   }
 
-  public setTechnologyType(val){
+  public setTechnologyType(val) {
     this.technology_type = val;
   }
 
-  constructor( private router: Router,
-               private activateRoute: ActivatedRoute,
-               private titleService: Title,
-               private service: ConstructorService,
-               public data: DataService ) { }
+  constructor(private router: Router,
+    private activateRoute: ActivatedRoute,
+    private titleService: Title,
+    private service: ConstructorService,
+    public data: DataService) { }
 
 
   public variantSelected(discipline, variant, semester) {
@@ -114,12 +114,12 @@ export class ProgramComponent implements OnInit {
       } else {
         return false;
       }
-    } else{
+    } else {
       return false
     }
   }
 
-  public variantSelected1(discipline, variants, variant, semester){
+  public variantSelected1(discipline, variants, variant, semester) {
     if (variants && discipline.default_semester[this.term] === semester) {
       const elements1 = variants.filter((element) => {
         return element.technology;
@@ -136,15 +136,15 @@ export class ProgramComponent implements OnInit {
       const elements5 = elements4.filter((element) => {
         return element.semester.term === this.term;
       });
-      if (elements5.length){
+      if (elements5.length) {
         return elements5[0].id === variant.id;
-      } else if (elements4.length){
+      } else if (elements4.length) {
         return elements4[0].id === variant.id;
-      } else if (elements3.length){
+      } else if (elements3.length) {
         return elements3[0].id === variant.id;
-      } else if (elements2.length){
+      } else if (elements2.length) {
         return elements2[0].id === variant.id;
-      } else if (elements1.length){
+      } else if (elements1.length) {
         return elements1[0].id === variant.id;
       } else {
         return false;
@@ -161,7 +161,7 @@ export class ProgramComponent implements OnInit {
   private collectModules(): any {
     let obj = {}
     let array = [];
-    for (const group of this.data.program.choice_groups ){
+    for (const group of this.data.program.choice_groups) {
       obj[group.id] = {};
       obj[group.id].default = group.modules.filter(
         (module_id: any) => {
@@ -174,39 +174,39 @@ export class ProgramComponent implements OnInit {
           return this.data.program.modules_by_id[module_id].targets_positions_indexed[this.selected] === 2;
         }
       );
-      obj[group.id].status = ((obj[group.id].variative.length === 0) ? false : true );
+      obj[group.id].status = ((obj[group.id].variative.length === 0) ? false : true);
       obj[group.id].labor = group.labor;
       obj[group.id].labor_selected = obj[group.id].default.map(
         (modules_id: string) => {
-            return this.data.program.modules_by_id[modules_id].get_labor || 0;
+          return this.data.program.modules_by_id[modules_id].get_labor || 0;
         }
-      ).reduce (
+      ).reduce(
         (a: number, b: number) => {
-            return  a + b;
+          return a + b;
         }, 0
-      );
+        );
     }
-    
+
     return { modules: obj, array: array };
   }
   private collectCompetences(array: any[]): any {
     let obj = {};
-    for (const competence of this.data.program.competences ){
-        obj[competence.id] = array.filter(
-          (module_id: any) => {
-            return this.data.program.modules_by_id[module_id].competence === competence.id;
-          }
-        ).map(
-          (module_id: any) => {
-            return this.data.program.modules_by_id[module_id].get_labor;
-          }
-        ).reduce (
-          (a: number, b: number) => {
-              return  a + b;
-          }, 0
+    for (const competence of this.data.program.competences) {
+      obj[competence.id] = array.filter(
+        (module_id: any) => {
+          return this.data.program.modules_by_id[module_id].competence === competence.id;
+        }
+      ).map(
+        (module_id: any) => {
+          return this.data.program.modules_by_id[module_id].get_labor;
+        }
+        ).reduce(
+        (a: number, b: number) => {
+          return a + b;
+        }, 0
         );
-      }
-      return obj;
+    }
+    return obj;
   }
 
   private saveTrajectory() {
@@ -218,17 +218,19 @@ export class ProgramComponent implements OnInit {
     data.selected = this.selected;
     data.modules = this.modules;
     data.steps = this.steps;
-    this.service.postResponse('save_trajectory', JSON.stringify({ id: this.trajectory.id,
-                                                                  program_id:  this.trajectory.program_id,
-                                                                  data: data })
-                             )
-                .subscribe(
-                      (trajectory) => {
-                         console.log('ok');
-                      },
-                      error => {
-                        console.log(error);
-                      });
+    this.service.postResponse('save_trajectory', JSON.stringify({
+      id: this.trajectory.id,
+      program_id: this.trajectory.program_id,
+      data: data
+    })
+    )
+      .subscribe(
+      (trajectory) => {
+        console.log('ok');
+      },
+      error => {
+        console.log(error);
+      });
   }
 
 
@@ -254,13 +256,13 @@ export class ProgramComponent implements OnInit {
       }
       this.modules[group].labor_selected = this.modules[group].default.map(
         (module_id: string) => {
-            return this.data.program.modules_by_id[module_id].get_labor || 0;
+          return this.data.program.modules_by_id[module_id].get_labor || 0;
         }
-      ).reduce (
+      ).reduce(
         (a: number, b: number) => {
-            return  a + b;
+          return a + b;
         }, 0
-      );
+        );
     }
     this.saveTrajectory();
   }

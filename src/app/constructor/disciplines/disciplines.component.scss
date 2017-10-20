@@ -18,14 +18,58 @@
     }
 }
 
+ .hidden{
+     visibility: hidden;
+ }
+
+ .body{
+    width: 1140px;
+    margin: auto;
+ }
+.discipline{
+    .toggle-all{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.disciplines-step-menu{
+    padding: 10px 0px;
+    background: $white-color;
+    .discipline{
+        .title{
+
+        }
+    }
+}
+.disciplines-small-menu{
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    .discipline{
+    border: none;
+    .calendar{
+        div{
+            border: 1px dashed gray;
+            // border-right: 1px dashed gray;
+        }
+    }
+}
+
+}
+
+.about-disciplines{
+    text-align: center;
+}
 .widget__disciplines {}
 
 .widget__variants_filter {
-    background: $white-color;
-    padding: 1em;
+    
+    // padding: 1em;
     margin-bottom: 1em;
     display: flex;
     align-content: space-around;
+    justify-content: center;
     .row {
         margin: 0 1em 0 1em;
         display: flex;
