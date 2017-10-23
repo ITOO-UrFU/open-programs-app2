@@ -4,13 +4,13 @@
 
     <ng-template [ngIf]="discipline.open">
     <p>{{ trajectory.getVariantSelected(discipline.id).diagram.title }}</p>
-    <canvas baseChart width="300" height="120"
+    <canvas baseChart width="280" height="200"
                 [datasets]="getGraphic().datasets"
                 [labels]="getGraphic().labels"
                 [chartType]="pieChartType"
                 [colors]="colorsOverride"
                 [options]="{
-                    responsive: true,
+                    responsive: false,
                     maintainAspectRatio: false,
                     animation : false,
                     tooltips: {
