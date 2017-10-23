@@ -65,7 +65,7 @@
             <div class="calendar">
                 <ng-template ngFor let-semester [ngForOf]="data.eduLength">
                     <div [style.width]="90/data.eduLength.length +'%'">
-                        <p style='font-size: 14px; text-align: center;font-weight: 300;'>{{ semester }} семестр</p>
+                        <p style='font-size: 14px; text-align: center;font-weight: 300;'>{{ semester }} семестр <br> {{trajectory.getLabor(semester)}} з.е.</p>
                     </div>
                 </ng-template>
             </div>
@@ -93,7 +93,7 @@
         <div class="calendar">
             <ng-template ngFor let-semester [ngForOf]="data.eduLength">
                 <div [style.width]="90/data.eduLength.length +'%'">
-                    <p style='font-size: 14px; text-align: center;font-weight: 300;'>{{ semester }} семестр</p>
+                    <p style='font-size: 14px; text-align: center;font-weight: 300;'>{{ semester }} семестр <br> {{trajectory?.getLabor(semester)}} з.е.</p>
                 </div>
             </ng-template>
         </div>

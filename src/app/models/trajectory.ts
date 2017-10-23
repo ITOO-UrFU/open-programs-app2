@@ -9,7 +9,7 @@ export class Trajectory {
     public module_ids: String[] = [];
     public modules: Module[] = [];
     public modules_by_id: Object = {};
-    public variants: Object = {};
+    public variants_by_id: Object = {};
 
 
     public choice_groups: string[];
@@ -33,7 +33,7 @@ export class Trajectory {
         this.data.status = true;
         this.data['target'] = this.target;
         this.data['modules'] = this.modules;
-        this.data['variants'] = this.variants;
+        this.data['variants'] = this.variants_by_id;
         return this.data;
     }
 
@@ -64,7 +64,7 @@ export class Trajectory {
                                             module.targets_positions_indexed ) );
             }
         );
-       this.variants = variants;
+       this.variants_by_id = variants;
     }
 
     getTargetId() {
@@ -145,19 +145,29 @@ export class Trajectory {
     // getChoiceGroupEditable(choice_group){
     //     return this.choice_groups_editeble.indexOf(choice_group) !== -1;
     // }
-    setVariantSelected(discipline_id, variant, semester){
-        const current_variant = {id: variant.id, semester: semester, diagram: variant.diagram};
-        this.variants[discipline_id] = current_variant;
+    setVariantSelected(discipline_id, disciplines_labor, variant, semester){
+        const current_variant = {id: variant.id, semester: semester, diagram: variant.diagram, labor: disciplines_labor};
+        this.variants_by_id[discipline_id] = current_variant;
     }
     getVariantSelected(discipline_id) {
-        if (this.variants[discipline_id]) {
-            return this.variants[discipline_id];
+        if (this.variants_by_id[discipline_id]) {
+            return this.variants_by_id[discipline_id];
         } else {
             return false;
         }
     }
+    getLabor(semester){
+        if(Object.keys(this.variants_by_id).map(key => this.variants_by_id[key]).length){
+            return Object.keys(this.variants_by_id).map(key => this.variants_by_id[key])
+            .filter(element => element.semester === semester).reduce((a, b) => a + b.labor, 0);
+        }
+        else {
+            return 0;
+         }
+    }
+
     getVariants(){
-        return this.variants;
+        return this.variants_by_id;
     }
 
 }

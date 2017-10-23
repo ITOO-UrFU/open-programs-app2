@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, AfterViewInit, ChangeDetectorRef  } from '@angular/core';
 
 import { DataService } from '../data.service';
 
@@ -32,7 +32,7 @@ export class DisciplinesComponent implements OnInit {
     }
   }
 
-  constructor(public data: DataService) { }
+  constructor(public data: DataService, private cdr: ChangeDetectorRef) { }
 
   public steps_menu_height = document.querySelector(".steps-block").getBoundingClientRect().height;
 
@@ -50,12 +50,18 @@ export class DisciplinesComponent implements OnInit {
       (a, b) => a.concat(b), []
     );
   }
+  
+  ngAfterViewInit() {
+    // this.message = 'all done loading :)'
+    this.cdr.detectChanges();
+  }
   ngOnInit() {
     this.trajectory = this.data.trajectory;
     this.program = this.data.program;
     this.getDisciplines(this.trajectory.modules);
     if (!this.trajectory.getStatus()) {
 // костыль
+// this.getLabor(1);
  this.data.setTechnologyType('', 0)
     }
   }

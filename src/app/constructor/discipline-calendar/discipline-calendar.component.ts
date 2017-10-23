@@ -64,7 +64,7 @@ export class DisciplineCalendarComponent implements OnInit {
   }
 
   changeVariantSelected(variant, semester) {
-    this.trajectory.setVariantSelected(this.discipline.id, variant, semester);
+    this.trajectory.setVariantSelected(this.discipline.id, this.discipline.labor, variant, semester);
   }
 
   ngOnInit() {
@@ -75,14 +75,14 @@ export class DisciplineCalendarComponent implements OnInit {
     this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
     this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility > 0 || element.mobility === 0 && element.semester.term === this.data.term }));
     if (this.variants.length && !this.trajectory.getVariants){
-      this.trajectory.setVariantSelected(this.discipline.id, this.variants[0], this.discipline.default_semester[this.data.term]);
+      this.trajectory.setVariantSelected(this.discipline.id, this.discipline.labor, this.variants[0], this.discipline.default_semester[this.data.term]);
     }
 
     this.data.sortSubject.subscribe((val) => {
       this.variants_other = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility === 0 && element.semester.term !== this.data.term }));
       this.variants = this.sortVariants(this.program.variants[this.discipline.id].filter((element) => { return element.mobility > 0 || element.mobility === 0 && element.semester.term === this.data.term }));
       if (this.variants.length){
-        this.trajectory.setVariantSelected(this.discipline.id, this.variants[0], this.discipline.default_semester[this.data.term]);
+        this.trajectory.setVariantSelected(this.discipline.id, this.discipline.labor, this.variants[0], this.discipline.default_semester[this.data.term]);
       }
 
     });
